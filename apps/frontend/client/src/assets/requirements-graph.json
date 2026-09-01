@@ -2995,7 +2995,7 @@
       "profileId": "moscow-npm-2026-08-18",
       "category": "Формат",
       "severity": "blocker",
-      "verification": "expert_evidence",
+      "verification": "automatic",
       "pending": false,
       "sourceRef": "табл.1 п.1"
     },
@@ -3007,7 +3007,7 @@
       "profileId": "moscow-npm-2026-08-18",
       "category": "Сцена",
       "severity": "blocker",
-      "verification": "expert_evidence",
+      "verification": "automatic",
       "pending": false,
       "sourceRef": "разд.4; табл.1 п.2"
     },
@@ -3091,7 +3091,7 @@
       "profileId": "moscow-npm-2026-08-18",
       "category": "Сцена",
       "severity": "blocker",
-      "verification": "expert_evidence",
+      "verification": "automatic",
       "pending": false,
       "sourceRef": "табл.2 п.1.3"
     },
@@ -3187,7 +3187,7 @@
       "profileId": "moscow-npm-2026-08-18",
       "category": "Геометрия",
       "severity": "blocker",
-      "verification": "expert_evidence",
+      "verification": "automatic",
       "pending": false,
       "sourceRef": "табл.2 п.3.6"
     },
@@ -3199,7 +3199,7 @@
       "profileId": "moscow-npm-2026-08-18",
       "category": "Геометрия",
       "severity": "blocker",
-      "verification": "expert_evidence",
+      "verification": "automatic",
       "pending": false,
       "sourceRef": "табл.2 п.3.6"
     },
@@ -3259,7 +3259,7 @@
       "profileId": "moscow-npm-2026-08-18",
       "category": "Геометрия",
       "severity": "blocker",
-      "verification": "expert_evidence",
+      "verification": "automatic",
       "pending": false,
       "sourceRef": "табл.2 п.3.11"
     },
@@ -3331,7 +3331,7 @@
       "profileId": "moscow-npm-2026-08-18",
       "category": "Текстуры",
       "severity": "blocker",
-      "verification": "expert_evidence",
+      "verification": "automatic",
       "pending": false,
       "sourceRef": "табл.2 п.5.1-5.3"
     },
@@ -3355,7 +3355,7 @@
       "profileId": "moscow-npm-2026-08-18",
       "category": "Текстуры",
       "severity": "blocker",
-      "verification": "expert_evidence",
+      "verification": "automatic",
       "pending": false,
       "sourceRef": "табл.2 п.5.5"
     },
@@ -3791,7 +3791,7 @@
       "profileId": "moscow-vpm-2026-08-18",
       "category": "Формат",
       "severity": "blocker",
-      "verification": "expert_evidence",
+      "verification": "automatic",
       "pending": false,
       "sourceRef": "табл.1 п.1"
     },
@@ -3803,7 +3803,7 @@
       "profileId": "moscow-vpm-2026-08-18",
       "category": "Сцена",
       "severity": "blocker",
-      "verification": "expert_evidence",
+      "verification": "automatic",
       "pending": false,
       "sourceRef": "разд.4; табл.1 п.2"
     },
@@ -4115,7 +4115,7 @@
       "profileId": "moscow-vpm-2026-08-18",
       "category": "Геометрия",
       "severity": "blocker",
-      "verification": "expert_evidence",
+      "verification": "automatic",
       "pending": false,
       "sourceRef": "табл.2 п.3.17-3.18"
     },
@@ -4151,7 +4151,7 @@
       "profileId": "moscow-vpm-2026-08-18",
       "category": "Текстуры",
       "severity": "blocker",
-      "verification": "expert_evidence",
+      "verification": "automatic",
       "pending": false,
       "sourceRef": "табл.2 п.5.1.1"
     },
@@ -4163,7 +4163,7 @@
       "profileId": "moscow-vpm-2026-08-18",
       "category": "Текстуры",
       "severity": "blocker",
-      "verification": "expert_evidence",
+      "verification": "automatic",
       "pending": false,
       "sourceRef": "табл.2 п.5.1.2-1.3,1.9"
     },

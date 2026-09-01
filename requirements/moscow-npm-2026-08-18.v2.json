@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.1",
   "id": "moscow-npm-2026-08-18",
-  "version": "2026-08-18.1",
-  "status": "superseded",
+  "version": "2026-08-18.2",
+  "status": "active",
   "sourceId": "msk-3d-2026-08-18",
   "jurisdiction": "Москва",
   "modelClass": "NPM",
@@ -14,18 +14,30 @@
       "category": "Формат",
       "title": "FBX 7.4 binary",
       "requirement": "Все приемочные модели предоставлены в FBX 2014 binary.",
-      "verification": "expert_evidence",
+      "verification": "automatic",
       "severity": "blocker",
-      "sourceRef": "табл.1 п.1"
+      "sourceRef": "табл.1 п.1",
+      "evaluator": {
+        "op": "equals",
+        "path": "fbx.version",
+        "value": 7400
+      },
+      "note": "FBX 2014 — это версия формата 7400. Проверяется по заголовку файла, а не по имени."
     },
     {
       "id": "npm-scale-1-1",
       "category": "Сцена",
       "title": "Масштаб 1:1",
       "requirement": "Метрическая сцена: 1 единица равна 1 метру.",
-      "verification": "expert_evidence",
+      "verification": "automatic",
       "severity": "blocker",
-      "sourceRef": "разд.4; табл.1 п.2"
+      "sourceRef": "разд.4; табл.1 п.2",
+      "evaluator": {
+        "op": "equals",
+        "path": "fbx.metreScale",
+        "value": true
+      },
+      "note": "FBX хранит масштаб в сантиметрах: UnitScaleFactor 100 и означает «одна единица — один метр»."
     },
     {
       "id": "npm-source-match",
@@ -107,9 +119,15 @@
       "category": "Сцена",
       "title": "Нет служебных объектов",
       "requirement": "Нет пустых объектов, анимаций, деформаций, камер, звуков, костей, лишних слоев, коммуникаций, людей и транспорта.",
-      "verification": "expert_evidence",
+      "verification": "automatic",
       "severity": "blocker",
-      "sourceRef": "табл.2 п.1.3"
+      "sourceRef": "табл.2 п.1.3",
+      "evaluator": {
+        "op": "equals",
+        "path": "fbx.sceneClean",
+        "value": true
+      },
+      "note": "Машина умеет опровергнуть это требование, но не подтвердить: часть перечисленного — люди, транспорт, коммуникации, лишние слои — из байтов файла не опознаётся. Поэтому проверка либо даёт auto_fail, либо остаётся за экспертом; auto_pass здесь не возникает никогда."
     },
     {
       "id": "npm-building-object-count",
@@ -179,18 +197,38 @@
       "category": "Геометрия",
       "title": "ОКС до 150 000 треугольников",
       "requirement": "В каждом FBX ОКС и эксплуатируемая кровля содержат не более 150 000 треугольников.",
-      "verification": "expert_evidence",
+      "verification": "automatic",
       "severity": "blocker",
-      "sourceRef": "табл.2 п.3.6"
+      "sourceRef": "табл.2 п.3.6",
+      "appliesWhen": {
+        "path": "package.modelScope",
+        "equals": "oks"
+      },
+      "evaluator": {
+        "op": "max",
+        "path": "fbx.triangles",
+        "value": 150000
+      },
+      "note": "Считается по PolygonVertexIndex приёмочного FBX, а не по производному GLB. Лимит относится к файлу ОКС. Без привязки к области модели тот же счётчик треугольников сверялся бы с лимитом благоустройства, и файл ОКС на 170 000 треугольников прошёл бы проверку."
     },
     {
       "id": "npm-ground-triangles",
       "category": "Геометрия",
       "title": "Благоустройство до 180 000",
       "requirement": "Благоустройство, его элементы и растительность суммарно не превышают 180 000 треугольников.",
-      "verification": "expert_evidence",
+      "verification": "automatic",
       "severity": "blocker",
-      "sourceRef": "табл.2 п.3.6"
+      "sourceRef": "табл.2 п.3.6",
+      "appliesWhen": {
+        "path": "package.modelScope",
+        "equals": "ground"
+      },
+      "evaluator": {
+        "op": "max",
+        "path": "fbx.triangles",
+        "value": 180000
+      },
+      "note": "Применяется к FBX благоустройства; лимит отличается от лимита ОКС. Лимит относится к файлу благоустройства и отличается от лимита ОКС."
     },
     {
       "id": "npm-geometry-defects",
@@ -233,9 +271,15 @@
       "category": "Геометрия",
       "title": "Триангуляция",
       "requirement": "Вся геометрия триангулирована перед экспортом FBX.",
-      "verification": "expert_evidence",
+      "verification": "automatic",
       "severity": "blocker",
-      "sourceRef": "табл.2 п.3.11"
+      "sourceRef": "табл.2 п.3.11",
+      "evaluator": {
+        "op": "equals",
+        "path": "fbx.triangulated",
+        "value": true
+      },
+      "note": "Полигон с числом вершин больше трёх виден прямо в PolygonVertexIndex."
     },
     {
       "id": "npm-visible-interiors",
@@ -287,9 +331,15 @@
       "category": "Текстуры",
       "title": "PNG 256-2048",
       "requirement": "Текстуры — PNG допустимых квадратных размеров 256, 512, 1024 или 2048, не более 3 МБ каждая.",
-      "verification": "expert_evidence",
+      "verification": "automatic",
       "severity": "blocker",
-      "sourceRef": "табл.2 п.5.1-5.3"
+      "sourceRef": "табл.2 п.5.1-5.3",
+      "evaluator": {
+        "op": "equals",
+        "path": "textures.sizesValid",
+        "value": true
+      },
+      "note": "Размеры и формат берутся из чанка IHDR каждого PNG."
     },
     {
       "id": "npm-texture-padding",
@@ -305,9 +355,15 @@
       "category": "Текстуры",
       "title": "Альфа-канал запрещен",
       "requirement": "В текстурных картах отсутствует альфа-канал.",
-      "verification": "expert_evidence",
+      "verification": "automatic",
       "severity": "blocker",
-      "sourceRef": "табл.2 п.5.5"
+      "sourceRef": "табл.2 п.5.5",
+      "evaluator": {
+        "op": "equals",
+        "path": "textures.alphaFree",
+        "value": true
+      },
+      "note": "Наличие альфы определяется типом цвета в IHDR."
     },
     {
       "id": "npm-texture-set",
@@ -365,5 +421,6 @@
     }
   ],
   "supersedes": "moscow-npm-2026-01-19",
-  "selfHash": "ffac9a7365eab66e6bde79778796c2f239a661d2118fa32a27ea3ab31ab7510c"
+  "transcriptionNote": "Редакция транскрипции, не источника. Юридическое содержание правил не изменилось ни в одном знаке: изменился способ проверки — появились инспекторы FBX, PNG и ZIP, и требования, прежде проверявшиеся человеком, стали машинными.",
+  "selfHash": "fe76972b28cb566ae075d653aaa9d42039185abd22ebb9753faad484a939de0d"
 }

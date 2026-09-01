@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.1",
   "id": "moscow-vpm-2026-08-18",
-  "version": "2026-08-18.1",
-  "status": "superseded",
+  "version": "2026-08-18.2",
+  "status": "active",
   "sourceId": "msk-3d-2026-08-18",
   "jurisdiction": "Москва",
   "modelClass": "VPM",
@@ -14,18 +14,28 @@
       "category": "Формат",
       "title": "FBX 2014 binary",
       "requirement": "Приемочная модель предоставлена в FBX 7.4 binary; GLB используется как производный просмотрочный артефакт, не вместо FBX.",
-      "verification": "expert_evidence",
+      "verification": "automatic",
       "severity": "blocker",
-      "sourceRef": "табл.1 п.1"
+      "sourceRef": "табл.1 п.1",
+      "evaluator": {
+        "op": "equals",
+        "path": "fbx.version",
+        "value": 7400
+      }
     },
     {
       "id": "vpm-scale",
       "category": "Сцена",
       "title": "Масштаб 1:1 и метр",
       "requirement": "Модель подготовлена 1:1; одна единица равна одному метру.",
-      "verification": "expert_evidence",
+      "verification": "automatic",
       "severity": "blocker",
-      "sourceRef": "разд.4; табл.1 п.2"
+      "sourceRef": "разд.4; табл.1 п.2",
+      "evaluator": {
+        "op": "equals",
+        "path": "fbx.metreScale",
+        "value": true
+      }
     },
     {
       "id": "vpm-source-match",
@@ -218,13 +228,11 @@
       "severity": "blocker",
       "sourceRef": "табл.2 п.3.1,3.11",
       "evaluator": {
-        "op": "all_zero",
-        "paths": [
-          "glb.cameras",
-          "glb.animations",
-          "glb.skins"
-        ]
-      }
+        "op": "equals",
+        "path": "fbx.sceneClean",
+        "value": true
+      },
+      "note": "Машина умеет опровергнуть это требование, но не подтвердить: часть перечисленного — люди, транспорт, коммуникации, лишние слои — из байтов файла не опознаётся. Поэтому проверка либо даёт auto_fail, либо остаётся за экспертом; auto_pass здесь не возникает никогда."
     },
     {
       "id": "vpm-one-layer",
@@ -272,9 +280,10 @@
       "sourceRef": "табл.2 п.3.9",
       "evaluator": {
         "op": "max",
-        "path": "glb.triangles",
+        "path": "fbx.triangles",
         "value": 1000000
-      }
+      },
+      "note": "Требование предъявлено к FBX, поэтому измеряется FBX. Прежняя редакция мерила glb.triangles — производный просмотрочный файл, а не то, что принимает ведомство."
     },
     {
       "id": "vpm-ground-triangles",
@@ -326,9 +335,15 @@
       "category": "Геометрия",
       "title": "Триангуляция и трансформации",
       "requirement": "Геометрия триангулирована, трансформации всех объектов и коллизий применены.",
-      "verification": "expert_evidence",
+      "verification": "automatic",
       "severity": "blocker",
-      "sourceRef": "табл.2 п.3.17-3.18"
+      "sourceRef": "табл.2 п.3.17-3.18",
+      "evaluator": {
+        "op": "equals",
+        "path": "fbx.triangulated",
+        "value": true
+      },
+      "note": "Проверяется триангуляция. Применённость трансформаций из файла не следует и остаётся за экспертом."
     },
     {
       "id": "vpm-materials",
@@ -349,27 +364,40 @@
       "sourceRef": "табл.2 п.4.3-4.5",
       "evaluator": {
         "op": "max",
-        "path": "glb.materials",
+        "path": "fbx.materials",
         "value": 7
-      }
+      },
+      "note": "Материалы считаются в приёмочном FBX, а не в GLB."
     },
     {
       "id": "vpm-textures-external",
       "category": "Текстуры",
       "title": "PNG отдельно от FBX",
       "requirement": "Текстуры не встроены в FBX, предоставлены отдельными PNG.",
-      "verification": "expert_evidence",
+      "verification": "automatic",
       "severity": "blocker",
-      "sourceRef": "табл.2 п.5.1.1"
+      "sourceRef": "табл.2 п.5.1.1",
+      "evaluator": {
+        "op": "max",
+        "path": "fbx.embeddedTextures",
+        "value": 0
+      },
+      "note": "Встроенная текстура видна как непустой Content у узла Video."
     },
     {
       "id": "vpm-texture-size",
       "category": "Текстуры",
       "title": "2048 или 4096",
       "requirement": "Карты имеют размер 2048×2048 или 4096×4096, 8 бит/канал; diffuse не меньше ERM/normal.",
-      "verification": "expert_evidence",
+      "verification": "automatic",
       "severity": "blocker",
-      "sourceRef": "табл.2 п.5.1.2-1.3,1.9"
+      "sourceRef": "табл.2 п.5.1.2-1.3,1.9",
+      "evaluator": {
+        "op": "equals",
+        "path": "textures.sizesValid",
+        "value": true
+      },
+      "note": "Размер и глубина берутся из IHDR; соотношение diffuse и ERM/normal — за экспертом."
     },
     {
       "id": "vpm-pbr-set",
@@ -507,9 +535,10 @@
       "sourceRef": "табл.2 п.15.2",
       "evaluator": {
         "op": "max",
-        "path": "glb.lights",
+        "path": "fbx.lights",
         "value": 250
-      }
+      },
+      "note": "Считаются источники в FBX освещения."
     },
     {
       "id": "vpm-light-spacing",
@@ -531,5 +560,6 @@
     }
   ],
   "supersedes": "moscow-vpm-2026-01-19",
-  "selfHash": "9bccba1077d3acd0cbdde3a176670b2bdaa0a100cae4f5c6bd90cd9a50cafe1d"
+  "transcriptionNote": "Редакция транскрипции, не источника. Юридическое содержание не изменилось. Помимо новых машинных проверок исправлена подмена предмета измерения: часть проверок смотрела на glb.* — производный просмотрочный файл, — тогда как требования предъявлены к приёмочному FBX.",
+  "selfHash": "fcfba999c72033c19540b806f5f30211c2c37388e60557b3cb9cc2dc28acaa03"
 }

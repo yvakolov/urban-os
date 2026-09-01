@@ -20,7 +20,11 @@ import check_sources  # noqa: E402
 from lib import extract as extract_mod  # noqa: E402
 from lib import impact as impact_mod  # noqa: E402
 from lib import normalize as norm_mod  # noqa: E402
+from lib import archive as archive_mod  # noqa: E402
+from lib import fbx as fbx_mod  # noqa: E402
+from lib import geojson as geojson_mod  # noqa: E402
 from lib import materials as materials_mod  # noqa: E402
+from lib import raster as raster_mod  # noqa: E402
 from lib import package as package_mod  # noqa: E402
 import validate as validate_mod  # noqa: E402
 
@@ -906,3 +910,171 @@ class TestMaterialsInspector(unittest.TestCase):
                 self.assertIn(v["element"], names, f"{key} ссылается на несуществующий элемент")
             self.assertTrue(v.get("comment") or v["element"],
                             f"{key} без элемента и без объяснения")
+
+
+class TestModelInspectors(unittest.TestCase):
+    """FBX, PNG, ZIP и GeoJSON — приёмочные файлы моделей.
+
+    До появления этих инспекторов автопроверки НПМ и ВПМ смотрели на glb.* —
+    производный просмотрочный файл. Ведомство принимает FBX.
+    """
+
+    FBX = ROOT / "tests" / "fbx_fixtures"
+    PNG = ROOT / "tests" / "texture_fixtures"
+    ZIP = ROOT / "tests" / "archive_fixtures"
+
+    def fbx(self, name):
+        return fbx_mod.inspect((self.FBX / f"{name}.fbx").read_bytes(), f"{name}.fbx")
+
+    def test_90_binary_fbx_parsed(self):
+        f = self.fbx("npm-oks-valid")
+        self.assertEqual(f["version"], 7400)
+        self.assertEqual(f["triangles"], 1200)
+        self.assertEqual(f["materials"], 3)
+        self.assertTrue(f["triangulated"])
+        self.assertTrue(f["metreScale"])
+
+    def test_91_wide_offsets_of_fbx_7500(self):
+        """С версии 7500 смещения в записях узлов 64-битные."""
+        f = self.fbx("fbx-7500-wide")
+        self.assertEqual(f["version"], 7500)
+        self.assertEqual(f["triangles"], 30)
+
+    def test_92_ascii_fbx_is_refused_not_guessed(self):
+        """Требования предписывают binary. Угадывать текстовый формат нельзя."""
+        with self.assertRaises(fbx_mod.FbxError):
+            self.fbx("not-fbx")
+
+    def test_93_quads_are_not_triangulated(self):
+        """Полигон с четырьмя вершинами виден прямо в PolygonVertexIndex."""
+        f = self.fbx("quads-not-triangulated")
+        self.assertFalse(f["triangulated"])
+        self.assertEqual(f["triangles"], 100)
+        self.assertGreater(f["nonTriangulatedPolygons"], 0)
+
+    def test_94_centimetre_scene_detected(self):
+        """UnitScaleFactor 1 — сантиметры; требование «1 единица = 1 метр» это 100."""
+        self.assertFalse(self.fbx("centimetre-scale")["metreScale"])
+
+    def test_95_scene_clean_can_only_be_refuted(self):
+        """Машина опровергает чистоту сцены, но не подтверждает её.
+
+        Люди, транспорт и коммуникации из байтов не опознаются, поэтому
+        отсутствие камер и костей соответствием не является — это None,
+        и подтверждает его человек.
+        """
+        self.assertFalse(self.fbx("scene-not-clean")["sceneClean"])
+        self.assertIsNone(self.fbx("npm-oks-valid")["sceneClean"])
+
+    def test_96_embedded_textures_detected(self):
+        """Текстуры предоставляются отдельными PNG, а не внутри FBX."""
+        self.assertEqual(self.fbx("embedded-textures")["embeddedTextures"], 2)
+        self.assertEqual(self.fbx("npm-oks-valid")["embeddedTextures"], 0)
+
+    def test_97_triangle_threshold_measured_on_generated_scene(self):
+        """Порог 150 000 проверяется на файле, который его действительно перешёл.
+
+        Такая сцена весит сотни килобайт и в репозитории не хранится —
+        собирается тем же генератором, что и мелкие фикстуры.
+        """
+        sys.path.insert(0, str(self.FBX))
+        from make_fixtures import scene  # noqa: E402
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "big.fbx"
+            scene(str(path), tris=150_050)
+            f = fbx_mod.inspect(path.read_bytes())
+        self.assertEqual(f["triangles"], 150_050)
+        self.assertGreater(f["triangles"], 150_000)
+
+    def test_98_png_ihdr_read(self):
+        names = sorted(str(p) for p in self.PNG.glob("*.png"))
+        f = raster_mod.inspect(names, allowed_sizes=(256, 512, 1024, 2048),
+                               max_bytes=3 * 1024 * 1024, require_no_alpha=True)
+        self.assertEqual(f["notPng"], ["not_a_png.png"])
+        self.assertIn("non_square_512x256.png", f["wrongSize"])
+        self.assertIn("odd_size_300.png", f["wrongSize"])
+        self.assertEqual(f["withAlpha"], ["with_alpha_512.png"])
+        self.assertEqual(f["notEightBit"], ["sixteen_bit_512.png"])
+        self.assertFalse(f["sizesValid"])
+        self.assertFalse(f["alphaFree"])
+
+    def test_99_zip_integrity(self):
+        self.assertTrue(archive_mod.inspect(str(self.ZIP / "clean.zip"))["valid"])
+        traversal = archive_mod.inspect(str(self.ZIP / "traversal.zip"))
+        self.assertFalse(traversal["valid"])
+        self.assertEqual(traversal["dangerousPaths"], ["../../etc/passwd"])
+        dup = archive_mod.inspect(str(self.ZIP / "duplicate.zip"))
+        self.assertEqual(dup["duplicateNames"], ["a.fbx"])
+        broken = archive_mod.inspect(str(self.ZIP / "not-a-zip.zip"))
+        self.assertFalse(broken["valid"])
+        self.assertIn("BadZipFile", broken["error"])
+
+    def test_100_geojson_precision_is_about_the_written_form(self):
+        """«Ровно 3 знака» — требование к записи, а не к значению.
+
+        Разбор JSON запись теряет: 2.500 становится числом 2.5. Поэтому
+        литералы читаются из текста, иначе проверка была бы невыполнимой.
+        """
+        ok = b'{"type":"Feature","properties":{"coordinates":[12345.678, 9876.543]}}'
+        trailing = b'{"type":"Feature","properties":{"coordinates":[12345.6780, 9876.543]}}'
+        short = b'{"type":"Feature","properties":{"coordinates":[12345.68, 9876.543]}}'
+        self.assertTrue(geojson_mod.inspect(ok)["coordinatesPrecision3"])
+        self.assertFalse(geojson_mod.inspect(trailing)["coordinatesPrecision3"])
+        self.assertFalse(geojson_mod.inspect(short)["coordinatesPrecision3"])
+
+    def test_101_geojson_duplicate_and_string_numbers(self):
+        """п. 2.5, 2.7: числа записываются числами, имена полей не дублируются."""
+        dup = b'{"type":"Feature","properties":{"h_abs":1,"h_abs":2}}'
+        self.assertEqual(geojson_mod.inspect(dup)["duplicateFields"], ["h_abs"])
+        self.assertFalse(geojson_mod.inspect(dup)["valid"])
+        as_string = b'{"type":"Feature","properties":{"h_abs":"12.5"}}'
+        self.assertEqual(geojson_mod.inspect(as_string)["numericFieldsAsString"], ["h_abs"])
+
+    def test_102_geojson_completeness_is_three_valued(self):
+        """Неизвестное не выдаётся за соответствие.
+
+        Полный перечень полей задан приложением 10, которого в репозитории
+        нет. Поэтому нарушение доказуемо, а соответствие — нет: отсутствие
+        известного поля даёт False, а его наличие даёт None, но не True.
+        """
+        d = json.loads((ROOT / "dictionaries" / "geojson-fields.v1.json").read_text(encoding="utf-8"))
+        full = {f: "x" for f in d["scopes"]["oks"]["fields"]}
+        raw = json.dumps({"type": "Feature", "properties": full}).encode()
+        self.assertIsNone(geojson_mod.inspect(raw, d, "oks")["oksRequiredComplete"])
+        without = dict(full)
+        del without["h_abs"]
+        raw2 = json.dumps({"type": "Feature", "properties": without}).encode()
+        f = geojson_mod.inspect(raw2, d, "oks")
+        self.assertFalse(f["oksRequiredComplete"])
+        self.assertEqual(f["oksMissingFields"], ["h_abs"])
+        # У рекламных конструкций перечень назван исчерпывающе — там True достижим
+        ad = {f: "x" for f in d["scopes"]["advertising"]["fields"]}
+        raw3 = json.dumps({"type": "Feature", "properties": ad}).encode()
+        self.assertTrue(geojson_mod.inspect(raw3, d, "advertising")["advertisingRequiredComplete"])
+
+    def test_103_published_profile_versions_do_not_collide(self):
+        """Две редакции одного профиля обязаны различаться и не перекрывать друг друга."""
+        seen, live = {}, {}
+        for path in sorted((ROOT / "requirements").glob("*.json")):
+            p = json.loads(path.read_text(encoding="utf-8"))
+            key = (p["id"], p["version"])
+            self.assertNotIn(key, seen, f"{path.name} повторяет {seen.get(key)}")
+            seen[key] = path.name
+            if p["status"] != "superseded":
+                live.setdefault(p["id"], []).append(path.name)
+        for pid, names in live.items():
+            self.assertEqual(len(names), 1, f"{pid}: не перекрытых редакций {names}")
+
+    def test_104_status_is_outside_the_self_hash(self):
+        """Иначе объявленный жизненный цикл невозможен.
+
+        Перевод активной редакции в superseded менял бы её собственный хеш,
+        а править опубликованный профиль запрещено. Хеш отвечает на вопрос
+        «то же ли это требование», а не «в каком оно статусе».
+        """
+        p = json.loads((ROOT / "requirements" / "moscow-npm-2026-08-18.v1.json").read_text(encoding="utf-8"))
+        before = validate_mod.self_hash(p)
+        p["status"] = "active"
+        self.assertEqual(validate_mod.self_hash(p), before)
+        p["rules"][0]["requirement"] += "."
+        self.assertNotEqual(validate_mod.self_hash(p), before)

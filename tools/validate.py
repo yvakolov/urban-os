@@ -41,9 +41,18 @@ PROFILE_STATUS = jsonschema.enum_of(PROFILE_SCHEMA, "properties/status")
 REQUIRED_RULE_FIELDS = ("id", "category", "title", "requirement", "verification", "severity", "sourceRef")
 
 
+# Поля, не входящие в selfHash. status исключён намеренно: он описывает место
+# профиля в жизненном цикле draft -> active -> superseded, а не его содержание.
+# Пока он входил в хеш, объявленный жизненный цикл был физически невозможен —
+# перевод активной редакции в superseded ломал её собственный хеш, а править
+# опубликованный профиль запрещено. Хеш обязан отвечать на вопрос «то же ли это
+# требование», а не «в каком оно сейчас статусе».
+HASH_EXCLUDED = ("selfHash", "status")
+
+
 def self_hash(profile: dict) -> str:
-    """sha256 канонического JSON профиля без самого поля selfHash."""
-    body = {k: v for k, v in profile.items() if k != "selfHash"}
+    """sha256 канонического JSON профиля без selfHash и status."""
+    body = {k: v for k, v in profile.items() if k not in HASH_EXCLUDED}
     blob = json.dumps(body, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
     return hashlib.sha256(blob.encode("utf-8")).hexdigest()
 
@@ -173,6 +182,11 @@ def check_structure(sources_doc, monitor_doc, raw_profiles):
 def check_profiles(sources, raw_profiles, rehash):
     errors, warnings, profiles = [], [], {}
     seen_active = {}
+    # Один id — несколько редакций транскрипции одного и того же источника.
+    # Индексировать по id нельзя: вторая версия молча затёрла бы первую, и
+    # проверки ссылочной целостности пошли бы по чужому набору правил.
+    seen_versions = {}
+    live = {}
 
     for path, p in raw_profiles:
         name = path.name if hasattr(path, "name") else str(path)
@@ -183,7 +197,17 @@ def check_profiles(sources, raw_profiles, rehash):
             # без id профиль в индекс не кладём — иначе дальше KeyError вместо диагностики
             if "id" not in p:
                 continue
-        profiles[p["id"]] = p
+        key = (p["id"], p.get("version"))
+        if key in seen_versions:
+            errors.append(
+                f"{name}: {p['id']} версии {p.get('version')} уже объявлен в "
+                f"{seen_versions[key]} — две редакции с одним номером неразличимы")
+        seen_versions[key] = name
+        if p.get("status") != "superseded":
+            live.setdefault(p["id"], []).append(name)
+            profiles[p["id"]] = p
+        else:
+            profiles.setdefault(p["id"], p)
 
         if p.get("sourceId") not in sources:
             errors.append(f"{name}: sourceId {p.get('sourceId')!r} отсутствует в sources/index.json")
@@ -228,6 +252,12 @@ def check_profiles(sources, raw_profiles, rehash):
                 errors.append(f"{name}/{rid}: all_zero без paths")
             if ev and ev.get("op") not in (None, "all_zero") and not ev.get("path"):
                 errors.append(f"{name}/{rid}: {ev.get('op')} без path")
+
+    for pid, names in live.items():
+        if len(names) > 1:
+            errors.append(
+                f"{pid}: сразу {len(names)} не перекрытых редакций ({', '.join(sorted(names))}) — "
+                f"предыдущая должна получить status=superseded")
 
     for key, names in seen_active.items():
         if len(names) > 1:
@@ -350,6 +380,15 @@ def check_fixtures(profiles):
         profile = profiles.get(fx["profileId"])
         if not profile:
             errors.append(f"{path.name}: профиль {fx['profileId']} не найден")
+            continue
+        # Кейсы пинятся к версии: новая редакция транскрипции меняет способ
+        # проверки, и молча пересчитывать под неё эталонные числа — значит
+        # потерять сам смысл эталона.
+        want_version = fx.get("profileVersion")
+        if want_version and profile.get("version") != want_version:
+            errors.append(
+                f"{path.name}: кейсы сняты с версии {want_version}, "
+                f"а активна {profile.get('version')} — перепроверьте и обновите ожидания")
             continue
         for case in fx["cases"]:
             got = evaluate(profile, case["context"], case.get("decisions"))

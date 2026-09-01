@@ -1,0 +1,112 @@
+{
+  "profileId": "moscow-npm-2026-08-18",
+  "profileVersion": "2026-08-18.2",
+  "note": "Золотые кейсы автопроверок НПМ, снятые с редакции 2026-08-18.2 — первой с инспекторами FBX, PNG и ZIP.",
+  "cases": [
+    {
+      "name": "чистая модель",
+      "context": {
+        "fbx": {
+          "version": 7400,
+          "metreScale": true,
+          "triangles": 1200,
+          "triangulated": true,
+          "sceneClean": null
+        },
+        "textures": {
+          "sizesValid": true,
+          "alphaFree": true
+        },
+        "zip": {
+          "valid": true
+        },
+        "package": {
+          "address": "Test_Address_1",
+          "zipSizeBytes": 1000,
+          "fbxCount": 2,
+          "modelScope": "oks"
+        }
+      },
+      "expect": {
+        "total": 37,
+        "auto_pass": 10,
+        "auto_fail": 0,
+        "expert_reviewed": 0,
+        "not_applicable": 1,
+        "pending": 26,
+        "rule_error": 0,
+        "releaseEligible": false
+      }
+    },
+    {
+      "name": "все автопороги нарушены",
+      "context": {
+        "fbx": {
+          "version": 7300,
+          "metreScale": false,
+          "triangles": 150050,
+          "triangulated": false,
+          "sceneClean": false
+        },
+        "textures": {
+          "sizesValid": false,
+          "alphaFree": false
+        },
+        "zip": {
+          "valid": false
+        },
+        "package": {
+          "address": "Плохой Адрес!",
+          "zipSizeBytes": 2000000000,
+          "fbxCount": 25,
+          "modelScope": "oks"
+        }
+      },
+      "expect": {
+        "total": 37,
+        "auto_pass": 0,
+        "auto_fail": 11,
+        "expert_reviewed": 0,
+        "not_applicable": 1,
+        "pending": 25,
+        "rule_error": 0,
+        "releaseEligible": false
+      }
+    },
+    {
+      "name": "благоустройство: превышен собственный лимит 180 000",
+      "context": {
+        "fbx": {
+          "version": 7400,
+          "metreScale": true,
+          "triangles": 180050,
+          "triangulated": true,
+          "sceneClean": null
+        },
+        "textures": {
+          "sizesValid": true,
+          "alphaFree": true
+        },
+        "zip": {
+          "valid": true
+        },
+        "package": {
+          "address": "Test_Address_1",
+          "zipSizeBytes": 1000,
+          "fbxCount": 2,
+          "modelScope": "ground"
+        }
+      },
+      "expect": {
+        "total": 37,
+        "auto_pass": 9,
+        "auto_fail": 1,
+        "expert_reviewed": 0,
+        "not_applicable": 1,
+        "pending": 26,
+        "rule_error": 0,
+        "releaseEligible": false
+      }
+    }
+  ]
+}

@@ -1,41 +1,185 @@
 {
   "profileId": "moscow-vpm-2026-08-18",
-  "note": "Золотые кейсы для автопроверок ВПМ. Значения снимались прогоном движка core.js — портированный evaluate() в tools/validate.py обязан давать те же числа.",
+  "profileVersion": "2026-08-18.2",
+  "note": "Золотые кейсы автопроверок ВПМ, снятые с редакции 2026-08-18.2 — первой, где измеряется приёмочный FBX, а не производный GLB. Кейс «перечень полей неизвестен» закрепляет трёхзначную полноту GeoJSON: неизвестное не выдаётся за соответствие.",
   "cases": [
     {
-      "name": "чистая минимальная модель, только GLB и поля пакета",
+      "name": "чистая модель: все известные пороги соблюдены",
       "context": {
-        "glb": { "triangles": 1, "materials": 2, "cameras": 0, "animations": 0, "skins": 0, "lights": 0 },
-        "package": { "address": "Test_Address_1", "modelScope": "oks", "zipSizeBytes": 1000 }
+        "fbx": {
+          "version": 7400,
+          "metreScale": true,
+          "triangles": 5000,
+          "materials": 5,
+          "lights": 0,
+          "embeddedTextures": 0,
+          "triangulated": true,
+          "sceneClean": null
+        },
+        "textures": {
+          "sizesValid": true
+        },
+        "geojson": {
+          "valid": true,
+          "oksRequiredComplete": true,
+          "groundRequiredComplete": true,
+          "coordinatesPrecision3": true
+        },
+        "zip": {
+          "valid": true
+        },
+        "package": {
+          "address": "Test_Address_1",
+          "modelScope": "oks",
+          "zipSizeBytes": 1000
+        }
       },
-      "expect": { "total": 49, "auto_pass": 6, "auto_fail": 0, "not_applicable": 2, "pending": 41, "releaseEligible": false }
+      "expect": {
+        "total": 49,
+        "auto_pass": 14,
+        "auto_fail": 0,
+        "expert_reviewed": 0,
+        "not_applicable": 2,
+        "pending": 33,
+        "rule_error": 0,
+        "releaseEligible": false
+      }
     },
     {
       "name": "все автопороги нарушены",
       "context": {
-        "glb": { "triangles": 1200000, "materials": 9, "cameras": 1, "animations": 0, "skins": 0, "lights": 400 },
-        "package": { "address": "Плохой Адрес!", "modelScope": "oks", "zipSizeBytes": 900000000 }
+        "fbx": {
+          "version": 7300,
+          "metreScale": false,
+          "triangles": 1200000,
+          "materials": 9,
+          "lights": 400,
+          "embeddedTextures": 3,
+          "triangulated": false,
+          "sceneClean": false
+        },
+        "textures": {
+          "sizesValid": false
+        },
+        "geojson": {
+          "valid": false,
+          "oksRequiredComplete": false,
+          "groundRequiredComplete": false,
+          "coordinatesPrecision3": false
+        },
+        "zip": {
+          "valid": false
+        },
+        "package": {
+          "address": "Плохой Адрес!",
+          "modelScope": "oks",
+          "zipSizeBytes": 900000000
+        }
       },
-      "expect": { "total": 49, "auto_pass": 0, "auto_fail": 6, "not_applicable": 2, "pending": 41, "releaseEligible": false }
+      "expect": {
+        "total": 49,
+        "auto_pass": 0,
+        "auto_fail": 15,
+        "expert_reviewed": 0,
+        "not_applicable": 2,
+        "pending": 32,
+        "rule_error": 0,
+        "releaseEligible": false
+      }
     },
     {
-      "name": "эксперт перекрывает провалившуюся автопроверку",
+      "name": "эксперт перекрывает провалившиеся автопроверки",
       "context": {
-        "glb": { "triangles": 1200000, "materials": 9, "cameras": 1, "animations": 0, "skins": 0, "lights": 400 },
-        "package": { "address": "Плохой Адрес!", "modelScope": "oks", "zipSizeBytes": 900000000 }
+        "fbx": {
+          "version": 7300,
+          "metreScale": false,
+          "triangles": 1200000,
+          "materials": 9,
+          "lights": 400,
+          "embeddedTextures": 3,
+          "triangulated": false,
+          "sceneClean": false
+        },
+        "textures": {
+          "sizesValid": false
+        },
+        "geojson": {
+          "valid": false,
+          "oksRequiredComplete": false,
+          "groundRequiredComplete": false,
+          "coordinatesPrecision3": false
+        },
+        "zip": {
+          "valid": false
+        },
+        "package": {
+          "address": "Плохой Адрес!",
+          "modelScope": "oks",
+          "zipSizeBytes": 900000000
+        }
       },
       "decisions": {
-        "vpm-oks-triangles": { "state": "expert_reviewed", "evidence": "согласовано" },
-        "vpm-material-count": { "state": "expert_reviewed", "evidence": "согласовано" },
-        "vpm-light-count": { "state": "expert_reviewed", "evidence": "согласовано" }
+        "vpm-oks-triangles": {
+          "state": "expert_reviewed",
+          "evidence": "согласовано"
+        },
+        "vpm-material-count": {
+          "state": "expert_reviewed",
+          "evidence": "согласовано"
+        }
       },
-      "expect": { "auto_fail": 3, "expert_reviewed": 3, "terminal": 5 },
-      "warning": "Экспертное решение стоит в порядке ветвлений раньше автопроверки и стирает замеренное значение из отчёта. Кейс фиксирует текущее поведение, а не желаемое — см. задачу про expert_override."
+      "expect": {
+        "total": 49,
+        "auto_pass": 0,
+        "auto_fail": 13,
+        "expert_reviewed": 2,
+        "not_applicable": 2,
+        "pending": 32,
+        "rule_error": 0,
+        "releaseEligible": false
+      }
     },
     {
-      "name": "нет артефактов вовсе — автопроверки уходят в pending, не в fail",
-      "context": { "package": { "modelScope": "oks" } },
-      "expect": { "auto_pass": 0, "auto_fail": 0, "releaseEligible": false }
+      "name": "перечень полей GeoJSON неизвестен — полнота не доказана",
+      "context": {
+        "fbx": {
+          "version": 7400,
+          "metreScale": true,
+          "triangles": 5000,
+          "materials": 5,
+          "lights": 0,
+          "embeddedTextures": 0,
+          "triangulated": true,
+          "sceneClean": null
+        },
+        "textures": {
+          "sizesValid": true
+        },
+        "geojson": {
+          "valid": true,
+          "oksRequiredComplete": null,
+          "groundRequiredComplete": null,
+          "coordinatesPrecision3": true
+        },
+        "zip": {
+          "valid": true
+        },
+        "package": {
+          "address": "Test_Address_1",
+          "modelScope": "oks",
+          "zipSizeBytes": 1000
+        }
+      },
+      "expect": {
+        "total": 49,
+        "auto_pass": 13,
+        "auto_fail": 0,
+        "expert_reviewed": 0,
+        "not_applicable": 2,
+        "pending": 34,
+        "rule_error": 0,
+        "releaseEligible": false
+      }
     }
   ]
 }
