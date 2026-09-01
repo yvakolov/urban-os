@@ -5,7 +5,7 @@
     "source": 12,
     "branch": 5,
     "profile": 6,
-    "rule": 209,
+    "rule": 238,
     "deliverable": 29
   },
   "nodes": [
@@ -923,7 +923,7 @@
       "label": "moscow-ifc-agr-2026-01-16",
       "status": "draft",
       "sourceId": "msk-ifc-agr",
-      "ruleCount": 33
+      "ruleCount": 62
     },
     {
       "id": "rule:ifc-format-spf",
@@ -1320,6 +1320,354 @@
       "verification": "expert_evidence",
       "pending": false,
       "sourceRef": "пп. 4.7.6–4.7.7"
+    },
+    {
+      "id": "rule:ifc-level-name-structure",
+      "layer": "rule",
+      "label": "Наименование уровня из пяти полей",
+      "ruleId": "ifc-level-name-structure",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Уровни",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "пп. 4.7.8.1, табл. 4.3"
+    },
+    {
+      "id": "rule:ifc-level-name-separator",
+      "layer": "rule",
+      "label": "Разделитель полей уровня — подчёркивание",
+      "ruleId": "ifc-level-name-separator",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Уровни",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 4.7.8.2"
+    },
+    {
+      "id": "rule:ifc-level-name-charset",
+      "layer": "rule",
+      "label": "Запрещённые символы в наименовании уровня",
+      "ruleId": "ifc-level-name-charset",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Уровни",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "п. 4.7.8.3"
+    },
+    {
+      "id": "rule:ifc-level-numbering",
+      "layer": "rule",
+      "label": "Нумерация уровней",
+      "ruleId": "ifc-level-numbering",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Уровни",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл. 4.3, поле 2"
+    },
+    {
+      "id": "rule:ifc-level-purpose",
+      "layer": "rule",
+      "label": "Назначение уровня",
+      "ruleId": "ifc-level-purpose",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Уровни",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл. 4.3, поле 4"
+    },
+    {
+      "id": "rule:ifc-axes-grid",
+      "layer": "rule",
+      "label": "Сетка осей включена в состав",
+      "ruleId": "ifc-axes-grid",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Координация",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 4.7.10"
+    },
+    {
+      "id": "rule:ifc-elements-design-position",
+      "layer": "rule",
+      "label": "Проектное положение, точные размеры и форма",
+      "ruleId": "ifc-elements-design-position",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Элементы",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 4.8.1"
+    },
+    {
+      "id": "rule:ifc-elements-storey-assignment",
+      "layer": "rule",
+      "label": "Поэтажная разбивка элементов",
+      "ruleId": "ifc-elements-storey-assignment",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Элементы",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 4.8.2"
+    },
+    {
+      "id": "rule:ifc-parameters-legible",
+      "layer": "rule",
+      "label": "Параметры однозначно понятны",
+      "ruleId": "ifc-parameters-legible",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Элементы",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 4.8.3"
+    },
+    {
+      "id": "rule:ifc-disciplinary-composition",
+      "layer": "rule",
+      "label": "Состав дисциплинарных ЦИМ",
+      "ruleId": "ifc-disciplinary-composition",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Состав",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 5.1.1"
+    },
+    {
+      "id": "rule:ifc-building-grouping",
+      "layer": "rule",
+      "label": "Разбиение по корпусам",
+      "ruleId": "ifc-building-grouping",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Состав",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 5.1.2"
+    },
+    {
+      "id": "rule:ifc-ps-content",
+      "layer": "rule",
+      "label": "Состав ЦИМ ПС",
+      "ruleId": "ifc-ps-content",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "ЦИМ ПС и БиО",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 5.2.1"
+    },
+    {
+      "id": "rule:ifc-bio-content",
+      "layer": "rule",
+      "label": "Состав ЦИМ БиО",
+      "ruleId": "ifc-bio-content",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "ЦИМ ПС и БиО",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 5.2.2"
+    },
+    {
+      "id": "rule:ifc-coverings-modelling",
+      "layer": "rule",
+      "label": "Моделирование покрытий",
+      "ruleId": "ifc-coverings-modelling",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "ЦИМ ПС и БиО",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "пп. 5.2.4, 5.2.6"
+    },
+    {
+      "id": "rule:ifc-maf-not-modelled",
+      "layer": "rule",
+      "label": "МАФ и переносные изделия не моделируются",
+      "ruleId": "ifc-maf-not-modelled",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "ЦИМ ПС и БиО",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 5.2.5"
+    },
+    {
+      "id": "rule:ifc-vegetation-not-modelled",
+      "layer": "rule",
+      "label": "Деревья и кустарники не моделируются",
+      "ruleId": "ifc-vegetation-not-modelled",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "ЦИМ ПС и БиО",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "пп. 5.2.7-5.2.8"
+    },
+    {
+      "id": "rule:ifc-ar-content",
+      "layer": "rule",
+      "label": "Состав элементов ЦИМ АР",
+      "ruleId": "ifc-ar-content",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "ЦИМ АР",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 5.3.1"
+    },
+    {
+      "id": "rule:ifc-ar-excluded",
+      "layer": "rule",
+      "label": "Что допускается не представлять",
+      "ruleId": "ifc-ar-excluded",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "ЦИМ АР",
+      "severity": "minor",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 5.3.2"
+    },
+    {
+      "id": "rule:ifc-ar-volumes-whole-building",
+      "layer": "rule",
+      "label": "Объёмные элементы для здания целиком",
+      "ruleId": "ifc-ar-volumes-whole-building",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "ЦИМ АР",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "пп. 5.3.3-5.3.4"
+    },
+    {
+      "id": "rule:ifc-rus-fno",
+      "layer": "rule",
+      "label": "Атрибут RUS_FNO заполнен",
+      "ruleId": "ifc-rus-fno",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "ЦИМ АР",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "п. 5.3.5"
+    },
+    {
+      "id": "rule:ifc-space-zoning",
+      "layer": "rule",
+      "label": "Зонирование объёмными IfcSpace",
+      "ruleId": "ifc-space-zoning",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "ЦИМ АР",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 5.3.6"
+    },
+    {
+      "id": "rule:ifc-no-zones-for",
+      "layer": "rule",
+      "label": "Зоны не создаются для отдельных типов помещений",
+      "ruleId": "ifc-no-zones-for",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "ЦИМ АР",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 5.3.7"
+    },
+    {
+      "id": "rule:ifc-curtain-wall",
+      "layer": "rule",
+      "label": "Наружные ограждающие конструкции",
+      "ruleId": "ifc-curtain-wall",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "ЦИМ АР",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 5.3.8"
+    },
+    {
+      "id": "rule:ifc-element-classification",
+      "layer": "rule",
+      "label": "Классификация элементов по классам IFC",
+      "ruleId": "ifc-element-classification",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "ЦИМ АР",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 5.3.9, табл. 5.1"
+    },
+    {
+      "id": "rule:ifc-min-attributes",
+      "layer": "rule",
+      "label": "Минимальный набор атрибутов RusSet_Common",
+      "ruleId": "ifc-min-attributes",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "ЦИМ АР",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "п. 5.3.11, табл. 5.2"
+    },
+    {
+      "id": "rule:ifc-russet-prefix",
+      "layer": "rule",
+      "label": "Учитываются только наборы RusSet_",
+      "ruleId": "ifc-russet-prefix",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "ЦИМ АР",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "п. 5.3.12"
+    },
+    {
+      "id": "rule:ifc-rus-attribute-prefix",
+      "layer": "rule",
+      "label": "Атрибуты с префиксом RUS_",
+      "ruleId": "ifc-rus-attribute-prefix",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "ЦИМ АР",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 5.3.13"
+    },
+    {
+      "id": "rule:ifc-names-written-together",
+      "layer": "rule",
+      "label": "Наименования атрибутов пишутся слитно",
+      "ruleId": "ifc-names-written-together",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "ЦИМ АР",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "п. 5.3.15"
+    },
+    {
+      "id": "rule:ifc-pset-qto-ignored",
+      "layer": "rule",
+      "label": "Pset_ и Qto_ не учитываются",
+      "ruleId": "ifc-pset-qto-ignored",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "ЦИМ АР",
+      "severity": "minor",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 5.3.16"
     },
     {
       "id": "profile:moscow-npm-2026-08-18",
@@ -3538,6 +3886,151 @@
     {
       "source": "profile:moscow-ifc-agr-2026-01-16",
       "target": "rule:ifc-levels-minimise",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-level-name-structure",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-level-name-separator",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-level-name-charset",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-level-numbering",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-level-purpose",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-axes-grid",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-elements-design-position",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-elements-storey-assignment",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-parameters-legible",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-disciplinary-composition",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-building-grouping",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-ps-content",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-bio-content",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-coverings-modelling",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-maf-not-modelled",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-vegetation-not-modelled",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-ar-content",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-ar-excluded",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-ar-volumes-whole-building",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-rus-fno",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-space-zoning",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-no-zones-for",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-curtain-wall",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-element-classification",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-min-attributes",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-russet-prefix",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-rus-attribute-prefix",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-names-written-together",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-pset-qto-ignored",
       "kind": "contains"
     },
     {
