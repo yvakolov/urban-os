@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Создание и обновление GitHub Issue по отчёту check_sources.
+"""Создание и обновление GitLab Issue по отчёту check_sources.
 
-    python3 tools/notify_github.py reports/source-check.json          # боевой режим
-    python3 tools/notify_github.py reports/source-check.json --print  # только текст
+    python3 tools/notify_gitlab.py reports/source-check.json          # боевой режим
+    python3 tools/notify_gitlab.py reports/source-check.json --print  # только текст
 
-Использует `gh` CLI, который предустановлен на раннерах. Никаких зависимостей.
+Использует GitLab REST API и CI job token. Никаких зависимостей.
 
 Дедупликация. Ключ подавления — sourceId + previousHash + newHash, и ищется он
 ТОЛЬКО среди открытых issue. Ключ без previousHash ломается на сценарии A -> B -> A:
@@ -18,8 +18,11 @@ issue в неделю навсегда.
 """
 import argparse
 import json
-import subprocess
+import os
 import sys
+import urllib.error
+import urllib.parse
+import urllib.request
 from pathlib import Path
 
 LABEL = "regulatory-change"
@@ -108,32 +111,56 @@ def render(ev):
     return "\n".join(lines)
 
 
-def gh(*args, check=True):
-    return subprocess.run(["gh", *args], capture_output=True, text=True, check=check).stdout
+def api_url(path, params=None):
+    base_url = os.environ["CI_API_V4_URL"].rstrip("/")
+    project_id = urllib.parse.quote(os.environ["CI_PROJECT_ID"], safe="")
+    url = f"{base_url}/projects/{project_id}{path}"
+    if params:
+        url += "?" + urllib.parse.urlencode(params)
+    return url
+
+
+def gitlab(method, path, params=None, payload=None):
+    data = None
+    headers = {"JOB-TOKEN": os.environ["CI_JOB_TOKEN"]}
+    if payload is not None:
+        data = json.dumps(payload, ensure_ascii=False).encode("utf-8")
+        headers["Content-Type"] = "application/json"
+
+    request = urllib.request.Request(
+        api_url(path, params), data=data, headers=headers, method=method
+    )
+    try:
+        with urllib.request.urlopen(request) as response:
+            raw = response.read()
+    except urllib.error.HTTPError as exc:
+        detail = exc.read().decode("utf-8", "replace")
+        raise RuntimeError(f"GitLab API {method} {path}: HTTP {exc.code}: {detail}") from exc
+
+    return json.loads(raw) if raw else None
 
 
 def find_open_issue(source_id):
-    out = gh("issue", "list", "--state", "open", "--label", LABEL,
-             "--search", source_id, "--json", "number,title,body", check=False)
-    try:
-        for item in json.loads(out or "[]"):
-            if item["title"] == f"[REGULATORY CHANGE] {source_id}":
-                return item
-    except json.JSONDecodeError:
-        pass
+    issues = gitlab("GET", "/issues", {
+        "state": "opened",
+        "labels": LABEL,
+        "search": source_id,
+        "in": "title",
+        "per_page": 100,
+    })
+    for item in issues or []:
+        if item["title"] == f"[REGULATORY CHANGE] {source_id}":
+            return item
     return None
 
 
 def already_reported(issue, ev):
-    if marker(ev) in (issue.get("body") or ""):
+    if marker(ev) in (issue.get("description") or ""):
         return True
-    out = gh("issue", "view", str(issue["number"]), "--json", "comments", check=False)
-    try:
-        for c in json.loads(out or "{}").get("comments", []):
-            if marker(ev) in (c.get("body") or ""):
-                return True
-    except json.JSONDecodeError:
-        pass
+    notes = gitlab("GET", f"/issues/{issue['iid']}/notes", {"per_page": 100})
+    for note in notes or []:
+        if marker(ev) in (note.get("body") or ""):
+            return True
     return False
 
 
@@ -145,11 +172,15 @@ def notify(ev, dry_run=False):
 
     issue = find_open_issue(ev["sourceId"])
     if issue is None:
-        gh("issue", "create", "--title", title(ev), "--body", body, "--label", LABEL)
+        gitlab("POST", "/issues", payload={
+            "title": title(ev),
+            "description": body,
+            "labels": LABEL,
+        })
         return "created"
     if already_reported(issue, ev):
         return "duplicate"
-    gh("issue", "comment", str(issue["number"]), "--body", body)
+    gitlab("POST", f"/issues/{issue['iid']}/notes", payload={"body": body})
     return "commented"
 
 

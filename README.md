@@ -24,7 +24,7 @@ requirements/*.json          корпуса требований (профили
 monitoring/sources.json      декларативная конфигурация наблюдения
 tools/validate.py            целостность реестра + прогон фикстур
 tools/check_sources.py       проверка источников, diff, импакт-анализ, утверждение baseline
-tools/notify_github.py       создание и обновление GitHub Issue
+tools/notify_gitlab.py       создание и обновление GitLab Issue
 tools/lib/                   extract · normalize · impact · schema
 tests/fixtures/*.json        золотые кейсы: контекст → ожидаемые counts
 tests/source_fixtures/*.html фикстуры мониторинга, включая негативные
@@ -81,7 +81,7 @@ Diff
       ↓
 Импакт-анализ
       ↓
-GitHub Issue
+GitLab Issue
       ↓
 Review человеком
       ↓
@@ -165,7 +165,7 @@ python3 tools/check_sources.py --approve msk-284-pp \
     --snapshot <rawHash12> --by <логин>
 
 # отрендерить тело issue, ничего не создавая
-python3 tools/notify_github.py reports/source-check.json --print
+python3 tools/notify_gitlab.py reports/source-check.json --print
 ```
 
 `--approve` **не ходит в сеть** и работает только с уже сохранённым снапшотом.
@@ -173,9 +173,11 @@ python3 tools/notify_github.py reports/source-check.json --print
 
 ### Автоматизация
 
-`.github/workflows/source-monitor.yml` — еженедельно и по кнопке. Создаёт issue
-только на `CHANGED`, дедуплицирует по `sourceId + previousHash + newHash` среди
-**открытых** issue. Не коммитит requirements и не обновляет baseline.
+GitLab CI в `.gitlab-ci.yml` проверяет целостность данных и тесты на push и в
+merge request. Job `source-monitor` запускается по расписанию или вручную, сохраняет
+JSON-отчёт как artifact и создаёт GitLab issue только на `CHANGED`. Уведомления
+дедуплицируются по `sourceId + previousHash + newHash` среди **открытых** issue.
+Job не коммитит requirements и не обновляет baseline.
 
 ## Проверка
 
