@@ -20,6 +20,7 @@ import check_sources  # noqa: E402
 from lib import extract as extract_mod  # noqa: E402
 from lib import impact as impact_mod  # noqa: E402
 from lib import normalize as norm_mod  # noqa: E402
+from lib import package as package_mod  # noqa: E402
 import validate as validate_mod  # noqa: E402
 
 FIX = ROOT / "tests" / "source_fixtures"
@@ -598,3 +599,108 @@ class TestIfcInspector(unittest.TestCase):
         """Расширение содержит точку, запрещённую п. 4.3.1.5 в самом имени."""
         self.assertEqual(self.failing("valid.ifc", file_name="НН_К01_С01_АР_АГР.ifc"), set())
         self.assertIn("ifc-filename-structure", self.failing("valid.ifc", file_name="модель 1.ifc"))
+
+
+class TestPackageInspector(unittest.TestCase):
+    """Инспектор комплекта запроса: то, на чём отказывают на приёме.
+
+    Манифест вместо каталога на диске — фикстура воспроизводима, а проверка
+    не зависит от того, где лежат файлы заявителя.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        cls.deliverables = json.loads(
+            (ROOT / "deliverables" / "index.json").read_text(encoding="utf-8"))["deliverables"]
+        cls.profile = json.loads(
+            (ROOT / "requirements" / "agr-request-package.v1.json").read_text(encoding="utf-8"))
+
+    def manifest(self, name):
+        return json.loads((ROOT / "tests" / "package_fixtures" / f"{name}.json").read_text(encoding="utf-8"))
+
+    def facts(self, name):
+        return package_mod.inspect(self.manifest(name), self.deliverables)
+
+    def context(self, name):
+        return {
+            "package": self.facts(name),
+            "applicant": {"kind": "legal_entity"},
+            "object": {"isLinear": False},
+            "request": {"viaRepresentative": True},
+        }
+
+    def failing(self, name):
+        ctx = self.context(name)
+        return {r["id"] for r in self.profile["rules"]
+                if validate_mod._state_for(r, ctx, None) == "auto_fail"}
+
+    def test_62_complete_package_passes(self):
+        """Полный комплект не даёт ни одного провала — и проверок при этом много."""
+        counts = validate_mod.evaluate(self.profile, self.context("complete"))
+        self.assertEqual(counts["auto_fail"], 0)
+        self.assertEqual(counts["rule_error"], 0)
+        self.assertGreaterEqual(counts["auto_pass"], 11)
+
+    def test_63_form_is_not_a_missing_document(self):
+        """Запрос подаётся формой на Портале: файла нет по определению."""
+        f = self.facts("complete")
+        self.assertNotIn("request-form", f["mandatoryMissing"])
+        self.assertEqual(f["mandatoryMissingCount"], 0)
+
+    def test_63a_form_counts_in_the_data_volume(self):
+        """Файла у формы нет, но сведения есть — в объём данных она входит."""
+        f = self.facts("complete")
+        self.assertEqual(f["dataItemsRequired"], f["mandatoryRequired"] + 1)
+        self.assertTrue(f["form"]["present"])
+        self.assertEqual(f["dataItemsMissing"], [])
+
+    def test_63b_unfilled_form_breaks_completeness(self):
+        """Документы собраны, форма пуста — комплект неполон."""
+        f = self.facts("form-empty")
+        self.assertEqual(f["mandatoryMissingCount"], 0)
+        self.assertEqual(f["dataItemsMissing"], ["request-form"])
+        self.assertIn("form-package-complete", self.failing("form-empty"))
+
+    def test_63c_form_field_composition_is_not_guessed(self):
+        """Состав полей задан приложением 2, оно не оцифровано — значит None."""
+        self.assertIsNone(self.facts("complete")["form"]["fieldsComplete"])
+
+    def test_64_missing_document_detected(self):
+        """Нет СПОЗУ — падает и правило документа, и полнота комплекта."""
+        self.assertEqual(self.failing("missing-spozu"), {"doc-04-spozu", "form-package-complete"})
+        self.assertEqual(self.facts("missing-spozu")["mandatoryMissing"], ["spozu"])
+
+    def test_65_wrong_format_detected(self):
+        """ТЭП принимается только XML: он формируется из состава ЦИМ, а не рисуется."""
+        self.assertEqual(self.failing("tep-as-pdf"), {"doc-08-tep-table", "form-readable"})
+
+    def test_66_missing_signature_detected(self):
+        self.assertFalse(self.facts("npm-unsigned")["documents"]["npm-package"]["signatureOk"])
+        self.assertEqual(self.facts("npm-unsigned")["signatureMismatch"], 1)
+
+    def test_67_signature_name_must_match(self):
+        """Подпись есть, но названа иначе — сопоставить её с файлом нечем."""
+        self.assertFalse(self.facts("vpm-signature-renamed")["documents"]["vpm-package"]["signatureOk"])
+
+    def test_68_oversize_detected(self):
+        """1 ГБ на пакет НПМ — граница, а не ориентир."""
+        self.assertFalse(self.facts("npm-oversize")["documents"]["npm-package"]["sizeOk"])
+        self.assertTrue(self.facts("complete")["documents"]["npm-package"]["sizeOk"])
+
+    def test_69_gpzu_must_survive_the_review(self):
+        """ГПЗУ, истекающий в ходе рассмотрения, — основание для отказа."""
+        self.assertTrue(self.facts("complete")["gpzu"]["survivesReview"])
+        self.assertIn("ext-gpzu-survives-review", self.failing("gpzu-expiring"))
+
+    def test_70_container_counts_as_valid_format(self):
+        """СПОЗУ подаётся как IFC внутри ZIP — снаружи виден ZIP, и это норма."""
+        self.assertTrue(self.facts("complete")["documents"]["spozu"]["formatValid"])
+
+    def test_71_inspector_does_not_touch_the_disk(self):
+        """Инспектор работает с манифестом. Обращение к файловой системе — дефект."""
+        real = package_mod.os.path.getsize
+        package_mod.os.path.getsize = lambda p: self.fail("инспектор полез на диск")
+        try:
+            self.facts("complete")
+        finally:
+            package_mod.os.path.getsize = real

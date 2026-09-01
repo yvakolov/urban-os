@@ -16,7 +16,11 @@
       "origin": "applicant",
       "producedBy": [
         "doc-01-request"
-      ]
+      ],
+      "accepted": [],
+      "carriesData": true,
+      "fieldsSource": "Приложение 2 к Административному регламенту; образец «Состав сведений АГР.pdf» приложен к п. 1 перечня документов на mos.ru",
+      "note": "Интерактивная форма: файла нет, но сведения есть. В общий объём данных комплекта входит наравне с документами; пофайловые проверки к ней неприменимы."
     },
     "agr-materials": {
       "kind": "package",
@@ -29,6 +33,9 @@
       "contains": [
         "npm-package",
         "vpm-package"
+      ],
+      "accepted": [
+        "pdf"
       ]
     },
     "npm-package": {
@@ -41,7 +48,12 @@
         "npm-fbx-oks",
         "npm-fbx-ground",
         "npm-signature"
-      ]
+      ],
+      "accepted": [
+        "zip"
+      ],
+      "signatureRequired": true,
+      "maxBytes": 1073741824
     },
     "npm-fbx-oks": {
       "kind": "file",
@@ -76,7 +88,11 @@
         "vpm-geojson",
         "vpm-textures",
         "vpm-signature"
-      ]
+      ],
+      "accepted": [
+        "zip"
+      ],
+      "signatureRequired": true
     },
     "vpm-fbx-geometry": {
       "kind": "file",
@@ -121,7 +137,12 @@
       "producedBy": [
         "doc-04-spozu"
       ],
-      "profile": "moscow-ifc-agr-2026-01-16"
+      "profile": "moscow-ifc-agr-2026-01-16",
+      "accepted": [
+        "ifc",
+        "xml"
+      ],
+      "container": "zip"
     },
     "floor-plans": {
       "kind": "package",
@@ -131,7 +152,12 @@
       "producedBy": [
         "doc-05-floor-plans"
       ],
-      "profile": "moscow-ifc-agr-2026-01-16"
+      "profile": "moscow-ifc-agr-2026-01-16",
+      "accepted": [
+        "ifc",
+        "xml"
+      ],
+      "container": "zip"
     },
     "sections-facades": {
       "kind": "package",
@@ -141,7 +167,12 @@
       "producedBy": [
         "doc-07-sections-facades"
       ],
-      "profile": "moscow-ifc-agr-2026-01-16"
+      "profile": "moscow-ifc-agr-2026-01-16",
+      "accepted": [
+        "ifc",
+        "xml"
+      ],
+      "container": "zip"
     },
     "tep-table": {
       "kind": "file",
@@ -154,7 +185,10 @@
         "ifc-tep-composition",
         "ifc-tep-xml-schema"
       ],
-      "note": "Формируется из атрибутивного состава ЦИМ АГР (п. 7.2), а не заполняется вручную."
+      "note": "Формируется из атрибутивного состава ЦИМ АГР (п. 7.2), а не заполняется вручную.",
+      "accepted": [
+        "xml"
+      ]
     },
     "title-documents": {
       "kind": "package",
@@ -163,6 +197,10 @@
       "origin": "applicant",
       "producedBy": [
         "doc-06-title-documents"
+      ],
+      "accepted": [
+        "pdf",
+        "zip"
       ]
     },
     "authority-legal-entity": {
@@ -172,7 +210,13 @@
       "origin": "applicant",
       "producedBy": [
         "doc-03-authority-legal-entity"
-      ]
+      ],
+      "accepted": [
+        "zip",
+        "pdf",
+        "xml"
+      ],
+      "signatureRequired": true
     },
     "authority-representative": {
       "kind": "file",
@@ -181,7 +225,13 @@
       "origin": "applicant",
       "producedBy": [
         "doc-09-authority-representative"
-      ]
+      ],
+      "accepted": [
+        "zip",
+        "pdf",
+        "xml"
+      ],
+      "signatureRequired": true
     },
     "gpzu": {
       "kind": "external",
@@ -271,5 +321,6 @@
       "isOutcome": true,
       "note": "Результат услуги. Не производится нами — выдаётся или не выдаётся."
     }
-  }
+  },
+  "formatsSource": "Перечень документов на странице госуслуги (incomingDocuments) и требования к моделям. Расширения в нижнем регистре, без точки."
 }

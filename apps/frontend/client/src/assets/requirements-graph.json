@@ -5,7 +5,7 @@
     "source": 12,
     "branch": 5,
     "profile": 6,
-    "rule": 261,
+    "rule": 262,
     "deliverable": 29
   },
   "nodes": [
@@ -459,7 +459,7 @@
       "label": "agr-request-package",
       "status": "draft",
       "sourceId": "msk-admin-reglament-agr",
-      "ruleCount": 38
+      "ruleCount": 39
     },
     {
       "id": "rule:elig-applicant-kind",
@@ -553,7 +553,7 @@
       "profileId": "agr-request-package",
       "category": "Комплект",
       "severity": "blocker",
-      "verification": "expert_evidence",
+      "verification": "automatic",
       "pending": false,
       "sourceRef": "incomingDocuments · обязательные, п. 2"
     },
@@ -565,7 +565,7 @@
       "profileId": "agr-request-package",
       "category": "Комплект",
       "severity": "blocker",
-      "verification": "expert_evidence",
+      "verification": "automatic",
       "pending": false,
       "sourceRef": "incomingDocuments · обязательные, п. 3"
     },
@@ -577,7 +577,7 @@
       "profileId": "agr-request-package",
       "category": "Комплект",
       "severity": "blocker",
-      "verification": "expert_evidence",
+      "verification": "automatic",
       "pending": false,
       "sourceRef": "incomingDocuments · обязательные, п. 4"
     },
@@ -589,7 +589,7 @@
       "profileId": "agr-request-package",
       "category": "Комплект",
       "severity": "blocker",
-      "verification": "expert_evidence",
+      "verification": "automatic",
       "pending": false,
       "sourceRef": "incomingDocuments · обязательные, п. 5"
     },
@@ -601,7 +601,7 @@
       "profileId": "agr-request-package",
       "category": "Комплект",
       "severity": "blocker",
-      "verification": "expert_evidence",
+      "verification": "automatic",
       "pending": false,
       "sourceRef": "incomingDocuments · обязательные, п. 6"
     },
@@ -613,7 +613,7 @@
       "profileId": "agr-request-package",
       "category": "Комплект",
       "severity": "blocker",
-      "verification": "expert_evidence",
+      "verification": "automatic",
       "pending": false,
       "sourceRef": "incomingDocuments · обязательные, п. 7"
     },
@@ -625,7 +625,7 @@
       "profileId": "agr-request-package",
       "category": "Комплект",
       "severity": "blocker",
-      "verification": "expert_evidence",
+      "verification": "automatic",
       "pending": false,
       "sourceRef": "incomingDocuments · обязательные, п. 8"
     },
@@ -637,7 +637,7 @@
       "profileId": "agr-request-package",
       "category": "Комплект",
       "severity": "blocker",
-      "verification": "expert_evidence",
+      "verification": "automatic",
       "pending": false,
       "sourceRef": "incomingDocuments · обязательные, п. 9"
     },
@@ -649,7 +649,7 @@
       "profileId": "agr-request-package",
       "category": "Форма подачи",
       "severity": "blocker",
-      "verification": "expert_evidence",
+      "verification": "automatic",
       "pending": false,
       "sourceRef": "groundsOfRefusal · приём, п. 6"
     },
@@ -661,7 +661,7 @@
       "profileId": "agr-request-package",
       "category": "Форма подачи",
       "severity": "blocker",
-      "verification": "expert_evidence",
+      "verification": "automatic",
       "pending": false,
       "sourceRef": "groundsOfRefusal · приём, п. 3"
     },
@@ -916,6 +916,18 @@
       "verification": "external_fact",
       "pending": false,
       "sourceRef": "groundsOfRefusal · приём, п. 2; предоставление, п. 2"
+    },
+    {
+      "id": "rule:ext-gpzu-survives-review",
+      "layer": "rule",
+      "label": "ГПЗУ переживёт срок рассмотрения",
+      "ruleId": "ext-gpzu-survives-review",
+      "profileId": "agr-request-package",
+      "category": "Внешние документы",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "groundsOfRefusal · предоставление, п. 13"
     },
     {
       "id": "profile:moscow-ifc-agr-2026-01-16",
@@ -3992,6 +4004,11 @@
     {
       "source": "profile:agr-request-package",
       "target": "rule:conf-documents-in-force",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:ext-gpzu-survives-review",
       "kind": "contains"
     },
     {
