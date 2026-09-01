@@ -1,13 +1,13 @@
 {
   "schemaVersion": "1.1",
   "id": "moscow-ifc-agr-2026-01-16",
-  "version": "2026-09-01.2",
+  "version": "2026-09-01.3",
   "status": "draft",
   "sourceId": "msk-ifc-agr",
   "jurisdiction": "Москва",
   "modelClass": "CIM_AGR",
   "effectiveFrom": "2026-01-16",
-  "releasePolicy": "Транскрипция разделов 4 и 5 первоисточника (стр. 6-21): общие требования к ЦИМ АГР, наименование уровней, требования к элементам, состав дисциплинарных ЦИМ, требования к ЦИМ ПС, ЦИМ БиО и ЦИМ АР. Приложения 1-2 со словарём атрибутов по классам IFC (стр. 25-65) не оцифрованы — профиль неполон и остаётся draft. sourceRef указывает пункт самого распоряжения: текст первоисточника прочитан постранично.",
+  "releasePolicy": "Транскрипция разделов 4–7 первоисточника (стр. 6–30): общие требования, дисциплинарные ЦИМ, проверки перед выгрузкой, ТЭП, а также таблицы Б.1 и Б.2 словаря атрибутов. Таблицы Б.3–Б.13 (стр. 31–65) не оцифрованы — профиль неполон и остаётся draft. Полный словарь атрибутов вынесен в dictionaries/ifc-attributes.v1.json: это данные, а не правила. sourceRef указывает пункт самого распоряжения — текст прочитан постранично.",
   "rules": [
     {
       "id": "ifc-format-spf",
@@ -657,7 +657,100 @@
       "severity": "minor",
       "sourceRef": "п. 5.3.16",
       "note": "Не запрет, а указание на то, что такие наборы не будут прочитаны: сведения, положенные только туда, до рассмотрения не дойдут."
+    },
+    {
+      "id": "ifc-collision-check",
+      "category": "Выпуск",
+      "title": "Проверка коллизий по матрице",
+      "requirement": "Элементы ЦИМ АГР проверены на коллизии в соответствии с матрицей коллизий приложения 4 Требований с допусками в миллиметрах.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "п. 6.2.2"
+    },
+    {
+      "id": "ifc-no-hanging-elements",
+      "category": "Выпуск",
+      "title": "Точность примыканий",
+      "requirement": "Элементы ЦИМ АГР проверены на точность примыканий; исключается «висячее в воздухе» состояние элементов.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "п. 6.2.2"
+    },
+    {
+      "id": "ifc-export-after-checks",
+      "category": "Выпуск",
+      "title": "Выгрузка после прохождения проверок",
+      "requirement": "Выгрузка ЦИМ АГР в формат IFC для предоставления в Департамент произведена после выполнения проверок пункта 6.2.2.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "п. 6.2.3"
+    },
+    {
+      "id": "ifc-tep-derivable",
+      "category": "ТЭП",
+      "title": "ЦИМ обеспечивает формирование ТЭП",
+      "requirement": "ЦИМ АГР обеспечивает возможность формирования основных технико-экономических показателей объекта капитального строительства.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "п. 7.1"
+    },
+    {
+      "id": "ifc-tep-from-attributes",
+      "category": "ТЭП",
+      "title": "ТЭП формируются из атрибутов",
+      "requirement": "Источником формирования ТЭП являются данные атрибутивного состава элементов ЦИМ АГР. Формирование выполняется в автоматизированном режиме базовыми операциями с атрибутами: прямой выгрузкой, выражениями с логическими операторами, суммированием и группировкой.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "п. 7.2"
+    },
+    {
+      "id": "ifc-tep-xml",
+      "category": "ТЭП",
+      "title": "XML технико-экономических показателей сформирован",
+      "requirement": "Сформирован XML технико-экономических показателей.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "п. 6.2.2"
+    },
+    {
+      "id": "ifc-tep-composition",
+      "category": "ТЭП",
+      "title": "Состав показателей ТЭП",
+      "requirement": "ТЭП содержат: высоту застройки (м); площадь участка (га); суммарную поэтажную площадь в габаритах наружных стен всего, в том числе жилых объектов с разделением на жилую и нежилую части и нежилых объектов (кв.м); общую площадь объекта с разделением на наземную и подземную (кв.м); нежилую наземную площадь нежилой части жилых зданий и нежилых объектов (кв.м); общую площадь квартир и площадь квартир без летних помещений (кв.м); количество квартир (шт.); площадь озеленения, включая площадь детских площадок и площадок для отдыха взрослых (кв.м).",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "п. 7.3, табл. 7.1"
+    },
+    {
+      "id": "ifc-attributes-proxy",
+      "category": "Атрибуты",
+      "title": "IfcBuildingElementProxy — обязательный набор атрибутов",
+      "requirement": "Элементы класса IfcBuildingElementProxy (вспомогательное 3D-тело) несут обязательный набор атрибутов по таблице Б.1: RusSet_Common — RUS_MSSK_Element_Code, RUS_Name, RUS_MSSK_Element_Name; RusSet_Quantities — RUS_Volume (м3), RUS_Height (мм), RUS_Width (мм), RUS_Length (мм); RusSet_Location — RUS_Object, RUS_Object_Sub.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "прил. 2, табл. Б.1",
+      "evaluator": {
+        "op": "equals",
+        "path": "ifc.attributes.IfcBuildingElementProxy.complete",
+        "value": true
+      },
+      "note": "Полный перечень с типами и единицами — dictionaries/ifc-attributes.v1.json, класс Б.1."
+    },
+    {
+      "id": "ifc-attributes-space",
+      "category": "Атрибуты",
+      "title": "IfcSpace — обязательный набор атрибутов",
+      "requirement": "Элементы класса IfcSpace (помещение, зона) несут обязательный набор атрибутов по таблице Б.2: RusSet_Common — RUS_MSSK_SpaceAndZone_Code, RUS_Name, RUS_MSSK_SpaceAndZone_Name; RusSet_Quantities — RUS_Height (мм), RUS_Area (м2), RUS_Volume (м3); RusSet_Location — RUS_Object, RUS_Object_Sub; RusSet_Identification — RUS_Zone, RUS_Group_Type, RUS_Group_Number, RUS_Number; RusSet_AGR — RUS_BasementFloor, RUS_GroundFloor, RUS_StudioApart.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "прил. 2, табл. Б.2",
+      "evaluator": {
+        "op": "equals",
+        "path": "ifc.attributes.IfcSpace.complete",
+        "value": true
+      },
+      "note": "Полный перечень — dictionaries/ifc-attributes.v1.json, класс Б.2. Транскрипция частичная: строки после 16 не сверены."
     }
   ],
-  "selfHash": "1ffe7ab6789452159aa9e6799891117d44fef951890ce1772e17581dd68702a1"
+  "selfHash": "c81781c6c50dd4a71d8b66e989f357a0d892af9bed45c190bf3d82c9bc7525da"
 }

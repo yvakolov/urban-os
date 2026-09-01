@@ -149,9 +149,11 @@
       "format": "XML",
       "origin": "produced",
       "producedBy": [
-        "doc-08-tep-table"
+        "doc-08-tep-table",
+        "ifc-tep-xml",
+        "ifc-tep-composition"
       ],
-      "blockedBy": "xml-schema-tep"
+      "note": "Формируется из атрибутивного состава ЦИМ АГР (п. 7.2), а не заполняется вручную."
     },
     "title-documents": {
       "kind": "package",

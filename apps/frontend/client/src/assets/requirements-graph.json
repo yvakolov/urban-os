@@ -5,7 +5,7 @@
     "source": 12,
     "branch": 5,
     "profile": 6,
-    "rule": 238,
+    "rule": 247,
     "deliverable": 29
   },
   "nodes": [
@@ -923,7 +923,7 @@
       "label": "moscow-ifc-agr-2026-01-16",
       "status": "draft",
       "sourceId": "msk-ifc-agr",
-      "ruleCount": 62
+      "ruleCount": 71
     },
     {
       "id": "rule:ifc-format-spf",
@@ -1668,6 +1668,114 @@
       "verification": "expert_evidence",
       "pending": false,
       "sourceRef": "п. 5.3.16"
+    },
+    {
+      "id": "rule:ifc-collision-check",
+      "layer": "rule",
+      "label": "Проверка коллизий по матрице",
+      "ruleId": "ifc-collision-check",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Выпуск",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 6.2.2"
+    },
+    {
+      "id": "rule:ifc-no-hanging-elements",
+      "layer": "rule",
+      "label": "Точность примыканий",
+      "ruleId": "ifc-no-hanging-elements",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Выпуск",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 6.2.2"
+    },
+    {
+      "id": "rule:ifc-export-after-checks",
+      "layer": "rule",
+      "label": "Выгрузка после прохождения проверок",
+      "ruleId": "ifc-export-after-checks",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Выпуск",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 6.2.3"
+    },
+    {
+      "id": "rule:ifc-tep-derivable",
+      "layer": "rule",
+      "label": "ЦИМ обеспечивает формирование ТЭП",
+      "ruleId": "ifc-tep-derivable",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "ТЭП",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 7.1"
+    },
+    {
+      "id": "rule:ifc-tep-from-attributes",
+      "layer": "rule",
+      "label": "ТЭП формируются из атрибутов",
+      "ruleId": "ifc-tep-from-attributes",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "ТЭП",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 7.2"
+    },
+    {
+      "id": "rule:ifc-tep-xml",
+      "layer": "rule",
+      "label": "XML технико-экономических показателей сформирован",
+      "ruleId": "ifc-tep-xml",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "ТЭП",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 6.2.2"
+    },
+    {
+      "id": "rule:ifc-tep-composition",
+      "layer": "rule",
+      "label": "Состав показателей ТЭП",
+      "ruleId": "ifc-tep-composition",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "ТЭП",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 7.3, табл. 7.1"
+    },
+    {
+      "id": "rule:ifc-attributes-proxy",
+      "layer": "rule",
+      "label": "IfcBuildingElementProxy — обязательный набор атрибутов",
+      "ruleId": "ifc-attributes-proxy",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Атрибуты",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "прил. 2, табл. Б.1"
+    },
+    {
+      "id": "rule:ifc-attributes-space",
+      "layer": "rule",
+      "label": "IfcSpace — обязательный набор атрибутов",
+      "ruleId": "ifc-attributes-space",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Атрибуты",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "прил. 2, табл. Б.2"
     },
     {
       "id": "profile:moscow-npm-2026-08-18",
@@ -3218,7 +3326,7 @@
       "kind": "file",
       "origin": "produced",
       "fmt": "XML",
-      "blockedBy": "xml-schema-tep",
+      "blockedBy": null,
       "isOutcome": false
     },
     {
@@ -4031,6 +4139,51 @@
     {
       "source": "profile:moscow-ifc-agr-2026-01-16",
       "target": "rule:ifc-pset-qto-ignored",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-collision-check",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-no-hanging-elements",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-export-after-checks",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-tep-derivable",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-tep-from-attributes",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-tep-xml",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-tep-composition",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-attributes-proxy",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-attributes-space",
       "kind": "contains"
     },
     {
@@ -4905,6 +5058,16 @@
     },
     {
       "source": "rule:doc-08-tep-table",
+      "target": "deliv:tep-table",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:ifc-tep-xml",
+      "target": "deliv:tep-table",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:ifc-tep-composition",
       "target": "deliv:tep-table",
       "kind": "produces"
     },
