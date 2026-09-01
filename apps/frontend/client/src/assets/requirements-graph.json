@@ -5,7 +5,7 @@
     "source": 14,
     "branch": 5,
     "profile": 7,
-    "rule": 345,
+    "rule": 364,
     "deliverable": 29
   },
   "nodes": [
@@ -50,7 +50,7 @@
       "layer": "source",
       "label": "Распоряжение Департамента градостроительной политики города Москвы и Департамента информац",
       "status": "active",
-      "transcribed": "partial",
+      "transcribed": "full",
       "monitored": false,
       "url": "https://stroimprosto.mos.ru/storage/app/media/KnowledgeBase/CIM_AGR_full.pdf"
     },
@@ -1957,7 +1957,7 @@
       "label": "moscow-ifc-agr-2026-01-16",
       "status": "draft",
       "sourceId": "msk-ifc-agr",
-      "ruleCount": 85
+      "ruleCount": 104
     },
     {
       "id": "rule:ifc-format-spf",
@@ -2363,7 +2363,7 @@
       "profileId": "moscow-ifc-agr-2026-01-16",
       "category": "Уровни",
       "severity": "blocker",
-      "verification": "expert_evidence",
+      "verification": "automatic",
       "pending": false,
       "sourceRef": "пп. 4.7.8.1, табл. 4.3"
     },
@@ -2375,7 +2375,7 @@
       "profileId": "moscow-ifc-agr-2026-01-16",
       "category": "Уровни",
       "severity": "blocker",
-      "verification": "expert_evidence",
+      "verification": "automatic",
       "pending": false,
       "sourceRef": "п. 4.7.8.2"
     },
@@ -2411,7 +2411,7 @@
       "profileId": "moscow-ifc-agr-2026-01-16",
       "category": "Уровни",
       "severity": "blocker",
-      "verification": "expert_evidence",
+      "verification": "automatic",
       "pending": false,
       "sourceRef": "табл. 4.3, поле 4"
     },
@@ -2978,6 +2978,234 @@
       "verification": "automatic",
       "pending": false,
       "sourceRef": "прил. 5"
+    },
+    {
+      "id": "rule:ifc-level-subobject-field",
+      "layer": "rule",
+      "label": "Поле 1 · Номер подобъекта (секции)",
+      "ruleId": "ifc-level-subobject-field",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Наименование уровня",
+      "severity": "major",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "табл. 4.3, поле 1"
+    },
+    {
+      "id": "rule:ifc-level-label-vocabulary",
+      "layer": "rule",
+      "label": "Поле 3 · Наименование уровня из перечня",
+      "ruleId": "ifc-level-label-vocabulary",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Наименование уровня",
+      "severity": "major",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "табл. 4.3, поле 3"
+    },
+    {
+      "id": "rule:ifc-level-elevation-field",
+      "layer": "rule",
+      "label": "Поле 5 · Отметка",
+      "ruleId": "ifc-level-elevation-field",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Наименование уровня",
+      "severity": "major",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "табл. 4.3, поле 5"
+    },
+    {
+      "id": "rule:ifc-split-into-subobjects",
+      "layer": "rule",
+      "label": "5.1.3 · Разбиение на подобъекты отражено в имени файла",
+      "ruleId": "ifc-split-into-subobjects",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Наименование уровня",
+      "severity": "major",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 5.1.3"
+    },
+    {
+      "id": "rule:ifc-split-justified",
+      "layer": "rule",
+      "label": "5.1.4 · Разбиение определяется составом проекта",
+      "ruleId": "ifc-split-justified",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Наименование уровня",
+      "severity": "major",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 5.1.4"
+    },
+    {
+      "id": "rule:ifc-naming-regardless-of-split",
+      "layer": "rule",
+      "label": "5.1.5 · Правила именования соблюдены при любом разбиении",
+      "ruleId": "ifc-naming-regardless-of-split",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Наименование уровня",
+      "severity": "major",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 5.1.5"
+    },
+    {
+      "id": "rule:ifc-ps-bio-flat-elements",
+      "layer": "rule",
+      "label": "5.2.3 · Плоские элементы ЦИМ ПС и БиО",
+      "ruleId": "ifc-ps-bio-flat-elements",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Наименование уровня",
+      "severity": "major",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 5.2.3"
+    },
+    {
+      "id": "rule:ifc-ps-bio-attributes",
+      "layer": "rule",
+      "label": "5.2.9 · Атрибутивный состав ЦИМ ПС и БиО",
+      "ruleId": "ifc-ps-bio-attributes",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Наименование уровня",
+      "severity": "major",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 5.2.9"
+    },
+    {
+      "id": "rule:ifc-ar-attributes-appendix2",
+      "layer": "rule",
+      "label": "5.3.10 · Атрибутивный состав элементов ЦИМ АР",
+      "ruleId": "ifc-ar-attributes-appendix2",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Наименование уровня",
+      "severity": "major",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 5.3.10"
+    },
+    {
+      "id": "rule:ifc-annotations-allowed",
+      "layer": "rule",
+      "label": "5.3.17 · Аннотации при наличии требования в техническом задании",
+      "ruleId": "ifc-annotations-allowed",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Наименование уровня",
+      "severity": "major",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 5.3.17"
+    },
+    {
+      "id": "rule:ifc-ar-annotations-table53",
+      "layer": "rule",
+      "label": "5.3.18 · Аннотации к ЦИМ АР по таблице 5.3",
+      "ruleId": "ifc-ar-annotations-table53",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Наименование уровня",
+      "severity": "major",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 5.3.18, табл. 5.3"
+    },
+    {
+      "id": "rule:ifc-annotation-gost",
+      "layer": "rule",
+      "label": "6.1.1 · Аннотации по ГОСТ Р 21.101-2020",
+      "ruleId": "ifc-annotation-gost",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Аннотации",
+      "severity": "minor",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 6.1.1"
+    },
+    {
+      "id": "rule:ifc-annotation-bcf",
+      "layer": "rule",
+      "label": "6.1.2 · Растровые аннотации в формате BCF",
+      "ruleId": "ifc-annotation-bcf",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Аннотации",
+      "severity": "minor",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 6.1.2"
+    },
+    {
+      "id": "rule:ifc-annotation-bcf-content",
+      "layer": "rule",
+      "label": "6.1.3 · Состав файлов разметки и визуализации",
+      "ruleId": "ifc-annotation-bcf-content",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Аннотации",
+      "severity": "major",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 6.1.3"
+    },
+    {
+      "id": "rule:ifc-annotation-guid",
+      "layer": "rule",
+      "label": "6.1.4 · GUID и точная привязка аннотаций",
+      "ruleId": "ifc-annotation-guid",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Аннотации",
+      "severity": "major",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 6.1.4"
+    },
+    {
+      "id": "rule:ifc-annotation-plan-name",
+      "layer": "rule",
+      "label": "6.1.5 · Наименования планов",
+      "ruleId": "ifc-annotation-plan-name",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Аннотации",
+      "severity": "major",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 6.1.5"
+    },
+    {
+      "id": "rule:ifc-annotation-section-name",
+      "layer": "rule",
+      "label": "6.1.7 · Наименования разрезов",
+      "ruleId": "ifc-annotation-section-name",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Аннотации",
+      "severity": "major",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 6.1.7"
+    },
+    {
+      "id": "rule:ifc-annotation-numbering",
+      "layer": "rule",
+      "label": "6.1.8 · Самостоятельная нумерация по видам изображений",
+      "ruleId": "ifc-annotation-numbering",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Аннотации",
+      "severity": "major",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 6.1.8"
+    },
+    {
+      "id": "rule:ifc-export-approved-versions",
+      "layer": "rule",
+      "label": "6.2.1 · Предоставляются утверждённые версии файлов",
+      "ruleId": "ifc-export-approved-versions",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Экспорт",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 6.2.1"
     },
     {
       "id": "profile:moscow-npm-2026-08-18",
@@ -5961,6 +6189,101 @@
     {
       "source": "profile:moscow-ifc-agr-2026-01-16",
       "target": "rule:ifc-tep-xml-schema",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-level-subobject-field",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-level-label-vocabulary",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-level-elevation-field",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-split-into-subobjects",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-split-justified",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-naming-regardless-of-split",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-ps-bio-flat-elements",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-ps-bio-attributes",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-ar-attributes-appendix2",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-annotations-allowed",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-ar-annotations-table53",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-annotation-gost",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-annotation-bcf",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-annotation-bcf-content",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-annotation-guid",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-annotation-plan-name",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-annotation-section-name",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-annotation-numbering",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-export-approved-versions",
       "kind": "contains"
     },
     {

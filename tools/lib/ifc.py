@@ -197,7 +197,82 @@ def _property_index(entities):
     return index, psets
 
 
-def inspect(text, file_name=None, file_size=None, dictionary=None):
+def check_level_names(names, grammar):
+    """Разобрать наименования уровней по грамматике таблицы 4.3.
+
+    Разбор терпим к отсутствию номера уровня: таблица объявляет поле
+    обязательным, но собственный пример источника «С01_крыша_дополнительный»
+    его не содержит. Противоречие источника не наше дело разрешать, поэтому
+    принимаются обе формы, а несоответствием считается только то, что нарушает
+    обе.
+    """
+    if not grammar:
+        return {}
+    fields = {f["number"]: f for f in grammar["fields"]}
+    sep = grammar["separator"]
+    vocab = {v.lower() for v in fields[3]["vocabulary"]}
+    purposes = {v.lower() for v in fields[4]["vocabulary"]}
+    sub_re = re.compile(fields[1]["pattern"])
+    lvl_re = re.compile(fields[2]["pattern"])
+    mark_re = re.compile(fields[5]["pattern"])
+
+    bad_subobject, bad_vocabulary, bad_purpose, bad_mark, bad_structure = [], [], [], [], []
+    for name in names:
+        parts = name.split(sep)
+        if len(parts) < 3:
+            bad_structure.append(name)
+            continue
+        if not sub_re.match(parts[0]):
+            bad_subobject.append(name)
+
+        # Хвост читается справа: назначение обязательно и всегда последнее,
+        # отметка необязательна и может стоять за ним. Разбирать слева нельзя —
+        # номер уровня отсутствует у крыши, и позиции полей поехали бы.
+        if parts[-1].lower() in purposes:
+            middle, mark = parts[1:-1], None
+        elif len(parts) >= 4 and parts[-2].lower() in purposes:
+            middle, mark = parts[1:-2], parts[-1]
+        else:
+            bad_purpose.append(name)
+            middle, mark = parts[1:-1], None
+        if mark is not None and not mark_re.match(mark):
+            bad_mark.append(name)
+
+        if len(middle) == 2:            # номер уровня и наименование
+            if not lvl_re.match(middle[0]):
+                bad_structure.append(name)
+            label = middle[1]
+        elif len(middle) == 1:          # без номера уровня — форма примера 4.7.9
+            label = middle[0]
+        else:
+            bad_structure.append(name)
+            continue
+
+        # в примере 4.7.9 номер и наименование разделены пробелом вместо «_»
+        if label.lower() not in vocab:
+            head = label.split(" ", 1)
+            if not (len(head) == 2 and lvl_re.match(head[0]) and head[1].lower() in vocab):
+                bad_vocabulary.append(label)
+
+    out = {
+        "checked": len(names),
+        "badSubobjectField": sorted(set(bad_subobject)),
+        "unknownLevelLabel": sorted(set(bad_vocabulary)),
+        "badPurposeField": sorted(set(bad_purpose)),
+        "badElevationField": sorted(set(bad_mark)),
+        "badStructure": sorted(set(bad_structure)),
+    }
+    # evaluator-ы сравнивают числа, а не списки: счётчики рядом со списками,
+    # чтобы правило говорило «сколько», а отчёт человеку — «какие именно».
+    for key in list(out):
+        if isinstance(out[key], list):
+            out[key + "Count"] = len(out[key])
+    out["allWellFormed"] = not any(
+        v for k, v in out.items() if isinstance(v, list))
+    return out
+
+
+def inspect(text, file_name=None, file_size=None, dictionary=None, level_grammar=None):
     """Вернуть плоский словарь фактов под пути evaluator-ов профиля."""
     doc = parse(text)
     ents = doc["entities"]
@@ -239,6 +314,7 @@ def inspect(text, file_name=None, file_size=None, dictionary=None):
             if pname == "RUS_FNO":
                 facts["project"]["RUS_FNO"] = val
 
+    facts["levelNaming"] = check_level_names(level_names, level_grammar)
     facts["attributes"] = _attribute_completeness(by_type, index, dictionary)
     # Классы, которых в файле нет, дают complete=None и в оценку не входят:
     # отсутствие класса не является нарушением, состав определяется проектом.

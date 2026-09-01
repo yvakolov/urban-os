@@ -550,12 +550,15 @@ class TestIfcInspector(unittest.TestCase):
             (ROOT / "dictionaries" / "ifc-attributes.v1.json").read_text(encoding="utf-8"))
         cls.profile = json.loads(
             (ROOT / "requirements" / "moscow-ifc-agr-2026-01-16.v1.json").read_text(encoding="utf-8"))
+        cls.grammar = json.loads(
+            (ROOT / "dictionaries" / "ifc-level-naming.v1.json").read_text(encoding="utf-8"))
 
     def context(self, name, file_name="НН_К01_С01_АР_АГР.ifc"):
         import os
         text = (self.FIX / name).read_text(encoding="utf-8")
         facts = self.ifc.inspect(text, file_name=file_name,
-                                 file_size=len(text.encode()), dictionary=self.dict)
+                                 file_size=len(text.encode()), dictionary=self.dict,
+                                 level_grammar=self.grammar)
         return {
             "ifc": facts,
             "package": {"fileName": file_name, "fileStem": os.path.splitext(file_name)[0],
@@ -629,6 +632,50 @@ class TestIfcInspector(unittest.TestCase):
         """Расширение содержит точку, запрещённую п. 4.3.1.5 в самом имени."""
         self.assertEqual(self.failing("valid.ifc", file_name="НН_К01_С01_АР_АГР.ifc"), set())
         self.assertIn("ifc-filename-structure", self.failing("valid.ifc", file_name="модель 1.ifc"))
+
+    def test_106_source_examples_satisfy_the_transcribed_grammar(self):
+        """Все десять примеров источника разбираются как корректные.
+
+        Это единственная доступная проверка самой транскрипции: грамматику
+        писали мы, а примеры — регулятор. Если наша запись расходится с его
+        замыслом, она отвергнет его собственные примеры.
+        """
+        result = self.ifc.check_level_names(self.grammar["examples"], self.grammar)
+        self.assertTrue(result["allWellFormed"], result)
+        self.assertEqual(result["checked"], 10)
+
+    def test_107_level_name_violations_are_named_precisely(self):
+        """Диагноз должен указывать на поле, а не на «что-то не так»."""
+        g = self.grammar
+        cases = {
+            "X1_4_этаж_основной": "badSubobjectField",
+            "С01_4_чердачное помещение_основной": "unknownLevelLabel",
+            "С01_4_этаж_главный": "badPurposeField",
+            "С01_2_этаж_основной_6.000": "badElevationField",
+            "этаж": "badStructure",
+        }
+        for name, expected in cases.items():
+            r = self.ifc.check_level_names([name], g)
+            flagged = {k for k, v in r.items() if isinstance(v, list) and v}
+            self.assertEqual(flagged, {expected}, name)
+
+    def test_108_roof_level_without_number_is_accepted(self):
+        """Источник противоречит себе, и разрешать это противоречие не нам.
+
+        Таблица 4.3 объявляет номер уровня обязательным, а пример п. 4.7.9
+        «С01_крыша_дополнительный» его не содержит. Отвергать форму, которую
+        регулятор привёл как образец, инструмент не вправе.
+        """
+        r = self.ifc.check_level_names(["С01_крыша_дополнительный"], self.grammar)
+        self.assertTrue(r["allWellFormed"])
+        field2 = next(f for f in self.grammar["fields"] if f["number"] == 2)
+        self.assertIn("sourceContradiction", field2)
+
+    def test_109_bad_level_name_fails_the_right_rules(self):
+        """Живой файл с неверным наименованием уровня валит ровно свои правила."""
+        failing = self.failing("bad-level-name.ifc")
+        self.assertEqual(failing, {"ifc-level-label-vocabulary", "ifc-level-purpose"})
+        self.assertEqual(self.failing("valid.ifc"), set())
 
 
 class TestPackageInspector(unittest.TestCase):
