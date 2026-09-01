@@ -1371,3 +1371,53 @@ class TestReviewState(unittest.TestCase):
 
     def test_125_record_keeps_who_actually_ran_it(self):
         self.assertIn("osUser", self.review.actual_identity())
+
+    def test_126_content_revision_resets_the_review(self):
+        """Новая редакция ПО СОДЕРЖАНИЮ обнуляет пересмотр.
+
+        Запись о пересмотре привязана к паре id+версия. Иначе утверждение,
+        поставленное на прежние правила, молча распространилось бы на
+        изменённые — то есть человек оказался бы подписан под текстом,
+        которого не читал.
+        """
+        state = json.loads((ROOT / "review" / "state.json").read_text(encoding="utf-8"))
+        _s, sources, active = self.review.load()
+        p = active["agr-request-package"]
+        self.assertEqual(p["version"], "2026-09-01.4")
+        self.assertNotIn(self.review.key(p), state["reviews"])
+        self.assertIn("agr-request-package@2026-09-01.3", state["reviews"],
+                      "запись о пересмотре прежней редакции должна сохраняться как история")
+        rows = self.review.status(state, sources, active)
+        self.assertIn("agr-request-package", self.review.blocked_profiles(rows))
+
+    def test_127_content_revision_says_why(self):
+        """Редакция, меняющая содержание, обязана объяснить чем отличается.
+
+        Без этого она неотличима от правки транскрипции, и читатель не может
+        понять, изменились требования или только способ их проверки.
+        """
+        for path in (ROOT / "requirements").glob("*.json"):
+            p = json.loads(path.read_text(encoding="utf-8"))
+            if p.get("revisionNote"):
+                self.assertNotIn("transcriptionNote", p,
+                                 f"{path.name}: редакция не может быть одновременно "
+                                 f"содержательной и чисто транскрипционной")
+        v2 = json.loads((ROOT / "requirements" / "agr-request-package.v2.json")
+                        .read_text(encoding="utf-8"))
+        self.assertIn("revisionNote", v2)
+        by_id = {r["id"]: r for r in v2["rules"]}
+        self.assertIn("градостроительной политики",
+                      by_id["form-no-duplicate-request"]["requirement"])
+        self.assertNotIn("в Комитете", by_id["form-no-duplicate-request"]["requirement"])
+
+    def test_128_resolved_divergence_records_who_decided(self):
+        """Разрешённое расхождение не исчезает — оно получает автора решения."""
+        doc = json.loads((ROOT / "dictionaries" / "source-divergences.v1.json")
+                         .read_text(encoding="utf-8"))
+        resolved = [d for d in doc["divergences"] if d.get("resolution")]
+        self.assertTrue(resolved)
+        for d in resolved:
+            for field in ("choice", "decidedBy", "decidedOn", "appliedIn"):
+                self.assertIn(field, d["resolution"], d["id"])
+            # текст обеих сторон обязан остаться: решение не стирает расхождение
+            self.assertTrue(d.get("textA") and d.get("textB"), d["id"])
