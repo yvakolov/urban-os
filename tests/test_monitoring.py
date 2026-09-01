@@ -1254,15 +1254,67 @@ class TestRegulationProvenance(unittest.TestCase):
                             f"{p['id']}: источник {sid} ничем не подтверждён и пробел не объявлен")
 
     def test_116_provenance_gaps_are_declared_not_hidden(self):
-        """Объявленных пробелов ровно столько, сколько источников без файла."""
+        """Пробел провенанса обязан быть объявлен, а объявленный — быть настоящим.
+
+        Две стороны, и обе важны. Источник, обещающий файл, которого нет,
+        обязан объяснить почему. И наоборот: объявленный пробел не должен
+        пережить появление файла — иначе реестр будет пугать закрытой дырой.
+        """
         gaps = {sid for sid, s in self.sources.items() if s.get("provenanceGap")}
-        # Отсутствующий хеш делает источник не менее непроверяемым, чем
-        # отсутствующий файл: предъявить нечего в обоих случаях.
-        unverifiable = {sid for sid, s in self.sources.items()
-                        if s.get("file") and not (ROOT / s["file"]).exists()}
-        self.assertEqual(gaps, unverifiable,
-                         "пробел есть, а объяснения нет — или наоборот")
-        self.assertEqual(len(gaps), 4)
+
+        promised_but_absent = {sid for sid, s in self.sources.items()
+                               if s.get("file") and not (ROOT / s["file"]).exists()}
+        self.assertTrue(promised_but_absent <= gaps,
+                        f"файла нет, а объяснения тоже: {sorted(promised_but_absent - gaps)}")
+
+        import hashlib
+        stale = set()
+        for sid in gaps:
+            s = self.sources[sid]
+            path = ROOT / (s.get("file") or "нет")
+            if s.get("sha256") and path.exists():
+                if hashlib.sha256(path.read_bytes()).hexdigest() == s["sha256"]:
+                    stale.add(sid)
+        self.assertEqual(stale, set(),
+                         f"пробел объявлен, но файл на месте и сверен: {sorted(stale)}")
+
+    def test_129_model_requirements_act_is_verifiable(self):
+        """Действующие требования к НПМ и ВПМ подтверждаются файлом с хешем.
+
+        86 правил двух профилей опирались на документ, которого нельзя было
+        предъявить. Он нашёлся опубликованным, и объявленный sha256 совпал —
+        значит транскрипция велась именно по нему.
+        """
+        s = self.sources["msk-3d-2026-08-18"]
+        self.assertNotIn("provenanceGap", s)
+        self.assertTrue(s.get("url", "").startswith("https://"))
+        path = ROOT / s["file"]
+        if not path.exists():
+            self.skipTest("файл дозагружается tools/fetch_source.py и в репозитории не хранится")
+        import hashlib
+        self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(), s["sha256"])
+
+    def test_130_redaction_chain_is_linked_both_ways(self):
+        """Цепочка редакций требований к моделям связана и симметрична."""
+        chain = ["msk-3d-2026-08-18", "msk-3d-2025-08-22", "msk-3d-2023-04-19"]
+        for newer, older in zip(chain, chain[1:]):
+            self.assertEqual(self.sources[newer]["supersedes"], older)
+            self.assertEqual(self.sources[older]["supersededBy"], newer)
+
+    def test_131_showcase_registry_is_known_to_be_stale(self):
+        """Витрина показывает отменённый акт — это записано, а не подразумевается.
+
+        Пока offDocs не обновится, отсутствие в нём нового акта не является
+        сигналом о том, что акта нет. Без записи об этом следующий прогон
+        мониторинга привёл бы к неверному выводу.
+        """
+        doc = json.loads((ROOT / "dictionaries" / "source-divergences.v1.json")
+                         .read_text(encoding="utf-8"))
+        stale = next((d for d in doc["divergences"]
+                      if d["id"] == "stale-3d-act-on-showcase"), None)
+        self.assertIsNotNone(stale)
+        self.assertIn("64-16-192/23/769", stale["textA"])
+        self.assertEqual(self.sources["msk-3d-2023-04-19"]["status"], "superseded")
 
 
 class TestReviewState(unittest.TestCase):
@@ -1372,23 +1424,26 @@ class TestReviewState(unittest.TestCase):
     def test_125_record_keeps_who_actually_ran_it(self):
         self.assertIn("osUser", self.review.actual_identity())
 
-    def test_126_content_revision_resets_the_review(self):
-        """Новая редакция ПО СОДЕРЖАНИЮ обнуляет пересмотр.
+    def test_126_review_is_bound_to_the_version(self):
+        """Пересмотр привязан к паре id+версия, а не к одному id.
 
-        Запись о пересмотре привязана к паре id+версия. Иначе утверждение,
-        поставленное на прежние правила, молча распространилось бы на
-        изменённые — то есть человек оказался бы подписан под текстом,
-        которого не читал.
+        Иначе утверждение, поставленное на прежние правила, молча
+        распространилось бы на изменённые, и человек оказался бы подписан
+        под текстом, которого не читал. Проверяется механизм, а не текущее
+        состояние реестра: состояние меняется каждым утверждением.
         """
         state = json.loads((ROOT / "review" / "state.json").read_text(encoding="utf-8"))
         _s, sources, active = self.review.load()
         p = active["agr-request-package"]
-        self.assertEqual(p["version"], "2026-09-01.4")
-        self.assertNotIn(self.review.key(p), state["reviews"])
-        self.assertIn("agr-request-package@2026-09-01.3", state["reviews"],
-                      "запись о пересмотре прежней редакции должна сохраняться как история")
-        rows = self.review.status(state, sources, active)
-        self.assertIn("agr-request-package", self.review.blocked_profiles(rows))
+        self.assertEqual(self.review.key(p), f"agr-request-package@{p['version']}")
+
+        # запись прежней редакции остаётся историей и на текущую не влияет
+        self.assertIn("agr-request-package@2026-09-01.3", state["reviews"])
+        pretend = dict(p, version="9999-99-99.1")
+        self.assertNotIn(self.review.key(pretend), state["reviews"])
+        rows = self.review.status(state, sources, {**active, "agr-request-package": pretend})
+        self.assertIn("agr-request-package", self.review.blocked_profiles(rows),
+                      "неизвестная редакция обязана блокировать выпуск")
 
     def test_127_content_revision_says_why(self):
         """Редакция, меняющая содержание, обязана объяснить чем отличается.

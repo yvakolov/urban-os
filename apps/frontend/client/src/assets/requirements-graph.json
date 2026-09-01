@@ -2,7 +2,7 @@
   "generatedFrom": "sources/index.json · monitoring/sources.json · requirements/*.json · deliverables/index.json",
   "note": "Сгенерировано tools/build_graph.py. Руками не править — правьте реестры.",
   "counts": {
-    "source": 14,
+    "source": 16,
     "branch": 5,
     "profile": 7,
     "rule": 364,
@@ -30,11 +30,11 @@
     {
       "id": "src:msk-3d-2026-08-18",
       "layer": "source",
-      "label": "Распоряжение Департамента информационных технологий города Москвы и Департамента градостро",
+      "label": "Распоряжение Департамента градостроительной политики города Москвы и Департамента информац",
       "status": "active",
       "transcribed": "full",
       "monitored": false,
-      "url": null
+      "url": "https://stroimprosto.mos.ru/storage/app/uploads/public/6a8/6ba/702/6a86ba702b7a2013687372.pdf"
     },
     {
       "id": "src:msk-3d-2026-01-19",
@@ -134,6 +134,24 @@
       "transcribed": "full",
       "monitored": false,
       "url": "https://www.mos.ru/pgu2/landing/api/doc/16b2015b-fe0f-4e11-84c5-93ac22308270?is_ergu=1"
+    },
+    {
+      "id": "src:msk-3d-2025-08-22",
+      "layer": "source",
+      "label": "Распоряжение Департамента информационных технологий города Москвы и Комитета по архитектур",
+      "status": "superseded",
+      "transcribed": "none",
+      "monitored": false,
+      "url": "https://stroimprosto.mos.ru/storage/app/uploads/public/697/b1a/d98/697b1ad98a0f2691117099.pdf"
+    },
+    {
+      "id": "src:msk-3d-2023-04-19",
+      "layer": "source",
+      "label": "Распоряжение Департамента информационных технологий города Москвы и Комитета по архитектур",
+      "status": "superseded",
+      "transcribed": "none",
+      "monitored": false,
+      "url": null
     },
     {
       "id": "branch:msk-284-pp:incomingDocuments",

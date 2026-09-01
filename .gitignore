@@ -54,3 +54,5 @@ yarn-error.log
 # отчёты прогонов — артефакт, не содержимое репозитория
 reports/
 sources/files/CIM_AGR_full.pdf
+sources/files/3d-models-2026-08-18.pdf
+sources/files/3d-models-2025-08-22.pdf
