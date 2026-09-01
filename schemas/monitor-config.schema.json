@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/yvakolov/urban-os/schemas/monitor-config.schema.json",
+  "title": "Конфигурация наблюдения за источниками",
+  "description": "Декларативно описывает, как получить и нормализовать содержательную часть источника и какие правила потенциально затрагивает изменение каждой ветки.",
+  "type": "object",
+  "required": ["schemaVersion", "monitors"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "type": "string" },
+    "note": { "type": "string" },
+    "monitors": {
+      "type": "object",
+      "description": "Ключ — sourceId из sources/index.json",
+      "additionalProperties": { "$ref": "#/$defs/monitor" }
+    }
+  },
+
+  "$defs": {
+    "monitor": {
+      "type": "object",
+      "required": ["enabled", "url", "kind", "extraction", "normalization"],
+      "additionalProperties": false,
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "url": { "type": "string" },
+        "kind": { "type": "string", "enum": ["html", "pdf", "binary", "manual"] },
+        "expectedContentType": { "type": "string" },
+        "extraction": { "$ref": "#/$defs/extraction" },
+        "normalization": { "$ref": "#/$defs/normalization" },
+        "impactMap": {
+          "type": "object",
+          "description": "Ветка -> список ruleId, либо \"__source_registry__\" для ветки с реквизитами НПА",
+          "additionalProperties": {
+            "oneOf": [
+              { "type": "array", "items": { "type": "string" } },
+              { "type": "string", "enum": ["__source_registry__"] }
+            ]
+          }
+        },
+        "notes": { "type": "string" }
+      }
+    },
+
+    "extraction": {
+      "type": "object",
+      "required": ["strategy", "version"],
+      "additionalProperties": false,
+      "properties": {
+        "strategy": { "type": "string", "enum": ["window_data_json", "raw_bytes"] },
+        "version": { "type": "integer" },
+        "invariants": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "Позитивные проверки: их нарушение даёт PARSER_ERROR, а не CHANGED",
+          "properties": {
+            "targetId": { "type": "string" },
+            "requiredBranches": { "type": "array", "items": { "type": "string" } },
+            "sizeCorridor": {
+              "type": "array",
+              "items": { "type": "number" },
+              "minItems": 2,
+              "maxItems": 2
+            }
+          }
+        }
+      }
+    },
+
+    "normalization": {
+      "type": "object",
+      "required": ["strategy", "version"],
+      "additionalProperties": false,
+      "properties": {
+        "strategy": { "type": "string", "enum": ["canonical_json", "raw_bytes"] },
+        "version": { "type": "integer" },
+        "includeBranches": { "type": "array", "items": { "type": "string" } },
+        "excludeKeys": { "type": "array", "items": { "type": "string" } },
+        "sortArrays": {
+          "type": "boolean",
+          "description": "По умолчанию false: порядок пунктов в НПА семантичен"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/yvakolov/urban-os/schemas/requirement-profile.schema.json",
+  "title": "Профиль требований",
+  "description": "Проверяемая транскрипция одного нормативного корпуса. Опубликованный (не draft) профиль неизменяем: любое исправление — новая версия файла.",
+  "type": "object",
+  "required": ["schemaVersion", "id", "version", "status", "sourceId", "effectiveFrom", "rules"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "type": "string" },
+    "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+    "version": { "type": "string" },
+    "status": { "type": "string", "enum": ["draft", "active", "superseded"] },
+    "sourceId": { "type": "string", "description": "Ключ в sources/index.json" },
+    "supersedes": { "type": "string", "description": "id предыдущего профиля" },
+    "jurisdiction": { "type": "string" },
+    "modelClass": { "type": "string" },
+    "effectiveFrom": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "releasePolicy": { "type": "string" },
+    "selfHash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "sha256 канонического JSON профиля без этого поля"
+    },
+    "rules": { "type": "array", "items": { "$ref": "#/$defs/rule" } }
+  },
+
+  "$defs": {
+    "rule": {
+      "type": "object",
+      "required": ["id", "category", "title", "requirement", "verification", "severity", "sourceRef"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "category": { "type": "string" },
+        "title": { "type": "string" },
+        "requirement": { "type": "string" },
+        "sourceRef": { "type": "string", "description": "Пункт первоисточника" },
+        "verification": {
+          "type": "string",
+          "enum": ["automatic", "expert_evidence", "external_fact", "external_verdict"],
+          "description": "automatic и expert_evidence дают терминальное состояние внутри контура; external_* — нет, их нельзя закрыть экспертизой"
+        },
+        "severity": { "type": "string", "enum": ["blocker", "major", "minor"] },
+        "status": { "type": "string", "enum": ["active", "pending_activation"] },
+        "activationCondition": { "type": "string" },
+        "note": { "type": "string" },
+        "authority": { "type": "string", "description": "Ключ в sources/index.json → authorities" },
+        "dependsOn": { "type": "array", "items": { "type": "string" }, "description": "id профилей" },
+        "dependsOnSource": { "type": "string", "description": "Ключ в sources/index.json" },
+        "appliesWhen": { "$ref": "#/$defs/condition" },
+        "evaluator": { "$ref": "#/$defs/evaluator" }
+      }
+    },
+
+    "condition": {
+      "type": "object",
+      "required": ["path"],
+      "additionalProperties": false,
+      "properties": {
+        "path": { "type": "string" },
+        "equals": {},
+        "in": { "type": "array" }
+      }
+    },
+
+    "evaluator": {
+      "type": "object",
+      "required": ["op"],
+      "additionalProperties": false,
+      "properties": {
+        "op": { "type": "string", "enum": ["max", "min", "range", "equals", "regex", "all_zero"] },
+        "path": { "type": "string" },
+        "paths": { "type": "array", "items": { "type": "string" } },
+        "value": {},
+        "min": {},
+        "max": {},
+        "pattern": { "type": "string" }
+      }
+    }
+  }
+}
