@@ -1,0 +1,10 @@
+{
+  "fetchedAt": "2026-09-01T07:32:38+00:00",
+  "url": "https://www.mos.ru/pgu2/landing/target/7700000000210548433/",
+  "status": 200,
+  "contentType": "text/html",
+  "attempt": 0,
+  "fixture": "tests/source_fixtures/mos-v1.html",
+  "rawHash": "b208843212882f68ef24eda50986f64af89b180af4e569d76d7e0dcf0372d973",
+  "sourceId": "msk-284-pp"
+}

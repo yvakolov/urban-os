@@ -1,0 +1,17 @@
+{
+  "snapshot": "b20884321288",
+  "rawHash": "b208843212882f68ef24eda50986f64af89b180af4e569d76d7e0dcf0372d973",
+  "normalizedHash": "ad7a65fafc2a8161cfaa81a27121008dc9c64aae68dd1203dfa2f12065f3c28d",
+  "payloadBytes": 80921,
+  "targetId": "7700000000210548433",
+  "extractionVersion": 1,
+  "normalizationVersion": 1,
+  "approvedBy": "yvakolov",
+  "approvedOn": "2026-09-01",
+  "httpMeta": {
+    "status": 200,
+    "contentType": "text/html",
+    "fetchedAt": "2026-09-01T07:32:38+00:00",
+    "url": "https://www.mos.ru/pgu2/landing/target/7700000000210548433/"
+  }
+}
