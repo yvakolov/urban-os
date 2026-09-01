@@ -1,0 +1,41 @@
+{
+  "profileId": "moscow-vpm-2026-08-18",
+  "note": "Золотые кейсы для автопроверок ВПМ. Значения снимались прогоном движка core.js — портированный evaluate() в tools/validate.py обязан давать те же числа.",
+  "cases": [
+    {
+      "name": "чистая минимальная модель, только GLB и поля пакета",
+      "context": {
+        "glb": { "triangles": 1, "materials": 2, "cameras": 0, "animations": 0, "skins": 0, "lights": 0 },
+        "package": { "address": "Test_Address_1", "modelScope": "oks", "zipSizeBytes": 1000 }
+      },
+      "expect": { "total": 49, "auto_pass": 6, "auto_fail": 0, "not_applicable": 2, "pending": 41, "releaseEligible": false }
+    },
+    {
+      "name": "все автопороги нарушены",
+      "context": {
+        "glb": { "triangles": 1200000, "materials": 9, "cameras": 1, "animations": 0, "skins": 0, "lights": 400 },
+        "package": { "address": "Плохой Адрес!", "modelScope": "oks", "zipSizeBytes": 900000000 }
+      },
+      "expect": { "total": 49, "auto_pass": 0, "auto_fail": 6, "not_applicable": 2, "pending": 41, "releaseEligible": false }
+    },
+    {
+      "name": "эксперт перекрывает провалившуюся автопроверку",
+      "context": {
+        "glb": { "triangles": 1200000, "materials": 9, "cameras": 1, "animations": 0, "skins": 0, "lights": 400 },
+        "package": { "address": "Плохой Адрес!", "modelScope": "oks", "zipSizeBytes": 900000000 }
+      },
+      "decisions": {
+        "vpm-oks-triangles": { "state": "expert_reviewed", "evidence": "согласовано" },
+        "vpm-material-count": { "state": "expert_reviewed", "evidence": "согласовано" },
+        "vpm-light-count": { "state": "expert_reviewed", "evidence": "согласовано" }
+      },
+      "expect": { "auto_fail": 3, "expert_reviewed": 3, "terminal": 5 },
+      "warning": "Экспертное решение стоит в порядке ветвлений раньше автопроверки и стирает замеренное значение из отчёта. Кейс фиксирует текущее поведение, а не желаемое — см. задачу про expert_override."
+    },
+    {
+      "name": "нет артефактов вовсе — автопроверки уходят в pending, не в fail",
+      "context": { "package": { "modelScope": "oks" } },
+      "expect": { "auto_pass": 0, "auto_fail": 0, "releaseEligible": false }
+    }
+  ]
+}
