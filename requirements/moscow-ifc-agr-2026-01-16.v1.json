@@ -1,13 +1,13 @@
 {
   "schemaVersion": "1.1",
   "id": "moscow-ifc-agr-2026-01-16",
-  "version": "2026-09-01.3",
+  "version": "2026-09-01.4",
   "status": "draft",
   "sourceId": "msk-ifc-agr",
   "jurisdiction": "Москва",
   "modelClass": "CIM_AGR",
   "effectiveFrom": "2026-01-16",
-  "releasePolicy": "Транскрипция разделов 4–7 первоисточника (стр. 6–30): общие требования, дисциплинарные ЦИМ, проверки перед выгрузкой, ТЭП, а также таблицы Б.1 и Б.2 словаря атрибутов. Таблицы Б.3–Б.13 (стр. 31–65) не оцифрованы — профиль неполон и остаётся draft. Полный словарь атрибутов вынесен в dictionaries/ifc-attributes.v1.json: это данные, а не правила. sourceRef указывает пункт самого распоряжения — текст прочитан постранично.",
+  "releasePolicy": "Транскрипция разделов 4-7 и приложений 2-3 первоисточника (стр. 6-48). Словарь атрибутов вынесен в dictionaries/ifc-attributes.v1.json: 15 классов, 144 атрибута. Приложение 4 (матрица коллизий, стр. 49) и приложение 5 (XML-схема ТЭП, стр. 50-65) не оцифрованы — профиль остаётся draft.",
   "rules": [
     {
       "id": "ifc-format-spf",
@@ -750,7 +750,189 @@
         "value": true
       },
       "note": "Полный перечень — dictionaries/ifc-attributes.v1.json, класс Б.2. Транскрипция частичная: строки после 16 не сверены."
+    },
+    {
+      "id": "ifc-attributes-building",
+      "category": "Атрибуты",
+      "title": "IfcBuilding — обязательный набор атрибутов (объект)",
+      "requirement": "Элементы класса IfcBuilding (объект) несут обязательный набор из 3 атрибутов по таблице Б.0 приложения 2. Полный перечень с наборами свойств, типами и единицами — dictionaries/ifc-attributes.v1.json, класс Б.0.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "прил. 2, табл. Б.0",
+      "evaluator": {
+        "op": "equals",
+        "path": "ifc.attributes.IfcBuilding.complete",
+        "value": true
+      }
+    },
+    {
+      "id": "ifc-attributes-space-spp",
+      "category": "Атрибуты",
+      "title": "IfcSpace — обязательный набор атрибутов (зона СПП в ГНС)",
+      "requirement": "Элементы класса IfcSpace (зона СПП в ГНС) несут обязательный набор из 12 атрибутов по таблице Б.3.1 приложения 2. Полный перечень с наборами свойств, типами и единицами — dictionaries/ifc-attributes.v1.json, класс Б.3.1. Детализация требуется на этапах: НПМ, ВПМ.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "прил. 2, табл. Б.3.1",
+      "evaluator": {
+        "op": "equals",
+        "path": "ifc.attributes.IfcSpace.complete",
+        "value": true
+      }
+    },
+    {
+      "id": "ifc-attributes-space-total",
+      "category": "Атрибуты",
+      "title": "IfcSpace — обязательный набор атрибутов (зона общей площади)",
+      "requirement": "Элементы класса IfcSpace (зона общей площади) несут обязательный набор из 12 атрибутов по таблице Б.3.2 приложения 2. Полный перечень с наборами свойств, типами и единицами — dictionaries/ifc-attributes.v1.json, класс Б.3.2. Детализация требуется на этапах: НПМ, ВПМ.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "прил. 2, табл. Б.3.2",
+      "evaluator": {
+        "op": "equals",
+        "path": "ifc.attributes.IfcSpace.complete",
+        "value": true
+      }
+    },
+    {
+      "id": "ifc-attributes-wall",
+      "category": "Атрибуты",
+      "title": "IfcWall — обязательный набор атрибутов (стена, перегородка)",
+      "requirement": "Элементы класса IfcWall (стена, перегородка) несут обязательный набор из 9 атрибутов по таблице Б.4 приложения 2. Полный перечень с наборами свойств, типами и единицами — dictionaries/ifc-attributes.v1.json, класс Б.4. Детализация требуется на этапах: НПМ, ВПМ.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "прил. 2, табл. Б.4",
+      "evaluator": {
+        "op": "equals",
+        "path": "ifc.attributes.IfcWall.complete",
+        "value": true
+      }
+    },
+    {
+      "id": "ifc-attributes-column",
+      "category": "Атрибуты",
+      "title": "IfcColumn — обязательный набор атрибутов (колонна, пилястра)",
+      "requirement": "Элементы класса IfcColumn (колонна, пилястра) несут обязательный набор из 10 атрибутов по таблице Б.5 приложения 2. Полный перечень с наборами свойств, типами и единицами — dictionaries/ifc-attributes.v1.json, класс Б.5. Детализация требуется на этапах: НПМ, ВПМ.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "прил. 2, табл. Б.5",
+      "evaluator": {
+        "op": "equals",
+        "path": "ifc.attributes.IfcColumn.complete",
+        "value": true
+      }
+    },
+    {
+      "id": "ifc-attributes-stair",
+      "category": "Атрибуты",
+      "title": "IfcStair — обязательный набор атрибутов (лестница)",
+      "requirement": "Элементы класса IfcStair (лестница) несут обязательный набор из 7 атрибутов по таблице Б.6 приложения 2. Полный перечень с наборами свойств, типами и единицами — dictionaries/ifc-attributes.v1.json, класс Б.6. Детализация требуется на этапах: ВПМ.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "прил. 2, табл. Б.6",
+      "evaluator": {
+        "op": "equals",
+        "path": "ifc.attributes.IfcStair.complete",
+        "value": true
+      }
+    },
+    {
+      "id": "ifc-attributes-ramp",
+      "category": "Атрибуты",
+      "title": "IfcRamp — обязательный набор атрибутов (пандус, рампа)",
+      "requirement": "Элементы класса IfcRamp (пандус, рампа) несут обязательный набор из 8 атрибутов по таблице Б.7 приложения 2. Полный перечень с наборами свойств, типами и единицами — dictionaries/ifc-attributes.v1.json, класс Б.7. Детализация требуется на этапах: ВПМ.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "прил. 2, табл. Б.7",
+      "evaluator": {
+        "op": "equals",
+        "path": "ifc.attributes.IfcRamp.complete",
+        "value": true
+      }
+    },
+    {
+      "id": "ifc-attributes-slab",
+      "category": "Атрибуты",
+      "title": "IfcSlab — обязательный набор атрибутов (перекрытие)",
+      "requirement": "Элементы класса IfcSlab (перекрытие) несут обязательный набор из 9 атрибутов по таблице Б.8 приложения 2. Полный перечень с наборами свойств, типами и единицами — dictionaries/ifc-attributes.v1.json, класс Б.8. Детализация требуется на этапах: НПМ, ВПМ.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "прил. 2, табл. Б.8",
+      "evaluator": {
+        "op": "equals",
+        "path": "ifc.attributes.IfcSlab.complete",
+        "value": true
+      }
+    },
+    {
+      "id": "ifc-attributes-window",
+      "category": "Атрибуты",
+      "title": "IfcWindow — обязательный набор атрибутов (окно, балконный блок)",
+      "requirement": "Элементы класса IfcWindow (окно, балконный блок) несут обязательный набор из 11 атрибутов по таблице Б.9 приложения 2. Полный перечень с наборами свойств, типами и единицами — dictionaries/ifc-attributes.v1.json, класс Б.9. Детализация требуется на этапах: ВПМ.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "прил. 2, табл. Б.9",
+      "evaluator": {
+        "op": "equals",
+        "path": "ifc.attributes.IfcWindow.complete",
+        "value": true
+      }
+    },
+    {
+      "id": "ifc-attributes-door",
+      "category": "Атрибуты",
+      "title": "IfcDoor — обязательный набор атрибутов (дверь, ворота, люк)",
+      "requirement": "Элементы класса IfcDoor (дверь, ворота, люк) несут обязательный набор из 9 атрибутов по таблице Б.10 приложения 2. Полный перечень с наборами свойств, типами и единицами — dictionaries/ifc-attributes.v1.json, класс Б.10. Детализация требуется на этапах: ВПМ.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "прил. 2, табл. Б.10",
+      "evaluator": {
+        "op": "equals",
+        "path": "ifc.attributes.IfcDoor.complete",
+        "value": true
+      }
+    },
+    {
+      "id": "ifc-attributes-curtainwall",
+      "category": "Атрибуты",
+      "title": "IfcCurtainWall — обязательный набор атрибутов (фасад)",
+      "requirement": "Элементы класса IfcCurtainWall (фасад) несут обязательный набор из 11 атрибутов по таблице Б.11 приложения 2. Полный перечень с наборами свойств, типами и единицами — dictionaries/ifc-attributes.v1.json, класс Б.11. Детализация требуется на этапах: НПМ, ВПМ.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "прил. 2, табл. Б.11",
+      "evaluator": {
+        "op": "equals",
+        "path": "ifc.attributes.IfcCurtainWall.complete",
+        "value": true
+      }
+    },
+    {
+      "id": "ifc-attributes-member",
+      "category": "Атрибуты",
+      "title": "IfcMember — обязательный набор атрибутов (импост витражной системы)",
+      "requirement": "Элементы класса IfcMember (импост витражной системы) несут обязательный набор из 8 атрибутов по таблице Б.12 приложения 2. Полный перечень с наборами свойств, типами и единицами — dictionaries/ifc-attributes.v1.json, класс Б.12. Детализация требуется на этапах: ВПМ.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "прил. 2, табл. Б.12",
+      "evaluator": {
+        "op": "equals",
+        "path": "ifc.attributes.IfcMember.complete",
+        "value": true
+      }
+    },
+    {
+      "id": "ifc-attributes-plate",
+      "category": "Атрибуты",
+      "title": "IfcPlate — обязательный набор атрибутов (панель витражной системы)",
+      "requirement": "Элементы класса IfcPlate (панель витражной системы) несут обязательный набор из 11 атрибутов по таблице Б.13 приложения 2. Полный перечень с наборами свойств, типами и единицами — dictionaries/ifc-attributes.v1.json, класс Б.13. Детализация требуется на этапах: ВПМ.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "прил. 2, табл. Б.13",
+      "evaluator": {
+        "op": "equals",
+        "path": "ifc.attributes.IfcPlate.complete",
+        "value": true
+      }
     }
   ],
-  "selfHash": "c81781c6c50dd4a71d8b66e989f357a0d892af9bed45c190bf3d82c9bc7525da"
+  "selfHash": "111283fe14bb3326b3d8d8f0928ddb0c00cb931cf3457866984b3df019b9efbc"
 }

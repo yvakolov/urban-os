@@ -5,78 +5,1840 @@
   "status": "draft",
   "note": "Словарь атрибутов ЦИМ АГР: приложение 2 распоряжения ДГП/ДИТ от 16.01.2026, таблицы Б.1–Б.13. Это ДАННЫЕ, а не правила: пятьсот атрибутов отдельными правилами были бы нечитаемы, и профиль перестал бы обозреваться. Правило в профиле одно на класс, оно ссылается сюда. Словарь напрямую пригоден для инспектора IFC: обойти файл, найти элементы класса, проверить наличие набора и параметра, тип и единицу.",
   "typeMap": {
-    "текстовый": "string",
-    "вещественный": "real",
-    "булевый": "boolean",
-    "целый": "integer"
+    "текстовый": {
+      "ifcType": "IfcText",
+      "note": "текстовый тип с условно бесконечной длиной"
+    },
+    "вещественный": {
+      "ifcType": "IfcReal",
+      "note": "число с плавающей точкой"
+    },
+    "булевый": {
+      "ifcType": "IfcBoolean",
+      "note": "ИСТИНА (true) или ЛОЖЬ (false)"
+    },
+    "логический": {
+      "ifcType": "IfcLogical",
+      "note": "ИСТИНА, ЛОЖЬ либо не определено (unknown)"
+    },
+    "целый": {
+      "ifcType": "IfcInteger",
+      "note": "целые числа"
+    },
+    "метка": {
+      "ifcType": "IfcLabel",
+      "note": "текстовый тип с ограничением 255 символов"
+    }
   },
   "transcription": {
-    "done": ["Б.1", "Б.2"],
-    "pending": ["Б.3.1", "Б.3.2", "Б.4", "Б.5", "Б.6", "Б.7", "Б.8", "Б.9", "Б.10", "Б.11", "Б.12", "Б.13"],
-    "note": "Оцифрованы страницы 28–30 первоисточника. Б.2 может содержать продолжение на стр. 31 — требуется сверка. Остальные таблицы (стр. 31–65) не транскрибированы."
+    "done": [
+      "Б.0",
+      "Б.1",
+      "Б.10",
+      "Б.11",
+      "Б.12",
+      "Б.13",
+      "Б.2",
+      "Б.3.1",
+      "Б.3.2",
+      "Б.4",
+      "Б.5",
+      "Б.6",
+      "Б.7",
+      "Б.8",
+      "Б.9"
+    ],
+    "pending": [],
+    "note": "Приложение 2 оцифровано целиком: стр. 27-47, классы Б.0-Б.13. Приложение 3 (типы данных, стр. 48) отражено в typeMap. Приложение 4 (матрица коллизий, стр. 49) и приложение 5 (XML-схема ТЭП, стр. 50-65) не оцифрованы."
   },
-
   "classes": {
+    "Б.0": {
+      "ifcClass": "IfcBuilding",
+      "element": "Объект",
+      "cimSection": "Объемно-планировочные и архитектурные решения",
+      "objectKind": "Непроизводственного назначения",
+      "detailStages": null,
+      "msskCodes": [],
+      "pages": "27",
+      "transcribed": "full",
+      "attributes": [
+        {
+          "n": 1,
+          "set": "RusSet_Project",
+          "group": "Сведения о проекте",
+          "name": "Наименование проекта",
+          "param": "RUS_ProjectName",
+          "type": "текстовый",
+          "unit": null,
+          "example": "Жилой дом"
+        },
+        {
+          "n": 2,
+          "set": "RusSet_Project",
+          "group": "Сведения о проекте",
+          "name": "Адрес",
+          "param": "RUS_BuildingAddress",
+          "type": "текстовый",
+          "unit": null,
+          "example": "г. Москва, Проспект Мира"
+        },
+        {
+          "n": 3,
+          "set": "RusSet_AGR",
+          "group": "Материалы АГР",
+          "name": "Функциональное назначение объекта",
+          "param": "RUS_FNO",
+          "type": "текстовый",
+          "unit": null,
+          "example": "Жилое здание/Нежилое здание"
+        }
+      ],
+      "detailStagesNote": "Класс IfcBuilding в таблице 5.1 отсутствует — стадии детализации первоисточником для него не заданы."
+    },
     "Б.1": {
       "ifcClass": "IfcBuildingElementProxy",
       "element": "Вспомогательное 3D-тело",
       "cimSection": "Объемно-планировочные и архитектурные решения",
       "objectKind": "Непроизводственного назначения",
-      "detailStages": ["НПМ", "ВПМ"],
-      "msskCodes": ["ЭЛ 30 30 10", "ЭЛ 30 30 20"],
+      "detailStages": [
+        "НПМ",
+        "ВПМ"
+      ],
+      "msskCodes": [
+        "ЭЛ 30 30 10",
+        "ЭЛ 30 30 20"
+      ],
       "pages": "28",
       "transcribed": "full",
       "attributes": [
-        { "n": 1, "set": "RusSet_Common", "group": "Общие данные", "name": "Код элемента МССК", "param": "RUS_MSSK_Element_Code", "type": "текстовый", "unit": null, "example": "ЭЛ 30 30" },
-        { "n": 2, "set": "RusSet_Common", "group": "Общие данные", "name": "Наименование", "param": "RUS_Name", "type": "текстовый", "unit": null, "example": "Объем подземной части здания" },
-        { "n": 3, "set": "RusSet_Common", "group": "Общие данные", "name": "Наименование элемента МССК", "param": "RUS_MSSK_Element_Name", "type": "текстовый", "unit": null, "example": "Подземная часть здания" },
-        { "n": 4, "set": "RusSet_Quantities", "group": "Количественные параметры", "name": "Объем", "param": "RUS_Volume", "type": "вещественный", "unit": "м3", "example": "30" },
-        { "n": 5, "set": "RusSet_Quantities", "group": "Количественные параметры", "name": "Высота", "param": "RUS_Height", "type": "вещественный", "unit": "мм", "example": "300" },
-        { "n": 6, "set": "RusSet_Quantities", "group": "Количественные параметры", "name": "Ширина", "param": "RUS_Width", "type": "вещественный", "unit": "мм", "example": "300" },
-        { "n": 7, "set": "RusSet_Quantities", "group": "Количественные параметры", "name": "Длина", "param": "RUS_Length", "type": "вещественный", "unit": "мм", "example": "12,5" },
-        { "n": 8, "set": "RusSet_Location", "group": "Местоположение", "name": "Номер объекта (корпуса)", "param": "RUS_Object", "type": "текстовый", "unit": null, "example": "К01" },
-        { "n": 9, "set": "RusSet_Location", "group": "Местоположение", "name": "Номер подобъекта (секции)", "param": "RUS_Object_Sub", "type": "текстовый", "unit": null, "example": "С01" }
+        {
+          "n": 1,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Код элемента МССК",
+          "param": "RUS_MSSK_Element_Code",
+          "type": "текстовый",
+          "unit": null,
+          "example": "ЭЛ 30 30"
+        },
+        {
+          "n": 2,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Наименование",
+          "param": "RUS_Name",
+          "type": "текстовый",
+          "unit": null,
+          "example": "Объем подземной части здания"
+        },
+        {
+          "n": 3,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Наименование элемента МССК",
+          "param": "RUS_MSSK_Element_Name",
+          "type": "текстовый",
+          "unit": null,
+          "example": "Подземная часть здания"
+        },
+        {
+          "n": 4,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Объем",
+          "param": "RUS_Volume",
+          "type": "вещественный",
+          "unit": "м3",
+          "example": "30"
+        },
+        {
+          "n": 5,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Высота",
+          "param": "RUS_Height",
+          "type": "вещественный",
+          "unit": "мм",
+          "example": "300"
+        },
+        {
+          "n": 6,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Ширина",
+          "param": "RUS_Width",
+          "type": "вещественный",
+          "unit": "мм",
+          "example": "300"
+        },
+        {
+          "n": 7,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Длина",
+          "param": "RUS_Length",
+          "type": "вещественный",
+          "unit": "мм",
+          "example": "12,5"
+        },
+        {
+          "n": 8,
+          "set": "RusSet_Location",
+          "group": "Местоположение",
+          "name": "Номер объекта (корпуса)",
+          "param": "RUS_Object",
+          "type": "текстовый",
+          "unit": null,
+          "example": "К01"
+        },
+        {
+          "n": 9,
+          "set": "RusSet_Location",
+          "group": "Местоположение",
+          "name": "Номер подобъекта (секции)",
+          "param": "RUS_Object_Sub",
+          "type": "текстовый",
+          "unit": null,
+          "example": "С01"
+        }
       ]
     },
-
     "Б.2": {
       "ifcClass": "IfcSpace",
       "element": "Помещение",
       "cimSection": "Объемно-планировочные и архитектурные решения",
       "objectKind": "Непроизводственного назначения",
-      "detailStages": ["НПМ", "ВПМ"],
+      "detailStages": [
+        "НПМ",
+        "ВПМ"
+      ],
       "msskCodes": [
-        "ПЗ 30", "ПЗ 30 10", "ПЗ 30 20", "ПЗ 30 30",
-        "ПЗ 31 01", "ПЗ 31 02", "ПЗ 31 03", "ПЗ 31 04", "ПЗ 31 05", "ПЗ 31 06",
-        "ПЗ 31 07", "ПЗ 31 08", "ПЗ 31 09", "ПЗ 31 10", "ПЗ 31 12", "ПЗ 31 13",
-        "ПЗ 31 14", "ПЗ 31 15", "ПЗ 31 16", "ПЗ 31 17",
-        "ПЗ 32 10", "ПЗ 32 12", "ПЗ 32 13", "ПЗ 32 14", "ПЗ 32 15", "ПЗ 32 16",
-        "ПЗ 33 10", "ПЗ 33 12", "ПЗ 33 13", "ПЗ 33 14", "ПЗ 33 15", "ПЗ 33 16",
-        "ПЗ 33 17", "ПЗ 33 18", "ПЗ 33 19", "ПЗ 33 20", "ПЗ 33 21", "ПЗ 33 22",
-        "ПЗ 33 23", "ПЗ 33 24", "ПЗ 33 25", "ПЗ 33 26", "ПЗ 33 27", "ПЗ 33 28",
-        "ПЗ 33 29", "ПЗ 33 30", "ПЗ 33 31", "ПЗ 33 32", "ПЗ 33 33",
-        "ПЗ 34 10", "ПЗ 34 12"
+        "ПЗ 30",
+        "ПЗ 30 10",
+        "ПЗ 30 20",
+        "ПЗ 30 30",
+        "ПЗ 31 01",
+        "ПЗ 31 02",
+        "ПЗ 31 03",
+        "ПЗ 31 04",
+        "ПЗ 31 05",
+        "ПЗ 31 06",
+        "ПЗ 31 07",
+        "ПЗ 31 08",
+        "ПЗ 31 09",
+        "ПЗ 31 10",
+        "ПЗ 31 12",
+        "ПЗ 31 13",
+        "ПЗ 31 14",
+        "ПЗ 31 15",
+        "ПЗ 31 16",
+        "ПЗ 31 17",
+        "ПЗ 32 10",
+        "ПЗ 32 12",
+        "ПЗ 32 13",
+        "ПЗ 32 14",
+        "ПЗ 32 15",
+        "ПЗ 32 16",
+        "ПЗ 33 10",
+        "ПЗ 33 12",
+        "ПЗ 33 13",
+        "ПЗ 33 14",
+        "ПЗ 33 15",
+        "ПЗ 33 16",
+        "ПЗ 33 17",
+        "ПЗ 33 18",
+        "ПЗ 33 19",
+        "ПЗ 33 20",
+        "ПЗ 33 21",
+        "ПЗ 33 22",
+        "ПЗ 33 23",
+        "ПЗ 33 24",
+        "ПЗ 33 25",
+        "ПЗ 33 26",
+        "ПЗ 33 27",
+        "ПЗ 33 28",
+        "ПЗ 33 29",
+        "ПЗ 33 30",
+        "ПЗ 33 31",
+        "ПЗ 33 32",
+        "ПЗ 33 33",
+        "ПЗ 34 10",
+        "ПЗ 34 12"
       ],
       "pages": "29-30",
       "transcribed": "partial",
       "transcriptionNote": "Строки 1–16 сверены со стр. 29–30. Строка 13 в прочитанных страницах не встретилась, строки после 16 не проверены — возможно продолжение на стр. 31.",
       "attributes": [
-        { "n": 1, "set": "RusSet_Common", "group": "Общие данные", "name": "Код помещения и зоны МССК", "param": "RUS_MSSK_SpaceAndZone_Code", "type": "текстовый", "unit": null, "example": "ПЗ 30 20 07" },
-        { "n": 2, "set": "RusSet_Common", "group": "Общие данные", "name": "Наименование", "param": "RUS_Name", "type": "текстовый", "unit": null, "example": "Кухня" },
-        { "n": 3, "set": "RusSet_Common", "group": "Общие данные", "name": "Наименование помещения и зоны МССК", "param": "RUS_MSSK_SpaceAndZone_Name", "type": "текстовый", "unit": null, "example": "Кухня" },
-        { "n": 4, "set": "RusSet_Quantities", "group": "Количественные параметры", "name": "Высота", "param": "RUS_Height", "type": "вещественный", "unit": "мм", "example": "3300" },
-        { "n": 5, "set": "RusSet_Quantities", "group": "Количественные параметры", "name": "Площадь", "param": "RUS_Area", "type": "вещественный", "unit": "м2", "example": "40" },
-        { "n": 6, "set": "RusSet_Quantities", "group": "Количественные параметры", "name": "Объем", "param": "RUS_Volume", "type": "вещественный", "unit": "м3", "example": "60" },
-        { "n": 7, "set": "RusSet_Location", "group": "Местоположение", "name": "Номер объекта (корпуса)", "param": "RUS_Object", "type": "текстовый", "unit": null, "example": "К01" },
-        { "n": 8, "set": "RusSet_Location", "group": "Местоположение", "name": "Номер подобъекта (секции)", "param": "RUS_Object_Sub", "type": "текстовый", "unit": null, "example": "С01" },
-        { "n": 9, "set": "RusSet_Identification", "group": "Идентификация", "name": "Категория функциональной зоны", "param": "RUS_Zone", "type": "текстовый", "unit": null, "example": "Жилая зона" },
-        { "n": 10, "set": "RusSet_Identification", "group": "Идентификация", "name": "Группа помещений", "param": "RUS_Group_Type", "type": "текстовый", "unit": null, "example": "Квартира" },
-        { "n": 11, "set": "RusSet_Identification", "group": "Идентификация", "name": "Номер группы помещений", "param": "RUS_Group_Number", "type": "текстовый", "unit": null, "example": "12" },
-        { "n": 12, "set": "RusSet_Identification", "group": "Идентификация", "name": "Номер помещения", "param": "RUS_Number", "type": "текстовый", "unit": null, "example": "1" },
-        { "n": 14, "set": "RusSet_AGR", "group": "Материалы АГР", "name": "Подземный этаж", "param": "RUS_BasementFloor", "type": "булевый", "unit": null, "example": "да/нет" },
-        { "n": 15, "set": "RusSet_AGR", "group": "Материалы АГР", "name": "Плавающая высотная отметка уровня", "param": "RUS_GroundFloor", "type": "булевый", "unit": null, "example": "да/нет" },
-        { "n": 16, "set": "RusSet_AGR", "group": "Материалы АГР", "name": "Студия (тип квартиры)", "param": "RUS_StudioApart", "type": "булевый", "unit": null, "example": "да/нет" }
+        {
+          "n": 1,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Код помещения и зоны МССК",
+          "param": "RUS_MSSK_SpaceAndZone_Code",
+          "type": "текстовый",
+          "unit": null,
+          "example": "ПЗ 30 20 07"
+        },
+        {
+          "n": 2,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Наименование",
+          "param": "RUS_Name",
+          "type": "текстовый",
+          "unit": null,
+          "example": "Кухня"
+        },
+        {
+          "n": 3,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Наименование помещения и зоны МССК",
+          "param": "RUS_MSSK_SpaceAndZone_Name",
+          "type": "текстовый",
+          "unit": null,
+          "example": "Кухня"
+        },
+        {
+          "n": 4,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Высота",
+          "param": "RUS_Height",
+          "type": "вещественный",
+          "unit": "мм",
+          "example": "3300"
+        },
+        {
+          "n": 5,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Площадь",
+          "param": "RUS_Area",
+          "type": "вещественный",
+          "unit": "м2",
+          "example": "40"
+        },
+        {
+          "n": 6,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Объем",
+          "param": "RUS_Volume",
+          "type": "вещественный",
+          "unit": "м3",
+          "example": "60"
+        },
+        {
+          "n": 7,
+          "set": "RusSet_Location",
+          "group": "Местоположение",
+          "name": "Номер объекта (корпуса)",
+          "param": "RUS_Object",
+          "type": "текстовый",
+          "unit": null,
+          "example": "К01"
+        },
+        {
+          "n": 8,
+          "set": "RusSet_Location",
+          "group": "Местоположение",
+          "name": "Номер подобъекта (секции)",
+          "param": "RUS_Object_Sub",
+          "type": "текстовый",
+          "unit": null,
+          "example": "С01"
+        },
+        {
+          "n": 9,
+          "set": "RusSet_Identification",
+          "group": "Идентификация",
+          "name": "Категория функциональной зоны",
+          "param": "RUS_Zone",
+          "type": "текстовый",
+          "unit": null,
+          "example": "Жилая зона"
+        },
+        {
+          "n": 10,
+          "set": "RusSet_Identification",
+          "group": "Идентификация",
+          "name": "Группа помещений",
+          "param": "RUS_Group_Type",
+          "type": "текстовый",
+          "unit": null,
+          "example": "Квартира"
+        },
+        {
+          "n": 11,
+          "set": "RusSet_Identification",
+          "group": "Идентификация",
+          "name": "Номер группы помещений",
+          "param": "RUS_Group_Number",
+          "type": "текстовый",
+          "unit": null,
+          "example": "12"
+        },
+        {
+          "n": 12,
+          "set": "RusSet_Identification",
+          "group": "Идентификация",
+          "name": "Номер помещения",
+          "param": "RUS_Number",
+          "type": "текстовый",
+          "unit": null,
+          "example": "1"
+        },
+        {
+          "n": 14,
+          "set": "RusSet_AGR",
+          "group": "Материалы АГР",
+          "name": "Подземный этаж",
+          "param": "RUS_BasementFloor",
+          "type": "булевый",
+          "unit": null,
+          "example": "да/нет"
+        },
+        {
+          "n": 15,
+          "set": "RusSet_AGR",
+          "group": "Материалы АГР",
+          "name": "Плавающая высотная отметка уровня",
+          "param": "RUS_GroundFloor",
+          "type": "булевый",
+          "unit": null,
+          "example": "да/нет"
+        },
+        {
+          "n": 16,
+          "set": "RusSet_AGR",
+          "group": "Материалы АГР",
+          "name": "Студия (тип квартиры)",
+          "param": "RUS_StudioApart",
+          "type": "булевый",
+          "unit": null,
+          "example": "да/нет"
+        }
+      ]
+    },
+    "Б.3.1": {
+      "ifcClass": "IfcSpace",
+      "element": "Зона (СПП в ГНС)",
+      "cimSection": "Объемно-планировочные и архитектурные решения",
+      "objectKind": "Непроизводственного назначения",
+      "detailStages": [
+        "НПМ",
+        "ВПМ"
+      ],
+      "msskCodes": [],
+      "pages": "31-32",
+      "transcribed": "full",
+      "attributes": [
+        {
+          "n": 1,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Код помещения и зоны МССК",
+          "param": "RUS_MSSK_SpaceAndZone_Code",
+          "type": "текстовый",
+          "unit": null,
+          "example": null
+        },
+        {
+          "n": 2,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Наименование",
+          "param": "RUS_Name",
+          "type": "текстовый",
+          "unit": null,
+          "example": "СПП в ГНС"
+        },
+        {
+          "n": 3,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Наименование помещения и зоны МССК",
+          "param": "RUS_MSSK_SpaceAndZone_Name",
+          "type": "текстовый",
+          "unit": null,
+          "example": null
+        },
+        {
+          "n": 4,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Высота",
+          "param": "RUS_Height",
+          "type": "вещественный",
+          "unit": "мм",
+          "example": "3300"
+        },
+        {
+          "n": 5,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Площадь",
+          "param": "RUS_Area",
+          "type": "вещественный",
+          "unit": "м2",
+          "example": "40"
+        },
+        {
+          "n": 6,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Объем",
+          "param": "RUS_Volume",
+          "type": "вещественный",
+          "unit": "м3",
+          "example": "60"
+        },
+        {
+          "n": 7,
+          "set": "RusSet_Location",
+          "group": "Местоположение",
+          "name": "Номер объекта (корпуса)",
+          "param": "RUS_Object",
+          "type": "текстовый",
+          "unit": null,
+          "example": "К01"
+        },
+        {
+          "n": 8,
+          "set": "RusSet_Location",
+          "group": "Местоположение",
+          "name": "Номер подобъекта (секции)",
+          "param": "RUS_Object_Sub",
+          "type": "текстовый",
+          "unit": null,
+          "example": "С01"
+        },
+        {
+          "n": 9,
+          "set": "RusSet_Identification",
+          "group": "Идентификация",
+          "name": "Категория функциональной зоны",
+          "param": "RUS_Zone",
+          "type": "текстовый",
+          "unit": null,
+          "example": "СПП в ГНС"
+        },
+        {
+          "n": 10,
+          "set": "RusSet_AGR",
+          "group": "Материалы АГР",
+          "name": "Подземный этаж",
+          "param": "RUS_BasementFloor",
+          "type": "булевый",
+          "unit": null,
+          "example": "да/нет"
+        },
+        {
+          "n": 11,
+          "set": "RusSet_AGR",
+          "group": "Материалы АГР",
+          "name": "Плавающая высотная отметка уровня",
+          "param": "RUS_GroundFloor",
+          "type": "булевый",
+          "unit": null,
+          "example": "да/нет"
+        },
+        {
+          "n": 12,
+          "set": "RusSet_AGR",
+          "group": "Материалы АГР",
+          "name": "Жилая зона",
+          "param": "RUS_ResidentalRoom",
+          "type": "булевый",
+          "unit": null,
+          "example": "да/нет"
+        }
+      ]
+    },
+    "Б.3.2": {
+      "ifcClass": "IfcSpace",
+      "element": "Зона (Общая площадь)",
+      "cimSection": "Объемно-планировочные и архитектурные решения",
+      "objectKind": "Непроизводственного назначения",
+      "detailStages": [
+        "НПМ",
+        "ВПМ"
+      ],
+      "msskCodes": [
+        "ПЗ 03"
+      ],
+      "pages": "33-34",
+      "transcribed": "full",
+      "attributes": [
+        {
+          "n": 1,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Код помещения и зоны МССК",
+          "param": "RUS_MSSK_SpaceAndZone_Code",
+          "type": "текстовый",
+          "unit": null,
+          "example": "ПЗ 03"
+        },
+        {
+          "n": 2,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Наименование",
+          "param": "RUS_Name",
+          "type": "текстовый",
+          "unit": null,
+          "example": "Общая площадь"
+        },
+        {
+          "n": 3,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Наименование помещения и зоны МССК",
+          "param": "RUS_MSSK_SpaceAndZone_Name",
+          "type": "текстовый",
+          "unit": null,
+          "example": "Общая площадь"
+        },
+        {
+          "n": 4,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Высота",
+          "param": "RUS_Height",
+          "type": "вещественный",
+          "unit": "мм",
+          "example": "3300"
+        },
+        {
+          "n": 5,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Площадь",
+          "param": "RUS_Area",
+          "type": "вещественный",
+          "unit": "м2",
+          "example": "40"
+        },
+        {
+          "n": 6,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Объем",
+          "param": "RUS_Volume",
+          "type": "вещественный",
+          "unit": "м3",
+          "example": "60"
+        },
+        {
+          "n": 7,
+          "set": "RusSet_Location",
+          "group": "Местоположение",
+          "name": "Номер объекта (корпуса)",
+          "param": "RUS_Object",
+          "type": "текстовый",
+          "unit": null,
+          "example": "К01"
+        },
+        {
+          "n": 8,
+          "set": "RusSet_Location",
+          "group": "Местоположение",
+          "name": "Номер подобъекта (секции)",
+          "param": "RUS_Object_Sub",
+          "type": "текстовый",
+          "unit": null,
+          "example": "С01"
+        },
+        {
+          "n": 9,
+          "set": "RusSet_Identification",
+          "group": "Идентификация",
+          "name": "Категория функциональной зоны",
+          "param": "RUS_Zone",
+          "type": "текстовый",
+          "unit": null,
+          "example": "Общая площадь"
+        },
+        {
+          "n": 10,
+          "set": "RusSet_AGR",
+          "group": "Материалы АГР",
+          "name": "Подземный этаж",
+          "param": "RUS_BasementFloor",
+          "type": "булевый",
+          "unit": null,
+          "example": "да/нет"
+        },
+        {
+          "n": 11,
+          "set": "RusSet_AGR",
+          "group": "Материалы АГР",
+          "name": "Плавающая высотная отметка уровня",
+          "param": "RUS_GroundFloor",
+          "type": "булевый",
+          "unit": null,
+          "example": "да/нет"
+        },
+        {
+          "n": 12,
+          "set": "RusSet_AGR",
+          "group": "Материалы АГР",
+          "name": "Жилая зона",
+          "param": "RUS_ResidentalRoom",
+          "type": "булевый",
+          "unit": null,
+          "example": "да/нет"
+        }
+      ]
+    },
+    "Б.4": {
+      "ifcClass": "IfcWall",
+      "element": "Стена, перегородка",
+      "cimSection": "Объемно-планировочные и архитектурные решения",
+      "objectKind": "Непроизводственного назначения",
+      "detailStages": [
+        "НПМ",
+        "ВПМ"
+      ],
+      "msskCodes": [
+        "ЭЛ 20 20 06",
+        "ЭЛ 30 10 15",
+        "ЭЛ 30 10 20",
+        "ЭЛ 30 10 36",
+        "ЭЛ 30 10 75",
+        "ЭЛ 30 10 76",
+        "ЭЛ 30 10 77",
+        "ЭЛ 30 10 78",
+        "ЭЛ 30 10 79",
+        "ЭЛ 30 16 77",
+        "ЭЛ 30 16 78"
+      ],
+      "pages": "34-35",
+      "transcribed": "full",
+      "attributes": [
+        {
+          "n": 1,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Код элемента МССК",
+          "param": "RUS_MSSK_Element_Code",
+          "type": "текстовый",
+          "unit": null,
+          "example": "ЭЛ 30 10 20"
+        },
+        {
+          "n": 2,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Наименование",
+          "param": "RUS_Name",
+          "type": "текстовый",
+          "unit": null,
+          "example": "Перегородка"
+        },
+        {
+          "n": 3,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Наименование элемента МССК",
+          "param": "RUS_MSSK_Element_Name",
+          "type": "текстовый",
+          "unit": null,
+          "example": "Перегородка"
+        },
+        {
+          "n": 4,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Длина",
+          "param": "RUS_Length",
+          "type": "вещественный",
+          "unit": "мм",
+          "example": "2100"
+        },
+        {
+          "n": 5,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Толщина",
+          "param": "RUS_Thickness",
+          "type": "вещественный",
+          "unit": "мм",
+          "example": "150"
+        },
+        {
+          "n": 6,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Высота",
+          "param": "RUS_Height",
+          "type": "вещественный",
+          "unit": "мм",
+          "example": "3300"
+        },
+        {
+          "n": 7,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Объем",
+          "param": "RUS_Volume",
+          "type": "вещественный",
+          "unit": "м3",
+          "example": "0.7"
+        },
+        {
+          "n": 8,
+          "set": "RusSet_Location",
+          "group": "Местоположение",
+          "name": "Номер объекта (корпуса)",
+          "param": "RUS_Object",
+          "type": "текстовый",
+          "unit": null,
+          "example": "К01"
+        },
+        {
+          "n": 9,
+          "set": "RusSet_Location",
+          "group": "Местоположение",
+          "name": "Номер подобъекта (секции)",
+          "param": "RUS_Object_Sub",
+          "type": "текстовый",
+          "unit": null,
+          "example": "С01"
+        }
+      ]
+    },
+    "Б.5": {
+      "ifcClass": "IfcColumn",
+      "element": "Колонна, пилястра",
+      "cimSection": "Объемно-планировочные и архитектурные решения",
+      "objectKind": "Непроизводственного назначения",
+      "detailStages": [
+        "НПМ",
+        "ВПМ"
+      ],
+      "msskCodes": [
+        "ЭЛ 30 16 15",
+        "ЭЛ 30 16 25",
+        "ЭЛ 30 16 40",
+        "ЭЛ 30 16 42",
+        "ЭЛ 30 16 50",
+        "ЭЛ 30 16 51"
+      ],
+      "pages": "36-37",
+      "transcribed": "full",
+      "attributes": [
+        {
+          "n": 1,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Код элемента МССК",
+          "param": "RUS_MSSK_Element_Code",
+          "type": "текстовый",
+          "unit": null,
+          "example": "ЭЛ 30 16 51"
+        },
+        {
+          "n": 2,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Наименование",
+          "param": "RUS_Name",
+          "type": "текстовый",
+          "unit": null,
+          "example": "Пилястра"
+        },
+        {
+          "n": 3,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Наименование элемента МССК",
+          "param": "RUS_MSSK_Element_Name",
+          "type": "текстовый",
+          "unit": null,
+          "example": "Пилястра"
+        },
+        {
+          "n": 4,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Длина",
+          "param": "RUS_Length",
+          "type": "вещественный",
+          "unit": "мм",
+          "example": "2100"
+        },
+        {
+          "n": 5,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Ширина",
+          "param": "RUS_Width",
+          "type": "вещественный",
+          "unit": "мм",
+          "example": "150"
+        },
+        {
+          "n": 6,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Высота",
+          "param": "RUS_Height",
+          "type": "вещественный",
+          "unit": "мм",
+          "example": "600"
+        },
+        {
+          "n": 7,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Диаметр",
+          "param": "RUS_Diametr",
+          "type": "вещественный",
+          "unit": "мм",
+          "example": "300"
+        },
+        {
+          "n": 8,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Объем",
+          "param": "RUS_Volume",
+          "type": "вещественный",
+          "unit": "м3",
+          "example": "0.7"
+        },
+        {
+          "n": 9,
+          "set": "RusSet_Location",
+          "group": "Местоположение",
+          "name": "Номер объекта (корпуса)",
+          "param": "RUS_Object",
+          "type": "текстовый",
+          "unit": null,
+          "example": "К01"
+        },
+        {
+          "n": 10,
+          "set": "RusSet_Location",
+          "group": "Местоположение",
+          "name": "Номер подобъекта (секции)",
+          "param": "RUS_Object_Sub",
+          "type": "текстовый",
+          "unit": null,
+          "example": "С01"
+        }
+      ]
+    },
+    "Б.6": {
+      "ifcClass": "IfcStair",
+      "element": "Лестница",
+      "cimSection": "Объемно-планировочные и архитектурные решения",
+      "objectKind": "Непроизводственного назначения",
+      "detailStages": [
+        "ВПМ"
+      ],
+      "msskCodes": [
+        "ЭЛ 30 24 30",
+        "ЭЛ 30 24 35"
+      ],
+      "pages": "37-38",
+      "transcribed": "full",
+      "attributes": [
+        {
+          "n": 1,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Код элемента МССК",
+          "param": "RUS_MSSK_Element_Code",
+          "type": "текстовый",
+          "unit": null,
+          "example": "ЭЛ 30 24 30"
+        },
+        {
+          "n": 2,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Наименование",
+          "param": "RUS_Name",
+          "type": "текстовый",
+          "unit": null,
+          "example": "Лестница монолитная"
+        },
+        {
+          "n": 3,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Наименование элемента МССК",
+          "param": "RUS_MSSK_Element_Name",
+          "type": "текстовый",
+          "unit": null,
+          "example": "Лестница"
+        },
+        {
+          "n": 4,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Ширина",
+          "param": "RUS_Width",
+          "type": "вещественный",
+          "unit": "мм",
+          "example": "2100"
+        },
+        {
+          "n": 5,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Высота",
+          "param": "RUS_Height",
+          "type": "вещественный",
+          "unit": "мм",
+          "example": "3300"
+        },
+        {
+          "n": 6,
+          "set": "RusSet_Location",
+          "group": "Местоположение",
+          "name": "Номер объекта (корпуса)",
+          "param": "RUS_Object",
+          "type": "текстовый",
+          "unit": null,
+          "example": "К01"
+        },
+        {
+          "n": 7,
+          "set": "RusSet_Location",
+          "group": "Местоположение",
+          "name": "Номер подобъекта (секции)",
+          "param": "RUS_Object_Sub",
+          "type": "текстовый",
+          "unit": null,
+          "example": "С01"
+        }
+      ]
+    },
+    "Б.7": {
+      "ifcClass": "IfcRamp",
+      "element": "Пандус, рампа",
+      "cimSection": "Объемно-планировочные и архитектурные решения",
+      "objectKind": "Непроизводственного назначения",
+      "detailStages": [
+        "ВПМ"
+      ],
+      "msskCodes": [
+        "ЭЛ 30 24 40",
+        "ЭЛ 30 24 60"
+      ],
+      "pages": "38-39",
+      "transcribed": "full",
+      "attributes": [
+        {
+          "n": 1,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Код элемента МССК",
+          "param": "RUS_MSSK_Element_Code",
+          "type": "текстовый",
+          "unit": null,
+          "example": "ЭЛ 30 24 40"
+        },
+        {
+          "n": 2,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Наименование",
+          "param": "RUS_Name",
+          "type": "текстовый",
+          "unit": null,
+          "example": "Пандус монолитная",
+          "uncertain": "рассогласование рода в примере ('Пандус монолитная') присутствует в самом источнике — транскрибировано дословно"
+        },
+        {
+          "n": 3,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Наименование элемента МССК",
+          "param": "RUS_MSSK_Element_Name",
+          "type": "текстовый",
+          "unit": null,
+          "example": "Пандус"
+        },
+        {
+          "n": 4,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Уклон",
+          "param": "RUS_Slope",
+          "type": "вещественный",
+          "unit": "°",
+          "example": "20"
+        },
+        {
+          "n": 5,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Ширина",
+          "param": "RUS_Width",
+          "type": "вещественный",
+          "unit": "мм",
+          "example": "2100"
+        },
+        {
+          "n": 6,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Высота",
+          "param": "RUS_Height",
+          "type": "вещественный",
+          "unit": "мм",
+          "example": "3300"
+        },
+        {
+          "n": 7,
+          "set": "RusSet_Location",
+          "group": "Местоположение",
+          "name": "Номер объекта (корпуса)",
+          "param": "RUS_Object",
+          "type": "текстовый",
+          "unit": null,
+          "example": "К01"
+        },
+        {
+          "n": 8,
+          "set": "RusSet_Location",
+          "group": "Местоположение",
+          "name": "Номер подобъекта (секции)",
+          "param": "RUS_Object_Sub",
+          "type": "текстовый",
+          "unit": null,
+          "example": "С01"
+        }
+      ]
+    },
+    "Б.8": {
+      "ifcClass": "IfcSlab",
+      "element": "Перекрытие",
+      "cimSection": "Объемно-планировочные и архитектурные решения",
+      "objectKind": "Непроизводственного назначения",
+      "detailStages": [
+        "НПМ",
+        "ВПМ"
+      ],
+      "msskCodes": [
+        "ЭЛ 30 10 40",
+        "ЭЛ 30 10 56",
+        "ЭЛ 30 10 57",
+        "ЭЛ 30 10 58",
+        "ЭЛ 30 10 80",
+        "ЭЛ 30 16 25",
+        "ЭЛ 30 24 20",
+        "ЭЛ 30 24 50",
+        "ЭЛ 30 24 51",
+        "ЭЛ 60 20 13"
+      ],
+      "pages": "39-40",
+      "transcribed": "full",
+      "attributes": [
+        {
+          "n": 1,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Код элемента МССК",
+          "param": "RUS_MSSK_Element_Code",
+          "type": "текстовый",
+          "unit": null,
+          "example": "ЭЛ 30 10 40"
+        },
+        {
+          "n": 2,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Наименование",
+          "param": "RUS_Name",
+          "type": "текстовый",
+          "unit": null,
+          "example": "Перекрытие монолитное"
+        },
+        {
+          "n": 3,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Наименование элемента МССК",
+          "param": "RUS_MSSK_Element_Name",
+          "type": "текстовый",
+          "unit": null,
+          "example": "Перекрытие"
+        },
+        {
+          "n": 4,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Толщина",
+          "param": "RUS_Thickness",
+          "type": "вещественный",
+          "unit": "мм",
+          "example": "150"
+        },
+        {
+          "n": 5,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Длина",
+          "param": "RUS_Length",
+          "type": "вещественный",
+          "unit": "мм",
+          "example": "21000"
+        },
+        {
+          "n": 6,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Объем",
+          "param": "RUS_Volume",
+          "type": "вещественный",
+          "unit": "м3",
+          "example": "20"
+        },
+        {
+          "n": 7,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Ширина",
+          "param": "RUS_Width",
+          "type": "вещественный",
+          "unit": "мм",
+          "example": "10100"
+        },
+        {
+          "n": 8,
+          "set": "RusSet_Location",
+          "group": "Местоположение",
+          "name": "Номер объекта (корпуса)",
+          "param": "RUS_Object",
+          "type": "текстовый",
+          "unit": null,
+          "example": "К01"
+        },
+        {
+          "n": 9,
+          "set": "RusSet_Location",
+          "group": "Местоположение",
+          "name": "Номер подобъекта (секции)",
+          "param": "RUS_Object_Sub",
+          "type": "текстовый",
+          "unit": null,
+          "example": "С01"
+        }
+      ]
+    },
+    "Б.9": {
+      "ifcClass": "IfcWindow",
+      "element": "Окно, балконный блок, остекление витража",
+      "cimSection": "Объемно-планировочные и архитектурные решения",
+      "objectKind": "Непроизводственного назначения",
+      "detailStages": [
+        "ВПМ"
+      ],
+      "msskCodes": [
+        "ЭЛ 20 30 24",
+        "ЭЛ 30 18 09",
+        "ЭЛ 30 18 40",
+        "ЭЛ 30 18 52",
+        "ЭЛ 30 18 52 10"
+      ],
+      "pages": "39-41",
+      "transcribed": "full",
+      "attributes": [
+        {
+          "n": 1,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Код элемента МССК",
+          "param": "RUS_MSSK_Element_Code",
+          "type": "текстовый",
+          "unit": null,
+          "example": "ЭЛ 30 18 40"
+        },
+        {
+          "n": 2,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Код материала МССК",
+          "param": "RUS_MSSK_Material_Code",
+          "type": "текстовый",
+          "unit": null,
+          "example": "СТ 10 17 20 10"
+        },
+        {
+          "n": 3,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Наименование",
+          "param": "RUS_Name",
+          "type": "текстовый",
+          "unit": null,
+          "example": "Окно"
+        },
+        {
+          "n": 4,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Наименование элемента МССК",
+          "param": "RUS_MSSK_Element_Name",
+          "type": "текстовый",
+          "unit": null,
+          "example": "Окно"
+        },
+        {
+          "n": 5,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Наименование материала МССК",
+          "param": "RUS_MSSK_Material_Name",
+          "type": "текстовый",
+          "unit": null,
+          "example": "Алюминий"
+        },
+        {
+          "n": 6,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Ширина",
+          "param": "RUS_Width",
+          "type": "вещественный",
+          "unit": "мм",
+          "example": "1000"
+        },
+        {
+          "n": 7,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Высота",
+          "param": "RUS_Height",
+          "type": "вещественный",
+          "unit": "мм",
+          "example": "2100"
+        },
+        {
+          "n": 8,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Высота подоконника",
+          "param": "RUS_SillHeight",
+          "type": "вещественный",
+          "unit": "мм",
+          "example": "900"
+        },
+        {
+          "n": 9,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Площадь остекления",
+          "param": "RUS_GlazingArea",
+          "type": "вещественный",
+          "unit": "м2",
+          "example": "20"
+        },
+        {
+          "n": 10,
+          "set": "RusSet_Location",
+          "group": "Местоположение",
+          "name": "Номер объекта (корпуса)",
+          "param": "RUS_Object",
+          "type": "текстовый",
+          "unit": null,
+          "example": "К01"
+        },
+        {
+          "n": 11,
+          "set": "RusSet_Location",
+          "group": "Местоположение",
+          "name": "Номер подобъекта (секции)",
+          "param": "RUS_Object_Sub",
+          "type": "текстовый",
+          "unit": null,
+          "example": "С01"
+        }
+      ]
+    },
+    "Б.10": {
+      "ifcClass": "IfcDoor",
+      "element": "Дверь, ворота, люк",
+      "cimSection": "Объемно-планировочные и архитектурные решения",
+      "objectKind": "Непроизводственного назначения",
+      "detailStages": [
+        "ВПМ"
+      ],
+      "msskCodes": [
+        "ЭЛ 30 18 20",
+        "ЭЛ 30 18 20 01",
+        "ЭЛ 30 18 20 02",
+        "ЭЛ 30 18 30",
+        "ЭЛ 30 18 30 10",
+        "ЭЛ 30 18 30 20",
+        "ЭЛ 30 18 30 30",
+        "ЭЛ 30 18 30 31",
+        "ЭЛ 30 18 50",
+        "ЭЛ 30 18 50 10",
+        "ЭЛ 30 18 50 20",
+        "ЭЛ 35 01 01",
+        "ЭЛ 35 01 02",
+        "ЭЛ 40 50 27 06"
+      ],
+      "pages": "41-42",
+      "transcribed": "full",
+      "attributes": [
+        {
+          "n": 1,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Код элемента МССК",
+          "param": "RUS_MSSK_Element_Code",
+          "type": "текстовый",
+          "unit": null,
+          "example": "ЭЛ 30 18 30"
+        },
+        {
+          "n": 2,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Код материала МССК",
+          "param": "RUS_MSSK_Material_Code",
+          "type": "текстовый",
+          "unit": null,
+          "example": "СТ 10 17 20 10"
+        },
+        {
+          "n": 3,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Наименование",
+          "param": "RUS_Name",
+          "type": "текстовый",
+          "unit": null,
+          "example": "Ворота"
+        },
+        {
+          "n": 4,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Наименование элемента МССК",
+          "param": "RUS_MSSK_Element_Name",
+          "type": "текстовый",
+          "unit": null,
+          "example": "Дверь"
+        },
+        {
+          "n": 5,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Наименование материала МССК",
+          "param": "RUS_MSSK_Material_Name",
+          "type": "текстовый",
+          "unit": null,
+          "example": "Алюминий"
+        },
+        {
+          "n": 6,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Ширина",
+          "param": "RUS_Width",
+          "type": "вещественный",
+          "unit": "мм",
+          "example": "1000"
+        },
+        {
+          "n": 7,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Высота",
+          "param": "RUS_Height",
+          "type": "вещественный",
+          "unit": "мм",
+          "example": "2100"
+        },
+        {
+          "n": 8,
+          "set": "RusSet_Location",
+          "group": "Местоположение",
+          "name": "Номер объекта (корпуса)",
+          "param": "RUS_Object",
+          "type": "текстовый",
+          "unit": null,
+          "example": "К01"
+        },
+        {
+          "n": 9,
+          "set": "RusSet_Location",
+          "group": "Местоположение",
+          "name": "Номер подобъекта (секции)",
+          "param": "RUS_Object_Sub",
+          "type": "текстовый",
+          "unit": null,
+          "example": "С01"
+        }
+      ]
+    },
+    "Б.11": {
+      "ifcClass": "IfcCurtainWall",
+      "element": "Фасад",
+      "cimSection": "Объемно-планировочные и архитектурные решения",
+      "objectKind": "Непроизводственного назначения",
+      "detailStages": [
+        "НПМ",
+        "ВПМ"
+      ],
+      "msskCodes": [
+        "ЭЛ 30 10 10",
+        "ЭЛ 30 10 35",
+        "ЭЛ 30 10 60",
+        "ЭЛ 30 10 61"
+      ],
+      "pages": "42-44",
+      "transcribed": "full",
+      "transcriptionNote": "Строки 2 и 4 содержат опечатки в самом источнике (подтверждено увеличенным фрагментом скана): имя параметра строки 2 — 'RUSS_MSSK_Material_Code' (двойная S), строки 4 — 'RUS_MSSK_Materialt_Name' (лишняя 't'). Транскрибировано дословно, без исправления.",
+      "attributes": [
+        {
+          "n": 1,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Код элемента МССК",
+          "param": "RUS_MSSK_Element_Code",
+          "type": "текстовый",
+          "unit": null,
+          "example": "ЭЛ 30 10 10"
+        },
+        {
+          "n": 2,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Код материала МССК",
+          "param": "RUSS_MSSK_Material_Code",
+          "type": "текстовый",
+          "unit": null,
+          "example": "СТ 00 70",
+          "uncertain": "опечатка в источнике: 'RUSS' с двойной S — сверено по увеличенному фрагменту скана, не исправлено"
+        },
+        {
+          "n": 3,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Наименование",
+          "param": "RUS_Name",
+          "type": "текстовый",
+          "unit": null,
+          "example": "Керамогранит тип 3"
+        },
+        {
+          "n": 4,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Наименование материала МССК",
+          "param": "RUS_MSSK_Materialt_Name",
+          "type": "текстовый",
+          "unit": null,
+          "example": "Стекло",
+          "uncertain": "опечатка в источнике: 'Materialt' с лишней 't' — сверено по увеличенному фрагменту скана, не исправлено"
+        },
+        {
+          "n": 5,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Наименование элемента МССК",
+          "param": "RUS_MSSK_Element_Name",
+          "type": "текстовый",
+          "unit": null,
+          "example": "Витраж"
+        },
+        {
+          "n": 6,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Ширина",
+          "param": "RUS_Width",
+          "type": "вещественный",
+          "unit": "мм",
+          "example": "70"
+        },
+        {
+          "n": 7,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Толщина",
+          "param": "RUS_Thickness",
+          "type": "вещественный",
+          "unit": "мм",
+          "example": "150"
+        },
+        {
+          "n": 8,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Высота",
+          "param": "RUS_Height",
+          "type": "вещественный",
+          "unit": "мм",
+          "example": "2700"
+        },
+        {
+          "n": 9,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Площадь",
+          "param": "RUS_Area",
+          "type": "вещественный",
+          "unit": "м2",
+          "example": "7,02"
+        },
+        {
+          "n": 10,
+          "set": "RusSet_Location",
+          "group": "Местоположение",
+          "name": "Номер объекта (корпуса)",
+          "param": "RUS_Object",
+          "type": "текстовый",
+          "unit": null,
+          "example": "К01"
+        },
+        {
+          "n": 11,
+          "set": "RusSet_Location",
+          "group": "Местоположение",
+          "name": "Номер подобъекта (секции)",
+          "param": "RUS_Object_Sub",
+          "type": "текстовый",
+          "unit": null,
+          "example": "С01"
+        }
+      ]
+    },
+    "Б.12": {
+      "ifcClass": "IfcMember",
+      "element": "Импост витражной системы (навесного фасада)",
+      "cimSection": "Объемно-планировочные и архитектурные решения",
+      "objectKind": "Непроизводственного назначения",
+      "detailStages": [
+        "ВПМ"
+      ],
+      "msskCodes": [
+        "ЭЛ 30 10 10 20",
+        "ЭЛ 30 10 61 02"
+      ],
+      "pages": "44-45",
+      "transcribed": "full",
+      "transcriptionNote": "В отличие от других классов, набор RusSet_Common здесь содержит только 4 строки (нет отдельной строки 'Наименование элемента МССК') — так в источнике.",
+      "attributes": [
+        {
+          "n": 1,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Код элемента МССК",
+          "param": "RUS_MSSK_Element_Code",
+          "type": "текстовый",
+          "unit": null,
+          "example": "ЭЛ 30 10 10 20"
+        },
+        {
+          "n": 2,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Код материала МССК",
+          "param": "RUS_MSSK_Material_Code",
+          "type": "текстовый",
+          "unit": null,
+          "example": "СТ 00 80"
+        },
+        {
+          "n": 3,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Наименование",
+          "param": "RUS_Name",
+          "type": "текстовый",
+          "unit": null,
+          "example": "Импост витражной системы"
+        },
+        {
+          "n": 4,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Наименование материала МССК",
+          "param": "RUS_MSSK_Material_Name",
+          "type": "текстовый",
+          "unit": null,
+          "example": "Пластмасса"
+        },
+        {
+          "n": 5,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Длина",
+          "param": "RUS_Length",
+          "type": "вещественный",
+          "unit": "мм",
+          "example": "1000"
+        },
+        {
+          "n": 6,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Масса",
+          "param": "RUS_Weight",
+          "type": "вещественный",
+          "unit": "кг",
+          "example": "5"
+        },
+        {
+          "n": 7,
+          "set": "RusSet_Location",
+          "group": "Местоположение",
+          "name": "Номер объекта (корпуса)",
+          "param": "RUS_Object",
+          "type": "текстовый",
+          "unit": null,
+          "example": "К01"
+        },
+        {
+          "n": 8,
+          "set": "RusSet_Location",
+          "group": "Местоположение",
+          "name": "Номер подобъекта (секции)",
+          "param": "RUS_Object_Sub",
+          "type": "текстовый",
+          "unit": null,
+          "example": "С01"
+        }
+      ]
+    },
+    "Б.13": {
+      "ifcClass": "IfcPlate",
+      "element": "Панель витражной системы (навесного фасада)",
+      "cimSection": "Объемно-планировочные и архитектурные решения",
+      "objectKind": "Непроизводственного назначения",
+      "detailStages": [
+        "ВПМ"
+      ],
+      "msskCodes": [],
+      "pages": "46-47",
+      "transcribed": "full",
+      "attributes": [
+        {
+          "n": 1,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Код элемента МССК",
+          "param": "RUS_MSSK_Element_Code",
+          "type": "текстовый",
+          "unit": null,
+          "example": "ЭЛ 30 10 10 10"
+        },
+        {
+          "n": 2,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Код материала МССК",
+          "param": "RUS_MSSK_Material_Code",
+          "type": "текстовый",
+          "unit": null,
+          "example": "СТ 00 80"
+        },
+        {
+          "n": 3,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Наименование",
+          "param": "RUS_Name",
+          "type": "текстовый",
+          "unit": null,
+          "example": "Панель витражной системы"
+        },
+        {
+          "n": 4,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Наименование материала МССК",
+          "param": "RUS_MSSK_Material_Name",
+          "type": "текстовый",
+          "unit": null,
+          "example": "Пластмасса"
+        },
+        {
+          "n": 5,
+          "set": "RusSet_Common",
+          "group": "Общие данные",
+          "name": "Наименование элемента МССК",
+          "param": "RUS_MSSK_Element_Name",
+          "type": "текстовый",
+          "unit": null,
+          "example": "Панель витражной систем",
+          "uncertain": "пример обрывается на 'систем' (без конечной 'ы') в самом источнике — сверено по увеличенному фрагменту скана, транскрибировано дословно"
+        },
+        {
+          "n": 6,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Ширина",
+          "param": "RUS_Width",
+          "type": "вещественный",
+          "unit": "мм",
+          "example": "70"
+        },
+        {
+          "n": 7,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Толщина",
+          "param": "RUS_Thickness",
+          "type": "вещественный",
+          "unit": "мм",
+          "example": "150"
+        },
+        {
+          "n": 8,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Высота",
+          "param": "RUS_Height",
+          "type": "вещественный",
+          "unit": "мм",
+          "example": "2700"
+        },
+        {
+          "n": 9,
+          "set": "RusSet_Quantities",
+          "group": "Количественные параметры",
+          "name": "Площадь",
+          "param": "RUS_Area",
+          "type": "вещественный",
+          "unit": "м2",
+          "example": "7,02"
+        },
+        {
+          "n": 10,
+          "set": "RusSet_Location",
+          "group": "Местоположение",
+          "name": "Номер объекта (корпуса)",
+          "param": "RUS_Object",
+          "type": "текстовый",
+          "unit": null,
+          "example": "К01"
+        },
+        {
+          "n": 11,
+          "set": "RusSet_Location",
+          "group": "Местоположение",
+          "name": "Номер подобъекта (секции)",
+          "param": "RUS_Object_Sub",
+          "type": "текстовый",
+          "unit": null,
+          "example": "С01"
+        }
       ]
     }
-  }
+  },
+  "detailStagesSource": "Таблица 5.1 «Классификация элементов ЦИМ АР», стр. 19-20 первоисточника, графа «Детализация на этапах АГР». В шапках таблиц приложения 2 это поле отсутствует.",
+  "typeMapSource": "Приложение 3 «Типы данных атрибутов ЦИМ АГР», стр. 48 первоисточника."
 }

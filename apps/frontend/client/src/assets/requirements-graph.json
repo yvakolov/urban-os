@@ -5,7 +5,7 @@
     "source": 12,
     "branch": 5,
     "profile": 6,
-    "rule": 247,
+    "rule": 260,
     "deliverable": 29
   },
   "nodes": [
@@ -923,7 +923,7 @@
       "label": "moscow-ifc-agr-2026-01-16",
       "status": "draft",
       "sourceId": "msk-ifc-agr",
-      "ruleCount": 71
+      "ruleCount": 84
     },
     {
       "id": "rule:ifc-format-spf",
@@ -1776,6 +1776,162 @@
       "verification": "automatic",
       "pending": false,
       "sourceRef": "прил. 2, табл. Б.2"
+    },
+    {
+      "id": "rule:ifc-attributes-building",
+      "layer": "rule",
+      "label": "IfcBuilding — обязательный набор атрибутов (объект)",
+      "ruleId": "ifc-attributes-building",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Атрибуты",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "прил. 2, табл. Б.0"
+    },
+    {
+      "id": "rule:ifc-attributes-space-spp",
+      "layer": "rule",
+      "label": "IfcSpace — обязательный набор атрибутов (зона СПП в ГНС)",
+      "ruleId": "ifc-attributes-space-spp",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Атрибуты",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "прил. 2, табл. Б.3.1"
+    },
+    {
+      "id": "rule:ifc-attributes-space-total",
+      "layer": "rule",
+      "label": "IfcSpace — обязательный набор атрибутов (зона общей площади)",
+      "ruleId": "ifc-attributes-space-total",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Атрибуты",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "прил. 2, табл. Б.3.2"
+    },
+    {
+      "id": "rule:ifc-attributes-wall",
+      "layer": "rule",
+      "label": "IfcWall — обязательный набор атрибутов (стена, перегородка)",
+      "ruleId": "ifc-attributes-wall",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Атрибуты",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "прил. 2, табл. Б.4"
+    },
+    {
+      "id": "rule:ifc-attributes-column",
+      "layer": "rule",
+      "label": "IfcColumn — обязательный набор атрибутов (колонна, пилястра)",
+      "ruleId": "ifc-attributes-column",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Атрибуты",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "прил. 2, табл. Б.5"
+    },
+    {
+      "id": "rule:ifc-attributes-stair",
+      "layer": "rule",
+      "label": "IfcStair — обязательный набор атрибутов (лестница)",
+      "ruleId": "ifc-attributes-stair",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Атрибуты",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "прил. 2, табл. Б.6"
+    },
+    {
+      "id": "rule:ifc-attributes-ramp",
+      "layer": "rule",
+      "label": "IfcRamp — обязательный набор атрибутов (пандус, рампа)",
+      "ruleId": "ifc-attributes-ramp",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Атрибуты",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "прил. 2, табл. Б.7"
+    },
+    {
+      "id": "rule:ifc-attributes-slab",
+      "layer": "rule",
+      "label": "IfcSlab — обязательный набор атрибутов (перекрытие)",
+      "ruleId": "ifc-attributes-slab",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Атрибуты",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "прил. 2, табл. Б.8"
+    },
+    {
+      "id": "rule:ifc-attributes-window",
+      "layer": "rule",
+      "label": "IfcWindow — обязательный набор атрибутов (окно, балконный блок)",
+      "ruleId": "ifc-attributes-window",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Атрибуты",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "прил. 2, табл. Б.9"
+    },
+    {
+      "id": "rule:ifc-attributes-door",
+      "layer": "rule",
+      "label": "IfcDoor — обязательный набор атрибутов (дверь, ворота, люк)",
+      "ruleId": "ifc-attributes-door",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Атрибуты",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "прил. 2, табл. Б.10"
+    },
+    {
+      "id": "rule:ifc-attributes-curtainwall",
+      "layer": "rule",
+      "label": "IfcCurtainWall — обязательный набор атрибутов (фасад)",
+      "ruleId": "ifc-attributes-curtainwall",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Атрибуты",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "прил. 2, табл. Б.11"
+    },
+    {
+      "id": "rule:ifc-attributes-member",
+      "layer": "rule",
+      "label": "IfcMember — обязательный набор атрибутов (импост витражной системы)",
+      "ruleId": "ifc-attributes-member",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Атрибуты",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "прил. 2, табл. Б.12"
+    },
+    {
+      "id": "rule:ifc-attributes-plate",
+      "layer": "rule",
+      "label": "IfcPlate — обязательный набор атрибутов (панель витражной системы)",
+      "ruleId": "ifc-attributes-plate",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Атрибуты",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "прил. 2, табл. Б.13"
     },
     {
       "id": "profile:moscow-npm-2026-08-18",
@@ -4184,6 +4340,71 @@
     {
       "source": "profile:moscow-ifc-agr-2026-01-16",
       "target": "rule:ifc-attributes-space",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-attributes-building",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-attributes-space-spp",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-attributes-space-total",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-attributes-wall",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-attributes-column",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-attributes-stair",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-attributes-ramp",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-attributes-slab",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-attributes-window",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-attributes-door",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-attributes-curtainwall",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-attributes-member",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-attributes-plate",
       "kind": "contains"
     },
     {

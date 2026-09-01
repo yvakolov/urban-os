@@ -414,3 +414,52 @@ class TestRefusalCoverage(MonitorTestCase):
         total = self.grounds[self.GROUPS["предоставление"]]
         missing = sorted(set(range(1, total + 1)) - self.covered("предоставление"))
         self.assertEqual(missing, [], f"основания отказа в предоставлении без правила: {missing}")
+
+
+class TestIfcDictionary(unittest.TestCase):
+    """Словарь атрибутов ЦИМ АГР — данные, на которые ссылаются правила профиля."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.d = json.loads((ROOT / "dictionaries" / "ifc-attributes.v1.json").read_text(encoding="utf-8"))
+        cls.p = json.loads(
+            (ROOT / "requirements" / "moscow-ifc-agr-2026-01-16.v1.json").read_text(encoding="utf-8"))
+
+    def test_40_every_type_is_declared(self):
+        """Тип атрибута обязан быть описан в приложении 3, иначе инспектор его не проверит."""
+        used = {a["type"] for c in self.d["classes"].values() for a in c["attributes"] if a.get("type")}
+        self.assertTrue(used <= set(self.d["typeMap"]), f"неизвестные типы: {used - set(self.d['typeMap'])}")
+
+    def test_41_attribute_names_follow_prefix(self):
+        """п. 5.3.13: имена атрибутов начинаются с RUS_. Опечатки источника фиксируются, а не чинятся."""
+        bad = [(k, a["param"]) for k, c in self.d["classes"].items() for a in c["attributes"]
+               if a.get("param") and not a["param"].startswith("RUS")]
+        self.assertEqual(bad, [], f"атрибуты вне соглашения RUS_: {bad}")
+
+    def test_42_property_sets_follow_prefix(self):
+        """п. 5.3.12: учитываются только наборы с префиксом RusSet_."""
+        bad = {a["set"] for c in self.d["classes"].values() for a in c["attributes"]
+               if a.get("set") and not a["set"].startswith("RusSet_")}
+        self.assertEqual(bad, set(), f"наборы вне соглашения RusSet_: {bad}")
+
+    def test_43_every_class_has_a_rule(self):
+        """Каждый класс словаря обоснован правилом профиля, иначе он не проверяется ничем."""
+        refs = {r["sourceRef"].split("табл. ")[-1] for r in self.p["rules"]
+                if r["sourceRef"].startswith("прил. 2")}
+        self.assertEqual(set(self.d["classes"]) - refs, set(),
+                         f"классы без правила: {set(self.d['classes']) - refs}")
+
+    def test_44_detail_stages_match_table_5_1(self):
+        """Стадии берутся из таблицы 5.1, а не проставляются одинаково.
+
+        Ошибка здесь опаснее пропуска: требовать окна и двери на стадии НПМ
+        значит отбраковывать корректные модели.
+        """
+        vpm_only = {"Б.6", "Б.7", "Б.9", "Б.10", "Б.12", "Б.13"}
+        for k, c in self.d["classes"].items():
+            if k == "Б.0":
+                self.assertIsNone(c["detailStages"])
+            elif k in vpm_only:
+                self.assertEqual(c["detailStages"], ["ВПМ"], f"{k} требуется только на ВПМ")
+            else:
+                self.assertEqual(c["detailStages"], ["НПМ", "ВПМ"], f"{k} требуется на обеих стадиях")
