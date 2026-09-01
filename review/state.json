@@ -18,6 +18,22 @@
           "note": "первичная сверка при публикации"
         }
       }
+    },
+    "agr-materials-composition@2026-09-01.1": {
+      "sources": {
+        "msk-284-pp": {
+          "normalizedHash": "ad7a65fafc2a8161cfaa81a27121008dc9c64aae68dd1203dfa2f12065f3c28d",
+          "reviewedOn": "2026-09-01",
+          "reviewedBy": "Ваколов Ю.С.",
+          "recordedBy": {
+            "osUser": "yury",
+            "gitName": "yvakolov",
+            "gitEmail": "y.vakolov@juralab.ru"
+          },
+          "verdict": "initial",
+          "note": "первичная сверка при публикации"
+        }
+      }
     }
   }
 }
