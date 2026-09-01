@@ -1,0 +1,81 @@
+<div class="graph-page">
+  <header class="toolbar">
+    <h1>Граф требований</h1>
+
+    <label class="search">
+      <span class="visually-hidden">Поиск по названию</span>
+      <input
+        type="search"
+        placeholder="Поиск по названию, ID, категории…"
+        [value]="searchTerm()"
+        (input)="onSearchInput($any($event.target).value)"
+      />
+    </label>
+
+    <label class="collapse-toggle">
+      <input
+        type="checkbox"
+        [checked]="collapseRules()"
+        (change)="onToggleCollapse($any($event.target).checked)"
+      />
+      Свернуть требования в профили
+    </label>
+
+    <button type="button" class="reset" (click)="onReset()">Сбросить выделение</button>
+  </header>
+
+  <div class="body">
+    <div class="canvas-wrap" #host>
+      @if (loading()) {
+        <p class="status">Загрузка графа…</p>
+      } @else if (error()) {
+        <p class="status status--error">{{ error() }}</p>
+      }
+      <svg #svg class="canvas" [class.is-hidden]="loading() || error()"></svg>
+    </div>
+
+    <aside class="side-panel">
+      <section class="legend">
+        <h2>Легенда</h2>
+
+        <h3>Слои</h3>
+        <ul class="legend-list">
+          <li><span class="swatch swatch--source"></span>Источник</li>
+          <li><span class="swatch swatch--branch"></span>Раздел госуслуги</li>
+          <li><span class="swatch swatch--profile"></span>Профиль требований (n = кол-во правил)</li>
+          <li><span class="swatch swatch--rule"></span>Требование</li>
+          <li><span class="swatch swatch--deliverable"></span>Артефакт</li>
+        </ul>
+
+        <h3>Критичность требования</h3>
+        <ul class="legend-list">
+          <li><span class="swatch swatch--severity-blocker"></span>blocker</li>
+          <li><span class="swatch swatch--severity-major"></span>major</li>
+          <li><span class="swatch swatch--severity-minor"></span>minor</li>
+        </ul>
+
+        <h3>Способ проверки (штриховка)</h3>
+        <ul class="legend-list">
+          <li><span class="swatch swatch--verify-automatic"></span>automatic</li>
+          <li><span class="swatch swatch--verify-expert_evidence"></span>expert_evidence</li>
+          <li><span class="swatch swatch--verify-external_fact"></span>external_fact</li>
+          <li><span class="swatch swatch--verify-external_verdict"></span>external_verdict</li>
+        </ul>
+
+        <h3>Прочее</h3>
+        <ul class="legend-list">
+          <li><span class="swatch swatch--pending"></span>pending — ещё не действует</li>
+          <li><span class="swatch swatch--outcome"></span>артефакт-результат</li>
+        </ul>
+      </section>
+
+      @if (selectedNode(); as node) {
+        <section class="selection">
+          <h2>Выбрано</h2>
+          <p class="selection-label">{{ node.label }}</p>
+          <p class="selection-layer">{{ node.layer }}</p>
+        </section>
+      }
+    </aside>
+  </div>
+</div>

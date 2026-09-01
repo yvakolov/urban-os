@@ -19,6 +19,11 @@
           {
             "glob": "**/*",
             "input": "apps/frontend/client/public"
+          },
+          {
+            "glob": "**/*",
+            "input": "apps/frontend/client/src/assets",
+            "output": "assets"
           }
         ],
         "styles": ["apps/frontend/client/src/styles.scss"]

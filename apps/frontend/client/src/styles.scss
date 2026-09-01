@@ -1,1 +1,103 @@
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    sans-serif;
+}
+
+/*
+ * The requirements graph is drawn into <svg class="canvas"> by D3 directly
+ * (not through Angular's template), so these rules live globally rather than
+ * in the component stylesheet — Angular's emulated encapsulation would never
+ * match elements D3 appends by hand. The CSS variables they use are defined
+ * on the page component's :host and inherit down through the DOM as usual.
+ */
+svg.canvas {
+  .col-label {
+    fill: var(--text-muted);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .link {
+    fill: none;
+    stroke: var(--link-color);
+    stroke-width: 1;
+    opacity: 0.35;
+    transition: opacity 150ms ease;
+
+    &.is-dim {
+      opacity: 0.06;
+    }
+  }
+
+  .highlight-edge {
+    fill: none;
+    stroke: var(--highlight-color);
+    stroke-width: 2;
+    stroke-dasharray: 4 2;
+    opacity: 0.9;
+    pointer-events: none;
+  }
+
+  .node {
+    cursor: pointer;
+
+    .shape {
+      stroke: var(--node-stroke);
+      stroke-width: 1.5;
+      transition:
+        opacity 150ms ease,
+        stroke 150ms ease;
+    }
+
+    .label {
+      fill: var(--text);
+      font-size: 10px;
+      pointer-events: none;
+    }
+
+    .badge {
+      fill: var(--node-stroke);
+      font-size: 10px;
+      font-weight: 600;
+      text-anchor: middle;
+      pointer-events: none;
+    }
+
+    &.is-dim {
+      opacity: 0.15;
+    }
+
+    &.is-active .shape {
+      stroke: var(--highlight-color);
+      stroke-width: 2.5;
+    }
+
+    &.node--rule .shape.pending {
+      opacity: 0.5;
+      stroke-dasharray: 1, 2;
+    }
+
+    &.node--profile .shape.draft {
+      stroke: var(--highlight-color);
+      stroke-dasharray: 3, 2;
+    }
+
+    &.node--source .shape.superseded {
+      opacity: 0.55;
+    }
+
+    &.node--deliverable .shape.outcome {
+      stroke: var(--highlight-color);
+      stroke-width: 2.5;
+    }
+  }
+}
