@@ -4,8 +4,8 @@
   "counts": {
     "source": 12,
     "branch": 5,
-    "profile": 5,
-    "rule": 176,
+    "profile": 6,
+    "rule": 209,
     "deliverable": 29
   },
   "nodes": [
@@ -48,11 +48,11 @@
     {
       "id": "src:msk-ifc-agr",
       "layer": "source",
-      "label": "Распоряжение об утверждении Требований к материалам в формате IFC, представляемым в целях ",
+      "label": "Распоряжение Департамента градостроительной политики города Москвы и Департамента информац",
       "status": "active",
-      "transcribed": "none",
+      "transcribed": "partial",
       "monitored": false,
-      "url": null
+      "url": "https://stroimprosto.mos.ru/storage/app/media/KnowledgeBase/CIM_AGR_full.pdf"
     },
     {
       "id": "src:mo-npm-2025-12",
@@ -916,6 +916,410 @@
       "verification": "external_fact",
       "pending": false,
       "sourceRef": "groundsOfRefusal · приём, п. 2; предоставление, п. 2"
+    },
+    {
+      "id": "profile:moscow-ifc-agr-2026-01-16",
+      "layer": "profile",
+      "label": "moscow-ifc-agr-2026-01-16",
+      "status": "draft",
+      "sourceId": "msk-ifc-agr",
+      "ruleCount": 33
+    },
+    {
+      "id": "rule:ifc-format-spf",
+      "layer": "rule",
+      "label": "IFC STEP Physical File",
+      "ruleId": "ifc-format-spf",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Формат",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "п. 4.1.2"
+    },
+    {
+      "id": "rule:ifc-mvd-reference-view",
+      "layer": "rule",
+      "label": "Модельный вид IFC4 ReferenceView",
+      "ruleId": "ifc-mvd-reference-view",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Формат",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "п. 4.1.1"
+    },
+    {
+      "id": "rule:ifc-schema-version",
+      "layer": "rule",
+      "label": "Схема IFC 4.0.2.1 или новее",
+      "ruleId": "ifc-schema-version",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Формат",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "п. 4.1.5"
+    },
+    {
+      "id": "rule:ifc-class-mapping",
+      "layer": "rule",
+      "label": "Элементы сопоставлены классам IFC",
+      "ruleId": "ifc-class-mapping",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Формат",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 4.1.3"
+    },
+    {
+      "id": "rule:ifc-no-building-element-proxy",
+      "layer": "rule",
+      "label": "IfcBuildingElementProxy не используется",
+      "ruleId": "ifc-no-building-element-proxy",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Формат",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "п. 4.1.4"
+    },
+    {
+      "id": "rule:ifc-inventory-xml",
+      "layer": "rule",
+      "label": "Ведомость ЦИМ АГР в XML",
+      "ruleId": "ifc-inventory-xml",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Состав",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 4.1.6"
+    },
+    {
+      "id": "rule:ifc-inventory-columns",
+      "layer": "rule",
+      "label": "Графы ведомости заполнены",
+      "ruleId": "ifc-inventory-columns",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Состав",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "пп. 4.1.7–4.1.10"
+    },
+    {
+      "id": "rule:ifc-ukep-each-file",
+      "layer": "rule",
+      "label": "Каждый файл подписан УКЭП",
+      "ruleId": "ifc-ukep-each-file",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Юридическая значимость",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 4.2.2"
+    },
+    {
+      "id": "rule:ifc-ukep-separate-file",
+      "layer": "rule",
+      "label": "УКЭП отдельным одноимённым файлом",
+      "ruleId": "ifc-ukep-separate-file",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Юридическая значимость",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "п. 4.2.3"
+    },
+    {
+      "id": "rule:ifc-ukep-valid-at-signing",
+      "layer": "rule",
+      "label": "УКЭП действительна на момент подписания",
+      "ruleId": "ifc-ukep-valid-at-signing",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Юридическая значимость",
+      "severity": "blocker",
+      "verification": "external_fact",
+      "pending": false,
+      "sourceRef": "п. 4.2.3"
+    },
+    {
+      "id": "rule:ifc-certificate-content",
+      "layer": "rule",
+      "label": "Сертификат содержит обязательные сведения",
+      "ruleId": "ifc-certificate-content",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Юридическая значимость",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 4.2.3"
+    },
+    {
+      "id": "rule:ifc-iul-fallback",
+      "layer": "rule",
+      "label": "ИУЛ при невозможности подписать всем",
+      "ruleId": "ifc-iul-fallback",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Юридическая значимость",
+      "severity": "major",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 4.2.4"
+    },
+    {
+      "id": "rule:ifc-filename-structure",
+      "layer": "rule",
+      "label": "Пять полей в имени файла",
+      "ruleId": "ifc-filename-structure",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Именование",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "пп. 4.3.1.1–4.3.1.2"
+    },
+    {
+      "id": "rule:ifc-filename-separator",
+      "layer": "rule",
+      "label": "Разделитель полей — подчёркивание",
+      "ruleId": "ifc-filename-separator",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Именование",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 4.3.1.3"
+    },
+    {
+      "id": "rule:ifc-filename-multivalue",
+      "layer": "rule",
+      "label": "Несколько значений в полях 3 и 4 — через дефис",
+      "ruleId": "ifc-filename-multivalue",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Именование",
+      "severity": "major",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 4.3.1.4"
+    },
+    {
+      "id": "rule:ifc-filename-charset",
+      "layer": "rule",
+      "label": "Запрещённые символы в имени файла",
+      "ruleId": "ifc-filename-charset",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Именование",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "п. 4.3.1.5"
+    },
+    {
+      "id": "rule:ifc-filename-field-object-kind",
+      "layer": "rule",
+      "label": "Поле 1 — шифр вида объекта",
+      "ruleId": "ifc-filename-field-object-kind",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Именование",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл. 4.2, поле 1"
+    },
+    {
+      "id": "rule:ifc-filename-field-building",
+      "layer": "rule",
+      "label": "Поле 2 — номер объекта (корпуса)",
+      "ruleId": "ifc-filename-field-building",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Именование",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл. 4.2, поле 2"
+    },
+    {
+      "id": "rule:ifc-filename-field-section",
+      "layer": "rule",
+      "label": "Поле 3 — номер подобъекта (секции)",
+      "ruleId": "ifc-filename-field-section",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Именование",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл. 4.2, поле 3"
+    },
+    {
+      "id": "rule:ifc-filename-field-cim-code",
+      "layer": "rule",
+      "label": "Поле 4 — шифр ЦИМ",
+      "ruleId": "ifc-filename-field-cim-code",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Именование",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл. 4.2, поле 4"
+    },
+    {
+      "id": "rule:ifc-filename-field-stage",
+      "layer": "rule",
+      "label": "Поле 5 — шифр этапа «АГР»",
+      "ruleId": "ifc-filename-field-stage",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Именование",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "табл. 4.2, поле 5"
+    },
+    {
+      "id": "rule:ifc-file-size",
+      "layer": "rule",
+      "label": "Рекомендуемый размер файла",
+      "ruleId": "ifc-file-size",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Размер",
+      "severity": "minor",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "п. 4.4.1"
+    },
+    {
+      "id": "rule:ifc-files-coordinated",
+      "layer": "rule",
+      "label": "Файлы одного проекта скоординированы",
+      "ruleId": "ifc-files-coordinated",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Координация",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 4.5.1"
+    },
+    {
+      "id": "rule:ifc-single-coordinate-system",
+      "layer": "rule",
+      "label": "Единая система координат и отметок",
+      "ruleId": "ifc-single-coordinate-system",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Координация",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 4.5.2"
+    },
+    {
+      "id": "rule:ifc-base-point",
+      "layer": "rule",
+      "label": "Базовая точка проекта",
+      "ruleId": "ifc-base-point",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Координация",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 4.5.3"
+    },
+    {
+      "id": "rule:ifc-geo-referencing",
+      "layer": "rule",
+      "label": "Привязка к местности",
+      "ruleId": "ifc-geo-referencing",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Координация",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 4.5.4"
+    },
+    {
+      "id": "rule:ifc-secret-location-base-point",
+      "layer": "rule",
+      "label": "Гостайна — общая базовая точка без геопозиционирования",
+      "ruleId": "ifc-secret-location-base-point",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Координация",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 4.5.5"
+    },
+    {
+      "id": "rule:ifc-scale-and-units",
+      "layer": "rule",
+      "label": "Масштаб 1:1 и метрическая система",
+      "ruleId": "ifc-scale-and-units",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Единицы",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "п. 4.6.1"
+    },
+    {
+      "id": "rule:ifc-rounding",
+      "layer": "rule",
+      "label": "Округление размерных значений",
+      "ruleId": "ifc-rounding",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Единицы",
+      "severity": "major",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 4.6.2"
+    },
+    {
+      "id": "rule:ifc-levels-match-storeys",
+      "layer": "rule",
+      "label": "Уровни соответствуют высотному положению этажей",
+      "ruleId": "ifc-levels-match-storeys",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Уровни",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 4.7.1"
+    },
+    {
+      "id": "rule:ifc-level-zero",
+      "layer": "rule",
+      "label": "Отметка 0,000",
+      "ruleId": "ifc-level-zero",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Уровни",
+      "severity": "minor",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 4.7.2"
+    },
+    {
+      "id": "rule:ifc-levels-clean-floor",
+      "layer": "rule",
+      "label": "Уровни по отметке чистого пола",
+      "ruleId": "ifc-levels-clean-floor",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Уровни",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п. 4.7.3"
+    },
+    {
+      "id": "rule:ifc-levels-minimise",
+      "layer": "rule",
+      "label": "Минимизация количества уровней",
+      "ruleId": "ifc-levels-minimise",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "Уровни",
+      "severity": "minor",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "пп. 4.7.6–4.7.7"
     },
     {
       "id": "profile:moscow-npm-2026-08-18",
@@ -2436,7 +2840,7 @@
       "kind": "package",
       "origin": "produced",
       "fmt": "IFC и (или) XML в ZIP",
-      "blockedBy": "msk-ifc-agr",
+      "blockedBy": null,
       "isOutcome": false
     },
     {
@@ -2446,7 +2850,7 @@
       "kind": "package",
       "origin": "produced",
       "fmt": "IFC и (или) XML в ZIP",
-      "blockedBy": "msk-ifc-agr",
+      "blockedBy": null,
       "isOutcome": false
     },
     {
@@ -2456,7 +2860,7 @@
       "kind": "package",
       "origin": "produced",
       "fmt": "IFC и (или) XML в ZIP",
-      "blockedBy": "msk-ifc-agr",
+      "blockedBy": null,
       "isOutcome": false
     },
     {
@@ -2964,6 +3368,176 @@
     {
       "source": "profile:agr-request-package",
       "target": "rule:conf-documents-in-force",
+      "kind": "contains"
+    },
+    {
+      "source": "src:msk-ifc-agr",
+      "target": "profile:moscow-ifc-agr-2026-01-16",
+      "kind": "transcribedInto"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-format-spf",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-mvd-reference-view",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-schema-version",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-class-mapping",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-no-building-element-proxy",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-inventory-xml",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-inventory-columns",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-ukep-each-file",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-ukep-separate-file",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-ukep-valid-at-signing",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-certificate-content",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-iul-fallback",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-filename-structure",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-filename-separator",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-filename-multivalue",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-filename-charset",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-filename-field-object-kind",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-filename-field-building",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-filename-field-section",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-filename-field-cim-code",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-filename-field-stage",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-file-size",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-files-coordinated",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-single-coordinate-system",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-base-point",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-geo-referencing",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-secret-location-base-point",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-scale-and-units",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-rounding",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-levels-match-storeys",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-level-zero",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-levels-clean-floor",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-levels-minimise",
       "kind": "contains"
     },
     {
@@ -3812,12 +4386,27 @@
       "kind": "produces"
     },
     {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "deliv:spozu",
+      "kind": "produces"
+    },
+    {
       "source": "rule:doc-05-floor-plans",
       "target": "deliv:floor-plans",
       "kind": "produces"
     },
     {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "deliv:floor-plans",
+      "kind": "produces"
+    },
+    {
       "source": "rule:doc-07-sections-facades",
+      "target": "deliv:sections-facades",
+      "kind": "produces"
+    },
+    {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
       "target": "deliv:sections-facades",
       "kind": "produces"
     },
