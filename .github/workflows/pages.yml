@@ -1,0 +1,77 @@
+name: pages
+
+# Демонстрационная витрина: граф требований на GitHub Pages.
+# Контур нормативного контроля живёт в GitLab CI — здесь только показ.
+# Ничего не проверяет и ничего не решает: если сборка упадёт, это про витрину,
+# а не про данные.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "apps/frontend/client/**"
+      - "requirements/**"
+      - "sources/**"
+      - "monitoring/**"
+      - "deliverables/**"
+      - "tools/build_graph.py"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Граф — производная реестров. Если он разошёлся, витрина покажет
+      # устаревшую картину, поэтому сверяем перед сборкой.
+      - name: Граф актуален
+        run: python3 tools/build_graph.py --check
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # base-href под путь проекта: Pages отдаёт сайт из /<repo>/, и без него
+      # Angular запросит ассеты от корня домена и получит 404.
+      - name: Сборка client
+        run: npx nx build client --base-href=/urban-os/
+
+      # Pages не знает про Angular-роутинг: прямой заход на любой путь кроме
+      # корня отдаст 404. Копия index.html под этим именем возвращает
+      # управление приложению.
+      - name: SPA-фолбэк
+        run: cp dist/apps/frontend/client/browser/index.html dist/apps/frontend/client/browser/404.html
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/apps/frontend/client/browser
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
