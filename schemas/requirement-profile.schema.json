@@ -4,78 +4,244 @@
   "title": "Профиль требований",
   "description": "Проверяемая транскрипция одного нормативного корпуса. Опубликованный (не draft) профиль неизменяем: любое исправление — новая версия файла.",
   "type": "object",
-  "required": ["schemaVersion", "id", "version", "status", "sourceId", "effectiveFrom", "rules"],
+  "required": [
+    "schemaVersion",
+    "id",
+    "version",
+    "status",
+    "sourceId",
+    "effectiveFrom",
+    "rules"
+  ],
   "additionalProperties": false,
   "properties": {
-    "schemaVersion": { "type": "string" },
-    "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
-    "version": { "type": "string" },
-    "status": { "type": "string", "enum": ["draft", "active", "superseded"] },
-    "sourceId": { "type": "string", "description": "Ключ в sources/index.json" },
-    "supersedes": { "type": "string", "description": "id предыдущего профиля" },
-    "jurisdiction": { "type": "string" },
-    "modelClass": { "type": "string" },
-    "effectiveFrom": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
-    "releasePolicy": { "type": "string" },
+    "schemaVersion": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    },
+    "version": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "active",
+        "superseded"
+      ]
+    },
+    "sourceId": {
+      "type": "string",
+      "description": "Ключ в sources/index.json"
+    },
+    "supersedes": {
+      "type": "string",
+      "description": "id предыдущего профиля"
+    },
+    "jurisdiction": {
+      "type": "string"
+    },
+    "modelClass": {
+      "type": "string"
+    },
+    "effectiveFrom": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "releasePolicy": {
+      "type": "string"
+    },
     "selfHash": {
       "type": "string",
       "pattern": "^[0-9a-f]{64}$",
       "description": "sha256 канонического JSON профиля без этого поля"
     },
-    "rules": { "type": "array", "items": { "$ref": "#/$defs/rule" } }
+    "compositionItems": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Номера пунктов источника, образующих состав документа. Инспектор берёт отсюда перечень разделов, наличие которых меряет, — иначе он судил бы только о том, что заявитель сам объявил, и пропущенный раздел выглядел бы как неприменимый."
+    },
+    "repealed": {
+      "type": "array",
+      "description": "Пункты источника, утратившие силу. Требованиями не являются и в оценку не входят, но фиксируются: транскрипция обязана показывать, что пункт рассмотрен и признан недействующим, иначе отличить «пропустили» от «отменено» невозможно.",
+      "items": {
+        "type": "object",
+        "required": [
+          "clause",
+          "by"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "clause": {
+            "type": "string",
+            "description": "Номер пункта или дефиса в источнике"
+          },
+          "repealedOn": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Дата утраты силы, если источник её называет"
+          },
+          "by": {
+            "type": "string",
+            "description": "Документ, которым пункт отменён"
+          }
+        }
+      }
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/rule"
+      }
+    }
   },
-
   "$defs": {
     "rule": {
       "type": "object",
-      "required": ["id", "category", "title", "requirement", "verification", "severity", "sourceRef"],
+      "required": [
+        "id",
+        "category",
+        "title",
+        "requirement",
+        "verification",
+        "severity",
+        "sourceRef"
+      ],
       "additionalProperties": false,
       "properties": {
-        "id": { "type": "string" },
-        "category": { "type": "string" },
-        "title": { "type": "string" },
-        "requirement": { "type": "string" },
-        "sourceRef": { "type": "string", "description": "Пункт первоисточника" },
+        "id": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "requirement": {
+          "type": "string"
+        },
+        "sourceRef": {
+          "type": "string",
+          "description": "Пункт первоисточника"
+        },
         "verification": {
           "type": "string",
-          "enum": ["automatic", "expert_evidence", "external_fact", "external_verdict"],
+          "enum": [
+            "automatic",
+            "expert_evidence",
+            "external_fact",
+            "external_verdict"
+          ],
           "description": "automatic и expert_evidence дают терминальное состояние внутри контура; external_* — нет, их нельзя закрыть экспертизой"
         },
-        "severity": { "type": "string", "enum": ["blocker", "major", "minor"] },
-        "status": { "type": "string", "enum": ["active", "pending_activation"] },
-        "activationCondition": { "type": "string" },
-        "note": { "type": "string" },
-        "authority": { "type": "string", "description": "Ключ в sources/index.json → authorities" },
-        "dependsOn": { "type": "array", "items": { "type": "string" }, "description": "id профилей" },
-        "dependsOnSource": { "type": "string", "description": "Ключ в sources/index.json" },
-        "appliesWhen": { "$ref": "#/$defs/condition" },
-        "evaluator": { "$ref": "#/$defs/evaluator" }
+        "severity": {
+          "type": "string",
+          "enum": [
+            "blocker",
+            "major",
+            "minor"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "pending_activation"
+          ]
+        },
+        "activationCondition": {
+          "type": "string"
+        },
+        "note": {
+          "type": "string"
+        },
+        "authority": {
+          "type": "string",
+          "description": "Ключ в sources/index.json → authorities"
+        },
+        "dependsOn": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "id профилей"
+        },
+        "dependsOnSource": {
+          "type": "string",
+          "description": "Ключ в sources/index.json"
+        },
+        "elaborates": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "id правил ТОГО ЖЕ профиля, которые это правило раскрывает. Отличается от dependsOn: тот связывает профили, а это — пункт с пунктом внутри одного документа. Раздел «требования к материалам» детализирует раздел «состав материалов», и без этой связи цепочка изменений разрывается."
+        },
+        "appliesWhen": {
+          "$ref": "#/$defs/condition"
+        },
+        "evaluator": {
+          "$ref": "#/$defs/evaluator"
+        }
       }
     },
-
     "condition": {
       "type": "object",
-      "required": ["path"],
+      "required": [
+        "path"
+      ],
       "additionalProperties": false,
       "properties": {
-        "path": { "type": "string" },
+        "path": {
+          "type": "string"
+        },
         "equals": {},
-        "in": { "type": "array" }
+        "in": {
+          "type": "array"
+        }
       }
     },
-
     "evaluator": {
       "type": "object",
-      "required": ["op"],
+      "required": [
+        "op"
+      ],
       "additionalProperties": false,
       "properties": {
-        "op": { "type": "string", "enum": ["max", "min", "range", "equals", "regex", "all_zero"] },
-        "path": { "type": "string" },
-        "paths": { "type": "array", "items": { "type": "string" } },
+        "op": {
+          "type": "string",
+          "enum": [
+            "max",
+            "min",
+            "range",
+            "equals",
+            "regex",
+            "all_zero"
+          ]
+        },
+        "path": {
+          "type": "string"
+        },
+        "paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "value": {},
         "min": {},
         "max": {},
-        "pattern": { "type": "string" }
+        "pattern": {
+          "type": "string"
+        }
       }
     }
   }

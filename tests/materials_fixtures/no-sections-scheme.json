@@ -1,0 +1,50 @@
+{
+  "pdf": {
+    "files": [
+      "АГР_Примерная_1.pdf"
+    ],
+    "encrypted": false,
+    "sections": [
+      "1.3",
+      "1.4",
+      "1.6",
+      "1.7",
+      "1.8",
+      "1.10",
+      "1.11"
+    ],
+    "bookmarks": [
+      "1.3",
+      "1.4",
+      "1.6",
+      "1.7",
+      "1.8",
+      "1.10",
+      "1.11"
+    ]
+  },
+  "coordinates": {
+    "system": "МСК77",
+    "points": [
+      {
+        "x": "12345.67",
+        "y": "9876.54"
+      },
+      {
+        "x": "12400.10",
+        "y": "9900.00"
+      }
+    ]
+  },
+  "tep": {
+    "built-up-area": 4200.0,
+    "total-area": 38000.0,
+    "above-ground-area": 31000.0,
+    "underground-area": 7000.0,
+    "floors": "18 надземных, 2 подземных",
+    "absolute-height": 212.4,
+    "height": 58.0,
+    "total-floor-area": 36500.0,
+    "parking": 180
+  }
+}

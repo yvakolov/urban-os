@@ -284,10 +284,18 @@ def check_references(sources_doc, profiles, monitor_doc):
             # Предыдущая редакция реально существовала, просто не оцифрована.
             # Это констатация истории, а не дефект — warning, иначе CI красный на ровном месте.
             warnings.append(f"{pid}.supersedes -> {sup!r} — профиль не оцифрован")
+        own_rule_ids = {r["id"] for r in p.get("rules", []) if "id" in r}
         for r in p.get("rules", []):
             for dep in r.get("dependsOn", []) or []:
                 if dep not in profiles:
                     errors.append(f"{pid}/{r['id']}.dependsOn -> {dep!r} — такого профиля нет")
+            # elaborates связывает пункт с пунктом внутри одного документа,
+            # поэтому цель обязана лежать в этом же профиле.
+            for el in r.get("elaborates", []) or []:
+                if el not in own_rule_ids:
+                    errors.append(f"{pid}/{r['id']}.elaborates -> {el!r} — правила нет в этом профиле")
+                elif el == r["id"]:
+                    errors.append(f"{pid}/{r['id']}.elaborates ссылается само на себя")
             dsrc = r.get("dependsOnSource")
             if dsrc and dsrc not in sources:
                 errors.append(f"{pid}/{r['id']}.dependsOnSource -> {dsrc!r} — нет в реестре")

@@ -4,8 +4,8 @@
   "counts": {
     "source": 14,
     "branch": 5,
-    "profile": 6,
-    "rule": 276,
+    "profile": 7,
+    "rule": 345,
     "deliverable": 29
   },
   "nodes": [
@@ -127,11 +127,11 @@
       "url": "https://www.mos.ru/pgu2/landing/api/doc/6480a56e-b433-44af-87c1-40fed998e051?is_ergu=1"
     },
     {
-      "id": "src:msk-prilozhenie-sostav-materialov-agr",
+      "id": "src:msk-prilozhenie-1-sostav-materialov",
       "layer": "source",
-      "label": "Приложение к Административному регламенту предоставления государственной услуги «Оформлени",
+      "label": "Приложение 1 к Административному регламенту предоставления государственной услуги «Оформле",
       "status": "active",
-      "transcribed": "none",
+      "transcribed": "full",
       "monitored": false,
       "url": "https://www.mos.ru/pgu2/landing/api/doc/16b2015b-fe0f-4e11-84c5-93ac22308270?is_ergu=1"
     },
@@ -470,6 +470,842 @@
       "verification": "expert_evidence",
       "pending": false,
       "sourceRef": "п.7"
+    },
+    {
+      "id": "profile:agr-materials-composition",
+      "layer": "profile",
+      "label": "agr-materials-composition",
+      "status": "draft",
+      "sourceId": "msk-prilozhenie-1-sostav-materialov",
+      "ruleCount": 69
+    },
+    {
+      "id": "rule:mat-1-3-situation-plan",
+      "layer": "rule",
+      "label": "1.3 · Схема ситуационного плана",
+      "ruleId": "mat-1-3-situation-plan",
+      "profileId": "agr-materials-composition",
+      "category": "Состав материалов",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 1.3"
+    },
+    {
+      "id": "rule:mat-1-4-spozu",
+      "layer": "rule",
+      "label": "1.4 · СПОЗУ со схемой транспортной организации",
+      "ruleId": "mat-1-4-spozu",
+      "profileId": "agr-materials-composition",
+      "category": "Состав материалов",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 1.4"
+    },
+    {
+      "id": "rule:mat-1-6-visualization",
+      "layer": "rule",
+      "label": "1.6 · Материалы визуализации",
+      "ruleId": "mat-1-6-visualization",
+      "profileId": "agr-materials-composition",
+      "category": "Состав материалов",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 1.6"
+    },
+    {
+      "id": "rule:mat-1-7-facades",
+      "layer": "rule",
+      "label": "1.7 · Схемы фасадов",
+      "ruleId": "mat-1-7-facades",
+      "profileId": "agr-materials-composition",
+      "category": "Состав материалов",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 1.7"
+    },
+    {
+      "id": "rule:mat-1-8-floor-plans",
+      "layer": "rule",
+      "label": "1.8 · Схемы планов этажей и подземных уровней",
+      "ruleId": "mat-1-8-floor-plans",
+      "profileId": "agr-materials-composition",
+      "category": "Состав материалов",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 1.8"
+    },
+    {
+      "id": "rule:mat-1-9-sections",
+      "layer": "rule",
+      "label": "1.9 · Схемы разрезов",
+      "ruleId": "mat-1-9-sections",
+      "profileId": "agr-materials-composition",
+      "category": "Состав материалов",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 1.9"
+    },
+    {
+      "id": "rule:mat-1-10-finishing-note",
+      "layer": "rule",
+      "label": "1.10 · Пояснительная записка об отделке",
+      "ruleId": "mat-1-10-finishing-note",
+      "profileId": "agr-materials-composition",
+      "category": "Состав материалов",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 1.10"
+    },
+    {
+      "id": "rule:mat-1-11-tep",
+      "layer": "rule",
+      "label": "1.11 · Ведомость технико-экономических показателей",
+      "ruleId": "mat-1-11-tep",
+      "profileId": "agr-materials-composition",
+      "category": "Состав материалов",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 1.11"
+    },
+    {
+      "id": "rule:mat-1-12-heritage-bti",
+      "layer": "rule",
+      "label": "1.12 · Планы БТИ и технические обмеры",
+      "ruleId": "mat-1-12-heritage-bti",
+      "profileId": "agr-materials-composition",
+      "category": "Состав материалов",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 1.12"
+    },
+    {
+      "id": "rule:mat-1-13-signage",
+      "layer": "rule",
+      "label": "1.13 · Материалы по информационной конструкции (вывеске)",
+      "ruleId": "mat-1-13-signage",
+      "profileId": "agr-materials-composition",
+      "category": "Состав материалов",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 1.13"
+    },
+    {
+      "id": "rule:mat-2-1-single-pdf",
+      "layer": "rule",
+      "label": "2.1 · Один файл PDF без защиты паролем",
+      "ruleId": "mat-2-1-single-pdf",
+      "profileId": "agr-materials-composition",
+      "category": "Требования к материалам",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1"
+    },
+    {
+      "id": "rule:mat-2-1-single-layer-300dpi",
+      "layer": "rule",
+      "label": "2.1 · Однослойные изображения не менее 300 dpi",
+      "ruleId": "mat-2-1-single-layer-300dpi",
+      "profileId": "agr-materials-composition",
+      "category": "Требования к материалам",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1"
+    },
+    {
+      "id": "rule:mat-2-1-colour-annotations",
+      "layer": "rule",
+      "label": "2.1 · Цвет, аннотации, экспликации",
+      "ruleId": "mat-2-1-colour-annotations",
+      "profileId": "agr-materials-composition",
+      "category": "Требования к материалам",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1"
+    },
+    {
+      "id": "rule:mat-2-1-bookmarks",
+      "layer": "rule",
+      "label": "2.1 · Закладки по перечню раздела 1",
+      "ruleId": "mat-2-1-bookmarks",
+      "profileId": "agr-materials-composition",
+      "category": "Требования к материалам",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1"
+    },
+    {
+      "id": "rule:mat-2-1-2-accuracy",
+      "layer": "rule",
+      "label": "2.1.2 · Достоверность и авторские права",
+      "ruleId": "mat-2-1-2-accuracy",
+      "profileId": "agr-materials-composition",
+      "category": "Требования к материалам",
+      "severity": "major",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.2"
+    },
+    {
+      "id": "rule:mat-2-1-3-uds",
+      "layer": "rule",
+      "label": "2.1.3 · Трассировка и наименование элементов улично-дорожной сети с отображени",
+      "ruleId": "mat-2-1-3-uds",
+      "profileId": "agr-materials-composition",
+      "category": "Ситуационный план",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.3"
+    },
+    {
+      "id": "rule:mat-2-1-3-land-boundary",
+      "layer": "rule",
+      "label": "2.1.3 · Границы земельного участка",
+      "ruleId": "mat-2-1-3-land-boundary",
+      "profileId": "agr-materials-composition",
+      "category": "Ситуационный план",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.3"
+    },
+    {
+      "id": "rule:mat-2-1-3-new-object",
+      "layer": "rule",
+      "label": "2.1.3 · Объект строительства показан красным цветом",
+      "ruleId": "mat-2-1-3-new-object",
+      "profileId": "agr-materials-composition",
+      "category": "Ситуационный план",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.3"
+    },
+    {
+      "id": "rule:mat-2-1-3-reconstruction",
+      "layer": "rule",
+      "label": "2.1.3 · Объект реконструкции показан оранжевым цветом",
+      "ruleId": "mat-2-1-3-reconstruction",
+      "profileId": "agr-materials-composition",
+      "category": "Ситуационный план",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.3"
+    },
+    {
+      "id": "rule:mat-2-1-3-demolished",
+      "layer": "rule",
+      "label": "2.1.3 · Показаны сносимые здания",
+      "ruleId": "mat-2-1-3-demolished",
+      "profileId": "agr-materials-composition",
+      "category": "Ситуационный план",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.3"
+    },
+    {
+      "id": "rule:mat-2-1-3-existing",
+      "layer": "rule",
+      "label": "2.1.3 · Показана опорная застройка",
+      "ruleId": "mat-2-1-3-existing",
+      "profileId": "agr-materials-composition",
+      "category": "Ситуационный план",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.3"
+    },
+    {
+      "id": "rule:mat-2-1-3-prospective",
+      "layer": "rule",
+      "label": "2.1.3 · Показана перспективная застройка с выделением очередности в соответств",
+      "ruleId": "mat-2-1-3-prospective",
+      "profileId": "agr-materials-composition",
+      "category": "Ситуационный план",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.3"
+    },
+    {
+      "id": "rule:mat-2-1-3-protected-zones",
+      "layer": "rule",
+      "label": "2.1.3 · Показаны границы зон с особыми условиями использования территории",
+      "ruleId": "mat-2-1-3-protected-zones",
+      "profileId": "agr-materials-composition",
+      "category": "Ситуационный план",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.3"
+    },
+    {
+      "id": "rule:mat-2-1-4-uds",
+      "layer": "rule",
+      "label": "2.1.4 · Трассировка и наименование элементов улично-дорожной сети с отображени",
+      "ruleId": "mat-2-1-4-uds",
+      "profileId": "agr-materials-composition",
+      "category": "СПОЗУ",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.4"
+    },
+    {
+      "id": "rule:mat-2-1-4-land-boundary",
+      "layer": "rule",
+      "label": "2.1.4 · Границы земельного участка",
+      "ruleId": "mat-2-1-4-land-boundary",
+      "profileId": "agr-materials-composition",
+      "category": "СПОЗУ",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.4"
+    },
+    {
+      "id": "rule:mat-2-1-4-new-object",
+      "layer": "rule",
+      "label": "2.1.4 · Объект строительства показан красным цветом",
+      "ruleId": "mat-2-1-4-new-object",
+      "profileId": "agr-materials-composition",
+      "category": "СПОЗУ",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.4"
+    },
+    {
+      "id": "rule:mat-2-1-4-reconstruction",
+      "layer": "rule",
+      "label": "2.1.4 · Объект реконструкции показан оранжевым цветом",
+      "ruleId": "mat-2-1-4-reconstruction",
+      "profileId": "agr-materials-composition",
+      "category": "СПОЗУ",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.4"
+    },
+    {
+      "id": "rule:mat-2-1-4-demolished",
+      "layer": "rule",
+      "label": "2.1.4 · Показаны сносимые здания",
+      "ruleId": "mat-2-1-4-demolished",
+      "profileId": "agr-materials-composition",
+      "category": "СПОЗУ",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.4"
+    },
+    {
+      "id": "rule:mat-2-1-4-existing",
+      "layer": "rule",
+      "label": "2.1.4 · Показана опорная застройка",
+      "ruleId": "mat-2-1-4-existing",
+      "profileId": "agr-materials-composition",
+      "category": "СПОЗУ",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.4"
+    },
+    {
+      "id": "rule:mat-2-1-4-parking",
+      "layer": "rule",
+      "label": "2.1.4 · Показаны парковочные места",
+      "ruleId": "mat-2-1-4-parking",
+      "profileId": "agr-materials-composition",
+      "category": "СПОЗУ",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.4"
+    },
+    {
+      "id": "rule:mat-2-1-4-landscaping",
+      "layer": "rule",
+      "label": "2.1.4 · Приведены сведения о благоустройстве",
+      "ruleId": "mat-2-1-4-landscaping",
+      "profileId": "agr-materials-composition",
+      "category": "СПОЗУ",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.4"
+    },
+    {
+      "id": "rule:mat-2-1-4-coord-system",
+      "layer": "rule",
+      "label": "2.1.4 · Допустимая система координат",
+      "ruleId": "mat-2-1-4-coord-system",
+      "profileId": "agr-materials-composition",
+      "category": "СПОЗУ",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.4"
+    },
+    {
+      "id": "rule:mat-2-1-4-coordinates",
+      "layer": "rule",
+      "label": "2.1.4 · Координаты характерных точек контура",
+      "ruleId": "mat-2-1-4-coordinates",
+      "profileId": "agr-materials-composition",
+      "category": "СПОЗУ",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.4"
+    },
+    {
+      "id": "rule:mat-2-1-6-visualization-content",
+      "layer": "rule",
+      "label": "2.1.6 · Содержание материалов визуализации",
+      "ruleId": "mat-2-1-6-visualization-content",
+      "profileId": "agr-materials-composition",
+      "category": "Содержание схем",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.6"
+    },
+    {
+      "id": "rule:mat-2-1-7-1-materials",
+      "layer": "rule",
+      "label": "2.1.7.1 · Наименование отделочных материалов",
+      "ruleId": "mat-2-1-7-1-materials",
+      "profileId": "agr-materials-composition",
+      "category": "Содержание схем",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.7.1"
+    },
+    {
+      "id": "rule:mat-2-1-7-2-colour-palette",
+      "layer": "rule",
+      "label": "2.1.7.2 · Колористическое решение по международной палитре",
+      "ruleId": "mat-2-1-7-2-colour-palette",
+      "profileId": "agr-materials-composition",
+      "category": "Содержание схем",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.7.2"
+    },
+    {
+      "id": "rule:mat-2-1-7-3-axes",
+      "layer": "rule",
+      "label": "2.1.7.3 · Координационные оси на фасадах",
+      "ruleId": "mat-2-1-7-3-axes",
+      "profileId": "agr-materials-composition",
+      "category": "Содержание схем",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.7.3"
+    },
+    {
+      "id": "rule:mat-2-1-7-5-heights",
+      "layer": "rule",
+      "label": "2.1.7.5 · Высотные отметки на фасадах",
+      "ruleId": "mat-2-1-7-5-heights",
+      "profileId": "agr-materials-composition",
+      "category": "Содержание схем",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.7.5"
+    },
+    {
+      "id": "rule:mat-2-1-8-floor-plan-content",
+      "layer": "rule",
+      "label": "2.1.8 · Содержание схем планов",
+      "ruleId": "mat-2-1-8-floor-plan-content",
+      "profileId": "agr-materials-composition",
+      "category": "Содержание схем",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.8"
+    },
+    {
+      "id": "rule:mat-2-1-9-section-content",
+      "layer": "rule",
+      "label": "2.1.9 · Содержание схем разрезов",
+      "ruleId": "mat-2-1-9-section-content",
+      "profileId": "agr-materials-composition",
+      "category": "Содержание схем",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.9"
+    },
+    {
+      "id": "rule:mat-2-1-11-built-up-area",
+      "layer": "rule",
+      "label": "2.1.11 · Площадь застройки",
+      "ruleId": "mat-2-1-11-built-up-area",
+      "profileId": "agr-materials-composition",
+      "category": "ТЭП",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.11"
+    },
+    {
+      "id": "rule:mat-2-1-11-total-area",
+      "layer": "rule",
+      "label": "2.1.11 · Общая площадь объекта капитального строительства",
+      "ruleId": "mat-2-1-11-total-area",
+      "profileId": "agr-materials-composition",
+      "category": "ТЭП",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.11"
+    },
+    {
+      "id": "rule:mat-2-1-11-above-ground-area",
+      "layer": "rule",
+      "label": "2.1.11 · Наземная площадь объекта капитального строительства",
+      "ruleId": "mat-2-1-11-above-ground-area",
+      "profileId": "agr-materials-composition",
+      "category": "ТЭП",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.11"
+    },
+    {
+      "id": "rule:mat-2-1-11-underground-area",
+      "layer": "rule",
+      "label": "2.1.11 · Подземная площадь объекта капитального строительства",
+      "ruleId": "mat-2-1-11-underground-area",
+      "profileId": "agr-materials-composition",
+      "category": "ТЭП",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.11"
+    },
+    {
+      "id": "rule:mat-2-1-11-floors",
+      "layer": "rule",
+      "label": "2.1.11 · Количество этажей: подземных и надземных, в том числе технических",
+      "ruleId": "mat-2-1-11-floors",
+      "profileId": "agr-materials-composition",
+      "category": "ТЭП",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.11"
+    },
+    {
+      "id": "rule:mat-2-1-11-absolute-height",
+      "layer": "rule",
+      "label": "2.1.11 · Абсолютная высота — максимальная абсолютная высотная отметка объекта к",
+      "ruleId": "mat-2-1-11-absolute-height",
+      "profileId": "agr-materials-composition",
+      "category": "ТЭП",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.11"
+    },
+    {
+      "id": "rule:mat-2-1-11-height",
+      "layer": "rule",
+      "label": "2.1.11 · Высота объекта капитального строительства",
+      "ruleId": "mat-2-1-11-height",
+      "profileId": "agr-materials-composition",
+      "category": "ТЭП",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.11"
+    },
+    {
+      "id": "rule:mat-2-1-11-total-floor-area",
+      "layer": "rule",
+      "label": "2.1.11 · Суммарная поэтажная площадь в габаритах наружных стен",
+      "ruleId": "mat-2-1-11-total-floor-area",
+      "profileId": "agr-materials-composition",
+      "category": "ТЭП",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.11"
+    },
+    {
+      "id": "rule:mat-2-1-11-parking",
+      "layer": "rule",
+      "label": "2.1.11 · Количество парковочных мест и",
+      "ruleId": "mat-2-1-11-parking",
+      "profileId": "agr-materials-composition",
+      "category": "ТЭП",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.11"
+    },
+    {
+      "id": "rule:mat-2-1-11-1-transport-objects",
+      "layer": "rule",
+      "label": "2.1.11(1) · Сокращённый ТЭП для транспортных сооружений",
+      "ruleId": "mat-2-1-11-1-transport-objects",
+      "profileId": "agr-materials-composition",
+      "category": "ТЭП",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.11(1)"
+    },
+    {
+      "id": "rule:mat-2-1-12-per-building",
+      "layer": "rule",
+      "label": "2.1.12 · ТЭП на комплекс и на каждое строение",
+      "ruleId": "mat-2-1-12-per-building",
+      "profileId": "agr-materials-composition",
+      "category": "ТЭП",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.12"
+    },
+    {
+      "id": "rule:mat-2-1-13-by-permitted-use",
+      "layer": "rule",
+      "label": "2.1.13 · ТЭП по видам разрешённого использования",
+      "ruleId": "mat-2-1-13-by-permitted-use",
+      "profileId": "agr-materials-composition",
+      "category": "ТЭП",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.13"
+    },
+    {
+      "id": "rule:mat-2-1-13-1-existing-buildings",
+      "layer": "rule",
+      "label": "2.1.13(1) · ТЭП сохраняемых зданий",
+      "ruleId": "mat-2-1-13-1-existing-buildings",
+      "profileId": "agr-materials-composition",
+      "category": "ТЭП",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.13(1)"
+    },
+    {
+      "id": "rule:mat-2-1-18-accommodation",
+      "layer": "rule",
+      "label": "2.1.18 · Показатели средства размещения",
+      "ruleId": "mat-2-1-18-accommodation",
+      "profileId": "agr-materials-composition",
+      "category": "ТЭП",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.18"
+    },
+    {
+      "id": "rule:mat-2-1-14-signage-scheme",
+      "layer": "rule",
+      "label": "2.1.14 · Схема размещения информационных конструкций",
+      "ruleId": "mat-2-1-14-signage-scheme",
+      "profileId": "agr-materials-composition",
+      "category": "Требования к материалам",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.14"
+    },
+    {
+      "id": "rule:mat-2-1-19-finishing-content",
+      "layer": "rule",
+      "label": "2.1.19 · Состав сведений об отделке",
+      "ruleId": "mat-2-1-19-finishing-content",
+      "profileId": "agr-materials-composition",
+      "category": "Требования к материалам",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.1.19"
+    },
+    {
+      "id": "rule:mat-2-2-whole-object",
+      "layer": "rule",
+      "label": "2.2 · Частичная реконструкция — на весь объект",
+      "ruleId": "mat-2-2-whole-object",
+      "profileId": "agr-materials-composition",
+      "category": "Границы решения",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.2"
+    },
+    {
+      "id": "rule:mat-2-3-gpzu-conformity",
+      "layer": "rule",
+      "label": "2.3 · Соответствие ГПЗУ и непревышение ТЭП",
+      "ruleId": "mat-2-3-gpzu-conformity",
+      "profileId": "agr-materials-composition",
+      "category": "Границы решения",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.3"
+    },
+    {
+      "id": "rule:mat-2-3-linear-ppt",
+      "layer": "rule",
+      "label": "2.3 · Линейный объект — на основании ППТ и (или) ГПЗУ",
+      "ruleId": "mat-2-3-linear-ppt",
+      "profileId": "agr-materials-composition",
+      "category": "Границы решения",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.3"
+    },
+    {
+      "id": "rule:mat-2-3-development-context",
+      "layer": "rule",
+      "label": "2.3 · Учёт развития территории и охранного статуса",
+      "ruleId": "mat-2-3-development-context",
+      "profileId": "agr-materials-composition",
+      "category": "Границы решения",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.3"
+    },
+    {
+      "id": "rule:mat-2-3-1-absolute-height",
+      "layer": "rule",
+      "label": "2.3.1 · Определение абсолютной высоты",
+      "ruleId": "mat-2-3-1-absolute-height",
+      "profileId": "agr-materials-composition",
+      "category": "Границы решения",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.3.1"
+    },
+    {
+      "id": "rule:mat-2-3-2-height-definition",
+      "layer": "rule",
+      "label": "2.3.2 · Определение предельной высоты",
+      "ruleId": "mat-2-3-2-height-definition",
+      "profileId": "agr-materials-composition",
+      "category": "Границы решения",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.3.2"
+    },
+    {
+      "id": "rule:mat-2-3-2-1-aerodrome",
+      "layer": "rule",
+      "label": "2.3.2(1) · Приаэродромная территория — учитывается всё",
+      "ruleId": "mat-2-3-2-1-aerodrome",
+      "profileId": "agr-materials-composition",
+      "category": "Границы решения",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.3.2(1)"
+    },
+    {
+      "id": "rule:mat-2-3-3-visual-landscape",
+      "layer": "rule",
+      "label": "2.3.3 · Визуально-ландшафтные характеристики",
+      "ruleId": "mat-2-3-3-visual-landscape",
+      "profileId": "agr-materials-composition",
+      "category": "Границы решения",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 2.3.3"
+    },
+    {
+      "id": "rule:mat-3-1-models-required",
+      "layer": "rule",
+      "label": "3.1 · НПМ и ВПМ обязательны",
+      "ruleId": "mat-3-1-models-required",
+      "profileId": "agr-materials-composition",
+      "category": "Трёхмерные модели",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 3.1"
+    },
+    {
+      "id": "rule:mat-3-2-road-bridge-npm-only",
+      "layer": "rule",
+      "label": "3.2 · Дорожно-мостовое строительство — только НПМ",
+      "ruleId": "mat-3-2-road-bridge-npm-only",
+      "profileId": "agr-materials-composition",
+      "category": "Трёхмерные модели",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 3.2"
+    },
+    {
+      "id": "rule:mat-3-3-renovation-npm-only",
+      "layer": "rule",
+      "label": "3.3 · Фонд реновации — только НПМ",
+      "ruleId": "mat-3-3-renovation-npm-only",
+      "profileId": "agr-materials-composition",
+      "category": "Трёхмерные модели",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 3.3"
+    },
+    {
+      "id": "rule:mat-3-4-vpm-transfer",
+      "layer": "rule",
+      "label": "3.4 · Передача ВПМ в ДИТ",
+      "ruleId": "mat-3-4-vpm-transfer",
+      "profileId": "agr-materials-composition",
+      "category": "Трёхмерные модели",
+      "severity": "minor",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 3.4, 3.4.1, 3.4.2"
+    },
+    {
+      "id": "rule:mat-3-5-mayor-exemption",
+      "layer": "rule",
+      "label": "3.5 · Освобождение по решению совещания с Мэром",
+      "ruleId": "mat-3-5-mayor-exemption",
+      "profileId": "agr-materials-composition",
+      "category": "Трёхмерные модели",
+      "severity": "blocker",
+      "verification": "external_fact",
+      "pending": false,
+      "sourceRef": "приложение 1, п. 3.5"
     },
     {
       "id": "profile:agr-request-package",
@@ -3839,7 +4675,7 @@
     },
     {
       "source": "src:msk-admin-reglament-agr",
-      "target": "src:msk-prilozhenie-sostav-materialov-agr",
+      "target": "src:msk-prilozhenie-1-sostav-materialov",
       "kind": "partOf"
     },
     {
@@ -3990,6 +4826,356 @@
     {
       "source": "profile:advertising-structures-2025-07",
       "target": "rule:ad-naming",
+      "kind": "contains"
+    },
+    {
+      "source": "src:msk-prilozhenie-1-sostav-materialov",
+      "target": "profile:agr-materials-composition",
+      "kind": "transcribedInto"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-1-3-situation-plan",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-1-4-spozu",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-1-6-visualization",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-1-7-facades",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-1-8-floor-plans",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-1-9-sections",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-1-10-finishing-note",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-1-11-tep",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-1-12-heritage-bti",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-1-13-signage",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-single-pdf",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-single-layer-300dpi",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-colour-annotations",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-bookmarks",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-2-accuracy",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-3-uds",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-3-land-boundary",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-3-new-object",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-3-reconstruction",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-3-demolished",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-3-existing",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-3-prospective",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-3-protected-zones",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-4-uds",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-4-land-boundary",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-4-new-object",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-4-reconstruction",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-4-demolished",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-4-existing",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-4-parking",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-4-landscaping",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-4-coord-system",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-4-coordinates",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-6-visualization-content",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-7-1-materials",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-7-2-colour-palette",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-7-3-axes",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-7-5-heights",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-8-floor-plan-content",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-9-section-content",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-11-built-up-area",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-11-total-area",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-11-above-ground-area",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-11-underground-area",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-11-floors",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-11-absolute-height",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-11-height",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-11-total-floor-area",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-11-parking",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-11-1-transport-objects",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-12-per-building",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-13-by-permitted-use",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-13-1-existing-buildings",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-18-accommodation",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-14-signage-scheme",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-1-19-finishing-content",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-2-whole-object",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-3-gpzu-conformity",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-3-linear-ppt",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-3-development-context",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-3-1-absolute-height",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-3-2-height-definition",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-3-2-1-aerodrome",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-2-3-3-visual-landscape",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-3-1-models-required",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-3-2-road-bridge-npm-only",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-3-3-renovation-npm-only",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-3-4-vpm-transfer",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "rule:mat-3-5-mayor-exemption",
       "kind": "contains"
     },
     {
@@ -5628,6 +6814,56 @@
       "kind": "produces"
     },
     {
+      "source": "rule:mat-1-3-situation-plan",
+      "target": "deliv:agr-materials",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:mat-1-4-spozu",
+      "target": "deliv:agr-materials",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:mat-1-6-visualization",
+      "target": "deliv:agr-materials",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:mat-1-7-facades",
+      "target": "deliv:agr-materials",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:mat-1-8-floor-plans",
+      "target": "deliv:agr-materials",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:mat-1-9-sections",
+      "target": "deliv:agr-materials",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:mat-1-10-finishing-note",
+      "target": "deliv:agr-materials",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:mat-1-11-tep",
+      "target": "deliv:agr-materials",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:mat-1-12-heritage-bti",
+      "target": "deliv:agr-materials",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:mat-1-13-signage",
+      "target": "deliv:agr-materials",
+      "kind": "produces"
+    },
+    {
       "source": "deliv:agr-materials",
       "target": "deliv:npm-package",
       "kind": "contains"
@@ -5636,6 +6872,11 @@
       "source": "deliv:agr-materials",
       "target": "deliv:vpm-package",
       "kind": "contains"
+    },
+    {
+      "source": "profile:agr-materials-composition",
+      "target": "deliv:agr-materials",
+      "kind": "produces"
     },
     {
       "source": "deliv:npm-package",

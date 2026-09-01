@@ -20,6 +20,7 @@ import check_sources  # noqa: E402
 from lib import extract as extract_mod  # noqa: E402
 from lib import impact as impact_mod  # noqa: E402
 from lib import normalize as norm_mod  # noqa: E402
+from lib import materials as materials_mod  # noqa: E402
 from lib import package as package_mod  # noqa: E402
 import validate as validate_mod  # noqa: E402
 
@@ -771,3 +772,137 @@ class TestPackageInspector(unittest.TestCase):
             self.facts("complete")
         finally:
             package_mod.os.path.getsize = real
+
+
+class TestMaterialsInspector(unittest.TestCase):
+    """Приложение 1: состав материалов АГР и требования к ним.
+
+    Материалы АГР — самый крупный документ комплекта, и до сих пор он был
+    единственным, чей внутренний состав нигде не описан.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        cls.profile = json.loads(
+            (ROOT / "requirements" / "agr-materials-composition.v1.json").read_text(encoding="utf-8"))
+        cls.items = cls.profile["compositionItems"]
+
+    def context(self, name, **over):
+        manifest = json.loads(
+            (ROOT / "tests" / "materials_fixtures" / f"{name}.json").read_text(encoding="utf-8"))
+        ctx = {
+            "materials": materials_mod.inspect(manifest, self.items),
+            "object": {"inHeritageTerritory": False, "hasSignage": False, "isLinear": False,
+                       "isTransportStructure": False, "hasMultipleBuildings": False,
+                       "hasRetainedBuildings": False, "isAccommodationFacility": False,
+                       "isPartialReconstruction": False, "isCompositionallyActive": False,
+                       "modelsRequired": True, "isRoadBridge": False, "hasMayorExemption": False},
+            "territory": {"hasApprovedPpt": False, "hasProtectedZones": False, "isAerodrome": False},
+            "applicant": {"isRenovationFund": False, "isRenovationFundOrRoadAuthority": False},
+        }
+        ctx.update(over)
+        return ctx
+
+    def failing(self, name, **over):
+        ctx = self.context(name, **over)
+        return {r["id"] for r in self.profile["rules"]
+                if validate_mod._state_for(r, ctx, None) == "auto_fail"}
+
+    def test_79_complete_materials_pass(self):
+        counts = validate_mod.evaluate(self.profile, self.context("complete"))
+        self.assertEqual(counts["auto_fail"], 0)
+        self.assertEqual(counts["rule_error"], 0)
+        self.assertGreaterEqual(counts["auto_pass"], 20)
+
+    def test_80_missing_composition_item_detected(self):
+        """Схем разрезов нет в файле — пункт 1.9 не выполнен."""
+        self.assertEqual(self.failing("no-sections-scheme"), {"mat-1-9-sections"})
+
+    def test_81_bookmarks_must_cover_what_is_in_the_file(self):
+        """п. 2.1: закладки формируются по перечню раздела 1."""
+        self.assertEqual(self.failing("missing-bookmarks"), {"mat-2-1-bookmarks"})
+
+    def test_82_password_and_multiple_files_detected(self):
+        """п. 2.1: один файл, без защиты паролем."""
+        self.assertEqual(self.failing("password-protected"), {"mat-2-1-single-pdf"})
+        self.assertEqual(self.failing("two-files"), {"mat-2-1-single-pdf"})
+
+    def test_83_coordinate_precision_depends_on_the_system(self):
+        """п. 2.1.4: 7 знаков для WGS84, 2 знака для МСК77 — порог разный."""
+        self.assertIn("mat-2-1-4-coordinates", self.failing("coords-wgs84-coarse"))
+        self.assertEqual(self.failing("coords-wgs84-fine"), set())
+        self.assertEqual(self.failing("complete"), set())
+
+    def test_84_foreign_coordinate_system_is_its_own_violation(self):
+        """Чужая система координат — нарушение, а не низкая точность.
+
+        Требование к числу знаков для неё попросту не определено, поэтому
+        точность уходит в pending, а нарушением объявляется сама система.
+        """
+        self.assertIn("mat-2-1-4-coord-system", self.failing("coords-unknown-system"))
+        self.assertNotIn("mat-2-1-4-coordinates", self.failing("coords-unknown-system"))
+
+    def test_85_tep_indicators_checked_one_by_one(self):
+        """п. 2.1.11: каждый показатель ведомости — отдельное требование."""
+        self.assertEqual(self.failing("tep-incomplete"),
+                         {"mat-2-1-11-underground-area", "mat-2-1-11-parking"})
+
+    def test_86_transport_structures_have_a_shorter_tep_list(self):
+        """п. 2.1.11(1): требовать полный перечень с моста нельзя."""
+        short = set(materials_mod.TEP_TRANSPORT)
+        self.assertTrue(short < set(materials_mod.TEP_INDICATORS))
+        by_id = {r["id"]: r for r in self.profile["rules"]}
+        self.assertIn("mat-2-1-11-1-transport-objects", by_id)
+        self.assertEqual(by_id["mat-2-1-11-1-transport-objects"]["appliesWhen"],
+                         {"path": "object.isTransportStructure", "equals": True})
+
+    def test_87_model_exemptions_are_transcribed(self):
+        """Разделы 3.2, 3.3 и 3.5 снимают обязанность делать модели.
+
+        Без них профили НПМ/ВПМ требовали бы модели с дорожно-мостовых
+        объектов и с фонда реновации, то есть отбраковывали бы корректные
+        комплекты.
+        """
+        by_id = {r["id"]: r for r in self.profile["rules"]}
+        for rid, path in (("mat-3-2-road-bridge-npm-only", "object.isRoadBridge"),
+                          ("mat-3-3-renovation-npm-only", "applicant.isRenovationFund"),
+                          ("mat-3-5-mayor-exemption", "object.hasMayorExemption")):
+            self.assertEqual(by_id[rid]["appliesWhen"]["path"], path, rid)
+
+    def test_88_repealed_clauses_are_recorded_not_dropped(self):
+        """Отменённый пункт обязан быть виден как отменённый.
+
+        Иначе «пропустили при транскрипции» и «отменено законодателем»
+        выглядят одинаково — пустым местом.
+        """
+        repealed = self.profile["repealed"]
+        self.assertEqual(len(repealed), 18)
+        clauses = {r["clause"] for r in repealed}
+        self.assertIn("1.1", clauses)
+        self.assertIn("2.1.7.4", clauses)
+        rule_refs = {r["sourceRef"].split("п. ")[1] for r in self.profile["rules"]}
+        self.assertEqual(clauses & rule_refs, set(),
+                         "пункт числится и действующим, и отменённым")
+
+    def test_89_tep_gap_against_the_xml_schema_is_pinned(self):
+        """Три показателя ведомости ТЭП не имеют элемента в XML-схеме.
+
+        Приложение 1 к Регламенту требует девять показателей, приложение 5
+        распоряжения от 16.01.2026 описывает шесть из них. Оба документа
+        действующие, свести их — не наше решение, поэтому расхождение
+        зафиксировано как данные. Тест сторожит его от молчаливого дрейфа:
+        появится элемент в схеме или изменится перечень в Регламенте — тест
+        упадёт и позовёт человека.
+        """
+        schema = json.loads(
+            (ROOT / "dictionaries" / "tep-xml-schema.v1.json").read_text(encoding="utf-8"))
+        mapping = schema["crossCheck"]["mapping"]
+        self.assertEqual(set(mapping), set(materials_mod.TEP_INDICATORS))
+        unmapped = {k for k, v in mapping.items() if v["element"] is None}
+        self.assertEqual(unmapped, {"built-up-area", "absolute-height", "parking"})
+        names = {e["name"] for e in schema["elements"]}
+        for key, v in mapping.items():
+            if v["element"]:
+                self.assertIn(v["element"], names, f"{key} ссылается на несуществующий элемент")
+            self.assertTrue(v.get("comment") or v["element"],
+                            f"{key} без элемента и без объяснения")
