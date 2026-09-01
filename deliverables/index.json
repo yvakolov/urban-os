@@ -1,0 +1,170 @@
+{
+  "schemaVersion": "1.0",
+  "note": "Что физически должно оказаться в комплекте. Каждое требование порождает необходимость сущности — файла либо пакета с файлами. Реестр отвечает на вопрос «что собрать», тогда как requirements/ отвечает «каким оно должно быть». Связь producedBy указывает правила, которые эту сущность обосновывают.",
+
+  "kinds": {
+    "form": "Интерактивная форма на Портале, файла нет",
+    "file": "Одиночный файл",
+    "package": "Архив или папка с файлами",
+    "external": "Документ, который выдаёт третья сторона — мы его получаем, а не производим",
+    "verdict": "Заключение ведомства: не файл, а решение"
+  },
+
+  "deliverables": {
+    "request-form": {
+      "kind": "form", "label": "Запрос (заявление)",
+      "format": "форма на mos.ru", "origin": "applicant",
+      "producedBy": ["doc-01-request"]
+    },
+
+    "agr-materials": {
+      "kind": "package", "label": "Материалы АГР",
+      "format": "PDF + вложенные пакеты моделей", "origin": "produced",
+      "producedBy": ["doc-02-agr-materials"],
+      "contains": ["npm-package", "vpm-package"]
+    },
+
+    "npm-package": {
+      "kind": "package", "label": "Пакет НПМ",
+      "format": "ZIP ≤ 1 ГБ + УКЭП", "origin": "produced",
+      "profile": "moscow-npm-2026-08-18",
+      "contains": ["npm-fbx-oks", "npm-fbx-ground", "npm-signature"]
+    },
+    "npm-fbx-oks": {
+      "kind": "file", "label": "FBX ОКС",
+      "format": "FBX 7.4 binary, до 20 файлов, ≤ 150 000 тр. каждый",
+      "origin": "produced", "containedIn": "npm-package"
+    },
+    "npm-fbx-ground": {
+      "kind": "file", "label": "FBX благоустройства",
+      "format": "FBX 7.4 binary, 1 файл, ≤ 180 000 тр.",
+      "origin": "produced", "containedIn": "npm-package"
+    },
+    "npm-signature": {
+      "kind": "file", "label": "УКЭП пакета НПМ",
+      "format": "файл подписи, имя совпадает с ZIP",
+      "origin": "applicant", "containedIn": "npm-package"
+    },
+
+    "vpm-package": {
+      "kind": "package", "label": "Пакеты ВПМ",
+      "format": "ZIP ОКС ≤ 500 МБ (1–20) + ZIP благоустройства ≤ 1 ГБ, каждый с УКЭП",
+      "origin": "produced",
+      "profile": "moscow-vpm-2026-08-18",
+      "contains": ["vpm-fbx-geometry", "vpm-fbx-light", "vpm-geojson", "vpm-textures", "vpm-signature"]
+    },
+    "vpm-fbx-geometry": {
+      "kind": "file", "label": "FBX геометрии",
+      "format": "FBX 7.4 binary, ОКС ≤ 1 000 000 тр.",
+      "origin": "produced", "containedIn": "vpm-package"
+    },
+    "vpm-fbx-light": {
+      "kind": "file", "label": "FBX освещения",
+      "format": "FBX, ≤ 250 источников, при наличии светового дизайна",
+      "origin": "produced", "containedIn": "vpm-package"
+    },
+    "vpm-geojson": {
+      "kind": "file", "label": "GeoJSON",
+      "format": "UTF-8, МСК-77, координаты с 3 знаками",
+      "origin": "produced", "containedIn": "vpm-package"
+    },
+    "vpm-textures": {
+      "kind": "file", "label": "Текстуры PNG",
+      "format": "3–2100 файлов, 2048 или 4096, 8 бит/канал",
+      "origin": "produced", "containedIn": "vpm-package"
+    },
+    "vpm-signature": {
+      "kind": "file", "label": "УКЭП пакетов ВПМ",
+      "format": "отдельный одноимённый файл на каждый ZIP",
+      "origin": "applicant", "containedIn": "vpm-package"
+    },
+
+    "spozu": {
+      "kind": "package", "label": "СПОЗУ со схемой транспортной организации",
+      "format": "IFC и (или) XML в ZIP", "origin": "produced",
+      "producedBy": ["doc-04-spozu"], "blockedBy": "msk-ifc-agr"
+    },
+    "floor-plans": {
+      "kind": "package", "label": "Схемы планов этажей",
+      "format": "IFC и (или) XML в ZIP", "origin": "produced",
+      "producedBy": ["doc-05-floor-plans"], "blockedBy": "msk-ifc-agr"
+    },
+    "sections-facades": {
+      "kind": "package", "label": "Схемы разрезов и фасадов",
+      "format": "IFC и (или) XML в ZIP", "origin": "produced",
+      "producedBy": ["doc-07-sections-facades"], "blockedBy": "msk-ifc-agr"
+    },
+    "tep-table": {
+      "kind": "file", "label": "Таблица суммарной поэтажной площади",
+      "format": "XML", "origin": "produced",
+      "producedBy": ["doc-08-tep-table"], "blockedBy": "xml-schema-tep"
+    },
+
+    "title-documents": {
+      "kind": "package", "label": "Правоустанавливающие документы на ЗУ",
+      "format": "PDF либо ZIP", "origin": "applicant",
+      "producedBy": ["doc-06-title-documents"]
+    },
+    "authority-legal-entity": {
+      "kind": "file", "label": "Полномочия лица от юрлица",
+      "format": "ZIP · PDF · XML, УКЭП доверителя или нотариуса", "origin": "applicant",
+      "producedBy": ["doc-03-authority-legal-entity"]
+    },
+    "authority-representative": {
+      "kind": "file", "label": "Полномочия представителя",
+      "format": "ZIP · PDF · XML, УКЭП доверителя или нотариуса", "origin": "applicant",
+      "producedBy": ["doc-09-authority-representative"]
+    },
+
+    "gpzu": {
+      "kind": "external", "label": "ГПЗУ",
+      "format": "документ со сроком использования", "origin": "authority",
+      "producedBy": ["elig-land-right", "elig-linear-ppt", "ext-gpzu-valid", "conf-gpzu-consistency"]
+    },
+    "egrn-extract": {
+      "kind": "external", "label": "Выписка ЕГРН", "origin": "interdepartmental",
+      "producedBy": ["ext-egrn"]
+    },
+    "egrul-extract": {
+      "kind": "external", "label": "Выписка ЕГРЮЛ", "origin": "interdepartmental",
+      "producedBy": ["ext-egrul"]
+    },
+    "egrip-extract": {
+      "kind": "external", "label": "Выписка ЕГРИП", "origin": "interdepartmental",
+      "producedBy": ["ext-egrip"]
+    },
+    "land-scheme": {
+      "kind": "external", "label": "Схема расположения ЗУ на КПТ / проект межевания",
+      "origin": "interdepartmental",
+      "producedBy": ["ext-land-scheme", "elig-public-entity"]
+    },
+    "land-contracts": {
+      "kind": "external", "label": "Гражданско-правовые договоры на ЗУ",
+      "origin": "interdepartmental",
+      "producedBy": ["ext-land-contracts"]
+    },
+    "infrastructure-contract": {
+      "kind": "external", "label": "Инфраструктурный договор",
+      "origin": "authority",
+      "producedBy": ["ext-infrastructure-contract"]
+    },
+
+    "mosgornasledie-opinion": {
+      "kind": "verdict", "label": "Заключение Мосгорнаследия",
+      "origin": "authority", "authority": "mosgornasledie",
+      "producedBy": ["ext-mosgornasledie-verdict", "ext-mosgornasledie-site-req"]
+    },
+    "tourism-opinion": {
+      "kind": "verdict", "label": "Заключение Комитета по туризму",
+      "origin": "authority", "authority": "mos-tourism",
+      "producedBy": ["ext-tourism-verdict"]
+    },
+
+    "agr-certificate": {
+      "kind": "verdict", "label": "Свидетельство об утверждении АГР",
+      "origin": "authority", "authority": "depgradpolitiki",
+      "isOutcome": true,
+      "note": "Результат услуги. Не производится нами — выдаётся или не выдаётся."
+    }
+  }
+}

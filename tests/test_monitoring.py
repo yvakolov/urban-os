@@ -346,3 +346,32 @@ class TestSourceReconciliation(MonitorTestCase):
         self.assertEqual(acts["284-ПП"], "2013-04-30")
         # Требования к материалам в формате IFC — корпус ещё не оцифрован
         self.assertEqual(acts["ДГП-Р-1/26/64-16-6/26"], "2026-01-16")
+
+
+class TestGraph(unittest.TestCase):
+    """Граф для визуализации — производная реестров, а не отдельный источник."""
+
+    def test_35_graph_is_in_sync_with_registries(self):
+        import build_graph
+        self.assertEqual(build_graph.main.__module__, "build_graph")
+        graph = build_graph.build()
+        ids = {n["id"] for n in graph["nodes"]}
+        dangling = [l for l in graph["links"]
+                    if l["source"] not in ids or l["target"] not in ids]
+        self.assertEqual(dangling, [], f"висячие рёбра: {dangling[:3]}")
+
+    def test_36_every_rule_is_a_node(self):
+        import build_graph
+        graph = build_graph.build()
+        _s, _m, _d, profiles = build_graph.load()
+        rules = {r["id"] for p in profiles.values() for r in p["rules"]}
+        in_graph = {n["ruleId"] for n in graph["nodes"] if n["layer"] == "rule"}
+        self.assertEqual(rules, in_graph)
+
+    def test_37_deliverables_reference_existing_rules(self):
+        import build_graph
+        _s, _m, delivs, profiles = build_graph.load()
+        rules = {r["id"] for p in profiles.values() for r in p["rules"]}
+        for did, d in delivs.items():
+            for rid in d.get("producedBy", []) or []:
+                self.assertIn(rid, rules, f"{did}.producedBy -> {rid} не существует")

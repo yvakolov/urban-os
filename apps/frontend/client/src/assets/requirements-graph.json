@@ -1,0 +1,3927 @@
+{
+  "generatedFrom": "sources/index.json · monitoring/sources.json · requirements/*.json · deliverables/index.json",
+  "note": "Сгенерировано tools/build_graph.py. Руками не править — правьте реестры.",
+  "counts": {
+    "source": 12,
+    "branch": 5,
+    "profile": 5,
+    "rule": 172,
+    "deliverable": 29
+  },
+  "nodes": [
+    {
+      "id": "src:msk-284-pp",
+      "layer": "source",
+      "label": "Постановление Правительства Москвы от 30.04.2013 № 284-ПП",
+      "status": "active",
+      "transcribed": "partial",
+      "monitored": true,
+      "url": "https://www.mos.ru/pgu2/landing/target/7700000000210548433/"
+    },
+    {
+      "id": "src:msk-admin-reglament-agr",
+      "layer": "source",
+      "label": "Административный регламент предоставления государственной услуги «Оформление свидетельства",
+      "status": "active",
+      "transcribed": "partial",
+      "monitored": false,
+      "url": null
+    },
+    {
+      "id": "src:msk-3d-2026-08-18",
+      "layer": "source",
+      "label": "Распоряжение Департамента информационных технологий города Москвы и Департамента градостро",
+      "status": "active",
+      "transcribed": "full",
+      "monitored": false,
+      "url": null
+    },
+    {
+      "id": "src:msk-3d-2026-01-19",
+      "layer": "source",
+      "label": "Предыдущая редакция требований к НПМ и ВПМ",
+      "status": "superseded",
+      "transcribed": "none",
+      "monitored": false,
+      "url": null
+    },
+    {
+      "id": "src:msk-ifc-agr",
+      "layer": "source",
+      "label": "Распоряжение об утверждении Требований к материалам в формате IFC, представляемым в целях ",
+      "status": "active",
+      "transcribed": "none",
+      "monitored": false,
+      "url": null
+    },
+    {
+      "id": "src:mo-npm-2025-12",
+      "layer": "source",
+      "label": "Требования к низкополигональным моделям для Московской области",
+      "status": "active",
+      "transcribed": "full",
+      "monitored": false,
+      "url": null
+    },
+    {
+      "id": "src:msk-advert-2025-07",
+      "layer": "source",
+      "label": "Требования к моделям рекламных конструкций",
+      "status": "active",
+      "transcribed": "full",
+      "monitored": false,
+      "url": null
+    },
+    {
+      "id": "src:msk-546-pp",
+      "layer": "source",
+      "label": "Постановление Правительства Москвы от 15.11.2011 № 546-ПП",
+      "status": "active",
+      "transcribed": "none",
+      "monitored": false,
+      "url": null
+    },
+    {
+      "id": "src:msk-law-13-47",
+      "layer": "source",
+      "label": "Закон города Москвы от 05.07.1995 № 13-47 «О территориальном делении города Москвы»",
+      "status": "active",
+      "transcribed": "none",
+      "monitored": false,
+      "url": null
+    },
+    {
+      "id": "src:msk-law-28",
+      "layer": "source",
+      "label": "Закон города Москвы от 25.06.2008 № 28 «Градостроительный кодекс города Москвы»",
+      "status": "active",
+      "transcribed": "none",
+      "monitored": false,
+      "url": null
+    },
+    {
+      "id": "src:fz-210",
+      "layer": "source",
+      "label": "Федеральный закон от 27.07.2010 № 210-ФЗ «Об организации предоставления государственных и ",
+      "status": "active",
+      "transcribed": "none",
+      "monitored": false,
+      "url": null
+    },
+    {
+      "id": "src:msk-digital-masterplan",
+      "layer": "source",
+      "label": "Алгоритмы цифрового мастер-планирования территории города Москвы",
+      "status": "not_yet_adopted",
+      "transcribed": "none",
+      "monitored": false,
+      "url": null
+    },
+    {
+      "id": "branch:msk-284-pp:incomingDocuments",
+      "layer": "branch",
+      "label": "incomingDocuments",
+      "sourceId": "msk-284-pp",
+      "registry": false,
+      "ruleCount": 14
+    },
+    {
+      "id": "branch:msk-284-pp:groundsOfRefusal",
+      "layer": "branch",
+      "label": "groundsOfRefusal",
+      "sourceId": "msk-284-pp",
+      "registry": false,
+      "ruleCount": 13
+    },
+    {
+      "id": "branch:msk-284-pp:recipientCategories",
+      "layer": "branch",
+      "label": "recipientCategories",
+      "sourceId": "msk-284-pp",
+      "registry": false,
+      "ruleCount": 6
+    },
+    {
+      "id": "branch:msk-284-pp:terms",
+      "layer": "branch",
+      "label": "terms",
+      "sourceId": "msk-284-pp",
+      "registry": false,
+      "ruleCount": 0
+    },
+    {
+      "id": "branch:msk-284-pp:offDocs",
+      "layer": "branch",
+      "label": "offDocs",
+      "sourceId": "msk-284-pp",
+      "registry": true,
+      "ruleCount": 0
+    },
+    {
+      "id": "profile:advertising-structures-2025-07",
+      "layer": "profile",
+      "label": "advertising-structures-2025-07",
+      "status": "active",
+      "sourceId": "msk-advert-2025-07",
+      "ruleCount": 24
+    },
+    {
+      "id": "rule:ad-separate-model",
+      "layer": "rule",
+      "label": "Одна конструкция — одна модель",
+      "ruleId": "ad-separate-model",
+      "profileId": "advertising-structures-2025-07",
+      "category": "Состав",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "стр.1"
+    },
+    {
+      "id": "rule:ad-geojson",
+      "layer": "rule",
+      "label": "Обязательные поля",
+      "ruleId": "ad-geojson",
+      "profileId": "advertising-structures-2025-07",
+      "category": "GeoJSON",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "стр.1"
+    },
+    {
+      "id": "rule:ad-geojson-glasses",
+      "layer": "rule",
+      "label": "Glasses для экранной конструкции",
+      "ruleId": "ad-geojson-glasses",
+      "profileId": "advertising-structures-2025-07",
+      "category": "GeoJSON",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "стр.1"
+    },
+    {
+      "id": "rule:ad-mount-depth",
+      "layer": "rule",
+      "label": "Крепление углублено на 0,5 м",
+      "ruleId": "ad-mount-depth",
+      "profileId": "advertising-structures-2025-07",
+      "category": "Геометрия",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п.1"
+    },
+    {
+      "id": "rule:ad-triangles",
+      "layer": "rule",
+      "label": "До 200 000 треугольников",
+      "ruleId": "ad-triangles",
+      "profileId": "advertising-structures-2025-07",
+      "category": "Геометрия",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "п.1"
+    },
+    {
+      "id": "rule:ad-screen-object",
+      "layer": "rule",
+      "label": "Экран отдельным объектом",
+      "ruleId": "ad-screen-object",
+      "profileId": "advertising-structures-2025-07",
+      "category": "Геометрия",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п.1"
+    },
+    {
+      "id": "rule:ad-screen-uv-1001",
+      "layer": "rule",
+      "label": "Экран в 1001 UDIM",
+      "ruleId": "ad-screen-uv-1001",
+      "profileId": "advertising-structures-2025-07",
+      "category": "UV",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п.2"
+    },
+    {
+      "id": "rule:ad-screen-uv-orientation",
+      "layer": "rule",
+      "label": "Ориентация экрана U0 V1",
+      "ruleId": "ad-screen-uv-orientation",
+      "profileId": "advertising-structures-2025-07",
+      "category": "UV",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п.2"
+    },
+    {
+      "id": "rule:ad-screen-uv-island",
+      "layer": "rule",
+      "label": "Одна область — один остров",
+      "ruleId": "ad-screen-uv-island",
+      "profileId": "advertising-structures-2025-07",
+      "category": "UV",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п.2"
+    },
+    {
+      "id": "rule:ad-mount-material",
+      "layer": "rule",
+      "label": "Один материал крепления",
+      "ruleId": "ad-mount-material",
+      "profileId": "advertising-structures-2025-07",
+      "category": "Материалы",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п.3"
+    },
+    {
+      "id": "rule:ad-screen-materials",
+      "layer": "rule",
+      "label": "До 4 экранных материалов",
+      "ruleId": "ad-screen-materials",
+      "profileId": "advertising-structures-2025-07",
+      "category": "Материалы",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "п.3"
+    },
+    {
+      "id": "rule:ad-screen-no-maps",
+      "layer": "rule",
+      "label": "Карты экрана вне архива",
+      "ruleId": "ad-screen-no-maps",
+      "profileId": "advertising-structures-2025-07",
+      "category": "Материалы",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п.3"
+    },
+    {
+      "id": "rule:ad-no-screen-material",
+      "layer": "rule",
+      "label": "Один материал без экрана",
+      "ruleId": "ad-no-screen-material",
+      "profileId": "advertising-structures-2025-07",
+      "category": "Материалы",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п.3"
+    },
+    {
+      "id": "rule:ad-pivot-wall",
+      "layer": "rule",
+      "label": "Pivot настенной конструкции",
+      "ruleId": "ad-pivot-wall",
+      "profileId": "advertising-structures-2025-07",
+      "category": "Координаты",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п.4"
+    },
+    {
+      "id": "rule:ad-pivot-ground",
+      "layer": "rule",
+      "label": "Pivot наземной/крышной конструкции",
+      "ruleId": "ad-pivot-ground",
+      "profileId": "advertising-structures-2025-07",
+      "category": "Координаты",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п.4"
+    },
+    {
+      "id": "rule:ad-emission",
+      "layer": "rule",
+      "label": "Emission + R ERM",
+      "ruleId": "ad-emission",
+      "profileId": "advertising-structures-2025-07",
+      "category": "Текстуры",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п.5"
+    },
+    {
+      "id": "rule:ad-screen-texture-format",
+      "layer": "rule",
+      "label": "Экран PNG до 2560",
+      "ruleId": "ad-screen-texture-format",
+      "profileId": "advertising-structures-2025-07",
+      "category": "Текстуры",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п.5.1"
+    },
+    {
+      "id": "rule:ad-video-codec",
+      "layer": "rule",
+      "label": "MP4 H.264",
+      "ruleId": "ad-video-codec",
+      "profileId": "advertising-structures-2025-07",
+      "category": "Видео",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "введение; п.6"
+    },
+    {
+      "id": "rule:ad-video-resolution",
+      "layer": "rule",
+      "label": "Видео до 2560",
+      "ruleId": "ad-video-resolution",
+      "profileId": "advertising-structures-2025-07",
+      "category": "Видео",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п.6.1"
+    },
+    {
+      "id": "rule:ad-video-bitrate",
+      "layer": "rule",
+      "label": "Битрейт до 18 Мбит/с",
+      "ruleId": "ad-video-bitrate",
+      "profileId": "advertising-structures-2025-07",
+      "category": "Видео",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п.6.1"
+    },
+    {
+      "id": "rule:ad-video-fps",
+      "layer": "rule",
+      "label": "25 кадров/с",
+      "ruleId": "ad-video-fps",
+      "profileId": "advertising-structures-2025-07",
+      "category": "Видео",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п.6.1"
+    },
+    {
+      "id": "rule:ad-video-duration",
+      "layer": "rule",
+      "label": "До 30 секунд",
+      "ruleId": "ad-video-duration",
+      "profileId": "advertising-structures-2025-07",
+      "category": "Видео",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п.6.1"
+    },
+    {
+      "id": "rule:ad-video-size",
+      "layer": "rule",
+      "label": "До 70 МБ",
+      "ruleId": "ad-video-size",
+      "profileId": "advertising-structures-2025-07",
+      "category": "Видео",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п.6.1"
+    },
+    {
+      "id": "rule:ad-naming",
+      "layer": "rule",
+      "label": "Маски имен",
+      "ruleId": "ad-naming",
+      "profileId": "advertising-structures-2025-07",
+      "category": "Именование",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "п.7"
+    },
+    {
+      "id": "profile:agr-request-package",
+      "layer": "profile",
+      "label": "agr-request-package",
+      "status": "draft",
+      "sourceId": "msk-admin-reglament-agr",
+      "ruleCount": 34
+    },
+    {
+      "id": "rule:elig-applicant-kind",
+      "layer": "rule",
+      "label": "Заявитель — допустимая категория",
+      "ruleId": "elig-applicant-kind",
+      "profileId": "agr-request-package",
+      "category": "Право на подачу",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "recipientCategories, пп. 1-3"
+    },
+    {
+      "id": "rule:elig-land-right",
+      "layer": "rule",
+      "label": "Правообладание участком и ГПЗУ",
+      "ruleId": "elig-land-right",
+      "profileId": "agr-request-package",
+      "category": "Право на подачу",
+      "severity": "blocker",
+      "verification": "external_fact",
+      "pending": false,
+      "sourceRef": "recipientCategories, пп. 1-3"
+    },
+    {
+      "id": "rule:elig-public-entity",
+      "layer": "rule",
+      "label": "Госучреждения, ГУП и фонды — иное основание права",
+      "ruleId": "elig-public-entity",
+      "profileId": "agr-request-package",
+      "category": "Право на подачу",
+      "severity": "blocker",
+      "verification": "external_fact",
+      "pending": false,
+      "sourceRef": "recipientCategories, п. 4"
+    },
+    {
+      "id": "rule:elig-linear-ppt",
+      "layer": "rule",
+      "label": "Для линейного объекта — действующий ППТ и (или) ГПЗУ",
+      "ruleId": "elig-linear-ppt",
+      "profileId": "agr-request-package",
+      "category": "Право на подачу",
+      "severity": "blocker",
+      "verification": "external_fact",
+      "pending": false,
+      "sourceRef": "recipientCategories, пп. 1-3"
+    },
+    {
+      "id": "rule:elig-representative-kind",
+      "layer": "rule",
+      "label": "Представитель — только юрлицо или ИП",
+      "ruleId": "elig-representative-kind",
+      "profileId": "agr-request-package",
+      "category": "Право на подачу",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "recipientCategories, п. 5"
+    },
+    {
+      "id": "rule:elig-agr-required",
+      "layer": "rule",
+      "label": "Для объекта требуется утверждение АГР",
+      "ruleId": "elig-agr-required",
+      "profileId": "agr-request-package",
+      "category": "Право на подачу",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "offDocs · 284-ПП, Положение об утверждении АГР"
+    },
+    {
+      "id": "rule:doc-01-request",
+      "layer": "rule",
+      "label": "01 · Запрос (заявление)",
+      "ruleId": "doc-01-request",
+      "profileId": "agr-request-package",
+      "category": "Комплект",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "incomingDocuments · обязательные, п. 1"
+    },
+    {
+      "id": "rule:doc-02-agr-materials",
+      "layer": "rule",
+      "label": "02 · Материалы архитектурно-градостроительного решения",
+      "ruleId": "doc-02-agr-materials",
+      "profileId": "agr-request-package",
+      "category": "Комплект",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "incomingDocuments · обязательные, п. 2"
+    },
+    {
+      "id": "rule:doc-03-authority-legal-entity",
+      "layer": "rule",
+      "label": "03 · Полномочия лица от юридического лица",
+      "ruleId": "doc-03-authority-legal-entity",
+      "profileId": "agr-request-package",
+      "category": "Комплект",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "incomingDocuments · обязательные, п. 3"
+    },
+    {
+      "id": "rule:doc-04-spozu",
+      "layer": "rule",
+      "label": "04 · СПОЗУ, совмещённая со схемой транспортной организации территории",
+      "ruleId": "doc-04-spozu",
+      "profileId": "agr-request-package",
+      "category": "Комплект",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "incomingDocuments · обязательные, п. 4"
+    },
+    {
+      "id": "rule:doc-05-floor-plans",
+      "layer": "rule",
+      "label": "05 · Схемы планов первого и неповторяющихся этажей",
+      "ruleId": "doc-05-floor-plans",
+      "profileId": "agr-request-package",
+      "category": "Комплект",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "incomingDocuments · обязательные, п. 5"
+    },
+    {
+      "id": "rule:doc-06-title-documents",
+      "layer": "rule",
+      "label": "06 · Правоустанавливающие документы на земельный участок",
+      "ruleId": "doc-06-title-documents",
+      "profileId": "agr-request-package",
+      "category": "Комплект",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "incomingDocuments · обязательные, п. 6"
+    },
+    {
+      "id": "rule:doc-07-sections-facades",
+      "layer": "rule",
+      "label": "07 · Схемы разрезов и фасадов здания",
+      "ruleId": "doc-07-sections-facades",
+      "profileId": "agr-request-package",
+      "category": "Комплект",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "incomingDocuments · обязательные, п. 7"
+    },
+    {
+      "id": "rule:doc-08-tep-table",
+      "layer": "rule",
+      "label": "08 · Таблица расчёта суммарной поэтажной площади",
+      "ruleId": "doc-08-tep-table",
+      "profileId": "agr-request-package",
+      "category": "Комплект",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "incomingDocuments · обязательные, п. 8"
+    },
+    {
+      "id": "rule:doc-09-authority-representative",
+      "layer": "rule",
+      "label": "09 · Полномочия представителя заявителя",
+      "ruleId": "doc-09-authority-representative",
+      "profileId": "agr-request-package",
+      "category": "Комплект",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "incomingDocuments · обязательные, п. 9"
+    },
+    {
+      "id": "rule:form-readable",
+      "layer": "rule",
+      "label": "Образы читаются и соответствуют форматам",
+      "ruleId": "form-readable",
+      "profileId": "agr-request-package",
+      "category": "Форма подачи",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "groundsOfRefusal · приём, п. 6"
+    },
+    {
+      "id": "rule:form-signature-owner",
+      "layer": "rule",
+      "label": "Подпись принадлежит подавшему",
+      "ruleId": "form-signature-owner",
+      "profileId": "agr-request-package",
+      "category": "Форма подачи",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "groundsOfRefusal · приём, п. 5"
+    },
+    {
+      "id": "rule:form-no-duplicate-request",
+      "layer": "rule",
+      "label": "Нет ранее поданного идентичного запроса",
+      "ruleId": "form-no-duplicate-request",
+      "profileId": "agr-request-package",
+      "category": "Форма подачи",
+      "severity": "blocker",
+      "verification": "external_fact",
+      "pending": false,
+      "sourceRef": "groundsOfRefusal · предоставление, п. 10"
+    },
+    {
+      "id": "rule:ext-gpzu-valid",
+      "layer": "rule",
+      "label": "Срок использования ГПЗУ не истёк",
+      "ruleId": "ext-gpzu-valid",
+      "profileId": "agr-request-package",
+      "category": "Внешние документы",
+      "severity": "blocker",
+      "verification": "external_fact",
+      "pending": false,
+      "sourceRef": "groundsOfRefusal · предоставление, п. 13"
+    },
+    {
+      "id": "rule:ext-land-contracts",
+      "layer": "rule",
+      "label": "Гражданско-правовые договоры на ЗУ в собственности города Москвы",
+      "ruleId": "ext-land-contracts",
+      "profileId": "agr-request-package",
+      "category": "Внешние документы",
+      "severity": "major",
+      "verification": "external_fact",
+      "pending": false,
+      "sourceRef": "incomingDocuments · необязательные, п. 1"
+    },
+    {
+      "id": "rule:ext-egrn",
+      "layer": "rule",
+      "label": "Выписка ЕГРН",
+      "ruleId": "ext-egrn",
+      "profileId": "agr-request-package",
+      "category": "Внешние документы",
+      "severity": "major",
+      "verification": "external_fact",
+      "pending": false,
+      "sourceRef": "incomingDocuments · необязательные, п. 2"
+    },
+    {
+      "id": "rule:ext-egrul",
+      "layer": "rule",
+      "label": "Выписка из ЕГРЮЛ",
+      "ruleId": "ext-egrul",
+      "profileId": "agr-request-package",
+      "category": "Внешние документы",
+      "severity": "major",
+      "verification": "external_fact",
+      "pending": false,
+      "sourceRef": "incomingDocuments · необязательные, п. 4"
+    },
+    {
+      "id": "rule:ext-egrip",
+      "layer": "rule",
+      "label": "Выписка из ЕГРИП",
+      "ruleId": "ext-egrip",
+      "profileId": "agr-request-package",
+      "category": "Внешние документы",
+      "severity": "major",
+      "verification": "external_fact",
+      "pending": false,
+      "sourceRef": "incomingDocuments · необязательные, п. 5"
+    },
+    {
+      "id": "rule:ext-land-scheme",
+      "layer": "rule",
+      "label": "Схема расположения ЗУ на КПТ и (или) проект межевания",
+      "ruleId": "ext-land-scheme",
+      "profileId": "agr-request-package",
+      "category": "Внешние документы",
+      "severity": "major",
+      "verification": "external_fact",
+      "pending": false,
+      "sourceRef": "incomingDocuments · необязательные, п. 3"
+    },
+    {
+      "id": "rule:ext-infrastructure-contract",
+      "layer": "rule",
+      "label": "Инфраструктурный договор и очерёдность его этапов",
+      "ruleId": "ext-infrastructure-contract",
+      "profileId": "agr-request-package",
+      "category": "Внешние документы",
+      "severity": "blocker",
+      "verification": "external_fact",
+      "pending": false,
+      "sourceRef": "groundsOfRefusal · предоставление, п. 15"
+    },
+    {
+      "id": "rule:ext-mosgornasledie-verdict",
+      "layer": "rule",
+      "label": "Заключение Департамента культурного наследия",
+      "ruleId": "ext-mosgornasledie-verdict",
+      "profileId": "agr-request-package",
+      "category": "Заключения ведомств",
+      "severity": "blocker",
+      "verification": "external_verdict",
+      "pending": false,
+      "sourceRef": "groundsOfRefusal · предоставление, п. 8"
+    },
+    {
+      "id": "rule:ext-mosgornasledie-site-req",
+      "layer": "rule",
+      "label": "Требования Мосгорнаследия к участку и материалам",
+      "ruleId": "ext-mosgornasledie-site-req",
+      "profileId": "agr-request-package",
+      "category": "Заключения ведомств",
+      "severity": "blocker",
+      "verification": "external_verdict",
+      "pending": false,
+      "sourceRef": "groundsOfRefusal · предоставление, п. 9"
+    },
+    {
+      "id": "rule:ext-tourism-verdict",
+      "layer": "rule",
+      "label": "Заключение Комитета по туризму",
+      "ruleId": "ext-tourism-verdict",
+      "profileId": "agr-request-package",
+      "category": "Заключения ведомств",
+      "severity": "blocker",
+      "verification": "external_verdict",
+      "pending": false,
+      "sourceRef": "groundsOfRefusal · предоставление, п. 14"
+    },
+    {
+      "id": "rule:conf-gpzu-consistency",
+      "layer": "rule",
+      "label": "Материалы соответствуют ГПЗУ и ППТ",
+      "ruleId": "conf-gpzu-consistency",
+      "profileId": "agr-request-package",
+      "category": "Соответствие",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "groundsOfRefusal · предоставление, п. 7"
+    },
+    {
+      "id": "rule:conf-territorial-division",
+      "layer": "rule",
+      "label": "Местоположение ЗУ соответствует территориальному делению",
+      "ruleId": "conf-territorial-division",
+      "profileId": "agr-request-package",
+      "category": "Соответствие",
+      "severity": "blocker",
+      "verification": "external_fact",
+      "pending": false,
+      "sourceRef": "groundsOfRefusal · предоставление, п. 5"
+    },
+    {
+      "id": "rule:conf-architectural-context",
+      "layer": "rule",
+      "label": "Соответствие облика назначению и окружению",
+      "ruleId": "conf-architectural-context",
+      "profileId": "agr-request-package",
+      "category": "Соответствие",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "groundsOfRefusal · предоставление, п. 6"
+    },
+    {
+      "id": "rule:conf-digital-masterplan",
+      "layer": "rule",
+      "label": "Соответствие результатам цифрового мастер-планирования",
+      "ruleId": "conf-digital-masterplan",
+      "profileId": "agr-request-package",
+      "category": "Соответствие",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": true,
+      "sourceRef": "groundsOfRefusal · предоставление, п. 6"
+    },
+    {
+      "id": "rule:conf-no-contradictions",
+      "layer": "rule",
+      "label": "Нет противоречивых или недостоверных сведений",
+      "ruleId": "conf-no-contradictions",
+      "profileId": "agr-request-package",
+      "category": "Соответствие",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "groundsOfRefusal · предоставление, п. 3"
+    },
+    {
+      "id": "rule:conf-documents-in-force",
+      "layer": "rule",
+      "label": "Представленные документы не утратили силу",
+      "ruleId": "conf-documents-in-force",
+      "profileId": "agr-request-package",
+      "category": "Соответствие",
+      "severity": "blocker",
+      "verification": "external_fact",
+      "pending": false,
+      "sourceRef": "groundsOfRefusal · приём, п. 2; предоставление, п. 2"
+    },
+    {
+      "id": "profile:moscow-npm-2026-08-18",
+      "layer": "profile",
+      "label": "moscow-npm-2026-08-18",
+      "status": "active",
+      "sourceId": "msk-3d-2026-08-18",
+      "ruleCount": 37
+    },
+    {
+      "id": "rule:npm-format-fbx-2014",
+      "layer": "rule",
+      "label": "FBX 7.4 binary",
+      "ruleId": "npm-format-fbx-2014",
+      "profileId": "moscow-npm-2026-08-18",
+      "category": "Формат",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.1 п.1"
+    },
+    {
+      "id": "rule:npm-scale-1-1",
+      "layer": "rule",
+      "label": "Масштаб 1:1",
+      "ruleId": "npm-scale-1-1",
+      "profileId": "moscow-npm-2026-08-18",
+      "category": "Сцена",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "разд.4; табл.1 п.2"
+    },
+    {
+      "id": "rule:npm-source-match",
+      "layer": "rule",
+      "label": "Соответствие проекту АГР",
+      "ruleId": "npm-source-match",
+      "profileId": "moscow-npm-2026-08-18",
+      "category": "Состав",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.1 п.1.3"
+    },
+    {
+      "id": "rule:npm-address-mask",
+      "layer": "rule",
+      "label": "Address латиницей",
+      "ruleId": "npm-address-mask",
+      "profileId": "moscow-npm-2026-08-18",
+      "category": "Именование",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "табл.1 п.3"
+    },
+    {
+      "id": "rule:npm-zip-size",
+      "layer": "rule",
+      "label": "ZIP не более 1 ГБ",
+      "ruleId": "npm-zip-size",
+      "profileId": "moscow-npm-2026-08-18",
+      "category": "Архив",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "табл.2 п.1.1"
+    },
+    {
+      "id": "rule:npm-zip-integrity",
+      "layer": "rule",
+      "label": "ZIP читается безопасно",
+      "ruleId": "npm-zip-integrity",
+      "profileId": "moscow-npm-2026-08-18",
+      "category": "Архив",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "табл.2 п.1.1"
+    },
+    {
+      "id": "rule:npm-signature",
+      "layer": "rule",
+      "label": "УКЭП",
+      "ruleId": "npm-signature",
+      "profileId": "moscow-npm-2026-08-18",
+      "category": "Архив",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.1.1"
+    },
+    {
+      "id": "rule:npm-fbx-count",
+      "layer": "rule",
+      "label": "2-21 FBX",
+      "ruleId": "npm-fbx-count",
+      "profileId": "moscow-npm-2026-08-18",
+      "category": "Архив",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "табл.2 п.1.2"
+    },
+    {
+      "id": "rule:npm-scene-clean",
+      "layer": "rule",
+      "label": "Нет служебных объектов",
+      "ruleId": "npm-scene-clean",
+      "profileId": "moscow-npm-2026-08-18",
+      "category": "Сцена",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.1.3"
+    },
+    {
+      "id": "rule:npm-building-object-count",
+      "layer": "rule",
+      "label": "До 20 ОКС и 20 glass",
+      "ruleId": "npm-building-object-count",
+      "profileId": "moscow-npm-2026-08-18",
+      "category": "Состав",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.1.4"
+    },
+    {
+      "id": "rule:npm-no-existing-buildings",
+      "layer": "rule",
+      "label": "Только проектируемые ОКС",
+      "ruleId": "npm-no-existing-buildings",
+      "profileId": "moscow-npm-2026-08-18",
+      "category": "Состав",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.1.4"
+    },
+    {
+      "id": "rule:npm-ground-required",
+      "layer": "rule",
+      "label": "Благоустройство обязательно",
+      "ruleId": "npm-ground-required",
+      "profileId": "moscow-npm-2026-08-18",
+      "category": "Состав",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.1.5-1.6"
+    },
+    {
+      "id": "rule:npm-fbx-split",
+      "layer": "rule",
+      "label": "Разделение без дробления ОКС",
+      "ruleId": "npm-fbx-split",
+      "profileId": "moscow-npm-2026-08-18",
+      "category": "Состав",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.2"
+    },
+    {
+      "id": "rule:npm-separate-buildings",
+      "layer": "rule",
+      "label": "Каждый ОКС отдельным объектом",
+      "ruleId": "npm-separate-buildings",
+      "profileId": "moscow-npm-2026-08-18",
+      "category": "Геометрия",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.3.3"
+    },
+    {
+      "id": "rule:npm-ground-skirt",
+      "layer": "rule",
+      "label": "Периметр благоустройства -1 м",
+      "ruleId": "npm-ground-skirt",
+      "profileId": "moscow-npm-2026-08-18",
+      "category": "Геометрия",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.3.4"
+    },
+    {
+      "id": "rule:npm-no-hierarchy",
+      "layer": "rule",
+      "label": "Нет иерархий и групп",
+      "ruleId": "npm-no-hierarchy",
+      "profileId": "moscow-npm-2026-08-18",
+      "category": "Сцена",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.3.5"
+    },
+    {
+      "id": "rule:npm-oks-triangles",
+      "layer": "rule",
+      "label": "ОКС до 150 000 треугольников",
+      "ruleId": "npm-oks-triangles",
+      "profileId": "moscow-npm-2026-08-18",
+      "category": "Геометрия",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.3.6"
+    },
+    {
+      "id": "rule:npm-ground-triangles",
+      "layer": "rule",
+      "label": "Благоустройство до 180 000",
+      "ruleId": "npm-ground-triangles",
+      "profileId": "moscow-npm-2026-08-18",
+      "category": "Геометрия",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.3.6"
+    },
+    {
+      "id": "rule:npm-geometry-defects",
+      "layer": "rule",
+      "label": "Дефекты геометрии",
+      "ruleId": "npm-geometry-defects",
+      "profileId": "moscow-npm-2026-08-18",
+      "category": "Геометрия",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.3.7"
+    },
+    {
+      "id": "rule:npm-normals",
+      "layer": "rule",
+      "label": "Нормали и затенение",
+      "ruleId": "npm-normals",
+      "profileId": "moscow-npm-2026-08-18",
+      "category": "Геометрия",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.3.8"
+    },
+    {
+      "id": "rule:npm-coplanar-gap",
+      "layer": "rule",
+      "label": "Зазор сонаправленных полигонов",
+      "ruleId": "npm-coplanar-gap",
+      "profileId": "moscow-npm-2026-08-18",
+      "category": "Геометрия",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.3.9"
+    },
+    {
+      "id": "rule:npm-window-thickness",
+      "layer": "rule",
+      "label": "Плоские непросматриваемые окна",
+      "ruleId": "npm-window-thickness",
+      "profileId": "moscow-npm-2026-08-18",
+      "category": "Геометрия",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.3.10"
+    },
+    {
+      "id": "rule:npm-triangulated",
+      "layer": "rule",
+      "label": "Триангуляция",
+      "ruleId": "npm-triangulated",
+      "profileId": "moscow-npm-2026-08-18",
+      "category": "Геометрия",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.3.11"
+    },
+    {
+      "id": "rule:npm-visible-interiors",
+      "layer": "rule",
+      "label": "Только видимые интерьеры",
+      "ruleId": "npm-visible-interiors",
+      "profileId": "moscow-npm-2026-08-18",
+      "category": "Геометрия",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.3.12"
+    },
+    {
+      "id": "rule:npm-transform-reset",
+      "layer": "rule",
+      "label": "Трансформации применены",
+      "ruleId": "npm-transform-reset",
+      "profileId": "moscow-npm-2026-08-18",
+      "category": "Сцена",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.3.14-3.15"
+    },
+    {
+      "id": "rule:npm-shaders",
+      "layer": "rule",
+      "label": "Допустимые шейдеры",
+      "ruleId": "npm-shaders",
+      "profileId": "moscow-npm-2026-08-18",
+      "category": "Материалы",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.4.1"
+    },
+    {
+      "id": "rule:npm-glass-material",
+      "layer": "rule",
+      "label": "Стекло 50% без текстур",
+      "ruleId": "npm-glass-material",
+      "profileId": "moscow-npm-2026-08-18",
+      "category": "Материалы",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.4.2-4.3"
+    },
+    {
+      "id": "rule:npm-glass-material-count",
+      "layer": "rule",
+      "label": "До 7 материалов стекла",
+      "ruleId": "npm-glass-material-count",
+      "profileId": "moscow-npm-2026-08-18",
+      "category": "Материалы",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.4.6"
+    },
+    {
+      "id": "rule:npm-texture-format-size",
+      "layer": "rule",
+      "label": "PNG 256-2048",
+      "ruleId": "npm-texture-format-size",
+      "profileId": "moscow-npm-2026-08-18",
+      "category": "Текстуры",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.5.1-5.3"
+    },
+    {
+      "id": "rule:npm-texture-padding",
+      "layer": "rule",
+      "label": "Padding 8 px",
+      "ruleId": "npm-texture-padding",
+      "profileId": "moscow-npm-2026-08-18",
+      "category": "Текстуры",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.5.4"
+    },
+    {
+      "id": "rule:npm-no-alpha",
+      "layer": "rule",
+      "label": "Альфа-канал запрещен",
+      "ruleId": "npm-no-alpha",
+      "profileId": "moscow-npm-2026-08-18",
+      "category": "Текстуры",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.5.5"
+    },
+    {
+      "id": "rule:npm-texture-set",
+      "layer": "rule",
+      "label": "Полный PBR-набор",
+      "ruleId": "npm-texture-set",
+      "profileId": "moscow-npm-2026-08-18",
+      "category": "Текстуры",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.5.6-5.10"
+    },
+    {
+      "id": "rule:npm-texture-slots",
+      "layer": "rule",
+      "label": "1-2 набора на ОКС",
+      "ruleId": "npm-texture-slots",
+      "profileId": "moscow-npm-2026-08-18",
+      "category": "Текстуры",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.5.11-5.13"
+    },
+    {
+      "id": "rule:npm-texel-density",
+      "layer": "rule",
+      "label": "Плотность рельефа 10-40 px/м²",
+      "ruleId": "npm-texel-density",
+      "profileId": "moscow-npm-2026-08-18",
+      "category": "Текстуры",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.6"
+    },
+    {
+      "id": "rule:npm-glass-display",
+      "layer": "rule",
+      "label": "Отображение стекла",
+      "ruleId": "npm-glass-display",
+      "profileId": "moscow-npm-2026-08-18",
+      "category": "Материалы",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.7"
+    },
+    {
+      "id": "rule:npm-georeference",
+      "layer": "rule",
+      "label": "МСК Москвы и высоты",
+      "ruleId": "npm-georeference",
+      "profileId": "moscow-npm-2026-08-18",
+      "category": "Координаты",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.8"
+    },
+    {
+      "id": "rule:npm-naming",
+      "layer": "rule",
+      "label": "Маски файлов и объектов",
+      "ruleId": "npm-naming",
+      "profileId": "moscow-npm-2026-08-18",
+      "category": "Именование",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.9-10"
+    },
+    {
+      "id": "profile:moscow-oblast-npm-2025-12",
+      "layer": "profile",
+      "label": "moscow-oblast-npm-2025-12",
+      "status": "active",
+      "sourceId": "mo-npm-2025-12",
+      "ruleCount": 28
+    },
+    {
+      "id": "rule:mo-formats",
+      "layer": "rule",
+      "label": "FBX 2014 + GLB",
+      "ruleId": "mo-formats",
+      "profileId": "moscow-oblast-npm-2025-12",
+      "category": "Формат",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.1 п.1"
+    },
+    {
+      "id": "rule:mo-scale",
+      "layer": "rule",
+      "label": "1:1, метр",
+      "ruleId": "mo-scale",
+      "profileId": "moscow-oblast-npm-2025-12",
+      "category": "Сцена",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "разд.4; табл.1 п.2"
+    },
+    {
+      "id": "rule:mo-address",
+      "layer": "rule",
+      "label": "Address",
+      "ruleId": "mo-address",
+      "profileId": "moscow-oblast-npm-2025-12",
+      "category": "Именование",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "табл.1 п.3"
+    },
+    {
+      "id": "rule:mo-zip-size",
+      "layer": "rule",
+      "label": "ZIP до 1 ГБ",
+      "ruleId": "mo-zip-size",
+      "profileId": "moscow-oblast-npm-2025-12",
+      "category": "Архив",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "табл.2 п.1.1"
+    },
+    {
+      "id": "rule:mo-zip-integrity",
+      "layer": "rule",
+      "label": "ZIP читается безопасно",
+      "ruleId": "mo-zip-integrity",
+      "profileId": "moscow-oblast-npm-2025-12",
+      "category": "Архив",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "табл.2 п.1.1"
+    },
+    {
+      "id": "rule:mo-files",
+      "layer": "rule",
+      "label": "2-21 FBX + 1 GLB",
+      "ruleId": "mo-files",
+      "profileId": "moscow-oblast-npm-2025-12",
+      "category": "Архив",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.1.2"
+    },
+    {
+      "id": "rule:mo-clean",
+      "layer": "rule",
+      "label": "Чистые FBX/GLB",
+      "ruleId": "mo-clean",
+      "profileId": "moscow-oblast-npm-2025-12",
+      "category": "Сцена",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "табл.2 п.1.3"
+    },
+    {
+      "id": "rule:mo-ground-required",
+      "layer": "rule",
+      "label": "Благоустройство обязательно",
+      "ruleId": "mo-ground-required",
+      "profileId": "moscow-oblast-npm-2025-12",
+      "category": "Состав",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.1.4-1.6"
+    },
+    {
+      "id": "rule:mo-splitting",
+      "layer": "rule",
+      "label": "Разделение FBX",
+      "ruleId": "mo-splitting",
+      "profileId": "moscow-oblast-npm-2025-12",
+      "category": "Состав",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.2"
+    },
+    {
+      "id": "rule:mo-separate-oks",
+      "layer": "rule",
+      "label": "ОКС раздельно",
+      "ruleId": "mo-separate-oks",
+      "profileId": "moscow-oblast-npm-2025-12",
+      "category": "Геометрия",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.3.3"
+    },
+    {
+      "id": "rule:mo-ground-skirt",
+      "layer": "rule",
+      "label": "Периметр -1 м",
+      "ruleId": "mo-ground-skirt",
+      "profileId": "moscow-oblast-npm-2025-12",
+      "category": "Геометрия",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.3.4"
+    },
+    {
+      "id": "rule:mo-no-hierarchy",
+      "layer": "rule",
+      "label": "Нет иерархий",
+      "ruleId": "mo-no-hierarchy",
+      "profileId": "moscow-oblast-npm-2025-12",
+      "category": "Сцена",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.3.5"
+    },
+    {
+      "id": "rule:mo-oks-triangles",
+      "layer": "rule",
+      "label": "ОКС до 150 000",
+      "ruleId": "mo-oks-triangles",
+      "profileId": "moscow-oblast-npm-2025-12",
+      "category": "Геометрия",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.3.6"
+    },
+    {
+      "id": "rule:mo-ground-triangles",
+      "layer": "rule",
+      "label": "Благоустройство до 180 000",
+      "ruleId": "mo-ground-triangles",
+      "profileId": "moscow-oblast-npm-2025-12",
+      "category": "Геометрия",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.3.6"
+    },
+    {
+      "id": "rule:mo-geometry-quality",
+      "layer": "rule",
+      "label": "Качество геометрии",
+      "ruleId": "mo-geometry-quality",
+      "profileId": "moscow-oblast-npm-2025-12",
+      "category": "Геометрия",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.3.7-3.11"
+    },
+    {
+      "id": "rule:mo-transform",
+      "layer": "rule",
+      "label": "Трансформации применены",
+      "ruleId": "mo-transform",
+      "profileId": "moscow-oblast-npm-2025-12",
+      "category": "Сцена",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.3.14-3.15"
+    },
+    {
+      "id": "rule:mo-materials",
+      "layer": "rule",
+      "label": "Допустимые шейдеры",
+      "ruleId": "mo-materials",
+      "profileId": "moscow-oblast-npm-2025-12",
+      "category": "Материалы",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.4.1"
+    },
+    {
+      "id": "rule:mo-glass",
+      "layer": "rule",
+      "label": "Стекло 50%",
+      "ruleId": "mo-glass",
+      "profileId": "moscow-oblast-npm-2025-12",
+      "category": "Материалы",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.4.2-4.6"
+    },
+    {
+      "id": "rule:mo-textures",
+      "layer": "rule",
+      "label": "PNG 256-2048, ≤3 МБ",
+      "ruleId": "mo-textures",
+      "profileId": "moscow-oblast-npm-2025-12",
+      "category": "Текстуры",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.5"
+    },
+    {
+      "id": "rule:mo-texture-sets",
+      "layer": "rule",
+      "label": "Лимиты наборов",
+      "ruleId": "mo-texture-sets",
+      "profileId": "moscow-oblast-npm-2025-12",
+      "category": "Текстуры",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.5.11-5.13"
+    },
+    {
+      "id": "rule:mo-density",
+      "layer": "rule",
+      "label": "Плотность 10-40 px/м²",
+      "ruleId": "mo-density",
+      "profileId": "moscow-oblast-npm-2025-12",
+      "category": "Текстуры",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.6"
+    },
+    {
+      "id": "rule:mo-georef",
+      "layer": "rule",
+      "label": "МСК МО и высоты",
+      "ruleId": "mo-georef",
+      "profileId": "moscow-oblast-npm-2025-12",
+      "category": "Координаты",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.8"
+    },
+    {
+      "id": "rule:mo-naming",
+      "layer": "rule",
+      "label": "Маски имен",
+      "ruleId": "mo-naming",
+      "profileId": "moscow-oblast-npm-2025-12",
+      "category": "Именование",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.9-10"
+    },
+    {
+      "id": "rule:mo-glb-size",
+      "layer": "rule",
+      "label": "GLB до 20 МБ",
+      "ruleId": "mo-glb-size",
+      "profileId": "moscow-oblast-npm-2025-12",
+      "category": "GLB",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "табл.2 п.11"
+    },
+    {
+      "id": "rule:mo-glb-textures",
+      "layer": "rule",
+      "label": "Текстуры GLB до 256",
+      "ruleId": "mo-glb-textures",
+      "profileId": "moscow-oblast-npm-2025-12",
+      "category": "GLB",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "табл.2 п.11"
+    },
+    {
+      "id": "rule:mo-glb-origin",
+      "layer": "rule",
+      "label": "Нижний центр в (0,0,0)",
+      "ruleId": "mo-glb-origin",
+      "profileId": "moscow-oblast-npm-2025-12",
+      "category": "GLB",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.11"
+    },
+    {
+      "id": "rule:mo-glb-lights",
+      "layer": "rule",
+      "label": "Без источников света",
+      "ruleId": "mo-glb-lights",
+      "profileId": "moscow-oblast-npm-2025-12",
+      "category": "GLB",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "табл.2 п.11"
+    },
+    {
+      "id": "rule:mo-glb-viewer",
+      "layer": "rule",
+      "label": "Корректное отображение",
+      "ruleId": "mo-glb-viewer",
+      "profileId": "moscow-oblast-npm-2025-12",
+      "category": "GLB",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.11"
+    },
+    {
+      "id": "profile:moscow-vpm-2026-08-18",
+      "layer": "profile",
+      "label": "moscow-vpm-2026-08-18",
+      "status": "active",
+      "sourceId": "msk-3d-2026-08-18",
+      "ruleCount": 49
+    },
+    {
+      "id": "rule:vpm-format-fbx",
+      "layer": "rule",
+      "label": "FBX 2014 binary",
+      "ruleId": "vpm-format-fbx",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Формат",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.1 п.1"
+    },
+    {
+      "id": "rule:vpm-scale",
+      "layer": "rule",
+      "label": "Масштаб 1:1 и метр",
+      "ruleId": "vpm-scale",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Сцена",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "разд.4; табл.1 п.2"
+    },
+    {
+      "id": "rule:vpm-source-match",
+      "layer": "rule",
+      "label": "ВПМ соответствует проекту и НПМ",
+      "ruleId": "vpm-source-match",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Состав",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.1 п.1.3"
+    },
+    {
+      "id": "rule:vpm-address",
+      "layer": "rule",
+      "label": "Address по маске",
+      "ruleId": "vpm-address",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Именование",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "табл.1 п.3"
+    },
+    {
+      "id": "rule:vpm-oks-zip-size",
+      "layer": "rule",
+      "label": "ZIP ОКС до 500 МБ",
+      "ruleId": "vpm-oks-zip-size",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Архив",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "табл.2 п.1.1"
+    },
+    {
+      "id": "rule:vpm-ground-zip-size",
+      "layer": "rule",
+      "label": "ZIP благоустройства до 1 ГБ",
+      "ruleId": "vpm-ground-zip-size",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Архив",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "табл.2 п.1.1"
+    },
+    {
+      "id": "rule:vpm-zip-integrity",
+      "layer": "rule",
+      "label": "ZIP читается безопасно",
+      "ruleId": "vpm-zip-integrity",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Архив",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "табл.2 п.1.1"
+    },
+    {
+      "id": "rule:vpm-signature",
+      "layer": "rule",
+      "label": "УКЭП",
+      "ruleId": "vpm-signature",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Архив",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.1.1"
+    },
+    {
+      "id": "rule:vpm-archive-content",
+      "layer": "rule",
+      "label": "FBX + GeoJSON + PNG",
+      "ruleId": "vpm-archive-content",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Архив",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.1.2; прил.2"
+    },
+    {
+      "id": "rule:vpm-separate-oks",
+      "layer": "rule",
+      "label": "Каждый ОКС отдельно",
+      "ruleId": "vpm-separate-oks",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Состав",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.1.3"
+    },
+    {
+      "id": "rule:vpm-ground-required",
+      "layer": "rule",
+      "label": "Благоустройство отдельно",
+      "ruleId": "vpm-ground-required",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Состав",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.1.4"
+    },
+    {
+      "id": "rule:vpm-geojson-syntax",
+      "layer": "rule",
+      "label": "Валидный UTF-8 GeoJSON",
+      "ruleId": "vpm-geojson-syntax",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "GeoJSON",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "табл.2 п.2.1,2.5,2.7"
+    },
+    {
+      "id": "rule:vpm-geojson-required-oks",
+      "layer": "rule",
+      "label": "Все поля ОКС заполнены",
+      "ruleId": "vpm-geojson-required-oks",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "GeoJSON",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "табл.2 п.2.6"
+    },
+    {
+      "id": "rule:vpm-geojson-required-ground",
+      "layer": "rule",
+      "label": "Обязательные поля благоустройства",
+      "ruleId": "vpm-geojson-required-ground",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "GeoJSON",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "табл.2 п.2.6"
+    },
+    {
+      "id": "rule:vpm-coordinates-format",
+      "layer": "rule",
+      "label": "Координаты с точностью 3 знака",
+      "ruleId": "vpm-coordinates-format",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "GeoJSON",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "прил.10 поле coordinates"
+    },
+    {
+      "id": "rule:vpm-coordinates",
+      "layer": "rule",
+      "label": "Положение в МСК-77",
+      "ruleId": "vpm-coordinates",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "GeoJSON",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "прил.10 поле coordinates"
+    },
+    {
+      "id": "rule:vpm-scene-clean",
+      "layer": "rule",
+      "label": "Чистая сцена",
+      "ruleId": "vpm-scene-clean",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Сцена",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "табл.2 п.3.1,3.11"
+    },
+    {
+      "id": "rule:vpm-one-layer",
+      "layer": "rule",
+      "label": "Один слой",
+      "ruleId": "vpm-one-layer",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Сцена",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.3.2"
+    },
+    {
+      "id": "rule:vpm-glass-separate",
+      "layer": "rule",
+      "label": "Стекло отдельной геометрией",
+      "ruleId": "vpm-glass-separate",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Геометрия",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.3.4; п.8"
+    },
+    {
+      "id": "rule:vpm-oks-skirt",
+      "layer": "rule",
+      "label": "Периметр ОКС -1 м",
+      "ruleId": "vpm-oks-skirt",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Геометрия",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.3.6"
+    },
+    {
+      "id": "rule:vpm-ground-skirt",
+      "layer": "rule",
+      "label": "Периметр благоустройства -1 м",
+      "ruleId": "vpm-ground-skirt",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Геометрия",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.3.7"
+    },
+    {
+      "id": "rule:vpm-oks-triangles",
+      "layer": "rule",
+      "label": "ОКС до 1 000 000",
+      "ruleId": "vpm-oks-triangles",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Геометрия",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "табл.2 п.3.9"
+    },
+    {
+      "id": "rule:vpm-ground-triangles",
+      "layer": "rule",
+      "label": "Лимит благоустройства по площади",
+      "ruleId": "vpm-ground-triangles",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Геометрия",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.3.10"
+    },
+    {
+      "id": "rule:vpm-defects",
+      "layer": "rule",
+      "label": "Дефекты геометрии",
+      "ruleId": "vpm-defects",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Геометрия",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.3.11"
+    },
+    {
+      "id": "rule:vpm-interiors",
+      "layer": "rule",
+      "label": "Видимые интерьеры",
+      "ruleId": "vpm-interiors",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Геометрия",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.3.12"
+    },
+    {
+      "id": "rule:vpm-normals",
+      "layer": "rule",
+      "label": "Нормали и затенение",
+      "ruleId": "vpm-normals",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Геометрия",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.3.15"
+    },
+    {
+      "id": "rule:vpm-realistic-flora",
+      "layer": "rule",
+      "label": "Реалистичная растительность",
+      "ruleId": "vpm-realistic-flora",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Геометрия",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.3.16,3.19"
+    },
+    {
+      "id": "rule:vpm-triangulated-transforms",
+      "layer": "rule",
+      "label": "Триангуляция и трансформации",
+      "ruleId": "vpm-triangulated-transforms",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Геометрия",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.3.17-3.18"
+    },
+    {
+      "id": "rule:vpm-materials",
+      "layer": "rule",
+      "label": "Principled BSDF",
+      "ruleId": "vpm-materials",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Материалы",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.4.1-4.2"
+    },
+    {
+      "id": "rule:vpm-material-count",
+      "layer": "rule",
+      "label": "До 7 материалов",
+      "ruleId": "vpm-material-count",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Материалы",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "табл.2 п.4.3-4.5"
+    },
+    {
+      "id": "rule:vpm-textures-external",
+      "layer": "rule",
+      "label": "PNG отдельно от FBX",
+      "ruleId": "vpm-textures-external",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Текстуры",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.5.1.1"
+    },
+    {
+      "id": "rule:vpm-texture-size",
+      "layer": "rule",
+      "label": "2048 или 4096",
+      "ruleId": "vpm-texture-size",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Текстуры",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.5.1.2-1.3,1.9"
+    },
+    {
+      "id": "rule:vpm-pbr-set",
+      "layer": "rule",
+      "label": "Diffuse + ERM + Normal",
+      "ruleId": "vpm-pbr-set",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Текстуры",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.5.1.4,1.6-1.8"
+    },
+    {
+      "id": "rule:vpm-padding",
+      "layer": "rule",
+      "label": "Padding 16/32 px",
+      "ruleId": "vpm-padding",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "UV",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.5.1.5"
+    },
+    {
+      "id": "rule:vpm-udim",
+      "layer": "rule",
+      "label": "Последовательный UDIM",
+      "ruleId": "vpm-udim",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "UV",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.5.2.1"
+    },
+    {
+      "id": "rule:vpm-glass-uv",
+      "layer": "rule",
+      "label": "Стекло в 1001",
+      "ruleId": "vpm-glass-uv",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "UV",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.5.2.2"
+    },
+    {
+      "id": "rule:vpm-placeholder",
+      "layer": "rule",
+      "label": "Заглушка 256×256",
+      "ruleId": "vpm-placeholder",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Текстуры",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.5.3"
+    },
+    {
+      "id": "rule:vpm-texel-density",
+      "layer": "rule",
+      "label": "512-1706 px/м",
+      "ruleId": "vpm-texel-density",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Текстуры",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.6"
+    },
+    {
+      "id": "rule:vpm-bake-small-details",
+      "layer": "rule",
+      "label": "Детали до 5 см запечены",
+      "ruleId": "vpm-bake-small-details",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Геометрия",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.7"
+    },
+    {
+      "id": "rule:vpm-glass-properties",
+      "layer": "rule",
+      "label": "Стекло без текстур",
+      "ruleId": "vpm-glass-properties",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Материалы",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.8"
+    },
+    {
+      "id": "rule:vpm-pivot",
+      "layer": "rule",
+      "label": "Pivot и поворот",
+      "ruleId": "vpm-pivot",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Координаты",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.9"
+    },
+    {
+      "id": "rule:vpm-naming",
+      "layer": "rule",
+      "label": "Маски имен",
+      "ruleId": "vpm-naming",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Именование",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.10-11"
+    },
+    {
+      "id": "rule:vpm-alpha-cutouts",
+      "layer": "rule",
+      "label": "Сквозные вырезы через alpha",
+      "ruleId": "vpm-alpha-cutouts",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Текстуры",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.12"
+    },
+    {
+      "id": "rule:vpm-collision",
+      "layer": "rule",
+      "label": "Коллизия",
+      "ruleId": "vpm-collision",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Коллизия",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.13"
+    },
+    {
+      "id": "rule:vpm-collision-budget",
+      "layer": "rule",
+      "label": "Лимит коллизии",
+      "ruleId": "vpm-collision-budget",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Коллизия",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.13.7"
+    },
+    {
+      "id": "rule:vpm-emission",
+      "layer": "rule",
+      "label": "Свечение через ERM",
+      "ruleId": "vpm-emission",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Освещение",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.14"
+    },
+    {
+      "id": "rule:vpm-light-count",
+      "layer": "rule",
+      "label": "До 250 источников",
+      "ruleId": "vpm-light-count",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Освещение",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "табл.2 п.15.2"
+    },
+    {
+      "id": "rule:vpm-light-spacing",
+      "layer": "rule",
+      "label": "Шаг источников",
+      "ruleId": "vpm-light-spacing",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Освещение",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.15.5-15.6"
+    },
+    {
+      "id": "rule:vpm-light-hierarchy",
+      "layer": "rule",
+      "label": "Единый light root",
+      "ruleId": "vpm-light-hierarchy",
+      "profileId": "moscow-vpm-2026-08-18",
+      "category": "Освещение",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "табл.2 п.15.7-15.9"
+    },
+    {
+      "id": "deliv:request-form",
+      "layer": "deliverable",
+      "label": "Запрос (заявление)",
+      "kind": "form",
+      "origin": "applicant",
+      "fmt": "форма на mos.ru",
+      "blockedBy": null,
+      "isOutcome": false
+    },
+    {
+      "id": "deliv:agr-materials",
+      "layer": "deliverable",
+      "label": "Материалы АГР",
+      "kind": "package",
+      "origin": "produced",
+      "fmt": "PDF + вложенные пакеты моделей",
+      "blockedBy": null,
+      "isOutcome": false
+    },
+    {
+      "id": "deliv:npm-package",
+      "layer": "deliverable",
+      "label": "Пакет НПМ",
+      "kind": "package",
+      "origin": "produced",
+      "fmt": "ZIP ≤ 1 ГБ + УКЭП",
+      "blockedBy": null,
+      "isOutcome": false
+    },
+    {
+      "id": "deliv:npm-fbx-oks",
+      "layer": "deliverable",
+      "label": "FBX ОКС",
+      "kind": "file",
+      "origin": "produced",
+      "fmt": "FBX 7.4 binary, до 20 файлов, ≤ 150 000 тр. каждый",
+      "blockedBy": null,
+      "isOutcome": false
+    },
+    {
+      "id": "deliv:npm-fbx-ground",
+      "layer": "deliverable",
+      "label": "FBX благоустройства",
+      "kind": "file",
+      "origin": "produced",
+      "fmt": "FBX 7.4 binary, 1 файл, ≤ 180 000 тр.",
+      "blockedBy": null,
+      "isOutcome": false
+    },
+    {
+      "id": "deliv:npm-signature",
+      "layer": "deliverable",
+      "label": "УКЭП пакета НПМ",
+      "kind": "file",
+      "origin": "applicant",
+      "fmt": "файл подписи, имя совпадает с ZIP",
+      "blockedBy": null,
+      "isOutcome": false
+    },
+    {
+      "id": "deliv:vpm-package",
+      "layer": "deliverable",
+      "label": "Пакеты ВПМ",
+      "kind": "package",
+      "origin": "produced",
+      "fmt": "ZIP ОКС ≤ 500 МБ (1–20) + ZIP благоустройства ≤ 1 ГБ, каждый с УКЭП",
+      "blockedBy": null,
+      "isOutcome": false
+    },
+    {
+      "id": "deliv:vpm-fbx-geometry",
+      "layer": "deliverable",
+      "label": "FBX геометрии",
+      "kind": "file",
+      "origin": "produced",
+      "fmt": "FBX 7.4 binary, ОКС ≤ 1 000 000 тр.",
+      "blockedBy": null,
+      "isOutcome": false
+    },
+    {
+      "id": "deliv:vpm-fbx-light",
+      "layer": "deliverable",
+      "label": "FBX освещения",
+      "kind": "file",
+      "origin": "produced",
+      "fmt": "FBX, ≤ 250 источников, при наличии светового дизайна",
+      "blockedBy": null,
+      "isOutcome": false
+    },
+    {
+      "id": "deliv:vpm-geojson",
+      "layer": "deliverable",
+      "label": "GeoJSON",
+      "kind": "file",
+      "origin": "produced",
+      "fmt": "UTF-8, МСК-77, координаты с 3 знаками",
+      "blockedBy": null,
+      "isOutcome": false
+    },
+    {
+      "id": "deliv:vpm-textures",
+      "layer": "deliverable",
+      "label": "Текстуры PNG",
+      "kind": "file",
+      "origin": "produced",
+      "fmt": "3–2100 файлов, 2048 или 4096, 8 бит/канал",
+      "blockedBy": null,
+      "isOutcome": false
+    },
+    {
+      "id": "deliv:vpm-signature",
+      "layer": "deliverable",
+      "label": "УКЭП пакетов ВПМ",
+      "kind": "file",
+      "origin": "applicant",
+      "fmt": "отдельный одноимённый файл на каждый ZIP",
+      "blockedBy": null,
+      "isOutcome": false
+    },
+    {
+      "id": "deliv:spozu",
+      "layer": "deliverable",
+      "label": "СПОЗУ со схемой транспортной организации",
+      "kind": "package",
+      "origin": "produced",
+      "fmt": "IFC и (или) XML в ZIP",
+      "blockedBy": "msk-ifc-agr",
+      "isOutcome": false
+    },
+    {
+      "id": "deliv:floor-plans",
+      "layer": "deliverable",
+      "label": "Схемы планов этажей",
+      "kind": "package",
+      "origin": "produced",
+      "fmt": "IFC и (или) XML в ZIP",
+      "blockedBy": "msk-ifc-agr",
+      "isOutcome": false
+    },
+    {
+      "id": "deliv:sections-facades",
+      "layer": "deliverable",
+      "label": "Схемы разрезов и фасадов",
+      "kind": "package",
+      "origin": "produced",
+      "fmt": "IFC и (или) XML в ZIP",
+      "blockedBy": "msk-ifc-agr",
+      "isOutcome": false
+    },
+    {
+      "id": "deliv:tep-table",
+      "layer": "deliverable",
+      "label": "Таблица суммарной поэтажной площади",
+      "kind": "file",
+      "origin": "produced",
+      "fmt": "XML",
+      "blockedBy": "xml-schema-tep",
+      "isOutcome": false
+    },
+    {
+      "id": "deliv:title-documents",
+      "layer": "deliverable",
+      "label": "Правоустанавливающие документы на ЗУ",
+      "kind": "package",
+      "origin": "applicant",
+      "fmt": "PDF либо ZIP",
+      "blockedBy": null,
+      "isOutcome": false
+    },
+    {
+      "id": "deliv:authority-legal-entity",
+      "layer": "deliverable",
+      "label": "Полномочия лица от юрлица",
+      "kind": "file",
+      "origin": "applicant",
+      "fmt": "ZIP · PDF · XML, УКЭП доверителя или нотариуса",
+      "blockedBy": null,
+      "isOutcome": false
+    },
+    {
+      "id": "deliv:authority-representative",
+      "layer": "deliverable",
+      "label": "Полномочия представителя",
+      "kind": "file",
+      "origin": "applicant",
+      "fmt": "ZIP · PDF · XML, УКЭП доверителя или нотариуса",
+      "blockedBy": null,
+      "isOutcome": false
+    },
+    {
+      "id": "deliv:gpzu",
+      "layer": "deliverable",
+      "label": "ГПЗУ",
+      "kind": "external",
+      "origin": "authority",
+      "fmt": "документ со сроком использования",
+      "blockedBy": null,
+      "isOutcome": false
+    },
+    {
+      "id": "deliv:egrn-extract",
+      "layer": "deliverable",
+      "label": "Выписка ЕГРН",
+      "kind": "external",
+      "origin": "interdepartmental",
+      "fmt": null,
+      "blockedBy": null,
+      "isOutcome": false
+    },
+    {
+      "id": "deliv:egrul-extract",
+      "layer": "deliverable",
+      "label": "Выписка ЕГРЮЛ",
+      "kind": "external",
+      "origin": "interdepartmental",
+      "fmt": null,
+      "blockedBy": null,
+      "isOutcome": false
+    },
+    {
+      "id": "deliv:egrip-extract",
+      "layer": "deliverable",
+      "label": "Выписка ЕГРИП",
+      "kind": "external",
+      "origin": "interdepartmental",
+      "fmt": null,
+      "blockedBy": null,
+      "isOutcome": false
+    },
+    {
+      "id": "deliv:land-scheme",
+      "layer": "deliverable",
+      "label": "Схема расположения ЗУ на КПТ / проект межевания",
+      "kind": "external",
+      "origin": "interdepartmental",
+      "fmt": null,
+      "blockedBy": null,
+      "isOutcome": false
+    },
+    {
+      "id": "deliv:land-contracts",
+      "layer": "deliverable",
+      "label": "Гражданско-правовые договоры на ЗУ",
+      "kind": "external",
+      "origin": "interdepartmental",
+      "fmt": null,
+      "blockedBy": null,
+      "isOutcome": false
+    },
+    {
+      "id": "deliv:infrastructure-contract",
+      "layer": "deliverable",
+      "label": "Инфраструктурный договор",
+      "kind": "external",
+      "origin": "authority",
+      "fmt": null,
+      "blockedBy": null,
+      "isOutcome": false
+    },
+    {
+      "id": "deliv:mosgornasledie-opinion",
+      "layer": "deliverable",
+      "label": "Заключение Мосгорнаследия",
+      "kind": "verdict",
+      "origin": "authority",
+      "fmt": null,
+      "blockedBy": null,
+      "isOutcome": false
+    },
+    {
+      "id": "deliv:tourism-opinion",
+      "layer": "deliverable",
+      "label": "Заключение Комитета по туризму",
+      "kind": "verdict",
+      "origin": "authority",
+      "fmt": null,
+      "blockedBy": null,
+      "isOutcome": false
+    },
+    {
+      "id": "deliv:agr-certificate",
+      "layer": "deliverable",
+      "label": "Свидетельство об утверждении АГР",
+      "kind": "verdict",
+      "origin": "authority",
+      "fmt": null,
+      "blockedBy": null,
+      "isOutcome": true
+    }
+  ],
+  "links": [
+    {
+      "source": "src:msk-284-pp",
+      "target": "src:msk-admin-reglament-agr",
+      "kind": "partOf"
+    },
+    {
+      "source": "src:msk-284-pp",
+      "target": "branch:msk-284-pp:incomingDocuments",
+      "kind": "branch"
+    },
+    {
+      "source": "src:msk-284-pp",
+      "target": "branch:msk-284-pp:groundsOfRefusal",
+      "kind": "branch"
+    },
+    {
+      "source": "src:msk-284-pp",
+      "target": "branch:msk-284-pp:recipientCategories",
+      "kind": "branch"
+    },
+    {
+      "source": "src:msk-284-pp",
+      "target": "branch:msk-284-pp:terms",
+      "kind": "branch"
+    },
+    {
+      "source": "src:msk-284-pp",
+      "target": "branch:msk-284-pp:offDocs",
+      "kind": "branch"
+    },
+    {
+      "source": "src:msk-advert-2025-07",
+      "target": "profile:advertising-structures-2025-07",
+      "kind": "transcribedInto"
+    },
+    {
+      "source": "profile:advertising-structures-2025-07",
+      "target": "rule:ad-separate-model",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:advertising-structures-2025-07",
+      "target": "rule:ad-geojson",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:advertising-structures-2025-07",
+      "target": "rule:ad-geojson-glasses",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:advertising-structures-2025-07",
+      "target": "rule:ad-mount-depth",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:advertising-structures-2025-07",
+      "target": "rule:ad-triangles",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:advertising-structures-2025-07",
+      "target": "rule:ad-screen-object",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:advertising-structures-2025-07",
+      "target": "rule:ad-screen-uv-1001",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:advertising-structures-2025-07",
+      "target": "rule:ad-screen-uv-orientation",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:advertising-structures-2025-07",
+      "target": "rule:ad-screen-uv-island",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:advertising-structures-2025-07",
+      "target": "rule:ad-mount-material",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:advertising-structures-2025-07",
+      "target": "rule:ad-screen-materials",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:advertising-structures-2025-07",
+      "target": "rule:ad-screen-no-maps",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:advertising-structures-2025-07",
+      "target": "rule:ad-no-screen-material",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:advertising-structures-2025-07",
+      "target": "rule:ad-pivot-wall",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:advertising-structures-2025-07",
+      "target": "rule:ad-pivot-ground",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:advertising-structures-2025-07",
+      "target": "rule:ad-emission",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:advertising-structures-2025-07",
+      "target": "rule:ad-screen-texture-format",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:advertising-structures-2025-07",
+      "target": "rule:ad-video-codec",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:advertising-structures-2025-07",
+      "target": "rule:ad-video-resolution",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:advertising-structures-2025-07",
+      "target": "rule:ad-video-bitrate",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:advertising-structures-2025-07",
+      "target": "rule:ad-video-fps",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:advertising-structures-2025-07",
+      "target": "rule:ad-video-duration",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:advertising-structures-2025-07",
+      "target": "rule:ad-video-size",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:advertising-structures-2025-07",
+      "target": "rule:ad-naming",
+      "kind": "contains"
+    },
+    {
+      "source": "src:msk-admin-reglament-agr",
+      "target": "profile:agr-request-package",
+      "kind": "transcribedInto"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:elig-applicant-kind",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:elig-land-right",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:elig-public-entity",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:elig-linear-ppt",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:elig-representative-kind",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:elig-agr-required",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:doc-01-request",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:doc-02-agr-materials",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:doc-03-authority-legal-entity",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:doc-04-spozu",
+      "kind": "contains"
+    },
+    {
+      "source": "src:msk-ifc-agr",
+      "target": "rule:doc-04-spozu",
+      "kind": "dependsOnSource"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:doc-05-floor-plans",
+      "kind": "contains"
+    },
+    {
+      "source": "src:msk-ifc-agr",
+      "target": "rule:doc-05-floor-plans",
+      "kind": "dependsOnSource"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:doc-06-title-documents",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:doc-07-sections-facades",
+      "kind": "contains"
+    },
+    {
+      "source": "src:msk-ifc-agr",
+      "target": "rule:doc-07-sections-facades",
+      "kind": "dependsOnSource"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:doc-08-tep-table",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:doc-09-authority-representative",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:form-readable",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:form-signature-owner",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:form-no-duplicate-request",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:ext-gpzu-valid",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:ext-land-contracts",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:ext-egrn",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:ext-egrul",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:ext-egrip",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:ext-land-scheme",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:ext-infrastructure-contract",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:ext-mosgornasledie-verdict",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:ext-mosgornasledie-site-req",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:ext-tourism-verdict",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:conf-gpzu-consistency",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:conf-territorial-division",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:conf-architectural-context",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:conf-digital-masterplan",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:conf-no-contradictions",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:conf-documents-in-force",
+      "kind": "contains"
+    },
+    {
+      "source": "src:msk-3d-2026-08-18",
+      "target": "profile:moscow-npm-2026-08-18",
+      "kind": "transcribedInto"
+    },
+    {
+      "source": "profile:moscow-npm-2026-08-18",
+      "target": "rule:npm-format-fbx-2014",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-npm-2026-08-18",
+      "target": "rule:npm-scale-1-1",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-npm-2026-08-18",
+      "target": "rule:npm-source-match",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-npm-2026-08-18",
+      "target": "rule:npm-address-mask",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-npm-2026-08-18",
+      "target": "rule:npm-zip-size",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-npm-2026-08-18",
+      "target": "rule:npm-zip-integrity",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-npm-2026-08-18",
+      "target": "rule:npm-signature",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-npm-2026-08-18",
+      "target": "rule:npm-fbx-count",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-npm-2026-08-18",
+      "target": "rule:npm-scene-clean",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-npm-2026-08-18",
+      "target": "rule:npm-building-object-count",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-npm-2026-08-18",
+      "target": "rule:npm-no-existing-buildings",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-npm-2026-08-18",
+      "target": "rule:npm-ground-required",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-npm-2026-08-18",
+      "target": "rule:npm-fbx-split",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-npm-2026-08-18",
+      "target": "rule:npm-separate-buildings",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-npm-2026-08-18",
+      "target": "rule:npm-ground-skirt",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-npm-2026-08-18",
+      "target": "rule:npm-no-hierarchy",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-npm-2026-08-18",
+      "target": "rule:npm-oks-triangles",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-npm-2026-08-18",
+      "target": "rule:npm-ground-triangles",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-npm-2026-08-18",
+      "target": "rule:npm-geometry-defects",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-npm-2026-08-18",
+      "target": "rule:npm-normals",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-npm-2026-08-18",
+      "target": "rule:npm-coplanar-gap",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-npm-2026-08-18",
+      "target": "rule:npm-window-thickness",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-npm-2026-08-18",
+      "target": "rule:npm-triangulated",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-npm-2026-08-18",
+      "target": "rule:npm-visible-interiors",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-npm-2026-08-18",
+      "target": "rule:npm-transform-reset",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-npm-2026-08-18",
+      "target": "rule:npm-shaders",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-npm-2026-08-18",
+      "target": "rule:npm-glass-material",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-npm-2026-08-18",
+      "target": "rule:npm-glass-material-count",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-npm-2026-08-18",
+      "target": "rule:npm-texture-format-size",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-npm-2026-08-18",
+      "target": "rule:npm-texture-padding",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-npm-2026-08-18",
+      "target": "rule:npm-no-alpha",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-npm-2026-08-18",
+      "target": "rule:npm-texture-set",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-npm-2026-08-18",
+      "target": "rule:npm-texture-slots",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-npm-2026-08-18",
+      "target": "rule:npm-texel-density",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-npm-2026-08-18",
+      "target": "rule:npm-glass-display",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-npm-2026-08-18",
+      "target": "rule:npm-georeference",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-npm-2026-08-18",
+      "target": "rule:npm-naming",
+      "kind": "contains"
+    },
+    {
+      "source": "src:mo-npm-2025-12",
+      "target": "profile:moscow-oblast-npm-2025-12",
+      "kind": "transcribedInto"
+    },
+    {
+      "source": "profile:moscow-oblast-npm-2025-12",
+      "target": "rule:mo-formats",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-oblast-npm-2025-12",
+      "target": "rule:mo-scale",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-oblast-npm-2025-12",
+      "target": "rule:mo-address",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-oblast-npm-2025-12",
+      "target": "rule:mo-zip-size",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-oblast-npm-2025-12",
+      "target": "rule:mo-zip-integrity",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-oblast-npm-2025-12",
+      "target": "rule:mo-files",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-oblast-npm-2025-12",
+      "target": "rule:mo-clean",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-oblast-npm-2025-12",
+      "target": "rule:mo-ground-required",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-oblast-npm-2025-12",
+      "target": "rule:mo-splitting",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-oblast-npm-2025-12",
+      "target": "rule:mo-separate-oks",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-oblast-npm-2025-12",
+      "target": "rule:mo-ground-skirt",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-oblast-npm-2025-12",
+      "target": "rule:mo-no-hierarchy",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-oblast-npm-2025-12",
+      "target": "rule:mo-oks-triangles",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-oblast-npm-2025-12",
+      "target": "rule:mo-ground-triangles",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-oblast-npm-2025-12",
+      "target": "rule:mo-geometry-quality",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-oblast-npm-2025-12",
+      "target": "rule:mo-transform",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-oblast-npm-2025-12",
+      "target": "rule:mo-materials",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-oblast-npm-2025-12",
+      "target": "rule:mo-glass",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-oblast-npm-2025-12",
+      "target": "rule:mo-textures",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-oblast-npm-2025-12",
+      "target": "rule:mo-texture-sets",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-oblast-npm-2025-12",
+      "target": "rule:mo-density",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-oblast-npm-2025-12",
+      "target": "rule:mo-georef",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-oblast-npm-2025-12",
+      "target": "rule:mo-naming",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-oblast-npm-2025-12",
+      "target": "rule:mo-glb-size",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-oblast-npm-2025-12",
+      "target": "rule:mo-glb-textures",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-oblast-npm-2025-12",
+      "target": "rule:mo-glb-origin",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-oblast-npm-2025-12",
+      "target": "rule:mo-glb-lights",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-oblast-npm-2025-12",
+      "target": "rule:mo-glb-viewer",
+      "kind": "contains"
+    },
+    {
+      "source": "src:msk-3d-2026-08-18",
+      "target": "profile:moscow-vpm-2026-08-18",
+      "kind": "transcribedInto"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-format-fbx",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-scale",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-source-match",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-address",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-oks-zip-size",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-ground-zip-size",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-zip-integrity",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-signature",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-archive-content",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-separate-oks",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-ground-required",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-geojson-syntax",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-geojson-required-oks",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-geojson-required-ground",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-coordinates-format",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-coordinates",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-scene-clean",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-one-layer",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-glass-separate",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-oks-skirt",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-ground-skirt",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-oks-triangles",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-ground-triangles",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-defects",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-interiors",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-normals",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-realistic-flora",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-triangulated-transforms",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-materials",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-material-count",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-textures-external",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-texture-size",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-pbr-set",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-padding",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-udim",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-glass-uv",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-placeholder",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-texel-density",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-bake-small-details",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-glass-properties",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-pivot",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-naming",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-alpha-cutouts",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-collision",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-collision-budget",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-emission",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-light-count",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-light-spacing",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "rule:vpm-light-hierarchy",
+      "kind": "contains"
+    },
+    {
+      "source": "branch:msk-284-pp:incomingDocuments",
+      "target": "rule:doc-01-request",
+      "kind": "impacts"
+    },
+    {
+      "source": "branch:msk-284-pp:incomingDocuments",
+      "target": "rule:doc-02-agr-materials",
+      "kind": "impacts"
+    },
+    {
+      "source": "branch:msk-284-pp:incomingDocuments",
+      "target": "rule:doc-03-authority-legal-entity",
+      "kind": "impacts"
+    },
+    {
+      "source": "branch:msk-284-pp:incomingDocuments",
+      "target": "rule:doc-04-spozu",
+      "kind": "impacts"
+    },
+    {
+      "source": "branch:msk-284-pp:incomingDocuments",
+      "target": "rule:doc-05-floor-plans",
+      "kind": "impacts"
+    },
+    {
+      "source": "branch:msk-284-pp:incomingDocuments",
+      "target": "rule:doc-06-title-documents",
+      "kind": "impacts"
+    },
+    {
+      "source": "branch:msk-284-pp:incomingDocuments",
+      "target": "rule:doc-07-sections-facades",
+      "kind": "impacts"
+    },
+    {
+      "source": "branch:msk-284-pp:incomingDocuments",
+      "target": "rule:doc-08-tep-table",
+      "kind": "impacts"
+    },
+    {
+      "source": "branch:msk-284-pp:incomingDocuments",
+      "target": "rule:doc-09-authority-representative",
+      "kind": "impacts"
+    },
+    {
+      "source": "branch:msk-284-pp:incomingDocuments",
+      "target": "rule:ext-land-contracts",
+      "kind": "impacts"
+    },
+    {
+      "source": "branch:msk-284-pp:incomingDocuments",
+      "target": "rule:ext-egrn",
+      "kind": "impacts"
+    },
+    {
+      "source": "branch:msk-284-pp:incomingDocuments",
+      "target": "rule:ext-land-scheme",
+      "kind": "impacts"
+    },
+    {
+      "source": "branch:msk-284-pp:incomingDocuments",
+      "target": "rule:ext-egrul",
+      "kind": "impacts"
+    },
+    {
+      "source": "branch:msk-284-pp:incomingDocuments",
+      "target": "rule:ext-egrip",
+      "kind": "impacts"
+    },
+    {
+      "source": "branch:msk-284-pp:groundsOfRefusal",
+      "target": "rule:form-readable",
+      "kind": "impacts"
+    },
+    {
+      "source": "branch:msk-284-pp:groundsOfRefusal",
+      "target": "rule:form-signature-owner",
+      "kind": "impacts"
+    },
+    {
+      "source": "branch:msk-284-pp:groundsOfRefusal",
+      "target": "rule:form-no-duplicate-request",
+      "kind": "impacts"
+    },
+    {
+      "source": "branch:msk-284-pp:groundsOfRefusal",
+      "target": "rule:conf-gpzu-consistency",
+      "kind": "impacts"
+    },
+    {
+      "source": "branch:msk-284-pp:groundsOfRefusal",
+      "target": "rule:conf-territorial-division",
+      "kind": "impacts"
+    },
+    {
+      "source": "branch:msk-284-pp:groundsOfRefusal",
+      "target": "rule:conf-architectural-context",
+      "kind": "impacts"
+    },
+    {
+      "source": "branch:msk-284-pp:groundsOfRefusal",
+      "target": "rule:conf-no-contradictions",
+      "kind": "impacts"
+    },
+    {
+      "source": "branch:msk-284-pp:groundsOfRefusal",
+      "target": "rule:conf-documents-in-force",
+      "kind": "impacts"
+    },
+    {
+      "source": "branch:msk-284-pp:groundsOfRefusal",
+      "target": "rule:ext-gpzu-valid",
+      "kind": "impacts"
+    },
+    {
+      "source": "branch:msk-284-pp:groundsOfRefusal",
+      "target": "rule:ext-infrastructure-contract",
+      "kind": "impacts"
+    },
+    {
+      "source": "branch:msk-284-pp:groundsOfRefusal",
+      "target": "rule:ext-mosgornasledie-verdict",
+      "kind": "impacts"
+    },
+    {
+      "source": "branch:msk-284-pp:groundsOfRefusal",
+      "target": "rule:ext-mosgornasledie-site-req",
+      "kind": "impacts"
+    },
+    {
+      "source": "branch:msk-284-pp:groundsOfRefusal",
+      "target": "rule:ext-tourism-verdict",
+      "kind": "impacts"
+    },
+    {
+      "source": "branch:msk-284-pp:recipientCategories",
+      "target": "rule:elig-applicant-kind",
+      "kind": "impacts"
+    },
+    {
+      "source": "branch:msk-284-pp:recipientCategories",
+      "target": "rule:elig-land-right",
+      "kind": "impacts"
+    },
+    {
+      "source": "branch:msk-284-pp:recipientCategories",
+      "target": "rule:elig-public-entity",
+      "kind": "impacts"
+    },
+    {
+      "source": "branch:msk-284-pp:recipientCategories",
+      "target": "rule:elig-linear-ppt",
+      "kind": "impacts"
+    },
+    {
+      "source": "branch:msk-284-pp:recipientCategories",
+      "target": "rule:elig-representative-kind",
+      "kind": "impacts"
+    },
+    {
+      "source": "branch:msk-284-pp:recipientCategories",
+      "target": "rule:elig-agr-required",
+      "kind": "impacts"
+    },
+    {
+      "source": "rule:doc-01-request",
+      "target": "deliv:request-form",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:doc-02-agr-materials",
+      "target": "deliv:agr-materials",
+      "kind": "produces"
+    },
+    {
+      "source": "deliv:agr-materials",
+      "target": "deliv:npm-package",
+      "kind": "contains"
+    },
+    {
+      "source": "deliv:agr-materials",
+      "target": "deliv:vpm-package",
+      "kind": "contains"
+    },
+    {
+      "source": "deliv:npm-package",
+      "target": "deliv:npm-fbx-oks",
+      "kind": "contains"
+    },
+    {
+      "source": "deliv:npm-package",
+      "target": "deliv:npm-fbx-ground",
+      "kind": "contains"
+    },
+    {
+      "source": "deliv:npm-package",
+      "target": "deliv:npm-signature",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-npm-2026-08-18",
+      "target": "deliv:npm-package",
+      "kind": "produces"
+    },
+    {
+      "source": "deliv:vpm-package",
+      "target": "deliv:vpm-fbx-geometry",
+      "kind": "contains"
+    },
+    {
+      "source": "deliv:vpm-package",
+      "target": "deliv:vpm-fbx-light",
+      "kind": "contains"
+    },
+    {
+      "source": "deliv:vpm-package",
+      "target": "deliv:vpm-geojson",
+      "kind": "contains"
+    },
+    {
+      "source": "deliv:vpm-package",
+      "target": "deliv:vpm-textures",
+      "kind": "contains"
+    },
+    {
+      "source": "deliv:vpm-package",
+      "target": "deliv:vpm-signature",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:moscow-vpm-2026-08-18",
+      "target": "deliv:vpm-package",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:doc-04-spozu",
+      "target": "deliv:spozu",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:doc-05-floor-plans",
+      "target": "deliv:floor-plans",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:doc-07-sections-facades",
+      "target": "deliv:sections-facades",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:doc-08-tep-table",
+      "target": "deliv:tep-table",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:doc-06-title-documents",
+      "target": "deliv:title-documents",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:doc-03-authority-legal-entity",
+      "target": "deliv:authority-legal-entity",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:doc-09-authority-representative",
+      "target": "deliv:authority-representative",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:elig-land-right",
+      "target": "deliv:gpzu",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:elig-linear-ppt",
+      "target": "deliv:gpzu",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:ext-gpzu-valid",
+      "target": "deliv:gpzu",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:conf-gpzu-consistency",
+      "target": "deliv:gpzu",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:ext-egrn",
+      "target": "deliv:egrn-extract",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:ext-egrul",
+      "target": "deliv:egrul-extract",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:ext-egrip",
+      "target": "deliv:egrip-extract",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:ext-land-scheme",
+      "target": "deliv:land-scheme",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:elig-public-entity",
+      "target": "deliv:land-scheme",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:ext-land-contracts",
+      "target": "deliv:land-contracts",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:ext-infrastructure-contract",
+      "target": "deliv:infrastructure-contract",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:ext-mosgornasledie-verdict",
+      "target": "deliv:mosgornasledie-opinion",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:ext-mosgornasledie-site-req",
+      "target": "deliv:mosgornasledie-opinion",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:ext-tourism-verdict",
+      "target": "deliv:tourism-opinion",
+      "kind": "produces"
+    },
+    {
+      "source": "deliv:request-form",
+      "target": "deliv:agr-certificate",
+      "kind": "submitted"
+    },
+    {
+      "source": "deliv:agr-materials",
+      "target": "deliv:agr-certificate",
+      "kind": "submitted"
+    },
+    {
+      "source": "deliv:npm-package",
+      "target": "deliv:agr-certificate",
+      "kind": "submitted"
+    },
+    {
+      "source": "deliv:vpm-package",
+      "target": "deliv:agr-certificate",
+      "kind": "submitted"
+    },
+    {
+      "source": "deliv:spozu",
+      "target": "deliv:agr-certificate",
+      "kind": "submitted"
+    },
+    {
+      "source": "deliv:floor-plans",
+      "target": "deliv:agr-certificate",
+      "kind": "submitted"
+    },
+    {
+      "source": "deliv:sections-facades",
+      "target": "deliv:agr-certificate",
+      "kind": "submitted"
+    },
+    {
+      "source": "deliv:tep-table",
+      "target": "deliv:agr-certificate",
+      "kind": "submitted"
+    },
+    {
+      "source": "deliv:title-documents",
+      "target": "deliv:agr-certificate",
+      "kind": "submitted"
+    },
+    {
+      "source": "deliv:authority-legal-entity",
+      "target": "deliv:agr-certificate",
+      "kind": "submitted"
+    },
+    {
+      "source": "deliv:authority-representative",
+      "target": "deliv:agr-certificate",
+      "kind": "submitted"
+    },
+    {
+      "source": "deliv:gpzu",
+      "target": "deliv:agr-certificate",
+      "kind": "submitted"
+    },
+    {
+      "source": "deliv:egrn-extract",
+      "target": "deliv:agr-certificate",
+      "kind": "submitted"
+    },
+    {
+      "source": "deliv:egrul-extract",
+      "target": "deliv:agr-certificate",
+      "kind": "submitted"
+    },
+    {
+      "source": "deliv:egrip-extract",
+      "target": "deliv:agr-certificate",
+      "kind": "submitted"
+    },
+    {
+      "source": "deliv:land-scheme",
+      "target": "deliv:agr-certificate",
+      "kind": "submitted"
+    },
+    {
+      "source": "deliv:land-contracts",
+      "target": "deliv:agr-certificate",
+      "kind": "submitted"
+    },
+    {
+      "source": "deliv:infrastructure-contract",
+      "target": "deliv:agr-certificate",
+      "kind": "submitted"
+    },
+    {
+      "source": "deliv:mosgornasledie-opinion",
+      "target": "deliv:agr-certificate",
+      "kind": "submitted"
+    },
+    {
+      "source": "deliv:tourism-opinion",
+      "target": "deliv:agr-certificate",
+      "kind": "submitted"
+    }
+  ]
+}

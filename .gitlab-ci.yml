@@ -6,6 +6,7 @@ validate:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
   script:
     - python3 tools/validate.py
+    - python3 tools/build_graph.py --check
     - python3 -m unittest discover tests
 
 source-monitor:
