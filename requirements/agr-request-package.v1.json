@@ -1,13 +1,13 @@
 {
   "schemaVersion": "1.1",
   "id": "agr-request-package",
-  "version": "2026-09-01.1",
+  "version": "2026-09-01.2",
   "status": "draft",
   "sourceId": "msk-admin-reglament-agr",
   "jurisdiction": "Москва",
   "modelClass": "RequestPackage",
   "effectiveFrom": "2026-09-01",
-  "releasePolicy": "Комплект подаётся, когда все правила verification=automatic и expert_evidence терминальны. Правила external_fact и external_verdict терминальными не становятся — они либо получены, либо ожидаются, и учитываются отдельным счётчиком.",
+  "releasePolicy": "Комплект подаётся, когда все правила verification=automatic и expert_evidence терминальны. Правила external_fact и external_verdict терминальными не становятся — они либо получены, либо ожидаются, и учитываются отдельным счётчиком. sourceRef указывает адрес внутри машиночитаемого источника (window.DATA страницы услуги), а не реконструированный номер пункта Административного регламента.",
   "rules": [
     {
       "id": "elig-applicant-kind",
@@ -16,7 +16,7 @@
       "requirement": "Заявитель является физическим лицом, индивидуальным предпринимателем, юридическим лицом либо организацией из перечня п. 2.4.1.1 Административного регламента.",
       "verification": "expert_evidence",
       "severity": "blocker",
-      "sourceRef": "п. 2.4.1"
+      "sourceRef": "recipientCategories, пп. 1-3"
     },
     {
       "id": "elig-land-right",
@@ -25,7 +25,21 @@
       "requirement": "Для нелинейного объекта: заявитель — правообладатель земельного участка, прошедшего государственный кадастровый учёт, с выданным ГПЗУ.",
       "verification": "external_fact",
       "severity": "blocker",
-      "sourceRef": "п. 2.4.1"
+      "sourceRef": "recipientCategories, пп. 1-3"
+    },
+    {
+      "id": "elig-public-entity",
+      "category": "Право на подачу",
+      "title": "Госучреждения, ГУП и фонды — иное основание права",
+      "requirement": "Государственные учреждения и ГУП города Москвы, Московский фонд реновации жилой застройки, Московский фонд защиты прав граждан — участников долевого строительства, АНО «Развитие социальной инфраструктуры», АНО «Развитие спортивных и инфраструктурных объектов», а также стороны договора о приобретении будущих объектов недвижимости по Программе реновации — подают в отношении земельных участков, государственная собственность на которые не разграничена, при наличии схемы расположения ЗУ на КПТ и (или) проекта межевания и (или) действующего ГПЗУ.",
+      "verification": "external_fact",
+      "severity": "blocker",
+      "sourceRef": "recipientCategories, п. 4",
+      "appliesWhen": {
+        "path": "applicant.kind",
+        "equals": "public_entity"
+      },
+      "note": "Основание отличается от правообладания ЗУ: участок может быть с неразграниченной госсобственностью."
     },
     {
       "id": "elig-linear-ppt",
@@ -34,7 +48,7 @@
       "requirement": "Для линейного объекта основанием служит действующий проект планировки территории и (или) градостроительный план земельного участка.",
       "verification": "external_fact",
       "severity": "blocker",
-      "sourceRef": "п. 2.4.1",
+      "sourceRef": "recipientCategories, пп. 1-3",
       "appliesWhen": {
         "path": "object.isLinear",
         "equals": true
@@ -47,7 +61,7 @@
       "requirement": "Интересы заявителя вправе представлять юридическое лицо или лицо, зарегистрированное как индивидуальный предприниматель. Приём документов от представителей — физических лиц без статуса ИП не предусмотрен.",
       "verification": "expert_evidence",
       "severity": "blocker",
-      "sourceRef": "п. 2.4.2",
+      "sourceRef": "recipientCategories, п. 5",
       "appliesWhen": {
         "path": "request.viaRepresentative",
         "equals": true
@@ -60,7 +74,7 @@
       "requirement": "Объект капитального строительства входит в число тех, для которых утверждение АГР требуется согласно Положению, утверждённому постановлением 284-ПП.",
       "verification": "expert_evidence",
       "severity": "blocker",
-      "sourceRef": "284-ПП, Положение"
+      "sourceRef": "offDocs · 284-ПП, Положение об утверждении АГР"
     },
     {
       "id": "doc-01-request",
@@ -69,7 +83,7 @@
       "requirement": "Запрос оформлен внесением сведений по приложению 2 к Административному регламенту в интерактивную форму на Портале.",
       "verification": "expert_evidence",
       "severity": "blocker",
-      "sourceRef": "п. 2.5.1.1.1"
+      "sourceRef": "incomingDocuments · обязательные, п. 1"
     },
     {
       "id": "doc-02-agr-materials",
@@ -78,7 +92,7 @@
       "requirement": "Электронные образы направляются в PDF, за исключением низкополигональных моделей (FBX в составе ZIP) и высокополигональных моделей (FBX, PNG, GeoJSON в составе ZIP). Состав и требования установлены приложением к Административному регламенту.",
       "verification": "expert_evidence",
       "severity": "blocker",
-      "sourceRef": "п. 2.5.1.1.2",
+      "sourceRef": "incomingDocuments · обязательные, п. 2",
       "dependsOn": [
         "moscow-npm-2026-08-18",
         "moscow-vpm-2026-08-18"
@@ -91,7 +105,7 @@
       "requirement": "Формат ZIP, PDF или XML. Подписан усиленной квалифицированной электронной подписью доверителя или нотариуса. Не требуется для лица, действующего без доверенности.",
       "verification": "expert_evidence",
       "severity": "blocker",
-      "sourceRef": "п. 2.5.1.1.3",
+      "sourceRef": "incomingDocuments · обязательные, п. 3",
       "appliesWhen": {
         "path": "applicant.kind",
         "equals": "legal_entity"
@@ -104,7 +118,7 @@
       "requirement": "Электронные образы направляются в формате IFC и (или) XML в составе ZIP.",
       "verification": "expert_evidence",
       "severity": "blocker",
-      "sourceRef": "п. 2.5.1.1.6",
+      "sourceRef": "incomingDocuments · обязательные, п. 4",
       "dependsOnSource": "msk-ifc-agr"
     },
     {
@@ -114,7 +128,7 @@
       "requirement": "Электронные образы направляются в формате IFC и (или) XML в составе ZIP.",
       "verification": "expert_evidence",
       "severity": "blocker",
-      "sourceRef": "п. 2.5.1.1.7",
+      "sourceRef": "incomingDocuments · обязательные, п. 5",
       "dependsOnSource": "msk-ifc-agr"
     },
     {
@@ -124,7 +138,7 @@
       "requirement": "Формат PDF либо ZIP. Требуются при отсутствии в ЕГРН сведений о зарегистрированных правах, а также когда права не подлежат регистрации.",
       "verification": "expert_evidence",
       "severity": "blocker",
-      "sourceRef": "п. 2.5.1.1",
+      "sourceRef": "incomingDocuments · обязательные, п. 6",
       "appliesWhen": {
         "path": "object.isLinear",
         "equals": false
@@ -137,7 +151,7 @@
       "requirement": "Электронные образы направляются в формате IFC и (или) XML в составе ZIP.",
       "verification": "expert_evidence",
       "severity": "blocker",
-      "sourceRef": "п. 2.5.1.1.9",
+      "sourceRef": "incomingDocuments · обязательные, п. 7",
       "dependsOnSource": "msk-ifc-agr"
     },
     {
@@ -147,7 +161,7 @@
       "requirement": "Расчёт в габаритах наружных стен жилой и нежилой застройки (для жилой застройки — раздельно жилая и нежилая часть), включая площадь квартир без балконов, лоджий и террас, наземную площадь нежилой застройки, площадь квартир и встроенно-пристроенных помещений. Формат XML.",
       "verification": "expert_evidence",
       "severity": "blocker",
-      "sourceRef": "п. 2.5.1.1.8"
+      "sourceRef": "incomingDocuments · обязательные, п. 8"
     },
     {
       "id": "doc-09-authority-representative",
@@ -156,7 +170,7 @@
       "requirement": "Формат ZIP, PDF или XML. Подписан усиленной квалифицированной электронной подписью доверителя или нотариуса.",
       "verification": "expert_evidence",
       "severity": "blocker",
-      "sourceRef": "п. 2.5.1.1",
+      "sourceRef": "incomingDocuments · обязательные, п. 9",
       "appliesWhen": {
         "path": "request.viaRepresentative",
         "equals": true
@@ -169,7 +183,7 @@
       "requirement": "Электронные копии (образы) документов поддаются прочтению и соответствуют установленным требованиям к форматам их предоставления.",
       "verification": "expert_evidence",
       "severity": "blocker",
-      "sourceRef": "п. 2.7 осн. 6"
+      "sourceRef": "groundsOfRefusal · приём, п. 6"
     },
     {
       "id": "form-signature-owner",
@@ -178,7 +192,7 @@
       "requirement": "Запрос и документы подписаны электронной подписью, принадлежащей лицу, подавшему запрос.",
       "verification": "expert_evidence",
       "severity": "blocker",
-      "sourceRef": "п. 2.7 осн. 5"
+      "sourceRef": "groundsOfRefusal · приём, п. 5"
     },
     {
       "id": "form-no-duplicate-request",
@@ -187,7 +201,7 @@
       "requirement": "В Департаменте нет находящегося на исполнении запроса этого же заявителя по этому же объекту с идентичными по составу и содержанию документами.",
       "verification": "external_fact",
       "severity": "blocker",
-      "sourceRef": "п. 2.9 осн. 10"
+      "sourceRef": "groundsOfRefusal · предоставление, п. 10"
     },
     {
       "id": "ext-gpzu-valid",
@@ -196,8 +210,18 @@
       "requirement": "Срок использования информации ГПЗУ для подготовки проектной документации и выдачи разрешения на строительство не истёк — в том числе не истекает в период предоставления государственной услуги.",
       "verification": "external_fact",
       "severity": "blocker",
-      "sourceRef": "п. 2.9 осн. 13",
+      "sourceRef": "groundsOfRefusal · предоставление, п. 13",
       "note": "Проверяется на входе с запасом не менее срока услуги: 20 рабочих дней для объектов городского значения, 10 — окружного."
+    },
+    {
+      "id": "ext-land-contracts",
+      "category": "Внешние документы",
+      "title": "Гражданско-правовые договоры на ЗУ в собственности города Москвы",
+      "requirement": "Договоры, подтверждающие право заявителя на земельный участок, находящийся в собственности города Москвы. Получается Департаментом по межведомственному взаимодействию; заявитель вправе представить по собственной инициативе.",
+      "verification": "external_fact",
+      "severity": "major",
+      "sourceRef": "incomingDocuments · необязательные, п. 1",
+      "note": "Отсутствие документа у органа власти при непредставлении его заявителем — самостоятельное основание для отказа (основания в предоставлении, п. 12)."
     },
     {
       "id": "ext-egrn",
@@ -206,17 +230,34 @@
       "requirement": "Получается Департаментом по межведомственному взаимодействию. Заявитель вправе представить по собственной инициативе.",
       "verification": "external_fact",
       "severity": "major",
-      "sourceRef": "п. 2.5.1.2",
+      "sourceRef": "incomingDocuments · необязательные, п. 2",
       "note": "Отсутствие документа у органа власти при непредставлении его заявителем — самостоятельное основание для отказа (п. 2.9 осн. 12). Прикладывать самим."
     },
     {
-      "id": "ext-egrul-egrip",
+      "id": "ext-egrul",
       "category": "Внешние документы",
-      "title": "Выписка ЕГРЮЛ или ЕГРИП",
-      "requirement": "Получается по межведомственному взаимодействию в зависимости от типа заявителя. Заявитель вправе представить по собственной инициативе.",
+      "title": "Выписка из ЕГРЮЛ",
+      "requirement": "Требуется при подаче запроса от юридического лица. Получается по межведомственному взаимодействию; заявитель вправе представить по собственной инициативе.",
       "verification": "external_fact",
       "severity": "major",
-      "sourceRef": "п. 2.5.1.2"
+      "sourceRef": "incomingDocuments · необязательные, п. 4",
+      "appliesWhen": {
+        "path": "applicant.kind",
+        "equals": "legal_entity"
+      }
+    },
+    {
+      "id": "ext-egrip",
+      "category": "Внешние документы",
+      "title": "Выписка из ЕГРИП",
+      "requirement": "Требуется при подаче запроса физическим лицом, зарегистрированным как индивидуальный предприниматель. Получается по межведомственному взаимодействию; заявитель вправе представить по собственной инициативе.",
+      "verification": "external_fact",
+      "severity": "major",
+      "sourceRef": "incomingDocuments · необязательные, п. 5",
+      "appliesWhen": {
+        "path": "applicant.kind",
+        "equals": "sole_proprietor"
+      }
     },
     {
       "id": "ext-land-scheme",
@@ -225,7 +266,7 @@
       "requirement": "Получается по межведомственному взаимодействию. Заявитель вправе представить по собственной инициативе.",
       "verification": "external_fact",
       "severity": "major",
-      "sourceRef": "п. 2.5.1.2"
+      "sourceRef": "incomingDocuments · необязательные, п. 3"
     },
     {
       "id": "ext-infrastructure-contract",
@@ -234,7 +275,7 @@
       "requirement": "Инфраструктурный договор заключён, если его заключение предусмотрено правовым актом Правительства Москвы, и очерёдность (этапы) завершения мероприятий по строительству объектов инфраструктуры не нарушена.",
       "verification": "external_fact",
       "severity": "blocker",
-      "sourceRef": "п. 2.9 осн. 15"
+      "sourceRef": "groundsOfRefusal · предоставление, п. 15"
     },
     {
       "id": "ext-mosgornasledie-verdict",
@@ -243,7 +284,7 @@
       "requirement": "Заключение Мосгорнаследия на материалы АГР не является отрицательным.",
       "verification": "external_verdict",
       "severity": "blocker",
-      "sourceRef": "п. 2.9 осн. 8",
+      "sourceRef": "groundsOfRefusal · предоставление, п. 8",
       "authority": "mosgornasledie"
     },
     {
@@ -253,7 +294,7 @@
       "requirement": "Материалы АГР соответствуют требованиям, установленным Департаментом культурного наследия в отношении рассматриваемого земельного участка и (или) материалов АГР.",
       "verification": "external_verdict",
       "severity": "blocker",
-      "sourceRef": "п. 2.9 осн. 9",
+      "sourceRef": "groundsOfRefusal · предоставление, п. 9",
       "authority": "mosgornasledie",
       "note": "Отдельный от заключения корпус требований, устанавливаемый по конкретному участку. Заранее не транскрибируется — определяется адресно."
     },
@@ -264,7 +305,7 @@
       "requirement": "Заключение Комитета по туризму города Москвы на материалы АГР не является отрицательным.",
       "verification": "external_verdict",
       "severity": "blocker",
-      "sourceRef": "п. 2.9 осн. 14",
+      "sourceRef": "groundsOfRefusal · предоставление, п. 14",
       "authority": "mos-tourism"
     },
     {
@@ -274,7 +315,7 @@
       "requirement": "Материалы АГР соответствуют сведениям градостроительного плана земельного участка либо действующему проекту планировки территории, а также требованиям приложения к Административному регламенту и требованиям законодательства.",
       "verification": "expert_evidence",
       "severity": "blocker",
-      "sourceRef": "п. 2.9 осн. 7"
+      "sourceRef": "groundsOfRefusal · предоставление, п. 7"
     },
     {
       "id": "conf-territorial-division",
@@ -283,7 +324,7 @@
       "requirement": "Местоположение заявленного земельного участка соответствует территориальному делению города Москвы, установленному Законом города Москвы от 05.07.1995 № 13-47.",
       "verification": "external_fact",
       "severity": "blocker",
-      "sourceRef": "п. 2.9 осн. 5"
+      "sourceRef": "groundsOfRefusal · предоставление, п. 5"
     },
     {
       "id": "conf-architectural-context",
@@ -292,7 +333,7 @@
       "requirement": "Материалы АГР соответствуют функциональному назначению и местоположению объекта с учётом объёмно-планировочных, композиционных, силуэтных, архитектурно-художественных, декоративно-пластических, стилистических и колористических характеристик, а также сложившихся особенностей территории и характеристик окружающей застройки.",
       "verification": "expert_evidence",
       "severity": "blocker",
-      "sourceRef": "п. 2.9 осн. 6",
+      "sourceRef": "groundsOfRefusal · предоставление, п. 6",
       "note": "Содержательное, не формальное основание. Автоматизации не подлежит."
     },
     {
@@ -302,7 +343,7 @@
       "requirement": "Материалы АГР соответствуют результатам цифрового мастер-планирования территории города Москвы.",
       "verification": "expert_evidence",
       "severity": "blocker",
-      "sourceRef": "п. 2.9 осн. 6",
+      "sourceRef": "groundsOfRefusal · предоставление, п. 6",
       "status": "pending_activation",
       "activationCondition": "утверждение алгоритмов цифрового мастер-планирования территории города Москвы в установленном порядке"
     },
@@ -313,7 +354,7 @@
       "requirement": "В документах и информации отсутствуют противоречивые либо недостоверные сведения.",
       "verification": "expert_evidence",
       "severity": "blocker",
-      "sourceRef": "п. 2.9 осн. 3"
+      "sourceRef": "groundsOfRefusal · предоставление, п. 3"
     },
     {
       "id": "conf-documents-in-force",
@@ -322,8 +363,8 @@
       "requirement": "Ни один из представленных документов не утратил силу — в случаях, когда срок действия указан в самом документе либо определён законодательством.",
       "verification": "external_fact",
       "severity": "blocker",
-      "sourceRef": "п. 2.7 осн. 2; п. 2.9 осн. 2"
+      "sourceRef": "groundsOfRefusal · приём, п. 2; предоставление, п. 2"
     }
   ],
-  "selfHash": "fea555c5bb4e476886593e2c4da04b2ee2f0d69d5c0546f7a3cada8eb234ccbb"
+  "selfHash": "00953a279da8125883efb490fbac910312e9c67e8cd30985d8c6be6293c22fb3"
 }

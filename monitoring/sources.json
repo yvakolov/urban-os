@@ -1,14 +1,12 @@
 {
   "schemaVersion": "1.0",
   "note": "Декларативная конфигурация наблюдения. Отделена от sources/index.json намеренно: «что является правом» и «как мы за этим следим» — разные сущности с разным жизненным циклом. Ссылочная целостность sourceId проверяется tools/validate.py.",
-
   "monitors": {
     "msk-284-pp": {
       "enabled": true,
       "url": "https://www.mos.ru/pgu2/landing/target/7700000000210548433/",
       "kind": "html",
       "expectedContentType": "text/html",
-
       "extraction": {
         "strategy": "window_data_json",
         "version": 1,
@@ -21,10 +19,12 @@
             "offDocs",
             "terms"
           ],
-          "sizeCorridor": [0.5, 2.0]
+          "sizeCorridor": [
+            0.5,
+            2.0
+          ]
         }
       },
-
       "normalization": {
         "strategy": "canonical_json",
         "version": 1,
@@ -35,10 +35,13 @@
           "terms",
           "offDocs"
         ],
-        "excludeKeys": ["updatedAt", "seo", "settings"],
+        "excludeKeys": [
+          "updatedAt",
+          "seo",
+          "settings"
+        ],
         "sortArrays": false
       },
-
       "impactMap": {
         "incomingDocuments": [
           "doc-01-request",
@@ -50,9 +53,11 @@
           "doc-07-sections-facades",
           "doc-08-tep-table",
           "doc-09-authority-representative",
+          "ext-land-contracts",
           "ext-egrn",
-          "ext-egrul-egrip",
-          "ext-land-scheme"
+          "ext-land-scheme",
+          "ext-egrul",
+          "ext-egrip"
         ],
         "groundsOfRefusal": [
           "form-readable",
@@ -72,6 +77,7 @@
         "recipientCategories": [
           "elig-applicant-kind",
           "elig-land-right",
+          "elig-public-entity",
           "elig-linear-ppt",
           "elig-representative-kind",
           "elig-agr-required"
@@ -79,7 +85,6 @@
         "terms": [],
         "offDocs": "__source_registry__"
       },
-
       "notes": "Страница государственной услуги — витрина, а не источник права. Ветка offDocs содержит машиночитаемый реестр реквизитов НПА (sn, approvalDate): её изменение сигналит о новой редакции нормативного акта."
     }
   }

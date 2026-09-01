@@ -137,7 +137,7 @@ class TestImpact(MonitorTestCase):
         expected = set(self.monitor["impactMap"]["incomingDocuments"])
         got = {r["ruleId"] for r in ev["affectedRules"]}
         self.assertEqual(got, expected)
-        self.assertEqual(len(got), 12)
+        self.assertEqual(len(got), 14)
 
     def test_12_blocker_gives_critical_review(self):
         self.approve()
@@ -286,3 +286,63 @@ class TestValidator(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
+
+
+class TestSourceReconciliation(MonitorTestCase):
+    """Профиль обязан покрывать источник по составу, а не приблизительно.
+
+    Эти тесты — то, что превращает разовую ручную сверку в инвариант: если
+    на mos.ru добавится документ или основание для отказа, тест упадёт и
+    потребует пересмотра профиля. Без них расхождение обнаруживается только
+    отказом в приёме на реальной подаче.
+    """
+
+    def setUp(self):
+        super().setUp()
+        raw = read("mos-v1.html").decode("utf-8")
+        self.blocks = extract_mod.extract(raw)["data"]["blocks"]
+        self.profile = self.profiles["agr-request-package"]
+        self.imap = self.monitor["impactMap"]
+
+    def rules_for(self, branch):
+        ids = set(self.imap[branch])
+        return [r for r in self.profile["rules"] if r["id"] in ids]
+
+    def test_29_every_incoming_document_has_a_rule(self):
+        docs = self.blocks["incomingDocuments"]
+        self.assertEqual(len(docs), 14, "состав документов на источнике изменился")
+        self.assertEqual(len(self.rules_for("incomingDocuments")), len(docs))
+
+    def test_30_mandatory_documents_are_blockers(self):
+        """Обязательный документ не может быть major: без него откажут в приёме."""
+        mandatory = [d for d in self.blocks["incomingDocuments"]
+                     if d["inDocumentType"] == "Обязательный"]
+        self.assertEqual(len(mandatory), 9)
+        doc_rules = [r for r in self.profile["rules"] if r["id"].startswith("doc-")]
+        self.assertEqual(len(doc_rules), 9)
+        self.assertTrue(all(r["severity"] == "blocker" for r in doc_rules))
+
+    def test_31_every_recipient_category_is_covered(self):
+        cats = self.blocks["recipientCategories"]
+        self.assertEqual(len(cats), 5, "перечень категорий заявителей изменился")
+        self.assertTrue(self.rules_for("recipientCategories"))
+
+    def test_32_refusal_grounds_count_matches(self):
+        groups = {g["title"]: len(g["descriptions"]) for g in self.blocks["groundsOfRefusal"]}
+        self.assertEqual(sorted(groups.values()), [6, 15],
+                         f"число оснований для отказа изменилось: {groups}")
+
+    def test_33_source_refs_point_into_the_source(self):
+        """sourceRef обязан адресовать машиночитаемый источник, а не выдуманный пункт."""
+        anchors = ("incomingDocuments", "recipientCategories", "groundsOfRefusal", "offDocs")
+        loose = [r["id"] for r in self.profile["rules"]
+                 if not r["sourceRef"].startswith(anchors)]
+        self.assertEqual(loose, [], f"правила без проверяемого sourceRef: {loose}")
+
+    def test_34_normative_acts_registry_is_pinned(self):
+        """Реквизиты НПА из offDocs — сигнал о новой редакции. Фиксируем состав."""
+        acts = {a["sn"]: a["approvalDate"] for a in self.blocks["offDocs"]}
+        self.assertEqual(len(acts), 12)
+        self.assertEqual(acts["284-ПП"], "2013-04-30")
+        # Требования к материалам в формате IFC — корпус ещё не оцифрован
+        self.assertEqual(acts["ДГП-Р-1/26/64-16-6/26"], "2026-01-16")
