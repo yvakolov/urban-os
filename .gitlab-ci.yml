@@ -10,9 +10,12 @@ validate:
 
 source-monitor:
   resource_group: source-monitor
+  # По расписанию — сам; из интерфейса «Run pipeline» — вручную.
+  # Голый `when: manual` без условия навешивал бы ручную задачу на каждый push.
   rules:
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
-    - when: manual
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+      when: manual
   script:
     - python3 tools/check_sources.py --report reports/source-check.json
     - python3 tools/notify_gitlab.py reports/source-check.json
