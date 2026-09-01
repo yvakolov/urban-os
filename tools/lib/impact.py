@@ -8,8 +8,8 @@
     изменившийся source
       → потомки по partOf (нормативный документ внутри другого документа)
       → профили, чей sourceId попал в это множество
-      → правила профиля, сужённые impactMap по изменившимся веткам
-      + правила с прямым dependsOnSource на любой источник из множества
+      → правила профиля и правила с прямым dependsOnSource на источник из множества
+      → если ветки изменения известны и описаны в impactMap — только правила из карты
 """
 
 SEVERITY_ORDER = {"minor": 1, "major": 2, "blocker": 3}
@@ -93,9 +93,17 @@ def analyse(source_id, changed_branches, sources, profiles, monitor):
             # правила, которые ещё не вступили в силу, влияние не поднимают
             if rule.get("status") == "pending_activation":
                 continue
-            direct = rule.get("dependsOnSource") in closure
-            via_profile = by_source and (allowed is None or rule["id"] in allowed)
-            if direct or via_profile:
+            # Когда сужение по impactMap действует, оно авторитетно: карта
+            # перечисляет ВСЕ правила, которых касается ветка. Правило вне списка
+            # веткой не задето — как бы оно ни было приписано к источникам.
+            # Иначе правило, опирающееся на отдельный документ внутри 284-ПП,
+            # попадало бы в охват при любой правке витрины госуслуги, и сужение
+            # переставало бы что-либо сужать.
+            if allowed is not None:
+                if rule["id"] in allowed:
+                    hits.append(rule)
+                continue
+            if rule.get("dependsOnSource") in closure or by_source:
                 hits.append(rule)
 
         if not hits:

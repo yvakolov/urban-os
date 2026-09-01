@@ -10,7 +10,7 @@
 
 Манифест:
     {"documents": {"<deliverableId>": [{"name": "...", "bytes": 123}, ...]},
-     "form": {"fields": {"<имя поля>": "<значение>"}},
+     "form": {"sections": ["1", "1.1", "3", ...]},   # заполненные разделы приложения 2
      "gpzu": {"validUntil": "2026-12-31"},
      "serviceTermWorkingDays": 20,
      "asOf": "2026-09-01"}
@@ -52,8 +52,13 @@ def _working_days_between(a, b):
     return days
 
 
-def inspect(manifest, deliverables):
-    """manifest + реестр артефактов -> плоские факты под evaluator-ы."""
+def inspect(manifest, deliverables, form_sections=None):
+    """manifest + реестр артефактов (+ словарь разделов формы) -> плоские факты.
+
+    form_sections — dictionaries/request-form-sections.v1.json. Инспектор из
+    него берёт только перечень разделов: какие из них применимы к конкретному
+    заявителю, решают правила профиля через appliesWhen, а не он.
+    """
     docs = manifest.get("documents") or {}
     as_of = dt.date.fromisoformat(manifest.get("asOf") or dt.date.today().isoformat())
     term = int(manifest.get("serviceTermWorkingDays") or 20)
@@ -110,13 +115,13 @@ def inspect(manifest, deliverables):
     # Но в общий объём данных комплекта форма входит: сведения по приложению 2
     # — такая же часть запроса, как приложенные документы. Поэтому единицы
     # данных считаются отдельно от файлов и включают носителей без файлов.
-    form_fields = (manifest.get("form") or {}).get("fields") or {}
+    form_filled = set((manifest.get("form") or {}).get("sections") or [])
     carriers = [d for d, s in deliverables.items()
                 if s.get("carriesData") and s.get("origin") in ("applicant", "produced")]
     data_items = mandatory + carriers
     data_missing = sorted(
         [d for d in mandatory if not per_doc.get(d, {}).get("present")]
-        + [d for d in carriers if not form_fields])
+        + [d for d in carriers if not form_filled])
 
     facts = {
         "inspectionVersion": INSPECTION_VERSION,
@@ -132,14 +137,7 @@ def inspect(manifest, deliverables):
         "dataItemsPresent": len(data_items) - len(data_missing),
         "dataItemsMissing": data_missing,
         "dataItemsMissingCount": len(data_missing),
-        "form": {
-            "present": bool(form_fields),
-            "fieldsFilled": len(form_fields),
-            # Состав полей задан приложением 2 к Регламенту (образец «Состав
-            # сведений АГР.pdf»). Пока он не оцифрован, полноту формы машиной
-            # не установить: None, а не False — заявителя не в чем упрекнуть.
-            "fieldsComplete": None,
-        },
+        "form": _form_facts(form_filled, form_sections),
     }
 
     gpzu = manifest.get("gpzu") or {}
@@ -169,3 +167,30 @@ def manifest_from_directory(path, mapping):
         docs[did] = [{"name": n, "bytes": os.path.getsize(os.path.join(d, n))}
                      for n in sorted(os.listdir(d)) if os.path.isfile(os.path.join(d, n))]
     return {"documents": docs}
+
+
+def _form_facts(filled, dictionary):
+    """Какие разделы приложения 2 заполнены. Обязательность здесь не решается.
+
+    Ключи разделов идут с дефисом вместо точки: пути evaluator-ов разбираются
+    по точкам, и «1.1» распалось бы на два уровня.
+    """
+    facts = {"present": bool(filled), "sectionsFilled": len(filled)}
+    if not dictionary:
+        return facts
+    sections = {}
+    for sec in dictionary.get("sections", []):
+        entries = sec.get("subsections") or [sec]
+        for e in entries:
+            num = e["number"]
+            sections[num.replace(".", "-")] = {
+                "number": num,
+                "present": num in filled,
+                "applicability": e.get("applicability"),
+            }
+    facts["sections"] = sections
+    facts["sectionsKnown"] = len(sections)
+    facts["unknownSectionsFilled"] = sorted(
+        n for n in filled if n.replace(".", "-") not in sections)
+    return facts
+

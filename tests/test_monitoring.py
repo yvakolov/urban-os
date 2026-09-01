@@ -140,6 +140,20 @@ class TestImpact(MonitorTestCase):
         self.assertEqual(got, expected)
         self.assertEqual(len(got), 14)
 
+    def test_11a_impact_map_outranks_source_lineage(self):
+        """Правка витрины не тянет за собой правила приложения 2.
+
+        Приложение 2 входит в Регламент по partOf, поэтому попадает в closure
+        изменения. Но его текст лежит отдельным файлом с собственным хешем и от
+        правки страницы госуслуги не двигается. Когда карта влияния известна,
+        она и решает, что задето.
+        """
+        self.approve()
+        ev = self.run_fixture("mos-v2-doc-added.html")
+        self.assertIn("msk-prilozhenie-2-sostav-svedeniy", ev["impact"]["sourceClosure"])
+        self.assertEqual([r["ruleId"] for r in ev["affectedRules"]
+                          if r["ruleId"].startswith("form-sec-")], [])
+
     def test_12_blocker_gives_critical_review(self):
         self.approve()
         ev = self.run_fixture("mos-v2-doc-added.html")
@@ -334,11 +348,22 @@ class TestSourceReconciliation(MonitorTestCase):
                          f"число оснований для отказа изменилось: {groups}")
 
     def test_33_source_refs_point_into_the_source(self):
-        """sourceRef обязан адресовать машиночитаемый источник, а не выдуманный пункт."""
+        """sourceRef обязан адресовать проверяемый источник, а не выдуманный пункт.
+
+        Проверяемый — это либо ветка машиночитаемой витрины госуслуги, либо
+        зарегистрированный источник, файл которого лежит в репозитории и чей
+        sha256 сверяется валидатором. Второе строже первого: витрина может
+        измениться молча, файл — нет.
+        """
         anchors = ("incomingDocuments", "recipientCategories", "groundsOfRefusal", "offDocs")
+        sources = json.loads((ROOT / "sources" / "index.json").read_text(encoding="utf-8"))["sources"]
+        pinned = {sid for sid, s in sources.items()
+                  if s.get("sha256") and (ROOT / (s.get("file") or "нет")).exists()}
         loose = [r["id"] for r in self.profile["rules"]
-                 if not r["sourceRef"].startswith(anchors)]
+                 if not r["sourceRef"].startswith(anchors)
+                 and r.get("dependsOnSource") not in pinned]
         self.assertEqual(loose, [], f"правила без проверяемого sourceRef: {loose}")
+        self.assertTrue(pinned, "ни один источник не подтверждён файлом в репозитории")
 
     def test_34_normative_acts_registry_is_pinned(self):
         """Реквизиты НПА из offDocs — сигнал о новой редакции. Фиксируем состав."""
@@ -614,12 +639,14 @@ class TestPackageInspector(unittest.TestCase):
             (ROOT / "deliverables" / "index.json").read_text(encoding="utf-8"))["deliverables"]
         cls.profile = json.loads(
             (ROOT / "requirements" / "agr-request-package.v1.json").read_text(encoding="utf-8"))
+        cls.sections = json.loads(
+            (ROOT / "dictionaries" / "request-form-sections.v1.json").read_text(encoding="utf-8"))
 
     def manifest(self, name):
         return json.loads((ROOT / "tests" / "package_fixtures" / f"{name}.json").read_text(encoding="utf-8"))
 
     def facts(self, name):
-        return package_mod.inspect(self.manifest(name), self.deliverables)
+        return package_mod.inspect(self.manifest(name), self.deliverables, self.sections)
 
     def context(self, name):
         return {
@@ -627,6 +654,7 @@ class TestPackageInspector(unittest.TestCase):
             "applicant": {"kind": "legal_entity"},
             "object": {"isLinear": False},
             "request": {"viaRepresentative": True},
+            "representative": {"kind": "legal_entity"},
         }
 
     def failing(self, name):
@@ -661,9 +689,48 @@ class TestPackageInspector(unittest.TestCase):
         self.assertEqual(f["dataItemsMissing"], ["request-form"])
         self.assertIn("form-package-complete", self.failing("form-empty"))
 
-    def test_63c_form_field_composition_is_not_guessed(self):
-        """Состав полей задан приложением 2, оно не оцифровано — значит None."""
-        self.assertIsNone(self.facts("complete")["form"]["fieldsComplete"])
+    def test_63c_missing_form_section_detected(self):
+        """Юрлицо не заполнило раздел 1.1 — запрос неполон по приложению 2."""
+        self.assertEqual(self.failing("form-no-applicant-section"), {"form-sec-1-1"})
+
+    def test_63d_sections_of_other_applicant_kinds_are_not_demanded(self):
+        """Заявитель — юрлицо: разделы про ИП и физлицо к нему не относятся."""
+        ctx = self.context("complete")
+        by_id = {r["id"]: r for r in self.profile["rules"]}
+        for rid in ("form-sec-1-2", "form-sec-1-3", "form-sec-2-2"):
+            self.assertEqual(validate_mod._state_for(by_id[rid], ctx, None), "not_applicable", rid)
+
+    def test_63e_interpreted_applicability_is_not_a_blocker(self):
+        """Обязательность разделов 3-11 источником не оговорена: это наш вывод.
+
+        Цена ошибки в интерпретации не должна равняться отказу в приёме,
+        поэтому такие правила имеют severity major, а не blocker.
+        """
+        dict_by_num = {s["number"]: s for s in self.sections["sections"]}
+        for r in self.profile["rules"]:
+            if not r["id"].startswith("form-sec-") or "-" in r["id"][9:]:
+                continue
+            num = r["id"][len("form-sec-"):]
+            applicability = dict_by_num[num]["applicability"]
+            if applicability == "interpreted":
+                self.assertEqual(r["severity"], "major", r["id"])
+            elif applicability == "undetermined":
+                self.assertEqual(r["verification"], "expert_evidence", r["id"])
+
+    def test_63f_every_section_of_appendix_2_has_a_rule(self):
+        """Оцифровка полна: 11 разделов приложения 2 покрыты правилами.
+
+        Разделы 1 и 2 существуют только через подразделы — у них своих полей
+        нет, условия заполнения источник задаёт именно на подразделах.
+        """
+        covered = {r["id"][len("form-sec-"):].replace("-", ".")
+                   for r in self.profile["rules"] if r["id"].startswith("form-sec-")}
+        expected = set()
+        for sec in self.sections["sections"]:
+            subs = sec.get("subsections") or []
+            expected.update(s["number"] for s in subs) if subs else expected.add(sec["number"])
+        self.assertEqual(covered, expected)
+        self.assertEqual(len(self.sections["sections"]), 11)
 
     def test_64_missing_document_detected(self):
         """Нет СПОЗУ — падает и правило документа, и полнота комплекта."""

@@ -2,10 +2,10 @@
   "generatedFrom": "sources/index.json · monitoring/sources.json · requirements/*.json · deliverables/index.json",
   "note": "Сгенерировано tools/build_graph.py. Руками не править — правьте реестры.",
   "counts": {
-    "source": 12,
+    "source": 14,
     "branch": 5,
     "profile": 6,
-    "rule": 262,
+    "rule": 276,
     "deliverable": 29
   },
   "nodes": [
@@ -116,6 +116,24 @@
       "transcribed": "none",
       "monitored": false,
       "url": null
+    },
+    {
+      "id": "src:msk-prilozhenie-2-sostav-svedeniy",
+      "layer": "source",
+      "label": "Приложение 2 к Административному регламенту предоставления государственной услуги «Оформле",
+      "status": "active",
+      "transcribed": "full",
+      "monitored": false,
+      "url": "https://www.mos.ru/pgu2/landing/api/doc/6480a56e-b433-44af-87c1-40fed998e051?is_ergu=1"
+    },
+    {
+      "id": "src:msk-prilozhenie-sostav-materialov-agr",
+      "layer": "source",
+      "label": "Приложение к Административному регламенту предоставления государственной услуги «Оформлени",
+      "status": "active",
+      "transcribed": "none",
+      "monitored": false,
+      "url": "https://www.mos.ru/pgu2/landing/api/doc/16b2015b-fe0f-4e11-84c5-93ac22308270?is_ergu=1"
     },
     {
       "id": "branch:msk-284-pp:incomingDocuments",
@@ -459,7 +477,7 @@
       "label": "agr-request-package",
       "status": "draft",
       "sourceId": "msk-admin-reglament-agr",
-      "ruleCount": 39
+      "ruleCount": 53
     },
     {
       "id": "rule:elig-applicant-kind",
@@ -544,6 +562,174 @@
       "verification": "expert_evidence",
       "pending": false,
       "sourceRef": "incomingDocuments · обязательные, п. 1"
+    },
+    {
+      "id": "rule:form-sec-1-1",
+      "layer": "rule",
+      "label": "1.1 · Сведения о заявителе — юридическом лице",
+      "ruleId": "form-sec-1-1",
+      "profileId": "agr-request-package",
+      "category": "Сведения запроса",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "Приложение 2 к Административному регламенту, п. 1.1"
+    },
+    {
+      "id": "rule:form-sec-1-2",
+      "layer": "rule",
+      "label": "1.2 · Сведения о заявителе — индивидуальном предпринимателе",
+      "ruleId": "form-sec-1-2",
+      "profileId": "agr-request-package",
+      "category": "Сведения запроса",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "Приложение 2 к Административному регламенту, п. 1.2"
+    },
+    {
+      "id": "rule:form-sec-1-3",
+      "layer": "rule",
+      "label": "1.3 · Сведения о заявителе — физическом лице",
+      "ruleId": "form-sec-1-3",
+      "profileId": "agr-request-package",
+      "category": "Сведения запроса",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "Приложение 2 к Административному регламенту, п. 1.3"
+    },
+    {
+      "id": "rule:form-sec-2-1",
+      "layer": "rule",
+      "label": "2.1 · Сведения о представителе заявителя — юридическом лице",
+      "ruleId": "form-sec-2-1",
+      "profileId": "agr-request-package",
+      "category": "Сведения запроса",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "Приложение 2 к Административному регламенту, п. 2.1"
+    },
+    {
+      "id": "rule:form-sec-2-2",
+      "layer": "rule",
+      "label": "2.2 · Сведения о представителе заявителя — индивидуальном предпринимателе",
+      "ruleId": "form-sec-2-2",
+      "profileId": "agr-request-package",
+      "category": "Сведения запроса",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "Приложение 2 к Административному регламенту, п. 2.2"
+    },
+    {
+      "id": "rule:form-sec-3",
+      "layer": "rule",
+      "label": "3 · Сведения о виде работ и источнике финансирования",
+      "ruleId": "form-sec-3",
+      "profileId": "agr-request-package",
+      "category": "Сведения запроса",
+      "severity": "major",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "Приложение 2 к Административному регламенту, п. 3"
+    },
+    {
+      "id": "rule:form-sec-4",
+      "layer": "rule",
+      "label": "4 · Сведения о ГПЗУ / проекте планировки территории линейного объекта",
+      "ruleId": "form-sec-4",
+      "profileId": "agr-request-package",
+      "category": "Сведения запроса",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "Приложение 2 к Административному регламенту, п. 4"
+    },
+    {
+      "id": "rule:form-sec-5",
+      "layer": "rule",
+      "label": "5 · Сведения о ГПЗУ / схеме расположения земельного участка на кадастровом плане территории / проекте межевания территории — в отношении участков, государственная собственность на которые не разграничена",
+      "ruleId": "form-sec-5",
+      "profileId": "agr-request-package",
+      "category": "Сведения запроса",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "Приложение 2 к Административному регламенту, п. 5"
+    },
+    {
+      "id": "rule:form-sec-6",
+      "layer": "rule",
+      "label": "6 · Сведения о земельно-правовых отношениях",
+      "ruleId": "form-sec-6",
+      "profileId": "agr-request-package",
+      "category": "Сведения запроса",
+      "severity": "major",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "Приложение 2 к Административному регламенту, п. 6"
+    },
+    {
+      "id": "rule:form-sec-7",
+      "layer": "rule",
+      "label": "7 · Сведения о технико-экономических показателях размещаемых / реконструируемых объектов",
+      "ruleId": "form-sec-7",
+      "profileId": "agr-request-package",
+      "category": "Сведения запроса",
+      "severity": "major",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "Приложение 2 к Административному регламенту, п. 7"
+    },
+    {
+      "id": "rule:form-sec-8",
+      "layer": "rule",
+      "label": "8 · Сведения о разработчике материалов архитектурно-градостроительного решения объекта капитального строительства",
+      "ruleId": "form-sec-8",
+      "profileId": "agr-request-package",
+      "category": "Сведения запроса",
+      "severity": "major",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "Приложение 2 к Административному регламенту, п. 8"
+    },
+    {
+      "id": "rule:form-sec-9",
+      "layer": "rule",
+      "label": "9 · Сведения об организации, являющейся стороной по договору о приобретении будущих объектов недвижимости, создаваемых в многоквартирных домах в целях реализации Программы реновации жилищного фонда в городе Москве, заключённому с Московским фондом реновации жилой застройки",
+      "ruleId": "form-sec-9",
+      "profileId": "agr-request-package",
+      "category": "Сведения запроса",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "Приложение 2 к Административному регламенту, п. 9"
+    },
+    {
+      "id": "rule:form-sec-10",
+      "layer": "rule",
+      "label": "10 · Оценка материалов архитектурно-градостроительного решения",
+      "ruleId": "form-sec-10",
+      "profileId": "agr-request-package",
+      "category": "Сведения запроса",
+      "severity": "major",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "Приложение 2 к Административному регламенту, п. 10"
+    },
+    {
+      "id": "rule:form-sec-11",
+      "layer": "rule",
+      "label": "11 · Сведения о способе получения результата",
+      "ruleId": "form-sec-11",
+      "profileId": "agr-request-package",
+      "category": "Сведения запроса",
+      "severity": "major",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "Приложение 2 к Административному регламенту, п. 11"
     },
     {
       "id": "rule:doc-02-agr-materials",
@@ -3647,6 +3833,16 @@
       "kind": "partOf"
     },
     {
+      "source": "src:msk-admin-reglament-agr",
+      "target": "src:msk-prilozhenie-2-sostav-svedeniy",
+      "kind": "partOf"
+    },
+    {
+      "source": "src:msk-admin-reglament-agr",
+      "target": "src:msk-prilozhenie-sostav-materialov-agr",
+      "kind": "partOf"
+    },
+    {
       "source": "src:msk-284-pp",
       "target": "branch:msk-284-pp:incomingDocuments",
       "kind": "branch"
@@ -3835,6 +4031,146 @@
       "source": "profile:agr-request-package",
       "target": "rule:doc-01-request",
       "kind": "contains"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:form-sec-1-1",
+      "kind": "contains"
+    },
+    {
+      "source": "src:msk-prilozhenie-2-sostav-svedeniy",
+      "target": "rule:form-sec-1-1",
+      "kind": "dependsOnSource"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:form-sec-1-2",
+      "kind": "contains"
+    },
+    {
+      "source": "src:msk-prilozhenie-2-sostav-svedeniy",
+      "target": "rule:form-sec-1-2",
+      "kind": "dependsOnSource"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:form-sec-1-3",
+      "kind": "contains"
+    },
+    {
+      "source": "src:msk-prilozhenie-2-sostav-svedeniy",
+      "target": "rule:form-sec-1-3",
+      "kind": "dependsOnSource"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:form-sec-2-1",
+      "kind": "contains"
+    },
+    {
+      "source": "src:msk-prilozhenie-2-sostav-svedeniy",
+      "target": "rule:form-sec-2-1",
+      "kind": "dependsOnSource"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:form-sec-2-2",
+      "kind": "contains"
+    },
+    {
+      "source": "src:msk-prilozhenie-2-sostav-svedeniy",
+      "target": "rule:form-sec-2-2",
+      "kind": "dependsOnSource"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:form-sec-3",
+      "kind": "contains"
+    },
+    {
+      "source": "src:msk-prilozhenie-2-sostav-svedeniy",
+      "target": "rule:form-sec-3",
+      "kind": "dependsOnSource"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:form-sec-4",
+      "kind": "contains"
+    },
+    {
+      "source": "src:msk-prilozhenie-2-sostav-svedeniy",
+      "target": "rule:form-sec-4",
+      "kind": "dependsOnSource"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:form-sec-5",
+      "kind": "contains"
+    },
+    {
+      "source": "src:msk-prilozhenie-2-sostav-svedeniy",
+      "target": "rule:form-sec-5",
+      "kind": "dependsOnSource"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:form-sec-6",
+      "kind": "contains"
+    },
+    {
+      "source": "src:msk-prilozhenie-2-sostav-svedeniy",
+      "target": "rule:form-sec-6",
+      "kind": "dependsOnSource"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:form-sec-7",
+      "kind": "contains"
+    },
+    {
+      "source": "src:msk-prilozhenie-2-sostav-svedeniy",
+      "target": "rule:form-sec-7",
+      "kind": "dependsOnSource"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:form-sec-8",
+      "kind": "contains"
+    },
+    {
+      "source": "src:msk-prilozhenie-2-sostav-svedeniy",
+      "target": "rule:form-sec-8",
+      "kind": "dependsOnSource"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:form-sec-9",
+      "kind": "contains"
+    },
+    {
+      "source": "src:msk-prilozhenie-2-sostav-svedeniy",
+      "target": "rule:form-sec-9",
+      "kind": "dependsOnSource"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:form-sec-10",
+      "kind": "contains"
+    },
+    {
+      "source": "src:msk-prilozhenie-2-sostav-svedeniy",
+      "target": "rule:form-sec-10",
+      "kind": "dependsOnSource"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:form-sec-11",
+      "kind": "contains"
+    },
+    {
+      "source": "src:msk-prilozhenie-2-sostav-svedeniy",
+      "target": "rule:form-sec-11",
+      "kind": "dependsOnSource"
     },
     {
       "source": "profile:agr-request-package",
@@ -5213,6 +5549,76 @@
     },
     {
       "source": "rule:doc-01-request",
+      "target": "deliv:request-form",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:form-sec-1-1",
+      "target": "deliv:request-form",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:form-sec-1-2",
+      "target": "deliv:request-form",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:form-sec-1-3",
+      "target": "deliv:request-form",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:form-sec-2-1",
+      "target": "deliv:request-form",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:form-sec-2-2",
+      "target": "deliv:request-form",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:form-sec-3",
+      "target": "deliv:request-form",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:form-sec-4",
+      "target": "deliv:request-form",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:form-sec-5",
+      "target": "deliv:request-form",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:form-sec-6",
+      "target": "deliv:request-form",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:form-sec-7",
+      "target": "deliv:request-form",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:form-sec-8",
+      "target": "deliv:request-form",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:form-sec-9",
+      "target": "deliv:request-form",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:form-sec-10",
+      "target": "deliv:request-form",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:form-sec-11",
       "target": "deliv:request-form",
       "kind": "produces"
     },

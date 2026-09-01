@@ -5,7 +5,7 @@
     "validUntil": "2026-12-31"
   },
   "form": {
-    "fields": {}
+    "sections": []
   },
   "documents": {
     "agr-materials": [

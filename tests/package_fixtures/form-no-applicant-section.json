@@ -2,12 +2,11 @@
   "asOf": "2026-09-01",
   "serviceTermWorkingDays": 20,
   "gpzu": {
-    "validUntil": "2026-09-30"
+    "validUntil": "2026-12-31"
   },
   "form": {
     "sections": [
       "1",
-      "1.1",
       "2",
       "2.1",
       "3",
