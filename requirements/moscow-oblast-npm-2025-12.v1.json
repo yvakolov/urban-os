@@ -1,0 +1,305 @@
+{
+  "schemaVersion": "1.1",
+  "id": "moscow-oblast-npm-2025-12",
+  "version": "2025-12.1",
+  "status": "active",
+  "sourceId": "mo-npm-2025-12",
+  "jurisdiction": "Московская область",
+  "modelClass": "NPM+GLB",
+  "effectiveFrom": "2025-12-30",
+  "releasePolicy": "Все применимые правила должны иметь терминальное состояние; auto_fail и pending блокируют выпуск.",
+  "rules": [
+    {
+      "id": "mo-formats",
+      "category": "Формат",
+      "title": "FBX 2014 + GLB",
+      "requirement": "Предоставлены FBX 7.4 binary (цифровой двойник) и GLB для Web.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.1 п.1"
+    },
+    {
+      "id": "mo-scale",
+      "category": "Сцена",
+      "title": "1:1, метр",
+      "requirement": "Масштаб 1:1; одна единица равна одному метру.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "разд.4; табл.1 п.2"
+    },
+    {
+      "id": "mo-address",
+      "category": "Именование",
+      "title": "Address",
+      "requirement": "Address сформирован из адреса/кадастрового номера латиницей, цифрами и подчеркиваниями.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "табл.1 п.3",
+      "evaluator": {
+        "op": "regex",
+        "path": "package.address",
+        "pattern": "^[A-Za-z0-9_]+$"
+      }
+    },
+    {
+      "id": "mo-zip-size",
+      "category": "Архив",
+      "title": "ZIP до 1 ГБ",
+      "requirement": "Архив не превышает 1 ГБ и не содержит поврежденных файлов.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.1.1",
+      "evaluator": {
+        "op": "max",
+        "path": "package.zipSizeBytes",
+        "value": 1073741824
+      }
+    },
+    {
+      "id": "mo-zip-integrity",
+      "category": "Архив",
+      "title": "ZIP читается безопасно",
+      "requirement": "Центральная директория и локальные заголовки архива читаются; нет шифрования, опасных путей, дублей имен и неподдерживаемого сжатия.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.1.1",
+      "evaluator": {
+        "op": "equals",
+        "path": "zip.valid",
+        "value": true
+      }
+    },
+    {
+      "id": "mo-files",
+      "category": "Архив",
+      "title": "2-21 FBX + 1 GLB",
+      "requirement": "Один FBX благоустройства, до 20 FBX ОКС и один GLB.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.1.2"
+    },
+    {
+      "id": "mo-clean",
+      "category": "Сцена",
+      "title": "Чистые FBX/GLB",
+      "requirement": "Нет пустых объектов, анимаций, камер, света, звуков, костей, слоев, коммуникаций, людей и транспорта.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.1.3",
+      "evaluator": {
+        "op": "all_zero",
+        "paths": [
+          "glb.cameras",
+          "glb.animations",
+          "glb.skins",
+          "glb.lights"
+        ]
+      }
+    },
+    {
+      "id": "mo-ground-required",
+      "category": "Состав",
+      "title": "Благоустройство обязательно",
+      "requirement": "Благоустройство отдельно и не включает эксплуатируемую кровлю; ОКС и glass разнесены по правилам состава.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.1.4-1.6"
+    },
+    {
+      "id": "mo-splitting",
+      "category": "Состав",
+      "title": "Разделение FBX",
+      "requirement": "До 20 FBX, разделение только по неделимым ОКС при превышении лимита; нумерация сквозная.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.2"
+    },
+    {
+      "id": "mo-separate-oks",
+      "category": "Геометрия",
+      "title": "ОКС раздельно",
+      "requirement": "Здания, секции, корпуса, строения и стилобаты — отдельные объекты.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.3.3"
+    },
+    {
+      "id": "mo-ground-skirt",
+      "category": "Геометрия",
+      "title": "Периметр -1 м",
+      "requirement": "Периметр благоустройства выдавлен вниз не менее 1 м.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.3.4"
+    },
+    {
+      "id": "mo-no-hierarchy",
+      "category": "Сцена",
+      "title": "Нет иерархий",
+      "requirement": "Группы и иерархические связи между объектами отсутствуют.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.3.5"
+    },
+    {
+      "id": "mo-oks-triangles",
+      "category": "Геометрия",
+      "title": "ОКС до 150 000",
+      "requirement": "ОКС с кровлей — до 150 000 треугольников на FBX.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.3.6"
+    },
+    {
+      "id": "mo-ground-triangles",
+      "category": "Геометрия",
+      "title": "Благоустройство до 180 000",
+      "requirement": "Благоустройство, элементы и растительность — до 180 000 треугольников.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.3.6"
+    },
+    {
+      "id": "mo-geometry-quality",
+      "category": "Геометрия",
+      "title": "Качество геометрии",
+      "requirement": "Лимит дефектов 100 при 0,002 м; нет изолированных/нулевых элементов; нормали, зазоры 5-20 мм и триангуляция корректны.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.3.7-3.11"
+    },
+    {
+      "id": "mo-transform",
+      "category": "Сцена",
+      "title": "Трансформации применены",
+      "requirement": "Трансформации применены; сглаживание назначено полигонам.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.3.14-3.15"
+    },
+    {
+      "id": "mo-materials",
+      "category": "Материалы",
+      "title": "Допустимые шейдеры",
+      "requirement": "Только Standard, Physical Material, Principled BSDF; сторонние рендер-шейдеры отсутствуют.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.4.1"
+    },
+    {
+      "id": "mo-glass",
+      "category": "Материалы",
+      "title": "Стекло 50%",
+      "requirement": "Полупрозрачный материал без текстур, прозрачность 50%, не более 7 материалов.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.4.2-4.6"
+    },
+    {
+      "id": "mo-textures",
+      "category": "Текстуры",
+      "title": "PNG 256-2048, ≤3 МБ",
+      "requirement": "PNG только допустимых квадратных размеров, не более 3 МБ, padding 8 px, без alpha; PBR-карты применены по правилам.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.5"
+    },
+    {
+      "id": "mo-texture-sets",
+      "category": "Текстуры",
+      "title": "Лимиты наборов",
+      "requirement": "1 набор на ОКС, 2 при эксплуатируемой кровле; один набор 512 для элементов, один набор 2048 для растительности.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.5.11-5.13"
+    },
+    {
+      "id": "mo-density",
+      "category": "Текстуры",
+      "title": "Плотность 10-40 px/м²",
+      "requirement": "Плотность рельефа 10-40 px/м²; исключения применены только к указанной геометрии.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.6"
+    },
+    {
+      "id": "mo-georef",
+      "category": "Координаты",
+      "title": "МСК МО и высоты",
+      "requirement": "Все объекты привязаны в МСК МО зона 1/2 и по высоте; условная система координат запрещена.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.8"
+    },
+    {
+      "id": "mo-naming",
+      "category": "Именование",
+      "title": "Маски имен",
+      "requirement": "Имена ZIP/FBX/объектов/материалов/текстур соответствуют обязательным маскам и длине до 254.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.9-10"
+    },
+    {
+      "id": "mo-glb-size",
+      "category": "GLB",
+      "title": "GLB до 20 МБ",
+      "requirement": "Просмотровый GLB не превышает 20 МБ.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.11",
+      "evaluator": {
+        "op": "max",
+        "path": "glb.fileSizeBytes",
+        "value": 20971520
+      }
+    },
+    {
+      "id": "mo-glb-textures",
+      "category": "GLB",
+      "title": "Текстуры GLB до 256",
+      "requirement": "Текстуры GLB не превышают 256×256.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.11",
+      "evaluator": {
+        "op": "max",
+        "path": "glb.maxTextureDimension",
+        "value": 256
+      }
+    },
+    {
+      "id": "mo-glb-origin",
+      "category": "GLB",
+      "title": "Нижний центр в (0,0,0)",
+      "requirement": "Центральная нижняя точка геометрии расположена в начале координат.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.11"
+    },
+    {
+      "id": "mo-glb-lights",
+      "category": "GLB",
+      "title": "Без источников света",
+      "requirement": "В GLB удалены источники света.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.11",
+      "evaluator": {
+        "op": "equals",
+        "path": "glb.lights",
+        "value": 0
+      }
+    },
+    {
+      "id": "mo-glb-viewer",
+      "category": "GLB",
+      "title": "Корректное отображение",
+      "requirement": "Оптимизированный GLB корректно отображается в glTF Viewer; Draco допустим.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.11"
+    }
+  ],
+  "selfHash": "2ba305ac7dfb8a237d8b7fb9a1e24befebda67806ce58ebd0cb2feccc3fa0e68"
+}

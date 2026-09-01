@@ -1,0 +1,369 @@
+{
+  "schemaVersion": "1.1",
+  "id": "moscow-npm-2026-08-18",
+  "version": "2026-08-18.1",
+  "status": "active",
+  "sourceId": "msk-3d-2026-08-18",
+  "jurisdiction": "Москва",
+  "modelClass": "NPM",
+  "effectiveFrom": "2026-08-18",
+  "releasePolicy": "Все применимые правила должны иметь терминальное состояние; auto_fail и pending блокируют выпуск.",
+  "rules": [
+    {
+      "id": "npm-format-fbx-2014",
+      "category": "Формат",
+      "title": "FBX 7.4 binary",
+      "requirement": "Все приемочные модели предоставлены в FBX 2014 binary.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.1 п.1"
+    },
+    {
+      "id": "npm-scale-1-1",
+      "category": "Сцена",
+      "title": "Масштаб 1:1",
+      "requirement": "Метрическая сцена: 1 единица равна 1 метру.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "разд.4; табл.1 п.2"
+    },
+    {
+      "id": "npm-source-match",
+      "category": "Состав",
+      "title": "Соответствие проекту АГР",
+      "requirement": "НПМ соответствует ВПМ, визуализациям и графическим материалам проекта АГР, включая МАФ, озеленение и освещение.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.1 п.1.3"
+    },
+    {
+      "id": "npm-address-mask",
+      "category": "Именование",
+      "title": "Address латиницей",
+      "requirement": "Address сформирован из адреса или кадастрового номера, латиницей, цифрами и подчеркиваниями.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "табл.1 п.3",
+      "evaluator": {
+        "op": "regex",
+        "path": "package.address",
+        "pattern": "^[A-Za-z0-9_]+$"
+      }
+    },
+    {
+      "id": "npm-zip-size",
+      "category": "Архив",
+      "title": "ZIP не более 1 ГБ",
+      "requirement": "Финальный ZIP не превышает 1 ГБ и не содержит поврежденных файлов.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.1.1",
+      "evaluator": {
+        "op": "max",
+        "path": "package.zipSizeBytes",
+        "value": 1073741824
+      }
+    },
+    {
+      "id": "npm-zip-integrity",
+      "category": "Архив",
+      "title": "ZIP читается безопасно",
+      "requirement": "Центральная директория и локальные заголовки архива читаются; нет шифрования, опасных путей, дублей имен и неподдерживаемого сжатия.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.1.1",
+      "evaluator": {
+        "op": "equals",
+        "path": "zip.valid",
+        "value": true
+      }
+    },
+    {
+      "id": "npm-signature",
+      "category": "Архив",
+      "title": "УКЭП",
+      "requirement": "ZIP подписан действующей УКЭП; имя файла подписи совпадает с именем ZIP, сертификат содержит обязательные сведения.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.1.1"
+    },
+    {
+      "id": "npm-fbx-count",
+      "category": "Архив",
+      "title": "2-21 FBX",
+      "requirement": "В архиве один FBX благоустройства и до 20 FBX моделей ОКС.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.1.2",
+      "evaluator": {
+        "op": "range",
+        "path": "package.fbxCount",
+        "min": 2,
+        "max": 21
+      }
+    },
+    {
+      "id": "npm-scene-clean",
+      "category": "Сцена",
+      "title": "Нет служебных объектов",
+      "requirement": "Нет пустых объектов, анимаций, деформаций, камер, звуков, костей, лишних слоев, коммуникаций, людей и транспорта.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.1.3"
+    },
+    {
+      "id": "npm-building-object-count",
+      "category": "Состав",
+      "title": "До 20 ОКС и 20 glass",
+      "requirement": "Суммарно до 20 объектов ОКС и до 20 объектов полупрозрачных деталей.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.1.4"
+    },
+    {
+      "id": "npm-no-existing-buildings",
+      "category": "Состав",
+      "title": "Только проектируемые ОКС",
+      "requirement": "Нереконструируемые существующие здания не включены.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.1.4"
+    },
+    {
+      "id": "npm-ground-required",
+      "category": "Состав",
+      "title": "Благоустройство обязательно",
+      "requirement": "Отдельный файл благоустройства присутствует и не включает элементы эксплуатируемой кровли.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.1.5-1.6"
+    },
+    {
+      "id": "npm-fbx-split",
+      "category": "Состав",
+      "title": "Разделение без дробления ОКС",
+      "requirement": "Разделение на FBX выполняется только при превышении лимита, по зданиям/секциям/корпусам/стилобатам; нумерация сквозная.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.2"
+    },
+    {
+      "id": "npm-separate-buildings",
+      "category": "Геометрия",
+      "title": "Каждый ОКС отдельным объектом",
+      "requirement": "Здания, секции, корпуса, строения и стилобаты не объединены между собой.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.3.3"
+    },
+    {
+      "id": "npm-ground-skirt",
+      "category": "Геометрия",
+      "title": "Периметр благоустройства -1 м",
+      "requirement": "Полигоны по периметру благоустройства выдавлены вниз не менее чем на 1 м.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.3.4"
+    },
+    {
+      "id": "npm-no-hierarchy",
+      "category": "Сцена",
+      "title": "Нет иерархий и групп",
+      "requirement": "Объекты геометрии не имеют иерархических связей и групп.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.3.5"
+    },
+    {
+      "id": "npm-oks-triangles",
+      "category": "Геометрия",
+      "title": "ОКС до 150 000 треугольников",
+      "requirement": "В каждом FBX ОКС и эксплуатируемая кровля содержат не более 150 000 треугольников.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.3.6"
+    },
+    {
+      "id": "npm-ground-triangles",
+      "category": "Геометрия",
+      "title": "Благоустройство до 180 000",
+      "requirement": "Благоустройство, его элементы и растительность суммарно не превышают 180 000 треугольников.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.3.6"
+    },
+    {
+      "id": "npm-geometry-defects",
+      "category": "Геометрия",
+      "title": "Дефекты геометрии",
+      "requirement": "Не более 100 дубликатов/самопересечений при допуске 0,002 м; нет изолированных элементов и нулевых ребер.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.3.7"
+    },
+    {
+      "id": "npm-normals",
+      "category": "Геометрия",
+      "title": "Нормали и затенение",
+      "requirement": "Видимые нормали ориентированы наружу; отсутствуют пропавшие полигоны и дефекты затенения.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.3.8"
+    },
+    {
+      "id": "npm-coplanar-gap",
+      "category": "Геометрия",
+      "title": "Зазор сонаправленных полигонов",
+      "requirement": "Перекрывающиеся сонаправленные полигоны разнесены на 5-20 мм.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.3.9"
+    },
+    {
+      "id": "npm-window-thickness",
+      "category": "Геометрия",
+      "title": "Плоские непросматриваемые окна",
+      "requirement": "Оконные светопрозрачные конструкции, не видимые сзади, созданы без толщины.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.3.10"
+    },
+    {
+      "id": "npm-triangulated",
+      "category": "Геометрия",
+      "title": "Триангуляция",
+      "requirement": "Вся геометрия триангулирована перед экспортом FBX.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.3.11"
+    },
+    {
+      "id": "npm-visible-interiors",
+      "category": "Геометрия",
+      "title": "Только видимые интерьеры",
+      "requirement": "Упрощенные стены/пол/потолок присутствуют только там, где видны через стекло.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.3.12"
+    },
+    {
+      "id": "npm-transform-reset",
+      "category": "Сцена",
+      "title": "Трансформации применены",
+      "requirement": "Все трансформации применены, сглаживание назначено только полигонам.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.3.14-3.15"
+    },
+    {
+      "id": "npm-shaders",
+      "category": "Материалы",
+      "title": "Допустимые шейдеры",
+      "requirement": "Используются Standard, Physical Material или Principled BSDF; сторонние рендер-шейдеры отсутствуют.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.4.1"
+    },
+    {
+      "id": "npm-glass-material",
+      "category": "Материалы",
+      "title": "Стекло 50% без текстур",
+      "requirement": "Материал полупрозрачных деталей не содержит текстур, цвет задан параметром, прозрачность 50%.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.4.2-4.3"
+    },
+    {
+      "id": "npm-glass-material-count",
+      "category": "Материалы",
+      "title": "До 7 материалов стекла",
+      "requirement": "Количество материалов полупрозрачных деталей не превышает 7.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.4.6"
+    },
+    {
+      "id": "npm-texture-format-size",
+      "category": "Текстуры",
+      "title": "PNG 256-2048",
+      "requirement": "Текстуры — PNG допустимых квадратных размеров 256, 512, 1024 или 2048, не более 3 МБ каждая.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.5.1-5.3"
+    },
+    {
+      "id": "npm-texture-padding",
+      "category": "Текстуры",
+      "title": "Padding 8 px",
+      "requirement": "Уникальные соседние UV-острова имеют padding не менее 8 px.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.5.4"
+    },
+    {
+      "id": "npm-no-alpha",
+      "category": "Текстуры",
+      "title": "Альфа-канал запрещен",
+      "requirement": "В текстурных картах отсутствует альфа-канал.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.5.5"
+    },
+    {
+      "id": "npm-texture-set",
+      "category": "Текстуры",
+      "title": "Полный PBR-набор",
+      "requirement": "Diffuse обязателен; normal/transparency/roughness/metallic применяются по назначению; roughness и metallic только парой.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.5.6-5.10"
+    },
+    {
+      "id": "npm-texture-slots",
+      "category": "Текстуры",
+      "title": "1-2 набора на ОКС",
+      "requirement": "Один набор на ОКС; второй допустим только при эксплуатируемой кровле. Один общий набор на элементы благоустройства и один на растительность.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.5.11-5.13"
+    },
+    {
+      "id": "npm-texel-density",
+      "category": "Текстуры",
+      "title": "Плотность рельефа 10-40 px/м²",
+      "requirement": "Для рельефа участка плотность 10-40 px/м²; исключения применены только к оговоренным геометриям.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.6"
+    },
+    {
+      "id": "npm-glass-display",
+      "category": "Материалы",
+      "title": "Отображение стекла",
+      "requirement": "Стекло отображено либо в текстурах с roughness+metallic, либо отдельной геометрией с полупрозрачным материалом.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.7"
+    },
+    {
+      "id": "npm-georeference",
+      "category": "Координаты",
+      "title": "МСК Москвы и высоты",
+      "requirement": "Все объекты имеют координатную и высотную привязку в МСК Москвы; повороты соответствуют плану.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.8"
+    },
+    {
+      "id": "npm-naming",
+      "category": "Именование",
+      "title": "Маски файлов и объектов",
+      "requirement": "ZIP, FBX, объекты, материалы и текстуры именованы по обязательным схемам Main/MainGlass/Ground/GroundGlass/GroundEl/GroundElGlass/Flora; длина до 254.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.9-10"
+    }
+  ],
+  "supersedes": "moscow-npm-2026-01-19",
+  "selfHash": "4cfdbad848c2826279b7d419e208a734911e4e30c5d2289b2e7037ec5b4c3982"
+}

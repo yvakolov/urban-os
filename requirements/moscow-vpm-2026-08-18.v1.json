@@ -1,0 +1,535 @@
+{
+  "schemaVersion": "1.1",
+  "id": "moscow-vpm-2026-08-18",
+  "version": "2026-08-18.1",
+  "status": "active",
+  "sourceId": "msk-3d-2026-08-18",
+  "jurisdiction": "Москва",
+  "modelClass": "VPM",
+  "effectiveFrom": "2026-08-18",
+  "releasePolicy": "Все применимые правила должны иметь терминальное состояние; auto_fail и pending блокируют выпуск.",
+  "rules": [
+    {
+      "id": "vpm-format-fbx",
+      "category": "Формат",
+      "title": "FBX 2014 binary",
+      "requirement": "Приемочная модель предоставлена в FBX 7.4 binary; GLB используется как производный просмотрочный артефакт, не вместо FBX.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.1 п.1"
+    },
+    {
+      "id": "vpm-scale",
+      "category": "Сцена",
+      "title": "Масштаб 1:1 и метр",
+      "requirement": "Модель подготовлена 1:1; одна единица равна одному метру.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "разд.4; табл.1 п.2"
+    },
+    {
+      "id": "vpm-source-match",
+      "category": "Состав",
+      "title": "ВПМ соответствует проекту и НПМ",
+      "requirement": "Все ОКС и благоустройство одинаково и полно отражены в ВПМ и НПМ.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.1 п.1.3"
+    },
+    {
+      "id": "vpm-address",
+      "category": "Именование",
+      "title": "Address по маске",
+      "requirement": "Address сформирован из адреса либо кадастрового номера и содержит только латиницу, цифры и подчеркивания.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "табл.1 п.3",
+      "evaluator": {
+        "op": "regex",
+        "path": "package.address",
+        "pattern": "^[A-Za-z0-9_]+$"
+      }
+    },
+    {
+      "id": "vpm-oks-zip-size",
+      "category": "Архив",
+      "title": "ZIP ОКС до 500 МБ",
+      "requirement": "Каждый архив ОКС не превышает 500 МБ.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.1.1",
+      "appliesWhen": {
+        "path": "package.modelScope",
+        "equals": "oks"
+      },
+      "evaluator": {
+        "op": "max",
+        "path": "package.zipSizeBytes",
+        "value": 524288000
+      }
+    },
+    {
+      "id": "vpm-ground-zip-size",
+      "category": "Архив",
+      "title": "ZIP благоустройства до 1 ГБ",
+      "requirement": "Архив благоустройства не превышает 1 ГБ.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.1.1",
+      "appliesWhen": {
+        "path": "package.modelScope",
+        "equals": "ground"
+      },
+      "evaluator": {
+        "op": "max",
+        "path": "package.zipSizeBytes",
+        "value": 1073741824
+      }
+    },
+    {
+      "id": "vpm-zip-integrity",
+      "category": "Архив",
+      "title": "ZIP читается безопасно",
+      "requirement": "Центральная директория и локальные заголовки архива читаются; нет шифрования, опасных путей, дублей имен и неподдерживаемого сжатия.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.1.1",
+      "evaluator": {
+        "op": "equals",
+        "path": "zip.valid",
+        "value": true
+      }
+    },
+    {
+      "id": "vpm-signature",
+      "category": "Архив",
+      "title": "УКЭП",
+      "requirement": "Каждый ZIP подписан действующей УКЭП отдельным одноименным файлом; сертификат содержит обязательные сведения.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.1.1"
+    },
+    {
+      "id": "vpm-archive-content",
+      "category": "Архив",
+      "title": "FBX + GeoJSON + PNG",
+      "requirement": "Архив содержит FBX геометрии, FBX освещения при наличии, GeoJSON и 3-2100 PNG; поврежденные файлы отсутствуют.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.1.2; прил.2"
+    },
+    {
+      "id": "vpm-separate-oks",
+      "category": "Состав",
+      "title": "Каждый ОКС отдельно",
+      "requirement": "Каждый отдельностоящий ОКС, секция, корпус и стилобат с эксплуатируемой кровлей сформирован отдельной моделью.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.1.3"
+    },
+    {
+      "id": "vpm-ground-required",
+      "category": "Состав",
+      "title": "Благоустройство отдельно",
+      "requirement": "Обязательная отдельная модель благоустройства не включает эксплуатируемую кровлю ОКС.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.1.4"
+    },
+    {
+      "id": "vpm-geojson-syntax",
+      "category": "GeoJSON",
+      "title": "Валидный UTF-8 GeoJSON",
+      "requirement": "GeoJSON валиден, UTF-8, числовые поля — числа с точкой, имена полей не изменены и не продублированы.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.2.1,2.5,2.7",
+      "evaluator": {
+        "op": "equals",
+        "path": "geojson.valid",
+        "value": true
+      }
+    },
+    {
+      "id": "vpm-geojson-required-oks",
+      "category": "GeoJSON",
+      "title": "Все поля ОКС заполнены",
+      "requirement": "Для ОКС заполнены все поля кроме other; значения достоверны и соответствуют проекту.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.2.6",
+      "appliesWhen": {
+        "path": "package.modelScope",
+        "equals": "oks"
+      },
+      "evaluator": {
+        "op": "equals",
+        "path": "geojson.oksRequiredComplete",
+        "value": true
+      }
+    },
+    {
+      "id": "vpm-geojson-required-ground",
+      "category": "GeoJSON",
+      "title": "Обязательные поля благоустройства",
+      "requirement": "Для благоустройства заполнены все поля кроме FNO_name, FNO_code, h_otn, h_abs, s_obsh, s_naz, s_podz, spp_gns, other.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.2.6",
+      "appliesWhen": {
+        "path": "package.modelScope",
+        "equals": "ground"
+      },
+      "evaluator": {
+        "op": "equals",
+        "path": "geojson.groundRequiredComplete",
+        "value": true
+      }
+    },
+    {
+      "id": "vpm-coordinates-format",
+      "category": "GeoJSON",
+      "title": "Координаты с точностью 3 знака",
+      "requirement": "Обе координаты точки вставки записаны числами ровно с 3 знаками после точки.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "прил.10 поле coordinates",
+      "evaluator": {
+        "op": "equals",
+        "path": "geojson.coordinatesPrecision3",
+        "value": true
+      }
+    },
+    {
+      "id": "vpm-coordinates",
+      "category": "GeoJSON",
+      "title": "Положение в МСК-77",
+      "requirement": "Точка вставки дана в МСК-77 и смещена от планового положения СПОЗУ не более чем на 0,5 м.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "прил.10 поле coordinates"
+    },
+    {
+      "id": "vpm-scene-clean",
+      "category": "Сцена",
+      "title": "Чистая сцена",
+      "requirement": "Нет камер, пустых объектов, пустой геометрии, коммуникаций, людей, транспорта, анимаций и иных лишних данных.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.3.1,3.11",
+      "evaluator": {
+        "op": "all_zero",
+        "paths": [
+          "glb.cameras",
+          "glb.animations",
+          "glb.skins"
+        ]
+      }
+    },
+    {
+      "id": "vpm-one-layer",
+      "category": "Сцена",
+      "title": "Один слой",
+      "requirement": "Все объекты находятся в одном слое/коллекции; вложенные коллекции отсутствуют.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.3.2"
+    },
+    {
+      "id": "vpm-glass-separate",
+      "category": "Геометрия",
+      "title": "Стекло отдельной геометрией",
+      "requirement": "Светопрозрачные конструкции отделены от фасадов и объединены по модели по правилам материалов.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.3.4; п.8"
+    },
+    {
+      "id": "vpm-oks-skirt",
+      "category": "Геометрия",
+      "title": "Периметр ОКС -1 м",
+      "requirement": "Полигоны по периметру ОКС выдавлены вниз не менее чем на 1 м.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.3.6"
+    },
+    {
+      "id": "vpm-ground-skirt",
+      "category": "Геометрия",
+      "title": "Периметр благоустройства -1 м",
+      "requirement": "Полигоны благоустройства выдавлены вниз не менее чем на 1 м с заглушками обобщенного цвета.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.3.7"
+    },
+    {
+      "id": "vpm-oks-triangles",
+      "category": "Геометрия",
+      "title": "ОКС до 1 000 000",
+      "requirement": "ОКС и эксплуатируемая кровля в одном FBX — не более 1 000 000 треугольников без коллизии.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.3.9",
+      "evaluator": {
+        "op": "max",
+        "path": "glb.triangles",
+        "value": 1000000
+      }
+    },
+    {
+      "id": "vpm-ground-triangles",
+      "category": "Геометрия",
+      "title": "Лимит благоустройства по площади",
+      "requirement": "Лимит треугольников выбран по площади Sтер-Sпз: 300k/705k/1.125m/1.65m/1.95m/2.625m/3.15m/4.5m.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.3.10"
+    },
+    {
+      "id": "vpm-defects",
+      "category": "Геометрия",
+      "title": "Дефекты геометрии",
+      "requirement": "Не более 100 дубликатов/самопересечений при 0,002 м; нет изолированных элементов, нулевых ребер и ключей анимации.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.3.11"
+    },
+    {
+      "id": "vpm-interiors",
+      "category": "Геометрия",
+      "title": "Видимые интерьеры",
+      "requirement": "Интерьеры в видимых через стекло зонах соответствуют проекту; невидимые сложные элементы не моделируются.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.3.12"
+    },
+    {
+      "id": "vpm-normals",
+      "category": "Геометрия",
+      "title": "Нормали и затенение",
+      "requirement": "Нормали ориентированы к наблюдателю, визуальные дефекты и пропавшие полигоны отсутствуют.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.3.15"
+    },
+    {
+      "id": "vpm-realistic-flora",
+      "category": "Геометрия",
+      "title": "Реалистичная растительность",
+      "requirement": "Растительность выполнена реалистично без стилизации; состав благоустройства соответствует проекту.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.3.16,3.19"
+    },
+    {
+      "id": "vpm-triangulated-transforms",
+      "category": "Геометрия",
+      "title": "Триангуляция и трансформации",
+      "requirement": "Геометрия триангулирована, трансформации всех объектов и коллизий применены.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.3.17-3.18"
+    },
+    {
+      "id": "vpm-materials",
+      "category": "Материалы",
+      "title": "Principled BSDF",
+      "requirement": "Используется только Principled BSDF без сторонних рендер-движков; пути к текстурам удалены.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.4.1-4.2"
+    },
+    {
+      "id": "vpm-material-count",
+      "category": "Материалы",
+      "title": "До 7 материалов",
+      "requirement": "На объекте не более 7 материалов; дополнительные Main-материалы только при более 100 UDIM.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.4.3-4.5",
+      "evaluator": {
+        "op": "max",
+        "path": "glb.materials",
+        "value": 7
+      }
+    },
+    {
+      "id": "vpm-textures-external",
+      "category": "Текстуры",
+      "title": "PNG отдельно от FBX",
+      "requirement": "Текстуры не встроены в FBX, предоставлены отдельными PNG.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.5.1.1"
+    },
+    {
+      "id": "vpm-texture-size",
+      "category": "Текстуры",
+      "title": "2048 или 4096",
+      "requirement": "Карты имеют размер 2048×2048 или 4096×4096, 8 бит/канал; diffuse не меньше ERM/normal.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.5.1.2-1.3,1.9"
+    },
+    {
+      "id": "vpm-pbr-set",
+      "category": "Текстуры",
+      "title": "Diffuse + ERM + Normal",
+      "requirement": "Обязательный набор: diffuse, ERM, DirectX normal; ERM и normal без alpha; неиспользуемых карт нет.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.5.1.4,1.6-1.8"
+    },
+    {
+      "id": "vpm-padding",
+      "category": "UV",
+      "title": "Padding 16/32 px",
+      "requirement": "Padding не менее 16 px для 2048 и 32 px для 4096.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.5.1.5"
+    },
+    {
+      "id": "vpm-udim",
+      "category": "UV",
+      "title": "Последовательный UDIM",
+      "requirement": "Одна UV-развертка/канал, UDIM с 1001 без пропусков, без зеркалирования, с отступами и без видимых швов.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.5.2.1"
+    },
+    {
+      "id": "vpm-glass-uv",
+      "category": "UV",
+      "title": "Стекло в 1001",
+      "requirement": "Стекло развернуто в 1001 UDIM, один канал; наложение островов допустимо.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.5.2.2"
+    },
+    {
+      "id": "vpm-placeholder",
+      "category": "Текстуры",
+      "title": "Заглушка 256×256",
+      "requirement": "Одноцветные заглушки 256×256 без alpha используются только на поверхностях без выраженной фактуры.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.5.3"
+    },
+    {
+      "id": "vpm-texel-density",
+      "category": "Текстуры",
+      "title": "512-1706 px/м",
+      "requirement": "Плотность diffuse находится в диапазоне 512-1706 px/м; исключения применены только к заглушкам.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.6"
+    },
+    {
+      "id": "vpm-bake-small-details",
+      "category": "Геометрия",
+      "title": "Детали до 5 см запечены",
+      "requirement": "Декоративные детали до 5 см запечены в текстуры, кроме бордюрных выступов.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.7"
+    },
+    {
+      "id": "vpm-glass-properties",
+      "category": "Материалы",
+      "title": "Стекло без текстур",
+      "requirement": "Все стекло модели объединено; разные свойства — разные материалы, не более 7; текстуры на стекле запрещены.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.8"
+    },
+    {
+      "id": "vpm-pivot",
+      "category": "Координаты",
+      "title": "Pivot и поворот",
+      "requirement": "Pivot FBX в (0,0,0); pivot модели в центре XY и на нулевой отметке Z; все связанные объекты имеют одинаковый pivot.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.9"
+    },
+    {
+      "id": "vpm-naming",
+      "category": "Именование",
+      "title": "Маски имен",
+      "requirement": "Файлы, объекты, коллизии, материалы, текстуры и свет именованы по обязательным маскам, латиницей, до 254 символов.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.10-11"
+    },
+    {
+      "id": "vpm-alpha-cutouts",
+      "category": "Текстуры",
+      "title": "Сквозные вырезы через alpha",
+      "requirement": "Вырезы кодируются alpha diffuse; двусторонние полигоны дублируются со смещением 0,003-0,01 м и обратной нормалью.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.12"
+    },
+    {
+      "id": "vpm-collision",
+      "category": "Коллизия",
+      "title": "Коллизия",
+      "requirement": "Коллизии выпуклые, замкнутые, без материалов/пересечений; присутствуют для благоустройства, существующих и проектируемых ОКС по правилам допусков.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.13"
+    },
+    {
+      "id": "vpm-collision-budget",
+      "category": "Коллизия",
+      "title": "Лимит коллизии",
+      "requirement": "До 15 000 треугольников для модели <50k; иначе не более ceil(5% геометрии).",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.13.7"
+    },
+    {
+      "id": "vpm-emission",
+      "category": "Освещение",
+      "title": "Свечение через ERM",
+      "requirement": "Красный канал ERM используется только для свечения; при отсутствии свечения он черный, цвет берется из diffuse.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.14"
+    },
+    {
+      "id": "vpm-light-count",
+      "category": "Освещение",
+      "title": "До 250 источников",
+      "requirement": "В FBX освещения не более 250 источников.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.15.2",
+      "evaluator": {
+        "op": "max",
+        "path": "glb.lights",
+        "value": 250
+      }
+    },
+    {
+      "id": "vpm-light-spacing",
+      "category": "Освещение",
+      "title": "Шаг источников",
+      "requirement": "Между omni не менее 5 м, между spot не менее 1,5 м; используются базовые источники.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.15.5-15.6"
+    },
+    {
+      "id": "vpm-light-hierarchy",
+      "category": "Освещение",
+      "title": "Единый light root",
+      "requirement": "Источники привязаны к единому root с pivot освещаемого объекта; настроены только цвет и сила.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "табл.2 п.15.7-15.9"
+    }
+  ],
+  "supersedes": "moscow-vpm-2026-01-19",
+  "selfHash": "9f65299417d8142273769378204004a1f963438fe1982d13d76dc503a2b24d80"
+}

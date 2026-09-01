@@ -1,0 +1,254 @@
+{
+  "schemaVersion": "1.1",
+  "id": "advertising-structures-2025-07",
+  "version": "2025-07.1",
+  "status": "active",
+  "sourceId": "msk-advert-2025-07",
+  "jurisdiction": "Москва",
+  "modelClass": "AdvertisingStructure",
+  "effectiveFrom": "2025-07-15",
+  "releasePolicy": "Все применимые правила должны иметь терминальное состояние; auto_fail и pending блокируют выпуск.",
+  "rules": [
+    {
+      "id": "ad-separate-model",
+      "category": "Состав",
+      "title": "Одна конструкция — одна модель",
+      "requirement": "Каждый медиафасад, крышная или уникальная конструкция подготовлена отдельной моделью.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "стр.1"
+    },
+    {
+      "id": "ad-geojson",
+      "category": "GeoJSON",
+      "title": "Обязательные поля",
+      "requirement": "Заполнены address, okrug, rajon, name, developer, designer, cadNum и coordinates.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "стр.1",
+      "evaluator": {
+        "op": "equals",
+        "path": "geojson.advertisingRequiredComplete",
+        "value": true
+      }
+    },
+    {
+      "id": "ad-geojson-glasses",
+      "category": "GeoJSON",
+      "title": "Glasses для экранной конструкции",
+      "requirement": "Поле Glasses присутствует при наличии светопрозрачных или экранных материалов.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "стр.1",
+      "appliesWhen": {
+        "path": "package.hasScreen",
+        "equals": true
+      },
+      "evaluator": {
+        "op": "equals",
+        "path": "geojson.hasGlasses",
+        "value": true
+      }
+    },
+    {
+      "id": "ad-mount-depth",
+      "category": "Геометрия",
+      "title": "Крепление углублено на 0,5 м",
+      "requirement": "Крепления углублены к точке крепления не менее чем на 50 см.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "п.1"
+    },
+    {
+      "id": "ad-triangles",
+      "category": "Геометрия",
+      "title": "До 200 000 треугольников",
+      "requirement": "Геометрия без коллизии в одном FBX не превышает 200 000 треугольников.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "п.1",
+      "evaluator": {
+        "op": "max",
+        "path": "glb.triangles",
+        "value": 200000
+      }
+    },
+    {
+      "id": "ad-screen-object",
+      "category": "Геометрия",
+      "title": "Экран отдельным объектом",
+      "requirement": "Плоскость видео/изображения отделена в отдельный объект геометрии.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "п.1"
+    },
+    {
+      "id": "ad-screen-uv-1001",
+      "category": "UV",
+      "title": "Экран в 1001 UDIM",
+      "requirement": "Экран развернут в пределах 1001, с максимальным заполнением, отступом и центровкой.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "п.2"
+    },
+    {
+      "id": "ad-screen-uv-orientation",
+      "category": "UV",
+      "title": "Ориентация экрана U0 V1",
+      "requirement": "Верх экрана ориентирован к U:0 V:1.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "п.2"
+    },
+    {
+      "id": "ad-screen-uv-island",
+      "category": "UV",
+      "title": "Одна область — один остров",
+      "requirement": "Каждая уникальная экранная область использует один недеформированный UV-остров; дробление запрещено.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "п.2"
+    },
+    {
+      "id": "ad-mount-material",
+      "category": "Материалы",
+      "title": "Один материал крепления",
+      "requirement": "На объект крепления назначен один материал.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "п.3"
+    },
+    {
+      "id": "ad-screen-materials",
+      "category": "Материалы",
+      "title": "До 4 экранных материалов",
+      "requirement": "Число материалов экрана равно числу уникальных областей и не превышает 4; каждой области соответствует свое видео и текстура.",
+      "verification": "automatic",
+      "severity": "blocker",
+      "sourceRef": "п.3",
+      "evaluator": {
+        "op": "max",
+        "path": "package.screenMaterials",
+        "value": 4
+      }
+    },
+    {
+      "id": "ad-screen-no-maps",
+      "category": "Материалы",
+      "title": "Карты экрана вне архива",
+      "requirement": "Материал экрана не содержит текстурных карт; видео и экранная текстура предоставлены отдельно от архива.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "п.3"
+    },
+    {
+      "id": "ad-no-screen-material",
+      "category": "Материалы",
+      "title": "Один материал без экрана",
+      "requirement": "Конструкция без экрана использует один материал на всю модель.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "п.3"
+    },
+    {
+      "id": "ad-pivot-wall",
+      "category": "Координаты",
+      "title": "Pivot настенной конструкции",
+      "requirement": "Pivot настенной конструкции — примерно центр XY и нижняя точка по Z.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "п.4"
+    },
+    {
+      "id": "ad-pivot-ground",
+      "category": "Координаты",
+      "title": "Pivot наземной/крышной конструкции",
+      "requirement": "Pivot наземной или крышной конструкции — примерно центр XY и уровень поверхности по Z.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "п.4"
+    },
+    {
+      "id": "ad-emission",
+      "category": "Текстуры",
+      "title": "Emission + R ERM",
+      "requirement": "Светящиеся элементы используют карту Emission для цвета и красный канал ERM как маску; несветящиеся крепления имеют черный R ERM.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "п.5"
+    },
+    {
+      "id": "ad-screen-texture-format",
+      "category": "Текстуры",
+      "title": "Экран PNG до 2560",
+      "requirement": "Экранная текстура рекомендуется PNG, не более 2560 px по длинной стороне, пропорции совпадают с UV-островом.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "п.5.1"
+    },
+    {
+      "id": "ad-video-codec",
+      "category": "Видео",
+      "title": "MP4 H.264",
+      "requirement": "Видео — MP4 H.264, актуально по сезону/событию, с соответствующей статичной текстурой.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "введение; п.6"
+    },
+    {
+      "id": "ad-video-resolution",
+      "category": "Видео",
+      "title": "Видео до 2560",
+      "requirement": "Видео не превышает 2560 px по длинной стороне; пропорции совпадают с UV-островом.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "п.6.1"
+    },
+    {
+      "id": "ad-video-bitrate",
+      "category": "Видео",
+      "title": "Битрейт до 18 Мбит/с",
+      "requirement": "Битрейт не выше 18 Мбит/с.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "п.6.1"
+    },
+    {
+      "id": "ad-video-fps",
+      "category": "Видео",
+      "title": "25 кадров/с",
+      "requirement": "Частота кадров ровно 25 fps.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "п.6.1"
+    },
+    {
+      "id": "ad-video-duration",
+      "category": "Видео",
+      "title": "До 30 секунд",
+      "requirement": "Длительность клипа не превышает 30 секунд.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "п.6.1"
+    },
+    {
+      "id": "ad-video-size",
+      "category": "Видео",
+      "title": "До 70 МБ",
+      "requirement": "Видеофайл не превышает 70 МБ.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "п.6.1"
+    },
+    {
+      "id": "ad-naming",
+      "category": "Именование",
+      "title": "Маски имен",
+      "requirement": "Экран, видео, текстура, материал и Emission именованы по маскам SM_/V_/T_/M_Address_MainBillboard_Slot и T_Address_Emission_Slot.UDIM.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "п.7"
+    }
+  ],
+  "selfHash": "86044ebd0bd32d2694d8aa90798bc691f3be24b77927c1b956e258bebe4ab6d4"
+}
