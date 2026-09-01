@@ -18,7 +18,10 @@
 """
 
 import argparse
+import getpass
 import json
+import re
+import subprocess
 import sys
 from pathlib import Path
 
@@ -27,6 +30,15 @@ STATE = ROOT / "review" / "state.json"
 SOURCES = ROOT / "sources" / "index.json"
 REQ = ROOT / "requirements"
 SNAP = ROOT / "sources" / "snapshots"
+
+# Заглушки из документации и типовые «лишь бы прошло». Инструмент не умеет
+# проверить, что за именем стоит человек, но обязан отказать там, где очевидно,
+# что не стоит: запись «кто снял блокировку» — единственный след ответственности.
+PLACEHOLDERS = {
+    "фамилия и.о.", "фамилия и. о.", "<фамилия и.о.>", "фио", "ф.и.о.",
+    "имя", "автор", "todo", "tbd", "xxx", "test", "тест", "n/a", "-", "—",
+    "none", "null", "claude", "codex", "bot", "ci", "robot",
+}
 
 CURRENT = "current"
 STALE = "STALE"
@@ -59,6 +71,43 @@ def baseline_hash(source_id):
     if not f.exists():
         return None
     return json.loads(f.read_text(encoding="utf-8")).get("normalizedHash")
+
+
+def actual_identity():
+    """Кто фактически запустил команду. Личность не подтверждает, но фиксирует.
+
+    Расхождение с --by остаётся в записи: если утверждение оформлено на одного
+    человека, а выполнено под другой учётной записью, это должно быть видно в
+    истории, а не раствориться.
+    """
+    who = {"osUser": getpass.getuser()}
+    for field, arg in (("gitName", "user.name"), ("gitEmail", "user.email")):
+        try:
+            r = subprocess.run(["git", "config", arg], cwd=str(ROOT),
+                               capture_output=True, text=True, timeout=5)
+            if r.returncode == 0 and r.stdout.strip():
+                who[field] = r.stdout.strip()
+        except (OSError, subprocess.SubprocessError):
+            pass
+    return who
+
+
+def check_identity(by):
+    """Вернуть текст ошибки, если --by не может быть именем человека."""
+    value = " ".join((by or "").split())
+    low = value.lower()
+    if not value:
+        return "--by пустой"
+    if low in PLACEHOLDERS or low.strip(".") in PLACEHOLDERS:
+        return (f"«{value}» — заглушка из документации, а не имя. Снятие блокировки "
+                f"фиксирует ответственность конкретного человека, и подставлять "
+                f"образец из README здесь нельзя.")
+    if len(value) < 4 or not re.search(r"[A-Za-zА-Яа-яЁё]{2}", value):
+        return f"«{value}» не похоже на имя"
+    if len(value.split()) < 2:
+        return (f"«{value}» — одно слово. Укажите фамилию и инициалы либо имя и "
+                f"фамилию, чтобы запись адресовала человека однозначно.")
+    return None
 
 
 def key(profile):
@@ -107,7 +156,8 @@ def approve(args):
     entry["sources"][sid] = {
         "normalizedHash": h,
         "reviewedOn": args.on,
-        "reviewedBy": args.by,
+        "reviewedBy": " ".join(args.by.split()),
+        "recordedBy": actual_identity(),
         "verdict": args.verdict,
         "note": args.note or "",
     }
@@ -121,6 +171,8 @@ def main():
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--status", action="store_true")
     ap.add_argument("--approve", metavar="PROFILE")
+    ap.add_argument("--revoke", metavar="PROFILE",
+                    help="снять ошибочную запись о пересмотре; выпуск снова блокируется")
     ap.add_argument("--source")
     ap.add_argument("--by", default="")
     ap.add_argument("--on", default="")
@@ -129,10 +181,34 @@ def main():
     ap.add_argument("--note", default="")
     args = ap.parse_args()
 
+    if args.revoke:
+        state, sources, profiles = load()
+        p = profiles.get(args.revoke)
+        if not p:
+            print(f"{args.revoke}: активного профиля с таким id нет")
+            return 1
+        entry = state["reviews"].get(key(p)) or {"sources": {}}
+        sid = args.source or p["sourceId"]
+        if sid not in entry.get("sources", {}):
+            print(f"{key(p)} ← {sid}: записи о пересмотре нет")
+            return 1
+        removed = entry["sources"].pop(sid)
+        if not entry["sources"]:
+            state["reviews"].pop(key(p), None)
+        STATE.write_text(json.dumps(state, ensure_ascii=False, indent=2) + "\n",
+                         encoding="utf-8")
+        print(f"снято: {key(p)} ← {sid}, было оформлено на «{removed['reviewedBy']}»")
+        print("Выпуск по профилю снова заблокирован.")
+        return 0
+
     if args.approve:
         if not args.by or not args.on:
             print("--by и --on обязательны: пересмотр — действие человека, "
                   "и в записи должно быть видно, кто и когда его сделал")
+            return 1
+        problem = check_identity(args.by)
+        if problem:
+            print(f"--by отклонён: {problem}")
             return 1
         return approve(args)
 

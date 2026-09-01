@@ -1326,3 +1326,48 @@ class TestReviewState(unittest.TestCase):
         self.assertNotIn("requests", src)
         h = self.review.baseline_hash("msk-284-pp")
         self.assertTrue(h and len(h) == 64)
+
+    def test_121_placeholder_cannot_lift_the_block(self):
+        """Образец из README не должен проходить как имя утвердившего.
+
+        Запись «кто снял блокировку» — единственный след ответственности в
+        инструменте. Проверить, что за именем стоит человек, он не умеет, но
+        обязан отказать там, где очевидно, что не стоит.
+        """
+        for placeholder in ("Фамилия И.О.", "<Фамилия И.О.>", "ФИО", "TODO",
+                            "test", "claude", "", "  "):
+            self.assertIsNotNone(self.review.check_identity(placeholder), placeholder)
+        for real in ("Ваколов Ю.С.", "Иванов И.И.", "Пётр Смирнов", "A. B. Petrov"):
+            self.assertIsNone(self.review.check_identity(real), real)
+
+    def test_122_single_word_is_not_an_identity(self):
+        self.assertIsNotNone(self.review.check_identity("Иванов"))
+        self.assertIsNone(self.review.check_identity("Иванов И.И."))
+
+    def test_123_readme_example_is_the_rejected_placeholder(self):
+        """Пример --by в README обязан отвергаться инструментом.
+
+        Иначе документация учит команде, которая проходит, и заглушка
+        попадает в реестр именно потому, что её оттуда скопировали.
+        """
+        import re
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        examples = re.findall(r'--by "([^"]+)"', readme)
+        self.assertTrue(examples, "в README нет примера --by")
+        for example in examples:
+            self.assertIsNotNone(self.review.check_identity(example),
+                                 f"пример {example!r} из README проходит проверку")
+
+    def test_124_existing_approvals_satisfy_the_check(self):
+        """Уже поставленные утверждения не должны задним числом стать невалидными."""
+        state = json.loads((ROOT / "review" / "state.json").read_text(encoding="utf-8"))
+        seen = 0
+        for entry in state["reviews"].values():
+            for record in entry["sources"].values():
+                seen += 1
+                self.assertIsNone(self.review.check_identity(record["reviewedBy"]),
+                                  record["reviewedBy"])
+        self.assertGreater(seen, 0, "в реестре нет ни одного утверждения")
+
+    def test_125_record_keeps_who_actually_ran_it(self):
+        self.assertIn("osUser", self.review.actual_identity())
