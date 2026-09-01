@@ -2,7 +2,9 @@
   "name": "urban-os",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "dev": "nx serve client"
+  },
   "private": true,
   "devDependencies": {
     "@angular-devkit/core": "~22.0.4",
