@@ -1078,3 +1078,14 @@ class TestModelInspectors(unittest.TestCase):
         self.assertEqual(validate_mod.self_hash(p), before)
         p["rules"][0]["requirement"] += "."
         self.assertNotEqual(validate_mod.self_hash(p), before)
+
+    def test_105_graph_shows_only_live_redactions(self):
+        """Витрина показывает действующие требования, а не перекрытые.
+
+        Полагаться на порядок имён файлов нельзя: v10 встал бы перед v2.
+        """
+        import build_graph
+        _s, _m, _d, profiles = build_graph.load()
+        for pid, p in profiles.items():
+            self.assertNotEqual(p["status"], "superseded", pid)
+        self.assertEqual(profiles["moscow-npm-2026-08-18"]["version"], "2026-08-18.2")

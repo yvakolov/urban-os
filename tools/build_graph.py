@@ -36,6 +36,11 @@ def load():
     profiles = {}
     for p in sorted((ROOT / "requirements").glob("*.json")):
         d = json.loads(p.read_text(encoding="utf-8"))
+        # Перекрытая редакция в граф не идёт: показывать надо действующие
+        # требования. Полагаться на порядок имён файлов нельзя — v10 встал бы
+        # перед v2, и витрина показала бы устаревшую редакцию как текущую.
+        if d.get("status") == "superseded":
+            continue
         profiles[d["id"]] = d
     return sources, monitors, delivs, profiles
 
