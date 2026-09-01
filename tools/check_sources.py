@@ -29,6 +29,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from lib import extract as extract_mod  # noqa: E402
 from lib import impact as impact_mod  # noqa: E402
 from lib import normalize as norm_mod  # noqa: E402
+import review as review_mod  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 SOURCES_FILE = ROOT / "sources" / "index.json"
@@ -297,10 +298,14 @@ def main():
         payload = do_approve(args.approve, args.snapshot, monitors, args.by)
         print(f"baseline для {args.approve} утверждён: снапшот {payload['snapshot']}")
         print(f"  normalizedHash: {payload['normalizedHash']}")
-        print("\nrequirements НЕ изменены. Профили, которые следует пересмотреть:")
+        print("\nrequirements НЕ изменены. Утверждение baseline — это фиксация того,")
+        print("ЧТО сейчас написано в источнике, а не решение о том, что требования те же.")
+        print("Профили, пересмотр которых теперь устарел и выпуск по которым заблокирован:")
         imp = impact_mod.analyse(args.approve, [], sources, profiles, monitors[args.approve])
         for pid in imp["affectedProfiles"] or ["— нет привязанных профилей"]:
             print(f"  · {pid}")
+        print("\nСнять блокировку: tools/review.py --approve <профиль> "
+              "--source %s --by ... --on ... --verdict requirements_unchanged" % args.approve)
         return 0
 
     selected = [args.source_id] if args.source_id else [

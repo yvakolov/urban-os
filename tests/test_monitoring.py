@@ -1263,3 +1263,66 @@ class TestRegulationProvenance(unittest.TestCase):
         self.assertEqual(gaps, unverifiable,
                          "пробел есть, а объяснения нет — или наоборот")
         self.assertEqual(len(gaps), 4)
+
+
+class TestReviewState(unittest.TestCase):
+    """Состояние пересмотра: перечитал ли человек профиль после сдвига источника.
+
+    Живёт вне профилей намеренно. Опубликованный профиль неизменяем, а это
+    состояние меняется при каждом сдвиге источника: записать его внутрь значило
+    бы либо править опубликованное, либо выпускать новую редакцию требований
+    там, где требования не менялись.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        sys.path.insert(0, str(ROOT / "tools"))
+        import review
+        cls.review = review
+        cls.profile = json.loads(
+            (ROOT / "requirements" / "agr-request-package.v1.json").read_text(encoding="utf-8"))
+
+    def test_117_unreviewed_profile_is_reported_and_blocks_release(self):
+        state, sources, profiles = self.review.load()
+        rows = self.review.status(state, sources, profiles)
+        self.assertTrue(rows)
+        blocked = self.review.blocked_profiles(rows)
+        for pid, sid, st, _c, _s in rows:
+            self.assertIn(st, (self.review.CURRENT, self.review.STALE,
+                               self.review.NEVER, self.review.UNMONITORED))
+            if st in (self.review.STALE, self.review.NEVER):
+                self.assertIn(pid, blocked)
+
+    def test_118_stale_review_blocks_release_regardless_of_checks(self):
+        """Все проверки пройдены — выпускать всё равно нельзя.
+
+        Источник сдвинулся, значит правила могли устареть все разом, и
+        количество пройденных проверок об этом ничего не говорит.
+        """
+        clean = validate_mod.evaluate(self.profile, {}, None, True)
+        stale = validate_mod.evaluate(self.profile, {}, None, False)
+        self.assertIs(stale["sourceReviewCurrent"], False)
+        self.assertIs(clean["sourceReviewCurrent"], True)
+        self.assertFalse(stale["releaseEligible"])
+        self.assertEqual(stale["releaseBlockedBy"], "source_review_stale")
+        self.assertNotIn("releaseBlockedBy", clean)
+
+    def test_119_review_state_does_not_live_inside_profiles(self):
+        """Иначе сдвиг источника заставлял бы править опубликованный профиль."""
+        for path in (ROOT / "requirements").glob("*.json"):
+            p = json.loads(path.read_text(encoding="utf-8"))
+            self.assertNotIn("review", p, path.name)
+            self.assertNotIn("reviewedAgainst", p, path.name)
+
+    def test_120_approval_reads_the_approved_baseline_not_the_network(self):
+        """Хеш для записи берётся из утверждённого снапшота.
+
+        Иначе человек подтверждал бы редакцию, которой никто не видел: CI
+        смотрел одну, локальный запуск скачал бы другую.
+        """
+        import inspect as py_inspect
+        src = py_inspect.getsource(self.review)
+        self.assertNotIn("urllib", src)
+        self.assertNotIn("requests", src)
+        h = self.review.baseline_hash("msk-284-pp")
+        self.assertTrue(h and len(h) == 64)

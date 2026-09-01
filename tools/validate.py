@@ -72,7 +72,8 @@ def is_missing(v):
     return v is None or v == ""
 
 
-def evaluate(profile: dict, context: dict, decisions: dict | None = None) -> dict:
+def evaluate(profile: dict, context: dict, decisions: dict | None = None,
+             source_review_current: bool | None = None) -> dict:
     """Портированный evaluateProfile. Порядок ветвлений повторяет core.js."""
     decisions = decisions or {}
     counts = dict.fromkeys(
@@ -94,6 +95,14 @@ def evaluate(profile: dict, context: dict, decisions: dict | None = None) -> dic
         and counts["awaiting_external"] == 0
         and counts["rule_error"] == 0
     )
+    # Свежесть пересмотра — свойство профиля, а не объекта, поэтому приходит
+    # снаружи. Источник сдвинулся, а человек правила не перечитал — выпускать
+    # по ним нельзя, сколько бы проверок ни прошло: они могли устареть все
+    # разом. None означает «не спрашивали» и поведения не меняет.
+    counts["sourceReviewCurrent"] = source_review_current
+    if source_review_current is False:
+        counts["releaseEligible"] = False
+        counts["releaseBlockedBy"] = "source_review_stale"
     return counts
 
 
@@ -370,6 +379,29 @@ def check_references(sources_doc, profiles, monitor_doc):
 
 # ---------------------------------------------------------------- фикстуры
 
+def check_review(profiles):
+    """Свежесть пересмотра — предупреждение, а не ошибка сборки.
+
+    Непересмотренный источник блокирует ВЫПУСК, а не сборку: красить CI из-за
+    того, что человек ещё не сел читать, значит приучить смотреть на красное
+    как на норму. Блокировка живёт там, где принимается решение о выпуске.
+    """
+    try:
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        import review as review_mod
+    except Exception as exc:
+        return [f"состояние пересмотра не прочитано: {type(exc).__name__}: {exc}"]
+    state, sources, active = review_mod.load()
+    rows = review_mod.status(state, sources, active)
+    out = []
+    for pid, sid, st, _cur, _seen in rows:
+        if st == review_mod.NEVER:
+            out.append(f"{pid}: источник {sid} ни разу не пересматривался человеком — выпуск заблокирован")
+        elif st == review_mod.STALE:
+            out.append(f"{pid}: источник {sid} сдвинулся после последнего пересмотра — выпуск заблокирован")
+    return out
+
+
 def check_fixtures(profiles):
     errors = []
     if not FIXTURE_DIR.exists():
@@ -420,6 +452,7 @@ def main() -> int:
 
     if not rehash:
         errors += check_fixtures(profiles)
+        warnings += check_review(profiles)
 
     total_rules = sum(len(p.get("rules", [])) for p in profiles.values())
     auto = sum(1 for p in profiles.values() for r in p.get("rules", []) if r.get("verification") == "automatic")
