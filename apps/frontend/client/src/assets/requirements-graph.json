@@ -5,7 +5,7 @@
     "source": 12,
     "branch": 5,
     "profile": 6,
-    "rule": 260,
+    "rule": 261,
     "deliverable": 29
   },
   "nodes": [
@@ -923,7 +923,7 @@
       "label": "moscow-ifc-agr-2026-01-16",
       "status": "draft",
       "sourceId": "msk-ifc-agr",
-      "ruleCount": 84
+      "ruleCount": 85
     },
     {
       "id": "rule:ifc-format-spf",
@@ -1679,7 +1679,7 @@
       "severity": "blocker",
       "verification": "expert_evidence",
       "pending": false,
-      "sourceRef": "п. 6.2.2"
+      "sourceRef": "п. 6.2.2; прил. 4"
     },
     {
       "id": "rule:ifc-no-hanging-elements",
@@ -1932,6 +1932,18 @@
       "verification": "automatic",
       "pending": false,
       "sourceRef": "прил. 2, табл. Б.13"
+    },
+    {
+      "id": "rule:ifc-tep-xml-schema",
+      "layer": "rule",
+      "label": "XML ТЭП соответствует схеме приложения 5",
+      "ruleId": "ifc-tep-xml-schema",
+      "profileId": "moscow-ifc-agr-2026-01-16",
+      "category": "ТЭП",
+      "severity": "blocker",
+      "verification": "automatic",
+      "pending": false,
+      "sourceRef": "прил. 5"
     },
     {
       "id": "profile:moscow-npm-2026-08-18",
@@ -3481,7 +3493,7 @@
       "label": "Таблица суммарной поэтажной площади",
       "kind": "file",
       "origin": "produced",
-      "fmt": "XML",
+      "fmt": "XML по схеме приложения 5 (ArchitecturalUrbanPlanningSolution, 47 элементов)",
       "blockedBy": null,
       "isOutcome": false
     },
@@ -4408,6 +4420,11 @@
       "kind": "contains"
     },
     {
+      "source": "profile:moscow-ifc-agr-2026-01-16",
+      "target": "rule:ifc-tep-xml-schema",
+      "kind": "contains"
+    },
+    {
       "source": "src:msk-3d-2026-08-18",
       "target": "profile:moscow-npm-2026-08-18",
       "kind": "transcribedInto"
@@ -5289,6 +5306,11 @@
     },
     {
       "source": "rule:ifc-tep-composition",
+      "target": "deliv:tep-table",
+      "kind": "produces"
+    },
+    {
+      "source": "rule:ifc-tep-xml-schema",
       "target": "deliv:tep-table",
       "kind": "produces"
     },

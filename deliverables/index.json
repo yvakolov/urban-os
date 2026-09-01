@@ -146,12 +146,13 @@
     "tep-table": {
       "kind": "file",
       "label": "Таблица суммарной поэтажной площади",
-      "format": "XML",
+      "format": "XML по схеме приложения 5 (ArchitecturalUrbanPlanningSolution, 47 элементов)",
       "origin": "produced",
       "producedBy": [
         "doc-08-tep-table",
         "ifc-tep-xml",
-        "ifc-tep-composition"
+        "ifc-tep-composition",
+        "ifc-tep-xml-schema"
       ],
       "note": "Формируется из атрибутивного состава ЦИМ АГР (п. 7.2), а не заполняется вручную."
     },

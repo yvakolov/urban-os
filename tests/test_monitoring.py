@@ -463,3 +463,39 @@ class TestIfcDictionary(unittest.TestCase):
                 self.assertEqual(c["detailStages"], ["ВПМ"], f"{k} требуется только на ВПМ")
             else:
                 self.assertEqual(c["detailStages"], ["НПМ", "ВПМ"], f"{k} требуется на обеих стадиях")
+
+
+class TestTepSchema(unittest.TestCase):
+    """XML-схема ТЭП — приложение 5. Закрывает документ 8 комплекта запроса."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.d = json.loads((ROOT / "dictionaries" / "tep-xml-schema.v1.json").read_text(encoding="utf-8"))
+
+    def test_45_paths_match_nesting(self):
+        """path обязан соответствовать depth, иначе вложенность в схеме врёт."""
+        root = self.d["rootElement"]
+        for e in self.d["elements"]:
+            self.assertEqual(len(e["path"].split("/")), e["depth"] + 1,
+                             f"{e['name']}: path={e['path']} не соответствует depth={e['depth']}")
+            self.assertTrue(e["path"].startswith(root + "/"), f"{e['name']}: путь не от корня")
+
+    def test_46_nested_elements_have_a_parent(self):
+        """Элемент глубины 2 обязан лежать внутри существующего complexType."""
+        containers = {e["name"] for e in self.d["elements"] if e["type"] == "complexType"}
+        for e in self.d["elements"]:
+            if e["depth"] == 2:
+                parent = e["path"].split("/")[-2]
+                self.assertIn(parent, containers, f"{e['name']}: родитель {parent} не complexType")
+
+    def test_47_types_are_known(self):
+        known = {"xs:string", "xs:date", "xs:decimal", "xs:integer", "xs:positiveInteger",
+                 "complexType", "simpleType (enumeration)"}
+        used = {e["type"] for e in self.d["elements"] if e.get("type")}
+        self.assertTrue(used <= known, f"неизвестные типы: {used - known}")
+
+    def test_48_tep_composition_covered(self):
+        """Показатели из таблицы 7.1 должны иметь поля в схеме — иначе ТЭП не собрать."""
+        names = " ".join(e["name"] for e in self.d["elements"])
+        for token in ("Height", "Area", "Apartment"):
+            self.assertIn(token, names, f"в схеме нет ни одного элемента с «{token}»")
