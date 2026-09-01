@@ -1,4 +1,52 @@
+# инструменты
 __pycache__/
 *.pyc
+
+# система и IDE
 .DS_Store
 .idea/
+
+# Nx / node
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/settings.json
+!.vscode/tasks.json
+*.launch
+*.sublime-workspace
+.DS_Store
+.c9/
+.classpath
+.claude/settings.local.json
+.claude/worktrees
+.cursor/rules/nx-rules.mdc
+.github/instructions/nx.instructions.md
+.nx/cache
+.nx/migrate-runs
+.nx/polygraph
+.nx/self-healing
+.nx/workspace-data
+.project
+.settings/
+.vscode/*
+/.idea
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+/typings
+Thumbs.db
+dist
+node_modules
+npm-debug.log
+out-tsc
+testem.log
+tmp
+yarn-error.log
+
+.angular
+
+# Angular / Nx
+.angular
+
+# Angular / Nx
+.angular
