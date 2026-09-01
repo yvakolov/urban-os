@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.1",
   "id": "agr-request-package",
-  "version": "2026-09-01.2",
+  "version": "2026-09-01.3",
   "status": "draft",
   "sourceId": "msk-admin-reglament-agr",
   "jurisdiction": "Москва",
@@ -16,7 +16,7 @@
       "requirement": "Заявитель является физическим лицом, индивидуальным предпринимателем, юридическим лицом либо организацией из перечня п. 2.4.1.1 Административного регламента.",
       "verification": "expert_evidence",
       "severity": "blocker",
-      "sourceRef": "recipientCategories, пп. 1-3"
+      "sourceRef": "recipientCategories, пп. 1-3; groundsOfRefusal · предоставление, п. 4"
     },
     {
       "id": "elig-land-right",
@@ -74,7 +74,7 @@
       "requirement": "Объект капитального строительства входит в число тех, для которых утверждение АГР требуется согласно Положению, утверждённому постановлением 284-ПП.",
       "verification": "expert_evidence",
       "severity": "blocker",
-      "sourceRef": "offDocs · 284-ПП, Положение об утверждении АГР"
+      "sourceRef": "offDocs · 284-ПП, Положение об утверждении АГР; groundsOfRefusal · предоставление, п. 11"
     },
     {
       "id": "doc-01-request",
@@ -186,6 +186,24 @@
       "sourceRef": "groundsOfRefusal · приём, п. 6"
     },
     {
+      "id": "form-package-complete",
+      "category": "Форма подачи",
+      "title": "Комплект документов полон",
+      "requirement": "Представлен полный комплект документов, указанных в перечне обязательных. Неполный комплект — самостоятельное основание для отказа в приёме, срабатывающее до содержательного рассмотрения.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "groundsOfRefusal · приём, п. 3"
+    },
+    {
+      "id": "form-acts-compliance",
+      "category": "Форма подачи",
+      "title": "Запрос и документы соответствуют правовым актам",
+      "requirement": "Запрос и иные документы соответствуют требованиям правовых актов Российской Федерации, правовых актов города Москвы, Единых требований и Административного регламента. Проверяется дважды: на приёме и при обработке по существу.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "groundsOfRefusal · приём, п. 1; предоставление, п. 1"
+    },
+    {
       "id": "form-signature-owner",
       "category": "Форма подачи",
       "title": "Подпись принадлежит подавшему",
@@ -193,6 +211,15 @@
       "verification": "expert_evidence",
       "severity": "blocker",
       "sourceRef": "groundsOfRefusal · приём, п. 5"
+    },
+    {
+      "id": "form-authorised-submitter",
+      "category": "Форма подачи",
+      "title": "Запрос подан уполномоченным лицом",
+      "requirement": "Запрос от имени заявителя подан лицом, уполномоченным на это в установленном порядке.",
+      "verification": "expert_evidence",
+      "severity": "blocker",
+      "sourceRef": "groundsOfRefusal · приём, п. 4"
     },
     {
       "id": "form-no-duplicate-request",
@@ -222,6 +249,16 @@
       "severity": "major",
       "sourceRef": "incomingDocuments · необязательные, п. 1",
       "note": "Отсутствие документа у органа власти при непредставлении его заявителем — самостоятельное основание для отказа (основания в предоставлении, п. 12)."
+    },
+    {
+      "id": "ext-interdepartmental-gap",
+      "category": "Внешние документы",
+      "title": "Органы власти подтвердили наличие запрошенных документов",
+      "requirement": "От органов государственной власти не поступила информация об отсутствии у них документов и сведений, получаемых по межведомственному взаимодействию, если заявитель не представил их по собственной инициативе.",
+      "verification": "external_fact",
+      "severity": "blocker",
+      "sourceRef": "groundsOfRefusal · предоставление, п. 12",
+      "note": "Практический вывод: выписки и схемы прикладывать самим. Межведомственный запрос гарантией не является — его безрезультатность становится основанием для отказа."
     },
     {
       "id": "ext-egrn",
@@ -366,5 +403,5 @@
       "sourceRef": "groundsOfRefusal · приём, п. 2; предоставление, п. 2"
     }
   ],
-  "selfHash": "00953a279da8125883efb490fbac910312e9c67e8cd30985d8c6be6293c22fb3"
+  "selfHash": "c9ae0bf4a3d56ddc52c366076fb3533bcf0540530d5c75c88725253a0fb34f7d"
 }

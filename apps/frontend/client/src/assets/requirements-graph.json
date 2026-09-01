@@ -5,7 +5,7 @@
     "source": 12,
     "branch": 5,
     "profile": 5,
-    "rule": 172,
+    "rule": 176,
     "deliverable": 29
   },
   "nodes": [
@@ -131,7 +131,7 @@
       "label": "groundsOfRefusal",
       "sourceId": "msk-284-pp",
       "registry": false,
-      "ruleCount": 13
+      "ruleCount": 17
     },
     {
       "id": "branch:msk-284-pp:recipientCategories",
@@ -459,7 +459,7 @@
       "label": "agr-request-package",
       "status": "draft",
       "sourceId": "msk-admin-reglament-agr",
-      "ruleCount": 34
+      "ruleCount": 38
     },
     {
       "id": "rule:elig-applicant-kind",
@@ -471,7 +471,7 @@
       "severity": "blocker",
       "verification": "expert_evidence",
       "pending": false,
-      "sourceRef": "recipientCategories, пп. 1-3"
+      "sourceRef": "recipientCategories, пп. 1-3; groundsOfRefusal · предоставление, п. 4"
     },
     {
       "id": "rule:elig-land-right",
@@ -531,7 +531,7 @@
       "severity": "blocker",
       "verification": "expert_evidence",
       "pending": false,
-      "sourceRef": "offDocs · 284-ПП, Положение об утверждении АГР"
+      "sourceRef": "offDocs · 284-ПП, Положение об утверждении АГР; groundsOfRefusal · предоставление, п. 11"
     },
     {
       "id": "rule:doc-01-request",
@@ -654,6 +654,30 @@
       "sourceRef": "groundsOfRefusal · приём, п. 6"
     },
     {
+      "id": "rule:form-package-complete",
+      "layer": "rule",
+      "label": "Комплект документов полон",
+      "ruleId": "form-package-complete",
+      "profileId": "agr-request-package",
+      "category": "Форма подачи",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "groundsOfRefusal · приём, п. 3"
+    },
+    {
+      "id": "rule:form-acts-compliance",
+      "layer": "rule",
+      "label": "Запрос и документы соответствуют правовым актам",
+      "ruleId": "form-acts-compliance",
+      "profileId": "agr-request-package",
+      "category": "Форма подачи",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "groundsOfRefusal · приём, п. 1; предоставление, п. 1"
+    },
+    {
       "id": "rule:form-signature-owner",
       "layer": "rule",
       "label": "Подпись принадлежит подавшему",
@@ -664,6 +688,18 @@
       "verification": "expert_evidence",
       "pending": false,
       "sourceRef": "groundsOfRefusal · приём, п. 5"
+    },
+    {
+      "id": "rule:form-authorised-submitter",
+      "layer": "rule",
+      "label": "Запрос подан уполномоченным лицом",
+      "ruleId": "form-authorised-submitter",
+      "profileId": "agr-request-package",
+      "category": "Форма подачи",
+      "severity": "blocker",
+      "verification": "expert_evidence",
+      "pending": false,
+      "sourceRef": "groundsOfRefusal · приём, п. 4"
     },
     {
       "id": "rule:form-no-duplicate-request",
@@ -700,6 +736,18 @@
       "verification": "external_fact",
       "pending": false,
       "sourceRef": "incomingDocuments · необязательные, п. 1"
+    },
+    {
+      "id": "rule:ext-interdepartmental-gap",
+      "layer": "rule",
+      "label": "Органы власти подтвердили наличие запрошенных документов",
+      "ruleId": "ext-interdepartmental-gap",
+      "profileId": "agr-request-package",
+      "category": "Внешние документы",
+      "severity": "blocker",
+      "verification": "external_fact",
+      "pending": false,
+      "sourceRef": "groundsOfRefusal · предоставление, п. 12"
     },
     {
       "id": "rule:ext-egrn",
@@ -2810,7 +2858,22 @@
     },
     {
       "source": "profile:agr-request-package",
+      "target": "rule:form-package-complete",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:form-acts-compliance",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-request-package",
       "target": "rule:form-signature-owner",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:form-authorised-submitter",
       "kind": "contains"
     },
     {
@@ -2826,6 +2889,11 @@
     {
       "source": "profile:agr-request-package",
       "target": "rule:ext-land-contracts",
+      "kind": "contains"
+    },
+    {
+      "source": "profile:agr-request-package",
+      "target": "rule:ext-interdepartmental-gap",
       "kind": "contains"
     },
     {
@@ -3619,6 +3687,31 @@
       "kind": "impacts"
     },
     {
+      "source": "branch:msk-284-pp:groundsOfRefusal",
+      "target": "rule:form-acts-compliance",
+      "kind": "impacts"
+    },
+    {
+      "source": "branch:msk-284-pp:groundsOfRefusal",
+      "target": "rule:form-package-complete",
+      "kind": "impacts"
+    },
+    {
+      "source": "branch:msk-284-pp:groundsOfRefusal",
+      "target": "rule:form-authorised-submitter",
+      "kind": "impacts"
+    },
+    {
+      "source": "branch:msk-284-pp:groundsOfRefusal",
+      "target": "rule:ext-interdepartmental-gap",
+      "kind": "impacts"
+    },
+    {
+      "source": "branch:msk-284-pp:recipientCategories",
+      "target": "rule:elig-agr-required",
+      "kind": "impacts"
+    },
+    {
       "source": "branch:msk-284-pp:recipientCategories",
       "target": "rule:elig-applicant-kind",
       "kind": "impacts"
@@ -3630,22 +3723,17 @@
     },
     {
       "source": "branch:msk-284-pp:recipientCategories",
-      "target": "rule:elig-public-entity",
-      "kind": "impacts"
-    },
-    {
-      "source": "branch:msk-284-pp:recipientCategories",
       "target": "rule:elig-linear-ppt",
       "kind": "impacts"
     },
     {
       "source": "branch:msk-284-pp:recipientCategories",
-      "target": "rule:elig-representative-kind",
+      "target": "rule:elig-public-entity",
       "kind": "impacts"
     },
     {
       "source": "branch:msk-284-pp:recipientCategories",
-      "target": "rule:elig-agr-required",
+      "target": "rule:elig-representative-kind",
       "kind": "impacts"
     },
     {

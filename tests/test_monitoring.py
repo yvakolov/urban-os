@@ -375,3 +375,42 @@ class TestGraph(unittest.TestCase):
         for did, d in delivs.items():
             for rid in d.get("producedBy", []) or []:
                 self.assertIn(rid, rules, f"{did}.producedBy -> {rid} не существует")
+
+
+class TestRefusalCoverage(MonitorTestCase):
+    """Каждое основание для отказа обязано иметь правило.
+
+    Непокрытое основание — это отказ, который система не предскажет. Проверка
+    держит соответствие по номерам, а не по счёту: пропуск в середине списка
+    иначе компенсируется лишним правилом в конце.
+    """
+
+    GROUPS = {"приём": "Основания для отказа в приеме документов",
+              "предоставление": "Основания для отказа в предоставлении услуги"}
+
+    def setUp(self):
+        super().setUp()
+        import re
+        self.re = re
+        raw = read("mos-v1.html").decode("utf-8")
+        blocks = extract_mod.extract(raw)["data"]["blocks"]
+        self.grounds = {g["title"]: len(g["descriptions"])
+                        for g in blocks["groundsOfRefusal"]}
+        self.rules = self.profiles["agr-request-package"]["rules"]
+
+    def covered(self, key):
+        out = set()
+        for r in self.rules:
+            for m in self.re.finditer(rf"{key}, п\. (\d+)", r["sourceRef"]):
+                out.add(int(m.group(1)))
+        return out
+
+    def test_38_acceptance_grounds_fully_covered(self):
+        total = self.grounds[self.GROUPS["приём"]]
+        missing = sorted(set(range(1, total + 1)) - self.covered("приём"))
+        self.assertEqual(missing, [], f"основания отказа в приёме без правила: {missing}")
+
+    def test_39_provision_grounds_fully_covered(self):
+        total = self.grounds[self.GROUPS["предоставление"]]
+        missing = sorted(set(range(1, total + 1)) - self.covered("предоставление"))
+        self.assertEqual(missing, [], f"основания отказа в предоставлении без правила: {missing}")

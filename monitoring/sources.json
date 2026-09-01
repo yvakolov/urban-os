@@ -72,15 +72,19 @@
           "ext-infrastructure-contract",
           "ext-mosgornasledie-verdict",
           "ext-mosgornasledie-site-req",
-          "ext-tourism-verdict"
+          "ext-tourism-verdict",
+          "form-acts-compliance",
+          "form-package-complete",
+          "form-authorised-submitter",
+          "ext-interdepartmental-gap"
         ],
         "recipientCategories": [
+          "elig-agr-required",
           "elig-applicant-kind",
           "elig-land-right",
-          "elig-public-entity",
           "elig-linear-ppt",
-          "elig-representative-kind",
-          "elig-agr-required"
+          "elig-public-entity",
+          "elig-representative-kind"
         ],
         "terms": [],
         "offDocs": "__source_registry__"
