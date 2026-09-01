@@ -499,3 +499,102 @@ class TestTepSchema(unittest.TestCase):
         names = " ".join(e["name"] for e in self.d["elements"])
         for token in ("Height", "Area", "Apartment"):
             self.assertIn(token, names, f"в схеме нет ни одного элемента с «{token}»")
+
+
+class TestIfcInspector(unittest.TestCase):
+    """Инспектор IFC: разбор SPF и сбор фактов под evaluator-ы профиля.
+
+    Тесты держат две вещи сразу: что парсер читает файл верно и что правила,
+    написанные до появления инспектора, на живых фактах срабатывают там и
+    только там, где должны.
+    """
+
+    FIX = ROOT / "tests" / "ifc_fixtures"
+
+    @classmethod
+    def setUpClass(cls):
+        from lib import ifc
+        cls.ifc = ifc
+        cls.dict = json.loads(
+            (ROOT / "dictionaries" / "ifc-attributes.v1.json").read_text(encoding="utf-8"))
+        cls.profile = json.loads(
+            (ROOT / "requirements" / "moscow-ifc-agr-2026-01-16.v1.json").read_text(encoding="utf-8"))
+
+    def context(self, name, file_name="НН_К01_С01_АР_АГР.ifc"):
+        import os
+        text = (self.FIX / name).read_text(encoding="utf-8")
+        facts = self.ifc.inspect(text, file_name=file_name,
+                                 file_size=len(text.encode()), dictionary=self.dict)
+        return {
+            "ifc": facts,
+            "package": {"fileName": file_name, "fileStem": os.path.splitext(file_name)[0],
+                        "signatureNamesMatch": True, "allSignersCovered": True},
+            "project": {"locationIsStateSecret": False},
+            "tep": {"schemaValid": True},
+        }
+
+    def failing(self, name, **kw):
+        ctx = self.context(name, **kw)
+        return {r["id"] for r in self.profile["rules"]
+                if validate_mod._state_for(r, ctx, None) == "auto_fail"}
+
+    def test_49_not_ifc_raises(self):
+        with self.assertRaises(self.ifc.IfcError):
+            self.ifc.inspect((self.FIX / "not-ifc.ifc").read_text(encoding="utf-8"))
+
+    def test_50_header_is_parsed(self):
+        f = self.context("valid.ifc")["ifc"]
+        self.assertEqual(f["schema"], "IFC4")
+        self.assertEqual(f["mvd"], "ReferenceView_V1.2")
+        self.assertEqual(f["lengthUnit"], "MILLIMETRE")
+
+    def test_51_strings_with_quotes_and_commas(self):
+        """Токенизатор SPF: '' внутри строки и запятая не должны рвать разбор."""
+        f = self.context("tricky-strings.ifc")["ifc"]
+        self.assertTrue(f["attributes"]["IfcWall"]["complete"])
+        self.assertEqual(self.failing("tricky-strings.ifc"), set())
+
+    def test_52_valid_file_has_no_false_positives(self):
+        """Ни одно правило не должно обвинять корректный файл."""
+        self.assertEqual(self.failing("valid.ifc"), set())
+
+    def test_53_valid_file_actually_passes_checks(self):
+        """Отсутствие провалов бессмысленно, если ничего и не проверялось."""
+        counts = validate_mod.evaluate(self.profile, self.context("valid.ifc"))
+        self.assertGreaterEqual(counts["auto_pass"], 15)
+        self.assertEqual(counts["rule_error"], 0)
+
+    def test_54_wrong_schema_detected(self):
+        self.assertIn("ifc-schema-version", self.failing("wrong-schema.ifc"))
+
+    def test_55_metre_unit_detected(self):
+        """п. 4.6.1: метрическая система в миллиметрах, не в метрах."""
+        self.assertIn("ifc-scale-and-units", self.failing("metre-unit.ifc"))
+
+    def test_56_proxy_detected(self):
+        """п. 4.1.4: IfcBuildingElementProxy запрещён."""
+        self.assertIn("ifc-no-building-element-proxy", self.failing("has-proxy.ifc"))
+
+    def test_57_incomplete_attributes_detected(self):
+        """Стена без RusSet_Quantities и RusSet_Location — неполный набор по Б.4."""
+        self.assertIn("ifc-attributes-wall", self.failing("wall-incomplete.ifc"))
+
+    def test_58_wrong_fno_detected(self):
+        """п. 5.3.5: RUS_FNO принимает только «Жилое здание» или «Нежилое здание»."""
+        self.assertIn("ifc-rus-fno", self.failing("wrong-fno.ifc"))
+
+    def test_59_pset_name_with_space_detected(self):
+        """п. 5.3.15: наименования наборов пишутся слитно без пробелов."""
+        self.assertIn("ifc-names-written-together", self.failing("pset-name-with-space.ifc"))
+
+    def test_60_absent_class_is_not_a_violation(self):
+        """Класса нет в файле — это не нарушение: состав определяется проектом."""
+        f = self.context("valid.ifc")["ifc"]
+        absent = [v for v in f["attributes"].values() if v["instances"] == 0]
+        self.assertTrue(absent)
+        self.assertTrue(all(v["complete"] is None for v in absent))
+
+    def test_61_filename_checked_without_extension(self):
+        """Расширение содержит точку, запрещённую п. 4.3.1.5 в самом имени."""
+        self.assertEqual(self.failing("valid.ifc", file_name="НН_К01_С01_АР_АГР.ifc"), set())
+        self.assertIn("ifc-filename-structure", self.failing("valid.ifc", file_name="модель 1.ifc"))
