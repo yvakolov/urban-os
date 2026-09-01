@@ -2,7 +2,7 @@
   "schemaVersion": "1.1",
   "id": "agr-request-package",
   "version": "2026-09-01.3",
-  "status": "draft",
+  "status": "active",
   "sourceId": "msk-admin-reglament-agr",
   "jurisdiction": "Москва",
   "modelClass": "RequestPackage",
@@ -16,7 +16,8 @@
       "requirement": "Заявитель является физическим лицом, индивидуальным предпринимателем, юридическим лицом либо организацией из перечня п. 2.4.1.1 Административного регламента.",
       "verification": "expert_evidence",
       "severity": "blocker",
-      "sourceRef": "recipientCategories, пп. 1-3; groundsOfRefusal · предоставление, п. 4"
+      "sourceRef": "Регламент, п. 2.4.1 (витрина: recipientCategories, пп. 1-3; groundsOfRefusal · предоставление, п. 4)",
+      "dependsOnSource": "msk-284-pp"
     },
     {
       "id": "elig-land-right",
@@ -25,7 +26,8 @@
       "requirement": "Для нелинейного объекта: заявитель — правообладатель земельного участка, прошедшего государственный кадастровый учёт, с выданным ГПЗУ.",
       "verification": "external_fact",
       "severity": "blocker",
-      "sourceRef": "recipientCategories, пп. 1-3"
+      "sourceRef": "Регламент, п. 2.4.1.1 (витрина: recipientCategories, пп. 1-3)",
+      "dependsOnSource": "msk-284-pp"
     },
     {
       "id": "elig-public-entity",
@@ -34,7 +36,8 @@
       "requirement": "Государственные учреждения и ГУП города Москвы, Московский фонд реновации жилой застройки, Московский фонд защиты прав граждан — участников долевого строительства, АНО «Развитие социальной инфраструктуры», АНО «Развитие спортивных и инфраструктурных объектов», а также стороны договора о приобретении будущих объектов недвижимости по Программе реновации — подают в отношении земельных участков, государственная собственность на которые не разграничена, при наличии схемы расположения ЗУ на КПТ и (или) проекта межевания и (или) действующего ГПЗУ.",
       "verification": "external_fact",
       "severity": "blocker",
-      "sourceRef": "recipientCategories, п. 4",
+      "sourceRef": "Регламент, п. 2.4.1.2 (витрина: recipientCategories, п. 4)",
+      "dependsOnSource": "msk-284-pp",
       "appliesWhen": {
         "path": "applicant.kind",
         "equals": "public_entity"
@@ -48,7 +51,8 @@
       "requirement": "Для линейного объекта основанием служит действующий проект планировки территории и (или) градостроительный план земельного участка.",
       "verification": "external_fact",
       "severity": "blocker",
-      "sourceRef": "recipientCategories, пп. 1-3",
+      "sourceRef": "Регламент, п. 2.4.1.1 (витрина: recipientCategories, пп. 1-3)",
+      "dependsOnSource": "msk-284-pp",
       "appliesWhen": {
         "path": "object.isLinear",
         "equals": true
@@ -61,7 +65,8 @@
       "requirement": "Интересы заявителя вправе представлять юридическое лицо или лицо, зарегистрированное как индивидуальный предприниматель. Приём документов от представителей — физических лиц без статуса ИП не предусмотрен.",
       "verification": "expert_evidence",
       "severity": "blocker",
-      "sourceRef": "recipientCategories, п. 5",
+      "sourceRef": "Регламент, п. 2.4.2, 2.4.3 (витрина: recipientCategories, п. 5)",
+      "dependsOnSource": "msk-284-pp",
       "appliesWhen": {
         "path": "request.viaRepresentative",
         "equals": true
@@ -74,7 +79,8 @@
       "requirement": "Объект капитального строительства входит в число тех, для которых утверждение АГР требуется согласно Положению, утверждённому постановлением 284-ПП.",
       "verification": "expert_evidence",
       "severity": "blocker",
-      "sourceRef": "offDocs · 284-ПП, Положение об утверждении АГР; groundsOfRefusal · предоставление, п. 11"
+      "sourceRef": "Регламент, п. 2.10.1.11 (витрина: offDocs · 284-ПП, Положение об утверждении АГР; groundsOfRefusal · предоставление, п. 11)",
+      "dependsOnSource": "msk-284-pp"
     },
     {
       "id": "doc-01-request",
@@ -83,7 +89,8 @@
       "requirement": "Запрос оформлен внесением сведений по приложению 2 к Административному регламенту в интерактивную форму на Портале.",
       "verification": "expert_evidence",
       "severity": "blocker",
-      "sourceRef": "incomingDocuments · обязательные, п. 1"
+      "sourceRef": "Регламент, п. 2.5.1.1.1 (витрина: incomingDocuments · обязательные, п. 1)",
+      "dependsOnSource": "msk-284-pp"
     },
     {
       "id": "form-sec-1-1",
@@ -318,7 +325,8 @@
       "requirement": "Электронные образы направляются в PDF, за исключением низкополигональных моделей (FBX в составе ZIP) и высокополигональных моделей (FBX, PNG, GeoJSON в составе ZIP). Состав и требования установлены приложением к Административному регламенту.",
       "verification": "automatic",
       "severity": "blocker",
-      "sourceRef": "incomingDocuments · обязательные, п. 2",
+      "sourceRef": "Регламент, п. 2.5.1.1.2 (витрина: incomingDocuments · обязательные, п. 2)",
+      "dependsOnSource": "msk-284-pp",
       "dependsOn": [
         "moscow-npm-2026-08-18",
         "moscow-vpm-2026-08-18"
@@ -337,7 +345,8 @@
       "requirement": "Формат ZIP, PDF или XML. Подписан усиленной квалифицированной электронной подписью доверителя или нотариуса. Не требуется для лица, действующего без доверенности.",
       "verification": "automatic",
       "severity": "blocker",
-      "sourceRef": "incomingDocuments · обязательные, п. 3",
+      "sourceRef": "Регламент, п. 2.5.1.1.4 (витрина: incomingDocuments · обязательные, п. 3)",
+      "dependsOnSource": "msk-284-pp",
       "appliesWhen": {
         "path": "applicant.kind",
         "equals": "legal_entity"
@@ -356,7 +365,7 @@
       "requirement": "Электронные образы направляются в формате IFC и (или) XML в составе ZIP.",
       "verification": "automatic",
       "severity": "blocker",
-      "sourceRef": "incomingDocuments · обязательные, п. 4",
+      "sourceRef": "Регламент, п. 2.5.1.1.6 (витрина: incomingDocuments · обязательные, п. 4)",
       "dependsOnSource": "msk-ifc-agr",
       "evaluator": {
         "op": "equals",
@@ -372,7 +381,7 @@
       "requirement": "Электронные образы направляются в формате IFC и (или) XML в составе ZIP.",
       "verification": "automatic",
       "severity": "blocker",
-      "sourceRef": "incomingDocuments · обязательные, п. 5",
+      "sourceRef": "Регламент, п. 2.5.1.1.7 (витрина: incomingDocuments · обязательные, п. 5)",
       "dependsOnSource": "msk-ifc-agr",
       "evaluator": {
         "op": "equals",
@@ -388,7 +397,8 @@
       "requirement": "Формат PDF либо ZIP. Требуются при отсутствии в ЕГРН сведений о зарегистрированных правах, а также когда права не подлежат регистрации.",
       "verification": "automatic",
       "severity": "blocker",
-      "sourceRef": "incomingDocuments · обязательные, п. 6",
+      "sourceRef": "Регламент, п. 2.5.1.1.5 (витрина: incomingDocuments · обязательные, п. 6)",
+      "dependsOnSource": "msk-284-pp",
       "appliesWhen": {
         "path": "object.isLinear",
         "equals": false
@@ -407,7 +417,7 @@
       "requirement": "Электронные образы направляются в формате IFC и (или) XML в составе ZIP.",
       "verification": "automatic",
       "severity": "blocker",
-      "sourceRef": "incomingDocuments · обязательные, п. 7",
+      "sourceRef": "Регламент, п. 2.5.1.1.9 (витрина: incomingDocuments · обязательные, п. 7)",
       "dependsOnSource": "msk-ifc-agr",
       "evaluator": {
         "op": "equals",
@@ -423,7 +433,8 @@
       "requirement": "Расчёт в габаритах наружных стен жилой и нежилой застройки (для жилой застройки — раздельно жилая и нежилая часть), включая площадь квартир без балконов, лоджий и террас, наземную площадь нежилой застройки, площадь квартир и встроенно-пристроенных помещений. Формат XML.",
       "verification": "automatic",
       "severity": "blocker",
-      "sourceRef": "incomingDocuments · обязательные, п. 8",
+      "sourceRef": "Регламент, п. 2.5.1.1.8 (витрина: incomingDocuments · обязательные, п. 8)",
+      "dependsOnSource": "msk-284-pp",
       "evaluator": {
         "op": "equals",
         "path": "package.documents.tep-table.formatValid",
@@ -438,7 +449,8 @@
       "requirement": "Формат ZIP, PDF или XML. Подписан усиленной квалифицированной электронной подписью доверителя или нотариуса.",
       "verification": "automatic",
       "severity": "blocker",
-      "sourceRef": "incomingDocuments · обязательные, п. 9",
+      "sourceRef": "Регламент, п. 2.5.1.1.3 (витрина: incomingDocuments · обязательные, п. 9)",
+      "dependsOnSource": "msk-284-pp",
       "appliesWhen": {
         "path": "request.viaRepresentative",
         "equals": true
@@ -457,7 +469,8 @@
       "requirement": "Электронные копии (образы) документов поддаются прочтению и соответствуют установленным требованиям к форматам их предоставления.",
       "verification": "automatic",
       "severity": "blocker",
-      "sourceRef": "groundsOfRefusal · приём, п. 6",
+      "sourceRef": "Регламент, п. 2.8.1.6 (витрина: groundsOfRefusal · приём, п. 6)",
+      "dependsOnSource": "msk-284-pp",
       "evaluator": {
         "op": "max",
         "path": "package.unreadable",
@@ -471,7 +484,8 @@
       "requirement": "Представлен полный комплект документов, указанных в перечне обязательных. Неполный комплект — самостоятельное основание для отказа в приёме, срабатывающее до содержательного рассмотрения.",
       "verification": "automatic",
       "severity": "blocker",
-      "sourceRef": "groundsOfRefusal · приём, п. 3",
+      "sourceRef": "Регламент, п. 2.8.1.3 (витрина: groundsOfRefusal · приём, п. 3)",
+      "dependsOnSource": "msk-284-pp",
       "evaluator": {
         "op": "max",
         "path": "package.dataItemsMissingCount",
@@ -486,7 +500,8 @@
       "requirement": "Запрос и иные документы соответствуют требованиям правовых актов Российской Федерации, правовых актов города Москвы, Единых требований и Административного регламента. Проверяется дважды: на приёме и при обработке по существу.",
       "verification": "expert_evidence",
       "severity": "blocker",
-      "sourceRef": "groundsOfRefusal · приём, п. 1; предоставление, п. 1"
+      "sourceRef": "Регламент, п. 2.8.1.1 (витрина: groundsOfRefusal · приём, п. 1; предоставление, п. 1)",
+      "dependsOnSource": "msk-284-pp"
     },
     {
       "id": "form-signature-owner",
@@ -495,7 +510,8 @@
       "requirement": "Запрос и документы подписаны электронной подписью, принадлежащей лицу, подавшему запрос.",
       "verification": "expert_evidence",
       "severity": "blocker",
-      "sourceRef": "groundsOfRefusal · приём, п. 5"
+      "sourceRef": "Регламент, п. 2.8.1.5 (витрина: groundsOfRefusal · приём, п. 5)",
+      "dependsOnSource": "msk-284-pp"
     },
     {
       "id": "form-authorised-submitter",
@@ -504,7 +520,8 @@
       "requirement": "Запрос от имени заявителя подан лицом, уполномоченным на это в установленном порядке.",
       "verification": "expert_evidence",
       "severity": "blocker",
-      "sourceRef": "groundsOfRefusal · приём, п. 4"
+      "sourceRef": "Регламент, п. 2.8.1.4 (витрина: groundsOfRefusal · приём, п. 4)",
+      "dependsOnSource": "msk-284-pp"
     },
     {
       "id": "form-no-duplicate-request",
@@ -513,7 +530,8 @@
       "requirement": "В Департаменте нет находящегося на исполнении запроса этого же заявителя по этому же объекту с идентичными по составу и содержанию документами.",
       "verification": "external_fact",
       "severity": "blocker",
-      "sourceRef": "groundsOfRefusal · предоставление, п. 10"
+      "sourceRef": "Регламент, п. 2.10.1.10 (витрина: groundsOfRefusal · предоставление, п. 10)",
+      "dependsOnSource": "msk-284-pp"
     },
     {
       "id": "ext-gpzu-valid",
@@ -522,7 +540,8 @@
       "requirement": "Срок использования информации ГПЗУ для подготовки проектной документации и выдачи разрешения на строительство не истёк — в том числе не истекает в период предоставления государственной услуги.",
       "verification": "external_fact",
       "severity": "blocker",
-      "sourceRef": "groundsOfRefusal · предоставление, п. 13",
+      "sourceRef": "Регламент, п. 2.10.1.13 (витрина: groundsOfRefusal · предоставление, п. 13)",
+      "dependsOnSource": "msk-284-pp",
       "note": "Проверяется на входе с запасом не менее срока услуги: 20 рабочих дней для объектов городского значения, 10 — окружного."
     },
     {
@@ -532,7 +551,8 @@
       "requirement": "Договоры, подтверждающие право заявителя на земельный участок, находящийся в собственности города Москвы. Получается Департаментом по межведомственному взаимодействию; заявитель вправе представить по собственной инициативе.",
       "verification": "external_fact",
       "severity": "major",
-      "sourceRef": "incomingDocuments · необязательные, п. 1",
+      "sourceRef": "Регламент, п. 2.5.1.2.4 (витрина: incomingDocuments · необязательные, п. 1)",
+      "dependsOnSource": "msk-284-pp",
       "note": "Отсутствие документа у органа власти при непредставлении его заявителем — самостоятельное основание для отказа (основания в предоставлении, п. 12)."
     },
     {
@@ -542,7 +562,8 @@
       "requirement": "От органов государственной власти не поступила информация об отсутствии у них документов и сведений, получаемых по межведомственному взаимодействию, если заявитель не представил их по собственной инициативе.",
       "verification": "external_fact",
       "severity": "blocker",
-      "sourceRef": "groundsOfRefusal · предоставление, п. 12",
+      "sourceRef": "Регламент, п. 2.10.1.12 (витрина: groundsOfRefusal · предоставление, п. 12)",
+      "dependsOnSource": "msk-284-pp",
       "note": "Практический вывод: выписки и схемы прикладывать самим. Межведомственный запрос гарантией не является — его безрезультатность становится основанием для отказа."
     },
     {
@@ -552,7 +573,8 @@
       "requirement": "Получается Департаментом по межведомственному взаимодействию. Заявитель вправе представить по собственной инициативе.",
       "verification": "external_fact",
       "severity": "major",
-      "sourceRef": "incomingDocuments · необязательные, п. 2",
+      "sourceRef": "Регламент, п. 2.5.1.2.3 (витрина: incomingDocuments · необязательные, п. 2)",
+      "dependsOnSource": "msk-284-pp",
       "note": "Отсутствие документа у органа власти при непредставлении его заявителем — самостоятельное основание для отказа (п. 2.9 осн. 12). Прикладывать самим."
     },
     {
@@ -562,7 +584,8 @@
       "requirement": "Требуется при подаче запроса от юридического лица. Получается по межведомственному взаимодействию; заявитель вправе представить по собственной инициативе.",
       "verification": "external_fact",
       "severity": "major",
-      "sourceRef": "incomingDocuments · необязательные, п. 4",
+      "sourceRef": "Регламент, п. 2.5.1.2.1 (витрина: incomingDocuments · необязательные, п. 4)",
+      "dependsOnSource": "msk-284-pp",
       "appliesWhen": {
         "path": "applicant.kind",
         "equals": "legal_entity"
@@ -575,7 +598,8 @@
       "requirement": "Требуется при подаче запроса физическим лицом, зарегистрированным как индивидуальный предприниматель. Получается по межведомственному взаимодействию; заявитель вправе представить по собственной инициативе.",
       "verification": "external_fact",
       "severity": "major",
-      "sourceRef": "incomingDocuments · необязательные, п. 5",
+      "sourceRef": "Регламент, п. 2.5.1.2.2 (витрина: incomingDocuments · необязательные, п. 5)",
+      "dependsOnSource": "msk-284-pp",
       "appliesWhen": {
         "path": "applicant.kind",
         "equals": "sole_proprietor"
@@ -588,7 +612,8 @@
       "requirement": "Получается по межведомственному взаимодействию. Заявитель вправе представить по собственной инициативе.",
       "verification": "external_fact",
       "severity": "major",
-      "sourceRef": "incomingDocuments · необязательные, п. 3"
+      "sourceRef": "Регламент, п. 2.5.1.2.5 (витрина: incomingDocuments · необязательные, п. 3)",
+      "dependsOnSource": "msk-284-pp"
     },
     {
       "id": "ext-infrastructure-contract",
@@ -597,7 +622,8 @@
       "requirement": "Инфраструктурный договор заключён, если его заключение предусмотрено правовым актом Правительства Москвы, и очерёдность (этапы) завершения мероприятий по строительству объектов инфраструктуры не нарушена.",
       "verification": "external_fact",
       "severity": "blocker",
-      "sourceRef": "groundsOfRefusal · предоставление, п. 15"
+      "sourceRef": "Регламент, п. 2.10.1.15 (витрина: groundsOfRefusal · предоставление, п. 15)",
+      "dependsOnSource": "msk-284-pp"
     },
     {
       "id": "ext-mosgornasledie-verdict",
@@ -606,7 +632,8 @@
       "requirement": "Заключение Мосгорнаследия на материалы АГР не является отрицательным.",
       "verification": "external_verdict",
       "severity": "blocker",
-      "sourceRef": "groundsOfRefusal · предоставление, п. 8",
+      "sourceRef": "Регламент, п. 2.5.1.3.1 (витрина: groundsOfRefusal · предоставление, п. 8)",
+      "dependsOnSource": "msk-284-pp",
       "authority": "mosgornasledie"
     },
     {
@@ -616,7 +643,8 @@
       "requirement": "Материалы АГР соответствуют требованиям, установленным Департаментом культурного наследия в отношении рассматриваемого земельного участка и (или) материалов АГР.",
       "verification": "external_verdict",
       "severity": "blocker",
-      "sourceRef": "groundsOfRefusal · предоставление, п. 9",
+      "sourceRef": "Регламент, п. 2.10.1.9 (витрина: groundsOfRefusal · предоставление, п. 9)",
+      "dependsOnSource": "msk-284-pp",
       "authority": "mosgornasledie",
       "note": "Отдельный от заключения корпус требований, устанавливаемый по конкретному участку. Заранее не транскрибируется — определяется адресно."
     },
@@ -627,7 +655,8 @@
       "requirement": "Заключение Комитета по туризму города Москвы на материалы АГР не является отрицательным.",
       "verification": "external_verdict",
       "severity": "blocker",
-      "sourceRef": "groundsOfRefusal · предоставление, п. 14",
+      "sourceRef": "Регламент, п. 2.5.1.3.2 (витрина: groundsOfRefusal · предоставление, п. 14)",
+      "dependsOnSource": "msk-284-pp",
       "authority": "mos-tourism"
     },
     {
@@ -637,7 +666,8 @@
       "requirement": "Материалы АГР соответствуют сведениям градостроительного плана земельного участка либо действующему проекту планировки территории, а также требованиям приложения к Административному регламенту и требованиям законодательства.",
       "verification": "expert_evidence",
       "severity": "blocker",
-      "sourceRef": "groundsOfRefusal · предоставление, п. 7"
+      "sourceRef": "Регламент, п. 2.10.1.7 (витрина: groundsOfRefusal · предоставление, п. 7)",
+      "dependsOnSource": "msk-284-pp"
     },
     {
       "id": "conf-territorial-division",
@@ -646,7 +676,8 @@
       "requirement": "Местоположение заявленного земельного участка соответствует территориальному делению города Москвы, установленному Законом города Москвы от 05.07.1995 № 13-47.",
       "verification": "external_fact",
       "severity": "blocker",
-      "sourceRef": "groundsOfRefusal · предоставление, п. 5"
+      "sourceRef": "Регламент, п. 2.10.1.5 (витрина: groundsOfRefusal · предоставление, п. 5)",
+      "dependsOnSource": "msk-284-pp"
     },
     {
       "id": "conf-architectural-context",
@@ -655,7 +686,8 @@
       "requirement": "Материалы АГР соответствуют функциональному назначению и местоположению объекта с учётом объёмно-планировочных, композиционных, силуэтных, архитектурно-художественных, декоративно-пластических, стилистических и колористических характеристик, а также сложившихся особенностей территории и характеристик окружающей застройки.",
       "verification": "expert_evidence",
       "severity": "blocker",
-      "sourceRef": "groundsOfRefusal · предоставление, п. 6",
+      "sourceRef": "Регламент, п. 2.10.1.6 (витрина: groundsOfRefusal · предоставление, п. 6)",
+      "dependsOnSource": "msk-284-pp",
       "note": "Содержательное, не формальное основание. Автоматизации не подлежит."
     },
     {
@@ -665,7 +697,8 @@
       "requirement": "Материалы АГР соответствуют результатам цифрового мастер-планирования территории города Москвы.",
       "verification": "expert_evidence",
       "severity": "blocker",
-      "sourceRef": "groundsOfRefusal · предоставление, п. 6",
+      "sourceRef": "Регламент, п. 2.10.1.6 (витрина: groundsOfRefusal · предоставление, п. 6)",
+      "dependsOnSource": "msk-284-pp",
       "status": "pending_activation",
       "activationCondition": "утверждение алгоритмов цифрового мастер-планирования территории города Москвы в установленном порядке"
     },
@@ -676,7 +709,8 @@
       "requirement": "В документах и информации отсутствуют противоречивые либо недостоверные сведения.",
       "verification": "expert_evidence",
       "severity": "blocker",
-      "sourceRef": "groundsOfRefusal · предоставление, п. 3"
+      "sourceRef": "Регламент, п. 2.10.1.3 (витрина: groundsOfRefusal · предоставление, п. 3)",
+      "dependsOnSource": "msk-284-pp"
     },
     {
       "id": "conf-documents-in-force",
@@ -685,7 +719,8 @@
       "requirement": "Ни один из представленных документов не утратил силу — в случаях, когда срок действия указан в самом документе либо определён законодательством.",
       "verification": "external_fact",
       "severity": "blocker",
-      "sourceRef": "groundsOfRefusal · приём, п. 2; предоставление, п. 2"
+      "sourceRef": "Регламент, п. 2.8.1.2 (витрина: groundsOfRefusal · приём, п. 2; предоставление, п. 2)",
+      "dependsOnSource": "msk-284-pp"
     },
     {
       "id": "ext-gpzu-survives-review",
@@ -694,7 +729,8 @@
       "requirement": "Срок использования ГПЗУ не истекает в ходе предоставления услуги. Проверяется с двойным запасом к сроку услуги: производственный календарь не учитывается, и оценка в рабочих днях завышена на число праздников в интервале.",
       "verification": "automatic",
       "severity": "blocker",
-      "sourceRef": "groundsOfRefusal · предоставление, п. 13",
+      "sourceRef": "Регламент, п. 2.10.1.13 (витрина: groundsOfRefusal · предоставление, п. 13)",
+      "dependsOnSource": "msk-284-pp",
       "evaluator": {
         "op": "equals",
         "path": "package.gpzu.survivesReview",
@@ -703,5 +739,5 @@
       "note": "Отдельно от ext-gpzu-valid: тот отвечает «получен ли документ», этот — «доживёт ли он до решения»."
     }
   ],
-  "selfHash": "2532271ece0245b41cfe80abb2adc3f72ae829aa7fc0e0e3d6dc8a79ef786544"
+  "selfHash": "834e86e3b02f9daf3a34742cfa6ddf507e8e2dc435064af353f4ac39408e9543"
 }

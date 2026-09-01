@@ -11,6 +11,7 @@
 Манифест:
     {"documents": {"<deliverableId>": [{"name": "...", "bytes": 123}, ...]},
      "form": {"sections": ["1", "1.1", "3", ...]},   # заполненные разделы приложения 2
+     "objectSignificance": "district" | "city",      # значение объекта, п. 2.7.1
      "gpzu": {"validUntil": "2026-12-31"},
      "serviceTermWorkingDays": 20,
      "asOf": "2026-09-01"}
@@ -52,7 +53,26 @@ def _working_days_between(a, b):
     return days
 
 
-def inspect(manifest, deliverables, form_sections=None):
+def service_term(manifest, terms):
+    """Срок услуги в рабочих днях по п. 2.7.1 Регламента.
+
+    Срок не один: 10 дней для объектов окружного значения, 20 для городского,
+    15 при обращении фондов реновации и защиты прав дольщиков. Брать 20 всегда
+    было бы неверно для окружных объектов, а брать 10 — опасно: проверка
+    «доживёт ли ГПЗУ до конца рассмотрения» при заниженном сроке пропустит
+    документ, который истечёт в ходе рассмотрения.
+    """
+    if not terms:
+        return int(manifest.get("serviceTermWorkingDays") or 20), None
+    table = {t["key"]: t["workingDays"] for t in terms["terms"]}
+    if manifest.get("applicantIsRenovationParty"):
+        key = "renovation"
+    else:
+        key = manifest.get("objectSignificance") or terms["defaultKey"]
+    return table.get(key, table[terms["defaultKey"]]), key
+
+
+def inspect(manifest, deliverables, form_sections=None, terms=None):
     """manifest + реестр артефактов (+ словарь разделов формы) -> плоские факты.
 
     form_sections — dictionaries/request-form-sections.v1.json. Инспектор из
@@ -61,7 +81,7 @@ def inspect(manifest, deliverables, form_sections=None):
     """
     docs = manifest.get("documents") or {}
     as_of = dt.date.fromisoformat(manifest.get("asOf") or dt.date.today().isoformat())
-    term = int(manifest.get("serviceTermWorkingDays") or 20)
+    term, term_key = service_term(manifest, terms)
 
     per_doc = {}
     unreadable = 0
@@ -148,6 +168,7 @@ def inspect(manifest, deliverables, form_sections=None):
             "validUntil": gpzu["validUntil"],
             "workingDaysRemaining": remaining,
             "serviceTermWorkingDays": term,
+            "serviceTermBasis": term_key,
             # Запас двойной: ГПЗУ не должен истечь В ХОДЕ рассмотрения
             # (основание для отказа, предоставление п. 13), а производственный
             # календарь здесь не учитывается — см. ceiling в _working_days_between.

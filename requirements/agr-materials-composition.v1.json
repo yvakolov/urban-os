@@ -2,9 +2,10 @@
   "schemaVersion": "1.1",
   "id": "agr-materials-composition",
   "version": "2026-09-01.1",
-  "status": "draft",
+  "status": "active",
   "sourceId": "msk-prilozhenie-1-sostav-materialov",
   "jurisdiction": "Москва",
+  "modelClass": "AGR_Materials",
   "effectiveFrom": "2025-10-01",
   "releasePolicy": "Все применимые правила должны иметь терминальное состояние; auto_fail и pending блокируют выпуск.",
   "compositionItems": [
@@ -1066,5 +1067,5 @@
       }
     }
   ],
-  "selfHash": "08ee90ea6efdf931d3d3d228f6f6bd5d1882bf01945a1bf155e9e7a615262d86"
+  "selfHash": "420f7f385a3559116e8f2db27a1865cd9d1fca7ec3cc3c13cd38f5b59d87fae2"
 }

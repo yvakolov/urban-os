@@ -16,7 +16,7 @@
       "status": "active",
       "transcribed": "partial",
       "monitored": true,
-      "url": "https://www.mos.ru/pgu2/landing/target/7700000000210548433/"
+      "url": "https://www.mos.ru/pgu2/landing/api/doc/d01a49a6-7b59-4c97-bc93-18593df926cb?is_ergu=1"
     },
     {
       "id": "src:msk-admin-reglament-agr",
@@ -50,7 +50,7 @@
       "layer": "source",
       "label": "Распоряжение Департамента градостроительной политики города Москвы и Департамента информац",
       "status": "active",
-      "transcribed": "full",
+      "transcribed": "partial",
       "monitored": false,
       "url": "https://stroimprosto.mos.ru/storage/app/media/KnowledgeBase/CIM_AGR_full.pdf"
     },
@@ -475,7 +475,7 @@
       "id": "profile:agr-materials-composition",
       "layer": "profile",
       "label": "agr-materials-composition",
-      "status": "draft",
+      "status": "active",
       "sourceId": "msk-prilozhenie-1-sostav-materialov",
       "ruleCount": 69
     },
@@ -1311,7 +1311,7 @@
       "id": "profile:agr-request-package",
       "layer": "profile",
       "label": "agr-request-package",
-      "status": "draft",
+      "status": "active",
       "sourceId": "msk-admin-reglament-agr",
       "ruleCount": 53
     },
@@ -1325,7 +1325,7 @@
       "severity": "blocker",
       "verification": "expert_evidence",
       "pending": false,
-      "sourceRef": "recipientCategories, пп. 1-3; groundsOfRefusal · предоставление, п. 4"
+      "sourceRef": "Регламент, п. 2.4.1 (витрина: recipientCategories, пп. 1-3; groundsOfRefusal · предоставление, п. 4)"
     },
     {
       "id": "rule:elig-land-right",
@@ -1337,7 +1337,7 @@
       "severity": "blocker",
       "verification": "external_fact",
       "pending": false,
-      "sourceRef": "recipientCategories, пп. 1-3"
+      "sourceRef": "Регламент, п. 2.4.1.1 (витрина: recipientCategories, пп. 1-3)"
     },
     {
       "id": "rule:elig-public-entity",
@@ -1349,7 +1349,7 @@
       "severity": "blocker",
       "verification": "external_fact",
       "pending": false,
-      "sourceRef": "recipientCategories, п. 4"
+      "sourceRef": "Регламент, п. 2.4.1.2 (витрина: recipientCategories, п. 4)"
     },
     {
       "id": "rule:elig-linear-ppt",
@@ -1361,7 +1361,7 @@
       "severity": "blocker",
       "verification": "external_fact",
       "pending": false,
-      "sourceRef": "recipientCategories, пп. 1-3"
+      "sourceRef": "Регламент, п. 2.4.1.1 (витрина: recipientCategories, пп. 1-3)"
     },
     {
       "id": "rule:elig-representative-kind",
@@ -1373,7 +1373,7 @@
       "severity": "blocker",
       "verification": "expert_evidence",
       "pending": false,
-      "sourceRef": "recipientCategories, п. 5"
+      "sourceRef": "Регламент, п. 2.4.2, 2.4.3 (витрина: recipientCategories, п. 5)"
     },
     {
       "id": "rule:elig-agr-required",
@@ -1385,7 +1385,7 @@
       "severity": "blocker",
       "verification": "expert_evidence",
       "pending": false,
-      "sourceRef": "offDocs · 284-ПП, Положение об утверждении АГР; groundsOfRefusal · предоставление, п. 11"
+      "sourceRef": "Регламент, п. 2.10.1.11 (витрина: offDocs · 284-ПП, Положение об утверждении АГР; groundsOfRefusal · предоставление, п. 11)"
     },
     {
       "id": "rule:doc-01-request",
@@ -1397,7 +1397,7 @@
       "severity": "blocker",
       "verification": "expert_evidence",
       "pending": false,
-      "sourceRef": "incomingDocuments · обязательные, п. 1"
+      "sourceRef": "Регламент, п. 2.5.1.1.1 (витрина: incomingDocuments · обязательные, п. 1)"
     },
     {
       "id": "rule:form-sec-1-1",
@@ -1577,7 +1577,7 @@
       "severity": "blocker",
       "verification": "automatic",
       "pending": false,
-      "sourceRef": "incomingDocuments · обязательные, п. 2"
+      "sourceRef": "Регламент, п. 2.5.1.1.2 (витрина: incomingDocuments · обязательные, п. 2)"
     },
     {
       "id": "rule:doc-03-authority-legal-entity",
@@ -1589,7 +1589,7 @@
       "severity": "blocker",
       "verification": "automatic",
       "pending": false,
-      "sourceRef": "incomingDocuments · обязательные, п. 3"
+      "sourceRef": "Регламент, п. 2.5.1.1.4 (витрина: incomingDocuments · обязательные, п. 3)"
     },
     {
       "id": "rule:doc-04-spozu",
@@ -1601,7 +1601,7 @@
       "severity": "blocker",
       "verification": "automatic",
       "pending": false,
-      "sourceRef": "incomingDocuments · обязательные, п. 4"
+      "sourceRef": "Регламент, п. 2.5.1.1.6 (витрина: incomingDocuments · обязательные, п. 4)"
     },
     {
       "id": "rule:doc-05-floor-plans",
@@ -1613,7 +1613,7 @@
       "severity": "blocker",
       "verification": "automatic",
       "pending": false,
-      "sourceRef": "incomingDocuments · обязательные, п. 5"
+      "sourceRef": "Регламент, п. 2.5.1.1.7 (витрина: incomingDocuments · обязательные, п. 5)"
     },
     {
       "id": "rule:doc-06-title-documents",
@@ -1625,7 +1625,7 @@
       "severity": "blocker",
       "verification": "automatic",
       "pending": false,
-      "sourceRef": "incomingDocuments · обязательные, п. 6"
+      "sourceRef": "Регламент, п. 2.5.1.1.5 (витрина: incomingDocuments · обязательные, п. 6)"
     },
     {
       "id": "rule:doc-07-sections-facades",
@@ -1637,7 +1637,7 @@
       "severity": "blocker",
       "verification": "automatic",
       "pending": false,
-      "sourceRef": "incomingDocuments · обязательные, п. 7"
+      "sourceRef": "Регламент, п. 2.5.1.1.9 (витрина: incomingDocuments · обязательные, п. 7)"
     },
     {
       "id": "rule:doc-08-tep-table",
@@ -1649,7 +1649,7 @@
       "severity": "blocker",
       "verification": "automatic",
       "pending": false,
-      "sourceRef": "incomingDocuments · обязательные, п. 8"
+      "sourceRef": "Регламент, п. 2.5.1.1.8 (витрина: incomingDocuments · обязательные, п. 8)"
     },
     {
       "id": "rule:doc-09-authority-representative",
@@ -1661,7 +1661,7 @@
       "severity": "blocker",
       "verification": "automatic",
       "pending": false,
-      "sourceRef": "incomingDocuments · обязательные, п. 9"
+      "sourceRef": "Регламент, п. 2.5.1.1.3 (витрина: incomingDocuments · обязательные, п. 9)"
     },
     {
       "id": "rule:form-readable",
@@ -1673,7 +1673,7 @@
       "severity": "blocker",
       "verification": "automatic",
       "pending": false,
-      "sourceRef": "groundsOfRefusal · приём, п. 6"
+      "sourceRef": "Регламент, п. 2.8.1.6 (витрина: groundsOfRefusal · приём, п. 6)"
     },
     {
       "id": "rule:form-package-complete",
@@ -1685,7 +1685,7 @@
       "severity": "blocker",
       "verification": "automatic",
       "pending": false,
-      "sourceRef": "groundsOfRefusal · приём, п. 3"
+      "sourceRef": "Регламент, п. 2.8.1.3 (витрина: groundsOfRefusal · приём, п. 3)"
     },
     {
       "id": "rule:form-acts-compliance",
@@ -1697,7 +1697,7 @@
       "severity": "blocker",
       "verification": "expert_evidence",
       "pending": false,
-      "sourceRef": "groundsOfRefusal · приём, п. 1; предоставление, п. 1"
+      "sourceRef": "Регламент, п. 2.8.1.1 (витрина: groundsOfRefusal · приём, п. 1; предоставление, п. 1)"
     },
     {
       "id": "rule:form-signature-owner",
@@ -1709,7 +1709,7 @@
       "severity": "blocker",
       "verification": "expert_evidence",
       "pending": false,
-      "sourceRef": "groundsOfRefusal · приём, п. 5"
+      "sourceRef": "Регламент, п. 2.8.1.5 (витрина: groundsOfRefusal · приём, п. 5)"
     },
     {
       "id": "rule:form-authorised-submitter",
@@ -1721,7 +1721,7 @@
       "severity": "blocker",
       "verification": "expert_evidence",
       "pending": false,
-      "sourceRef": "groundsOfRefusal · приём, п. 4"
+      "sourceRef": "Регламент, п. 2.8.1.4 (витрина: groundsOfRefusal · приём, п. 4)"
     },
     {
       "id": "rule:form-no-duplicate-request",
@@ -1733,7 +1733,7 @@
       "severity": "blocker",
       "verification": "external_fact",
       "pending": false,
-      "sourceRef": "groundsOfRefusal · предоставление, п. 10"
+      "sourceRef": "Регламент, п. 2.10.1.10 (витрина: groundsOfRefusal · предоставление, п. 10)"
     },
     {
       "id": "rule:ext-gpzu-valid",
@@ -1745,7 +1745,7 @@
       "severity": "blocker",
       "verification": "external_fact",
       "pending": false,
-      "sourceRef": "groundsOfRefusal · предоставление, п. 13"
+      "sourceRef": "Регламент, п. 2.10.1.13 (витрина: groundsOfRefusal · предоставление, п. 13)"
     },
     {
       "id": "rule:ext-land-contracts",
@@ -1757,7 +1757,7 @@
       "severity": "major",
       "verification": "external_fact",
       "pending": false,
-      "sourceRef": "incomingDocuments · необязательные, п. 1"
+      "sourceRef": "Регламент, п. 2.5.1.2.4 (витрина: incomingDocuments · необязательные, п. 1)"
     },
     {
       "id": "rule:ext-interdepartmental-gap",
@@ -1769,7 +1769,7 @@
       "severity": "blocker",
       "verification": "external_fact",
       "pending": false,
-      "sourceRef": "groundsOfRefusal · предоставление, п. 12"
+      "sourceRef": "Регламент, п. 2.10.1.12 (витрина: groundsOfRefusal · предоставление, п. 12)"
     },
     {
       "id": "rule:ext-egrn",
@@ -1781,7 +1781,7 @@
       "severity": "major",
       "verification": "external_fact",
       "pending": false,
-      "sourceRef": "incomingDocuments · необязательные, п. 2"
+      "sourceRef": "Регламент, п. 2.5.1.2.3 (витрина: incomingDocuments · необязательные, п. 2)"
     },
     {
       "id": "rule:ext-egrul",
@@ -1793,7 +1793,7 @@
       "severity": "major",
       "verification": "external_fact",
       "pending": false,
-      "sourceRef": "incomingDocuments · необязательные, п. 4"
+      "sourceRef": "Регламент, п. 2.5.1.2.1 (витрина: incomingDocuments · необязательные, п. 4)"
     },
     {
       "id": "rule:ext-egrip",
@@ -1805,7 +1805,7 @@
       "severity": "major",
       "verification": "external_fact",
       "pending": false,
-      "sourceRef": "incomingDocuments · необязательные, п. 5"
+      "sourceRef": "Регламент, п. 2.5.1.2.2 (витрина: incomingDocuments · необязательные, п. 5)"
     },
     {
       "id": "rule:ext-land-scheme",
@@ -1817,7 +1817,7 @@
       "severity": "major",
       "verification": "external_fact",
       "pending": false,
-      "sourceRef": "incomingDocuments · необязательные, п. 3"
+      "sourceRef": "Регламент, п. 2.5.1.2.5 (витрина: incomingDocuments · необязательные, п. 3)"
     },
     {
       "id": "rule:ext-infrastructure-contract",
@@ -1829,7 +1829,7 @@
       "severity": "blocker",
       "verification": "external_fact",
       "pending": false,
-      "sourceRef": "groundsOfRefusal · предоставление, п. 15"
+      "sourceRef": "Регламент, п. 2.10.1.15 (витрина: groundsOfRefusal · предоставление, п. 15)"
     },
     {
       "id": "rule:ext-mosgornasledie-verdict",
@@ -1841,7 +1841,7 @@
       "severity": "blocker",
       "verification": "external_verdict",
       "pending": false,
-      "sourceRef": "groundsOfRefusal · предоставление, п. 8"
+      "sourceRef": "Регламент, п. 2.5.1.3.1 (витрина: groundsOfRefusal · предоставление, п. 8)"
     },
     {
       "id": "rule:ext-mosgornasledie-site-req",
@@ -1853,7 +1853,7 @@
       "severity": "blocker",
       "verification": "external_verdict",
       "pending": false,
-      "sourceRef": "groundsOfRefusal · предоставление, п. 9"
+      "sourceRef": "Регламент, п. 2.10.1.9 (витрина: groundsOfRefusal · предоставление, п. 9)"
     },
     {
       "id": "rule:ext-tourism-verdict",
@@ -1865,7 +1865,7 @@
       "severity": "blocker",
       "verification": "external_verdict",
       "pending": false,
-      "sourceRef": "groundsOfRefusal · предоставление, п. 14"
+      "sourceRef": "Регламент, п. 2.5.1.3.2 (витрина: groundsOfRefusal · предоставление, п. 14)"
     },
     {
       "id": "rule:conf-gpzu-consistency",
@@ -1877,7 +1877,7 @@
       "severity": "blocker",
       "verification": "expert_evidence",
       "pending": false,
-      "sourceRef": "groundsOfRefusal · предоставление, п. 7"
+      "sourceRef": "Регламент, п. 2.10.1.7 (витрина: groundsOfRefusal · предоставление, п. 7)"
     },
     {
       "id": "rule:conf-territorial-division",
@@ -1889,7 +1889,7 @@
       "severity": "blocker",
       "verification": "external_fact",
       "pending": false,
-      "sourceRef": "groundsOfRefusal · предоставление, п. 5"
+      "sourceRef": "Регламент, п. 2.10.1.5 (витрина: groundsOfRefusal · предоставление, п. 5)"
     },
     {
       "id": "rule:conf-architectural-context",
@@ -1901,7 +1901,7 @@
       "severity": "blocker",
       "verification": "expert_evidence",
       "pending": false,
-      "sourceRef": "groundsOfRefusal · предоставление, п. 6"
+      "sourceRef": "Регламент, п. 2.10.1.6 (витрина: groundsOfRefusal · предоставление, п. 6)"
     },
     {
       "id": "rule:conf-digital-masterplan",
@@ -1913,7 +1913,7 @@
       "severity": "blocker",
       "verification": "expert_evidence",
       "pending": true,
-      "sourceRef": "groundsOfRefusal · предоставление, п. 6"
+      "sourceRef": "Регламент, п. 2.10.1.6 (витрина: groundsOfRefusal · предоставление, п. 6)"
     },
     {
       "id": "rule:conf-no-contradictions",
@@ -1925,7 +1925,7 @@
       "severity": "blocker",
       "verification": "expert_evidence",
       "pending": false,
-      "sourceRef": "groundsOfRefusal · предоставление, п. 3"
+      "sourceRef": "Регламент, п. 2.10.1.3 (витрина: groundsOfRefusal · предоставление, п. 3)"
     },
     {
       "id": "rule:conf-documents-in-force",
@@ -1937,7 +1937,7 @@
       "severity": "blocker",
       "verification": "external_fact",
       "pending": false,
-      "sourceRef": "groundsOfRefusal · приём, п. 2; предоставление, п. 2"
+      "sourceRef": "Регламент, п. 2.8.1.2 (витрина: groundsOfRefusal · приём, п. 2; предоставление, п. 2)"
     },
     {
       "id": "rule:ext-gpzu-survives-review",
@@ -1949,13 +1949,13 @@
       "severity": "blocker",
       "verification": "automatic",
       "pending": false,
-      "sourceRef": "groundsOfRefusal · предоставление, п. 13"
+      "sourceRef": "Регламент, п. 2.10.1.13 (витрина: groundsOfRefusal · предоставление, п. 13)"
     },
     {
       "id": "profile:moscow-ifc-agr-2026-01-16",
       "layer": "profile",
       "label": "moscow-ifc-agr-2026-01-16",
-      "status": "draft",
+      "status": "active",
       "sourceId": "msk-ifc-agr",
       "ruleCount": 104
     },
@@ -5417,9 +5417,19 @@
       "kind": "contains"
     },
     {
+      "source": "src:msk-284-pp",
+      "target": "rule:elig-applicant-kind",
+      "kind": "dependsOnSource"
+    },
+    {
       "source": "profile:agr-request-package",
       "target": "rule:elig-land-right",
       "kind": "contains"
+    },
+    {
+      "source": "src:msk-284-pp",
+      "target": "rule:elig-land-right",
+      "kind": "dependsOnSource"
     },
     {
       "source": "profile:agr-request-package",
@@ -5427,9 +5437,19 @@
       "kind": "contains"
     },
     {
+      "source": "src:msk-284-pp",
+      "target": "rule:elig-public-entity",
+      "kind": "dependsOnSource"
+    },
+    {
       "source": "profile:agr-request-package",
       "target": "rule:elig-linear-ppt",
       "kind": "contains"
+    },
+    {
+      "source": "src:msk-284-pp",
+      "target": "rule:elig-linear-ppt",
+      "kind": "dependsOnSource"
     },
     {
       "source": "profile:agr-request-package",
@@ -5437,14 +5457,29 @@
       "kind": "contains"
     },
     {
+      "source": "src:msk-284-pp",
+      "target": "rule:elig-representative-kind",
+      "kind": "dependsOnSource"
+    },
+    {
       "source": "profile:agr-request-package",
       "target": "rule:elig-agr-required",
       "kind": "contains"
     },
     {
+      "source": "src:msk-284-pp",
+      "target": "rule:elig-agr-required",
+      "kind": "dependsOnSource"
+    },
+    {
       "source": "profile:agr-request-package",
       "target": "rule:doc-01-request",
       "kind": "contains"
+    },
+    {
+      "source": "src:msk-284-pp",
+      "target": "rule:doc-01-request",
+      "kind": "dependsOnSource"
     },
     {
       "source": "profile:agr-request-package",
@@ -5592,9 +5627,19 @@
       "kind": "contains"
     },
     {
+      "source": "src:msk-284-pp",
+      "target": "rule:doc-02-agr-materials",
+      "kind": "dependsOnSource"
+    },
+    {
       "source": "profile:agr-request-package",
       "target": "rule:doc-03-authority-legal-entity",
       "kind": "contains"
+    },
+    {
+      "source": "src:msk-284-pp",
+      "target": "rule:doc-03-authority-legal-entity",
+      "kind": "dependsOnSource"
     },
     {
       "source": "profile:agr-request-package",
@@ -5622,6 +5667,11 @@
       "kind": "contains"
     },
     {
+      "source": "src:msk-284-pp",
+      "target": "rule:doc-06-title-documents",
+      "kind": "dependsOnSource"
+    },
+    {
       "source": "profile:agr-request-package",
       "target": "rule:doc-07-sections-facades",
       "kind": "contains"
@@ -5637,9 +5687,19 @@
       "kind": "contains"
     },
     {
+      "source": "src:msk-284-pp",
+      "target": "rule:doc-08-tep-table",
+      "kind": "dependsOnSource"
+    },
+    {
       "source": "profile:agr-request-package",
       "target": "rule:doc-09-authority-representative",
       "kind": "contains"
+    },
+    {
+      "source": "src:msk-284-pp",
+      "target": "rule:doc-09-authority-representative",
+      "kind": "dependsOnSource"
     },
     {
       "source": "profile:agr-request-package",
@@ -5647,9 +5707,19 @@
       "kind": "contains"
     },
     {
+      "source": "src:msk-284-pp",
+      "target": "rule:form-readable",
+      "kind": "dependsOnSource"
+    },
+    {
       "source": "profile:agr-request-package",
       "target": "rule:form-package-complete",
       "kind": "contains"
+    },
+    {
+      "source": "src:msk-284-pp",
+      "target": "rule:form-package-complete",
+      "kind": "dependsOnSource"
     },
     {
       "source": "profile:agr-request-package",
@@ -5657,9 +5727,19 @@
       "kind": "contains"
     },
     {
+      "source": "src:msk-284-pp",
+      "target": "rule:form-acts-compliance",
+      "kind": "dependsOnSource"
+    },
+    {
       "source": "profile:agr-request-package",
       "target": "rule:form-signature-owner",
       "kind": "contains"
+    },
+    {
+      "source": "src:msk-284-pp",
+      "target": "rule:form-signature-owner",
+      "kind": "dependsOnSource"
     },
     {
       "source": "profile:agr-request-package",
@@ -5667,9 +5747,19 @@
       "kind": "contains"
     },
     {
+      "source": "src:msk-284-pp",
+      "target": "rule:form-authorised-submitter",
+      "kind": "dependsOnSource"
+    },
+    {
       "source": "profile:agr-request-package",
       "target": "rule:form-no-duplicate-request",
       "kind": "contains"
+    },
+    {
+      "source": "src:msk-284-pp",
+      "target": "rule:form-no-duplicate-request",
+      "kind": "dependsOnSource"
     },
     {
       "source": "profile:agr-request-package",
@@ -5677,9 +5767,19 @@
       "kind": "contains"
     },
     {
+      "source": "src:msk-284-pp",
+      "target": "rule:ext-gpzu-valid",
+      "kind": "dependsOnSource"
+    },
+    {
       "source": "profile:agr-request-package",
       "target": "rule:ext-land-contracts",
       "kind": "contains"
+    },
+    {
+      "source": "src:msk-284-pp",
+      "target": "rule:ext-land-contracts",
+      "kind": "dependsOnSource"
     },
     {
       "source": "profile:agr-request-package",
@@ -5687,9 +5787,19 @@
       "kind": "contains"
     },
     {
+      "source": "src:msk-284-pp",
+      "target": "rule:ext-interdepartmental-gap",
+      "kind": "dependsOnSource"
+    },
+    {
       "source": "profile:agr-request-package",
       "target": "rule:ext-egrn",
       "kind": "contains"
+    },
+    {
+      "source": "src:msk-284-pp",
+      "target": "rule:ext-egrn",
+      "kind": "dependsOnSource"
     },
     {
       "source": "profile:agr-request-package",
@@ -5697,9 +5807,19 @@
       "kind": "contains"
     },
     {
+      "source": "src:msk-284-pp",
+      "target": "rule:ext-egrul",
+      "kind": "dependsOnSource"
+    },
+    {
       "source": "profile:agr-request-package",
       "target": "rule:ext-egrip",
       "kind": "contains"
+    },
+    {
+      "source": "src:msk-284-pp",
+      "target": "rule:ext-egrip",
+      "kind": "dependsOnSource"
     },
     {
       "source": "profile:agr-request-package",
@@ -5707,9 +5827,19 @@
       "kind": "contains"
     },
     {
+      "source": "src:msk-284-pp",
+      "target": "rule:ext-land-scheme",
+      "kind": "dependsOnSource"
+    },
+    {
       "source": "profile:agr-request-package",
       "target": "rule:ext-infrastructure-contract",
       "kind": "contains"
+    },
+    {
+      "source": "src:msk-284-pp",
+      "target": "rule:ext-infrastructure-contract",
+      "kind": "dependsOnSource"
     },
     {
       "source": "profile:agr-request-package",
@@ -5717,9 +5847,19 @@
       "kind": "contains"
     },
     {
+      "source": "src:msk-284-pp",
+      "target": "rule:ext-mosgornasledie-verdict",
+      "kind": "dependsOnSource"
+    },
+    {
       "source": "profile:agr-request-package",
       "target": "rule:ext-mosgornasledie-site-req",
       "kind": "contains"
+    },
+    {
+      "source": "src:msk-284-pp",
+      "target": "rule:ext-mosgornasledie-site-req",
+      "kind": "dependsOnSource"
     },
     {
       "source": "profile:agr-request-package",
@@ -5727,9 +5867,19 @@
       "kind": "contains"
     },
     {
+      "source": "src:msk-284-pp",
+      "target": "rule:ext-tourism-verdict",
+      "kind": "dependsOnSource"
+    },
+    {
       "source": "profile:agr-request-package",
       "target": "rule:conf-gpzu-consistency",
       "kind": "contains"
+    },
+    {
+      "source": "src:msk-284-pp",
+      "target": "rule:conf-gpzu-consistency",
+      "kind": "dependsOnSource"
     },
     {
       "source": "profile:agr-request-package",
@@ -5737,9 +5887,19 @@
       "kind": "contains"
     },
     {
+      "source": "src:msk-284-pp",
+      "target": "rule:conf-territorial-division",
+      "kind": "dependsOnSource"
+    },
+    {
       "source": "profile:agr-request-package",
       "target": "rule:conf-architectural-context",
       "kind": "contains"
+    },
+    {
+      "source": "src:msk-284-pp",
+      "target": "rule:conf-architectural-context",
+      "kind": "dependsOnSource"
     },
     {
       "source": "profile:agr-request-package",
@@ -5747,9 +5907,19 @@
       "kind": "contains"
     },
     {
+      "source": "src:msk-284-pp",
+      "target": "rule:conf-digital-masterplan",
+      "kind": "dependsOnSource"
+    },
+    {
       "source": "profile:agr-request-package",
       "target": "rule:conf-no-contradictions",
       "kind": "contains"
+    },
+    {
+      "source": "src:msk-284-pp",
+      "target": "rule:conf-no-contradictions",
+      "kind": "dependsOnSource"
     },
     {
       "source": "profile:agr-request-package",
@@ -5757,9 +5927,19 @@
       "kind": "contains"
     },
     {
+      "source": "src:msk-284-pp",
+      "target": "rule:conf-documents-in-force",
+      "kind": "dependsOnSource"
+    },
+    {
       "source": "profile:agr-request-package",
       "target": "rule:ext-gpzu-survives-review",
       "kind": "contains"
+    },
+    {
+      "source": "src:msk-284-pp",
+      "target": "rule:ext-gpzu-survives-review",
+      "kind": "dependsOnSource"
     },
     {
       "source": "src:msk-ifc-agr",

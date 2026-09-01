@@ -693,12 +693,16 @@ class TestPackageInspector(unittest.TestCase):
             (ROOT / "requirements" / "agr-request-package.v1.json").read_text(encoding="utf-8"))
         cls.sections = json.loads(
             (ROOT / "dictionaries" / "request-form-sections.v1.json").read_text(encoding="utf-8"))
+        cls.terms = json.loads(
+            (ROOT / "dictionaries" / "service-terms.v1.json").read_text(encoding="utf-8"))
 
     def manifest(self, name):
         return json.loads((ROOT / "tests" / "package_fixtures" / f"{name}.json").read_text(encoding="utf-8"))
 
-    def facts(self, name):
-        return package_mod.inspect(self.manifest(name), self.deliverables, self.sections)
+    def facts(self, name, **over):
+        manifest = self.manifest(name)
+        manifest.update(over)
+        return package_mod.inspect(manifest, self.deliverables, self.sections, self.terms)
 
     def context(self, name):
         return {
@@ -1136,3 +1140,126 @@ class TestModelInspectors(unittest.TestCase):
         for pid, p in profiles.items():
             self.assertNotEqual(p["status"], "superseded", pid)
         self.assertEqual(profiles["moscow-npm-2026-08-18"]["version"], "2026-08-18.2")
+
+
+class TestRegulationProvenance(unittest.TestCase):
+    """Текст Административного регламента как проверяемая основа профиля.
+
+    Профиль комплекта собирался с витрины госуслуги, и номера пунктов в нём
+    были реконструированы. Теперь текст Регламента лежит в репозитории с
+    проверяемым sha256, и каждая ссылка адресует настоящий пункт.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        cls.sources = json.loads(
+            (ROOT / "sources" / "index.json").read_text(encoding="utf-8"))["sources"]
+        cls.profile = json.loads(
+            (ROOT / "requirements" / "agr-request-package.v1.json").read_text(encoding="utf-8"))
+        cls.divergences = json.loads(
+            (ROOT / "dictionaries" / "source-divergences.v1.json").read_text(encoding="utf-8"))
+
+    def test_110_regulation_text_is_pinned_by_hash(self):
+        s = self.sources["msk-284-pp"]
+        path = ROOT / s["file"]
+        self.assertTrue(path.exists(), "текст 284-ПП не лежит в репозитории")
+        import hashlib
+        self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(), s["sha256"])
+
+    def test_111_every_rule_cites_a_real_clause(self):
+        """Ни одного правила без адреса в тексте, а не в витрине."""
+        loose = [r["id"] for r in self.profile["rules"]
+                 if "Регламент" not in r["sourceRef"] and "риложени" not in r["sourceRef"]]
+        self.assertEqual(loose, [])
+
+    def test_112_clause_numbers_exist_in_the_regulation(self):
+        """Ссылки проверяются по самому тексту, а не на слово.
+
+        Пункт, которого в Регламенте нет, — это выдуманный провенанс, и
+        обнаружить его должен тест, а не читатель отчёта.
+        """
+        import re
+        try:
+            import pypdf  # noqa: F401
+        except ImportError:
+            self.skipTest("pypdf недоступен — проверка текста пропущена")
+        import pypdf
+        reader = pypdf.PdfReader(str(ROOT / self.sources["msk-284-pp"]["file"]))
+        text = re.sub(r"\s+", " ", "\n".join(
+            (p.extract_text() or "") for p in reader.pages[12:]))
+        cited = set()
+        for r in self.profile["rules"]:
+            cited.update(re.findall(r"п\. ((?:\d+\.)+\d+)", r["sourceRef"]))
+        self.assertGreaterEqual(len(cited), 25)
+        missing = [c for c in sorted(cited) if c + "." not in text]
+        self.assertEqual(missing, [], f"пункты не найдены в тексте Регламента: {missing}")
+
+    def test_113_known_divergences_are_recorded(self):
+        """Расхождения между источниками фиксируются, а не устраняются."""
+        ids = {d["id"] for d in self.divergences["divergences"]}
+        self.assertIn("duplicate-request-authority", ids)
+        self.assertIn("tep-list-vs-xml-schema", ids)
+        rule_ids = {r["id"] for r in self.profile["rules"]}
+        for d in self.divergences["divergences"]:
+            for affected in d.get("affects", []):
+                if affected.startswith(("form-", "ext-", "conf-", "doc-", "elig-")):
+                    self.assertIn(affected, rule_ids, f"{d['id']} ссылается на {affected}")
+
+    def test_114_service_term_depends_on_the_object(self):
+        """п. 2.7.1: срок не один, а три — 10, 20 и 15 рабочих дней.
+
+        Брать 20 всегда неверно для окружных объектов, а брать 10 опасно:
+        при заниженном сроке проверка «доживёт ли ГПЗУ до конца рассмотрения»
+        пропустит документ, который в ходе рассмотрения истечёт.
+        """
+        terms = json.loads(
+            (ROOT / "dictionaries" / "service-terms.v1.json").read_text(encoding="utf-8"))
+        days = {t["key"]: t["workingDays"] for t in terms["terms"]}
+        self.assertEqual(days, {"district": 10, "city": 20, "renovation": 15})
+        self.assertEqual(terms["defaultKey"], "city",
+                         "по умолчанию берётся наибольший срок обычного заявителя")
+        for manifest, expected in (({}, 20),
+                                   ({"objectSignificance": "district"}, 10),
+                                   ({"applicantIsRenovationParty": True}, 15)):
+            self.assertEqual(package_mod.service_term(manifest, terms)[0], expected)
+
+    def test_115_published_profiles_have_verifiable_sources(self):
+        """Активный профиль обязан опираться на источник, который можно проверить.
+
+        Проверяемый — значит файл лежит в репозитории и его sha256 сверяется,
+        либо источник машиночитаемый и под наблюдением. Исключение допустимо
+        только объявленное: источник обязан сам сказать в provenanceGap, почему
+        файла нет. Молчаливых исключений в тесте быть не должно — иначе пробел
+        станет невидимым ровно там, где он важнее всего.
+        """
+        import hashlib
+        monitored = set(json.loads(
+            (ROOT / "monitoring" / "sources.json").read_text(encoding="utf-8"))["monitors"])
+        for path in sorted((ROOT / "requirements").glob("*.json")):
+            p = json.loads(path.read_text(encoding="utf-8"))
+            if p["status"] != "active":
+                continue
+            sid = p["sourceId"]
+            src = self.sources[sid]
+            chain, cur = set(), sid
+            while cur:
+                chain.add(cur)
+                cur = self.sources.get(cur, {}).get("partOf")
+            pinned = any(
+                self.sources.get(c, {}).get("sha256")
+                and (ROOT / (self.sources[c].get("file") or "нет")).exists()
+                for c in chain)
+            declared_gap = any(self.sources.get(c, {}).get("provenanceGap") for c in chain)
+            self.assertTrue(pinned or (chain & monitored) or declared_gap,
+                            f"{p['id']}: источник {sid} ничем не подтверждён и пробел не объявлен")
+
+    def test_116_provenance_gaps_are_declared_not_hidden(self):
+        """Объявленных пробелов ровно столько, сколько источников без файла."""
+        gaps = {sid for sid, s in self.sources.items() if s.get("provenanceGap")}
+        # Отсутствующий хеш делает источник не менее непроверяемым, чем
+        # отсутствующий файл: предъявить нечего в обоих случаях.
+        unverifiable = {sid for sid, s in self.sources.items()
+                        if s.get("file") and not (ROOT / s["file"]).exists()}
+        self.assertEqual(gaps, unverifiable,
+                         "пробел есть, а объяснения нет — или наоборот")
+        self.assertEqual(len(gaps), 4)
