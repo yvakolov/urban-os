@@ -1,0 +1,104 @@
+<div class="h-full overflow-auto">
+  <div class="mx-auto flex max-w-5xl flex-col gap-8 px-6 pt-8 pb-16">
+    @if (loading()) {
+      <p class="py-8 text-muted-foreground">Загрузка данных…</p>
+    } @else if (error()) {
+      <p class="py-8 text-destructive">{{ error() }}</p>
+    } @else {
+      <header class="flex flex-col items-start gap-3">
+        <h1 class="text-3xl font-bold tracking-tight text-foreground">Требования как данные</h1>
+        <p class="max-w-2xl leading-relaxed text-muted-foreground">
+          Проверяемая транскрипция требований к оформлению свидетельства об утверждении
+          архитектурно-градостроительного решения. Не источник права: каждое правило
+          ссылается на пункт документа, а сами документы сверяются по sha256.
+        </p>
+        <a hlmBtn routerLink="/graph">Открыть граф требований</a>
+      </header>
+
+      @if (counts(); as c) {
+        <section class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4" aria-label="Сводка">
+          <div hlmCard class="p-5">
+            <div class="text-3xl font-bold tabular-nums">{{ c.rule }}</div>
+            <div class="mt-1 text-sm text-muted-foreground">правил</div>
+          </div>
+          <div hlmCard class="p-5">
+            <div class="text-3xl font-bold tabular-nums">{{ automatic() }}</div>
+            <div class="mt-1 text-sm text-muted-foreground">
+              проверяются машиной · {{ automationPercent() }}%
+            </div>
+          </div>
+          <div hlmCard class="p-5">
+            <div class="text-3xl font-bold tabular-nums">{{ c.source }}</div>
+            <div class="mt-1 text-sm text-muted-foreground">
+              источников · {{ transcribedFull() }} оцифровано целиком
+            </div>
+          </div>
+          <div hlmCard class="p-5">
+            <div class="text-3xl font-bold tabular-nums">{{ c.deliverable }}</div>
+            <div class="mt-1 text-sm text-muted-foreground">артефактов комплекта</div>
+          </div>
+        </section>
+      }
+
+      <section class="grid gap-4 md:grid-cols-2">
+        <div hlmCard class="p-5">
+          <h2 class="mb-4 text-base font-semibold">Критичность</h2>
+          <ul class="flex flex-col gap-3">
+            @for (row of bySeverity(); track row.severity) {
+              <li class="flex items-center justify-between gap-4">
+                <span hlmBadge [variant]="severityVariant(row.severity)">{{ row.severity }}</span>
+                <span class="font-semibold tabular-nums">{{ row.count }}</span>
+              </li>
+            }
+          </ul>
+        </div>
+
+        <div hlmCard class="p-5">
+          <h2 class="mb-4 text-base font-semibold">Способ проверки</h2>
+          <ul class="flex flex-col gap-3">
+            @for (row of byVerification(); track row.verification) {
+              <li class="flex items-center justify-between gap-4">
+                <span class="text-muted-foreground">{{ verificationLabel(row.verification) }}</span>
+                <span class="font-semibold tabular-nums">{{ row.count }}</span>
+              </li>
+            }
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="mb-3 text-lg font-semibold">Корпуса требований</h2>
+        <div hlmTableContainer>
+          <table hlmTable>
+            <thead hlmTHead>
+              <tr hlmTr>
+                <th hlmTh>Профиль</th>
+                <th hlmTh>Статус</th>
+                <th hlmTh class="text-right">Правил</th>
+                <th hlmTh class="text-right">Машинных</th>
+                <th hlmTh class="text-right">Блокирующих</th>
+              </tr>
+            </thead>
+            <tbody hlmTBody>
+              @for (row of profiles(); track row.id) {
+                <tr hlmTr>
+                  <td hlmTd class="font-medium">{{ row.id }}</td>
+                  <td hlmTd>
+                    <span hlmBadge [variant]="row.status === 'active' ? 'default' : 'outline'">
+                      {{ row.status }}
+                    </span>
+                  </td>
+                  <td hlmTd class="text-right tabular-nums">{{ row.rules }}</td>
+                  <td hlmTd class="text-right tabular-nums">
+                    {{ row.automatic }} · {{ row.automationPercent }}%
+                  </td>
+                  <td hlmTd class="text-right tabular-nums">{{ row.blockers }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </section>
+    }
+  </div>
+</div>
