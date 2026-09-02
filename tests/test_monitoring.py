@@ -1552,3 +1552,26 @@ class TestReviewState(unittest.TestCase):
                 self.assertIn(field, d["resolution"], d["id"])
             # текст обеих сторон обязан остаться: решение не стирает расхождение
             self.assertTrue(d.get("textA") and d.get("textB"), d["id"])
+
+    def test_132_orphan_profiles_are_reported(self):
+        """Корпус, не порождающий ни одного артефакта, должен быть заметен.
+
+        Каждое требование существует ради сущности, которую надо предъявить.
+        Профиль без такой связи либо лежит не в своём реестре, либо потерял
+        её — и увидеть это надо в проверке, а не глазами на графе.
+        """
+        import validate as v
+        profiles = {}
+        for path in (ROOT / "requirements").glob("*.json"):
+            p = json.loads(path.read_text(encoding="utf-8"))
+            if p["status"] != "superseded":
+                profiles[p["id"]] = p
+        delivs = json.loads(
+            (ROOT / "deliverables" / "index.json").read_text(encoding="utf-8"))["deliverables"]
+        orphans = {line.split(":")[0] for line in v.check_orphan_profiles(profiles, delivs)}
+        self.assertIn("advertising-structures-2025-07", orphans)
+        self.assertIn("moscow-oblast-npm-2025-12", orphans)
+        for wired in ("agr-request-package", "agr-materials-composition",
+                      "moscow-ifc-agr-2026-01-16", "moscow-npm-2026-08-18",
+                      "moscow-vpm-2026-08-18"):
+            self.assertNotIn(wired, orphans, wired)

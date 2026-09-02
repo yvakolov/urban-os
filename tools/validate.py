@@ -25,6 +25,7 @@ FIXTURE_DIR = ROOT / "tests" / "fixtures"
 SCHEMA_DIR = ROOT / "schemas"
 SOURCES_FILE = ROOT / "sources" / "index.json"
 MONITOR_FILE = ROOT / "monitoring" / "sources.json"
+DELIVERABLES_FILE = ROOT / "deliverables" / "index.json"
 
 PROFILE_SCHEMA = jsonschema.load(SCHEMA_DIR / "requirement-profile.schema.json")
 REGISTRY_SCHEMA = jsonschema.load(SCHEMA_DIR / "source-registry.schema.json")
@@ -379,6 +380,33 @@ def check_references(sources_doc, profiles, monitor_doc):
 
 # ---------------------------------------------------------------- фикстуры
 
+def check_orphan_profiles(profiles, deliverables):
+    """Профиль, из которого не порождается ни один артефакт комплекта.
+
+    Каждое требование существует ради сущности, которую надо предъявить.
+    Корпус, не связанный ни с одним артефактом, либо лежит не в своём реестре,
+    либо потерял связь — и то и другое стоит увидеть, а не обнаружить глазами
+    на картинке. Предупреждение, не ошибка: у корпуса другой юрисдикции
+    отсутствие связи с московским комплектом закономерно.
+    """
+    linked = set()
+    for spec in deliverables.values():
+        if spec.get("profile"):
+            linked.add(spec["profile"])
+    rule_owner = {r["id"]: pid for pid, p in profiles.items() for r in p.get("rules", [])}
+    for spec in deliverables.values():
+        for rid in spec.get("producedBy") or []:
+            if rid in rule_owner:
+                linked.add(rule_owner[rid])
+    out = []
+    for pid, p in sorted(profiles.items()):
+        if p.get("status") != "active" or pid in linked:
+            continue
+        out.append(f"{pid}: не порождает ни одного артефакта комплекта — "
+                   f"проверьте, в своём ли он реестре")
+    return out
+
+
 def check_review(profiles):
     """Свежесть пересмотра — предупреждение, а не ошибка сборки.
 
@@ -437,6 +465,8 @@ def main() -> int:
 
     sources_doc = json.loads(SOURCES_FILE.read_text(encoding="utf-8"))
     monitor_doc = json.loads(MONITOR_FILE.read_text(encoding="utf-8")) if MONITOR_FILE.exists() else None
+    deliverables_doc = (json.loads(DELIVERABLES_FILE.read_text(encoding="utf-8"))
+                        if DELIVERABLES_FILE.exists() else {})
     raw_profiles = [(p, json.loads(p.read_text(encoding="utf-8"))) for p in sorted(REQ_DIR.glob("*.json"))]
 
     errors = check_structure(sources_doc, monitor_doc, [(p.name, d) for p, d in raw_profiles])
@@ -453,6 +483,7 @@ def main() -> int:
     if not rehash:
         errors += check_fixtures(profiles)
         warnings += check_review(profiles)
+        warnings += check_orphan_profiles(profiles, deliverables_doc.get("deliverables", {}))
 
     total_rules = sum(len(p.get("rules", [])) for p in profiles.values())
     auto = sum(1 for p in profiles.values() for r in p.get("rules", []) if r.get("verification") == "automatic")
