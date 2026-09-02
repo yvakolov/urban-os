@@ -8,9 +8,9 @@ describe('appRoutes', () => {
     expect(graph?.title).toContain('Граф требований');
   });
 
-  it('корень ведёт на граф до появления обзорной страницы', () => {
+  it('на корне стоит обзор', () => {
     const root = appRoutes.find((r) => r.path === '');
-    expect(root?.redirectTo).toBe('graph');
+    expect(root?.loadComponent).toBeDefined();
     // Без pathMatch: 'full' пустой префикс совпал бы с любым адресом,
     // и до маршрута графа управление не дошло бы никогда.
     expect(root?.pathMatch).toBe('full');
