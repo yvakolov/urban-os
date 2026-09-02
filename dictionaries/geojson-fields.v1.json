@@ -1,49 +1,85 @@
 {
   "schemaVersion": "1.0",
-  "version": "2026-09-01.1",
+  "sourceId": "msk-3d-2026-08-18",
+  "version": "2026-09-02.1",
   "status": "draft",
-  "note": "Поля GeoJSON пакета ВПМ и пакета рекламных конструкций. Это данные, а не правила: обязательность и область применения задаются профилями.",
-  "provenanceNote": "Полный перечень полей задан приложением 10 к требованиям ВПМ, документа в репозитории нет. Здесь собраны только те поля, которые названы в тексте самих правил, поэтому перечень для ОКС и благоустройства объявлен partial. Инспектор из-за этого умеет доказать нарушение (известное поле отсутствует), но не соответствие (перечень может быть шире).",
+  "note": "Поля GeoJSON пакета ВПМ. Транскрибировано с приложений 10 и 11 к Требованиям к высокополигональным моделям — распоряжение ДГП и ДИТ от 18.08.2026 № ДИТ-Р-56/26/04-16-473/26, стр. 58-62 файла источника. Приложение 10 даёт схему метаданных с примером заполнения, приложение 11 — таблицу 1 «Описание полей» с ограничениями.",
+  "sourcePages": "58-62",
+  "transcribed": "full",
+  "structure": {
+    "root": "FeatureCollection",
+    "featureType": "ObjectFeature",
+    "propertiesPath": "features[].properties",
+    "geometryPath": "features[].geometry",
+    "glassesPath": "Glasses",
+    "note": "coordinates лежат в geometry, а не в properties: в таблице 1 поле стоит под номером 21, но в схеме приложения 10 оно находится в объекте geometry."
+  },
   "scopes": {
     "oks": {
-      "completeness": "partial",
-      "fields": ["address", "okrug", "rajon", "name", "developer", "designer", "cadNum", "coordinates",
-                 "FNO_name", "FNO_code", "h_otn", "h_abs", "s_obsh", "s_naz", "s_podz", "spp_gns"],
+      "completeness": "full",
+      "fields": ["address", "okrug", "rajon", "name", "developer", "designer", "cadNum",
+                 "FNO_code", "FNO_name", "ZU_area", "h_relief", "h_otn", "h_abs",
+                 "s_obsh", "s_naz", "s_podz", "spp_gns", "act_AGR", "imageBase64"],
       "excluded": ["other"],
-      "sourceRef": "moscow-vpm-2026-08-18 / vpm-geojson-required-oks, табл.2 п.2.6"
+      "sourceRef": "приложение 11, таблица 1"
     },
     "ground": {
-      "completeness": "partial",
-      "fields": ["address", "okrug", "rajon", "name", "developer", "designer", "cadNum", "coordinates"],
-      "excluded": ["FNO_name", "FNO_code", "h_otn", "h_abs", "s_obsh", "s_naz", "s_podz", "spp_gns", "other"],
-      "sourceRef": "moscow-vpm-2026-08-18 / vpm-geojson-required-ground, табл.2 п.2.6",
-      "note": "Перечень исключений назван правилом дословно и потому достоверен; сам список обязательных полей — нет."
+      "completeness": "full",
+      "fields": ["address", "okrug", "rajon", "name", "developer", "designer", "cadNum",
+                 "FNO_name", "ZU_area", "h_relief", "imageBase64"],
+      "excluded": ["FNO_code", "h_otn", "h_abs", "s_obsh", "s_naz", "s_podz", "spp_gns",
+                   "act_AGR", "other"],
+      "sourceRef": "приложение 11, таблица 1 — колонка «Пример значения поля», отметки «или не заполнять для файла благоустройства»",
+      "note": "Для файла благоустройства FNO_name принимает значение «Благоустройство территории»."
     },
     "advertising": {
-      "completeness": "full",
+      "completeness": "partial",
       "fields": ["address", "okrug", "rajon", "name", "developer", "designer", "cadNum", "coordinates"],
       "sourceRef": "advertising-structures-2025-07 / ad-geojson, стр.1",
-      "note": "Здесь перечень полный: правило называет его исчерпывающе. Поле Glasses обязательно только при наличии светопрозрачных или экранных материалов и потому в перечень не входит."
+      "note": "Источник рекламных конструкций не установлен, поэтому перечень остаётся partial. Он совпадает с первыми семью полями таблицы 1, что подтверждает родство документов, но не заменяет самого документа."
     }
   },
-  "fieldMeanings": {
-    "address": "Адрес либо кадастровый номер, латиница, цифры и подчёркивания",
-    "okrug": "Административный округ",
-    "rajon": "Район",
-    "name": "Наименование объекта",
-    "developer": "Застройщик",
-    "designer": "Проектировщик",
-    "cadNum": "Кадастровый номер",
-    "coordinates": "Точка вставки в МСК-77, обе координаты ровно с 3 знаками после точки",
-    "FNO_name": "Наименование функционального назначения объекта",
-    "FNO_code": "Код функционального назначения объекта",
-    "h_otn": "Относительная высота",
-    "h_abs": "Абсолютная высота",
-    "s_obsh": "Общая площадь",
-    "s_naz": "Наземная площадь",
-    "s_podz": "Подземная площадь",
-    "spp_gns": "Суммарная поэтажная площадь в габаритах наружных стен",
-    "other": "Произвольные дополнительные сведения; обязательным не является",
-    "Glasses": "Признак светопрозрачных или экранных материалов"
+  "fields": {
+    "address": {"n": 1, "label": "Адрес", "description": "Улица, владение, корпус/строение", "example": "Полярная ул., вл.4"},
+    "okrug": {"n": 2, "label": "Округ", "maxLength": 50, "example": "СВАО"},
+    "rajon": {"n": 3, "label": "Район", "maxLength": 50, "example": "Южное Медведково"},
+    "name": {"n": 4, "label": "Наименование объекта", "example": "Многоквартирный жилой дом"},
+    "developer": {"n": 5, "label": "Наименование организации застройщика", "maxLength": 255, "example": "Фонд реновации"},
+    "designer": {"n": 6, "label": "Наименование проектной организации", "maxLength": 255, "example": "АО МСУ-1"},
+    "cadNum": {"n": 7, "label": "Кадастровый(ые) номер(а)",
+               "pattern": "^[0-9]{2}:[0-9]{2}:[0-9]{6,10}(:[0-9]{1,10})?$",
+               "patternNote": "Маска источника: АА:ББ:ВВВВВВВ:ГГ для участка либо АА:ББ:ВВВВВВВ для квартала, где АА и ББ по две цифры, ВВВВВВВ от 6 до 10 цифр, ГГ от 1 до 10 цифр.",
+               "example": "77:02:0006003:95"},
+    "FNO_code": {"n": 8, "label": "Код функционального назначения объекта по 306-ППП",
+                 "pattern": "^[0-9]{3}( [0-9]{3}){0,2}$",
+                 "patternNote": "Маски источника: ХХХ ХХХ ХХХ, ХХХ ХХХ или ХХХ.",
+                 "example": "010 001 001", "optionalWhenUnknown": true},
+    "FNO_name": {"n": 9, "label": "Функциональное назначение объекта по 306-ППП", "maxLength": 255,
+                 "example": "Многоэтажный многоквартирный дом",
+                 "groundValue": "Благоустройство территории"},
+    "ZU_area": {"n": 10, "label": "Площадь участка, га", "decimals": 4, "example": "0.5191"},
+    "h_relief": {"n": 11, "label": "Нулевая отметка, м", "decimals": 2, "example": "147.90"},
+    "h_otn": {"n": 12, "label": "Относительная высота объекта, м", "decimals": 2, "example": "46.92"},
+    "h_abs": {"n": 13, "label": "Абсолютная высота объекта, м", "decimals": 2, "example": "194.82"},
+    "s_obsh": {"n": 14, "label": "Общая площадь объекта, м2", "decimals": 2, "example": "17088.71"},
+    "s_naz": {"n": 15, "label": "Наземная площадь объекта, м2", "decimals": 2, "example": "13983.62"},
+    "s_podz": {"n": 16, "label": "Подземная площадь объекта, м2", "decimals": 2, "example": "3105.13"},
+    "spp_gns": {"n": 17, "label": "Суммарная поэтажная площадь объекта в габаритах наружных стен, м2", "decimals": 2, "example": "16454.34"},
+    "act_AGR": {"n": 18, "label": "Номер САГР, действующего на момент подачи заявления", "example": "811-2-21", "optionalWhenUnknown": true},
+    "imageBase64": {"n": 19, "label": "Уникальное изображение объекта для поиска",
+                    "description": "Вставляется в JSON в формате base64. Исходное изображение до конвертации — 256×256 пикселей, формат jpg.",
+                    "sourceImage": {"width": 256, "height": 256, "format": "jpg"}},
+    "other": {"n": 20, "label": "Дополнительная информация", "required": false},
+    "coordinates": {"n": 21, "label": "Координаты точки вставки модели в МСК-77", "decimals": 3,
+                    "in": "geometry", "example": "[1000.374, 324.817]"}
+  },
+  "glasses": {
+    "description": "Массив описаний светопрозрачных материалов. Ключ — имя материала по маске M_Address_MainGlass_N.",
+    "properties": ["color_RGB.Red", "color_RGB.Green", "color_RGB.Blue",
+                   "transparency", "refraction", "roughness", "metallicity"],
+    "example": {"M_ProezdNansena_Uch_8_MainGlass_1": {
+      "color_RGB": {"Red": 135, "Green": 136, "Blue": 146},
+      "transparency": 0.379, "refraction": 1.13, "roughness": 0.057, "metallicity": 0.84}},
+    "sourceRef": "приложение 10"
   }
 }

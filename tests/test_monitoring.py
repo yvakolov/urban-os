@@ -1084,24 +1084,75 @@ class TestModelInspectors(unittest.TestCase):
     def test_102_geojson_completeness_is_three_valued(self):
         """Неизвестное не выдаётся за соответствие.
 
-        Полный перечень полей задан приложением 10, которого в репозитории
-        нет. Поэтому нарушение доказуемо, а соответствие — нет: отсутствие
-        известного поля даёт False, а его наличие даёт None, но не True.
+        Три значения: False — известное поле отсутствует, нарушение доказано;
+        None — все известные поля на месте, но перечень неполон, и доказано
+        ничего; True — перечень объявлен полным и целиком удовлетворён.
+
+        Демонстрируется на области «рекламные конструкции»: её источник не
+        установлен, перечень остаётся partial, и подтвердить полноту нечем.
+        Для ОКС и благоустройства перечень взят из приложения 11 и потому
+        полон — там True достижим.
         """
         d = json.loads((ROOT / "dictionaries" / "geojson-fields.v1.json").read_text(encoding="utf-8"))
+        ad = d["scopes"]["advertising"]
+        self.assertEqual(ad["completeness"], "partial")
+
+        full = {f: "x" for f in ad["fields"]}
+        raw = json.dumps({"type": "Feature", "properties": full}).encode()
+        self.assertIsNone(geojson_mod.inspect(raw, d, "advertising")["advertisingRequiredComplete"],
+                          "неполный перечень не может подтвердить соответствие")
+
+        without = dict(full)
+        del without["cadNum"]
+        raw2 = json.dumps({"type": "Feature", "properties": without}).encode()
+        f = geojson_mod.inspect(raw2, d, "advertising")
+        self.assertFalse(f["advertisingRequiredComplete"], "нарушение доказуемо и при неполном перечне")
+        self.assertEqual(f["advertisingMissingFields"], ["cadNum"])
+
+    def test_102a_geojson_field_list_is_complete_now(self):
+        """Перечень полей взят из приложения 11 и потому полон.
+
+        Пока источник был неизвестен, полнота была недоказуема и проверка
+        могла только опровергать. Теперь она может и подтверждать.
+        """
+        d = json.loads((ROOT / "dictionaries" / "geojson-fields.v1.json").read_text(encoding="utf-8"))
+        self.assertEqual(d["sourceId"], "msk-3d-2026-08-18")
+        self.assertEqual(d["scopes"]["oks"]["completeness"], "full")
+        self.assertEqual(len(d["fields"]), 21)
         full = {f: "x" for f in d["scopes"]["oks"]["fields"]}
         raw = json.dumps({"type": "Feature", "properties": full}).encode()
-        self.assertIsNone(geojson_mod.inspect(raw, d, "oks")["oksRequiredComplete"])
-        without = dict(full)
-        del without["h_abs"]
-        raw2 = json.dumps({"type": "Feature", "properties": without}).encode()
-        f = geojson_mod.inspect(raw2, d, "oks")
-        self.assertFalse(f["oksRequiredComplete"])
-        self.assertEqual(f["oksMissingFields"], ["h_abs"])
-        # У рекламных конструкций перечень назван исчерпывающе — там True достижим
-        ad = {f: "x" for f in d["scopes"]["advertising"]["fields"]}
-        raw3 = json.dumps({"type": "Feature", "properties": ad}).encode()
-        self.assertTrue(geojson_mod.inspect(raw3, d, "advertising")["advertisingRequiredComplete"])
+        self.assertTrue(geojson_mod.inspect(raw, d, "oks")["oksRequiredComplete"])
+
+    def test_102b_ground_file_omits_the_building_fields(self):
+        """Файл благоустройства не обязан нести показатели здания.
+
+        Требовать с него абсолютную высоту или подземную площадь — значит
+        отбраковывать корректный пакет.
+        """
+        d = json.loads((ROOT / "dictionaries" / "geojson-fields.v1.json").read_text(encoding="utf-8"))
+        ground = set(d["scopes"]["ground"]["fields"])
+        for absent in ("h_abs", "s_podz", "spp_gns", "act_AGR", "FNO_code"):
+            self.assertNotIn(absent, ground, absent)
+            self.assertIn(absent, d["scopes"]["ground"]["excluded"], absent)
+        full = {f: "x" for f in ground}
+        raw = json.dumps({"type": "Feature", "properties": full}).encode()
+        self.assertTrue(geojson_mod.inspect(raw, d, "ground")["groundRequiredComplete"])
+
+    def test_102c_field_constraints_are_checked(self):
+        """Таблица 1 задаёт длину, точность записи и маски — всё проверяемо."""
+        d = json.loads((ROOT / "dictionaries" / "geojson-fields.v1.json").read_text(encoding="utf-8"))
+        props = {f: "x" for f in d["scopes"]["oks"]["fields"]}
+        props.update({"cadNum": "77:02:0006003:95", "FNO_code": "010 001 001",
+                      "okrug": "СВАО", "h_abs": 194.82})
+        clean = json.dumps({"type": "Feature", "properties": props}, ensure_ascii=False).encode()
+        self.assertEqual(geojson_mod.inspect(clean, d, "oks")["fieldViolationCount"], 0)
+
+        props["cadNum"] = "77-02-0006003"
+        props["okrug"] = "О" * 60
+        dirty = json.dumps({"type": "Feature", "properties": props}, ensure_ascii=False)
+        dirty = dirty.replace("194.82", "194.8231").encode()
+        violations = geojson_mod.inspect(dirty, d, "oks")["fieldViolations"]
+        self.assertEqual({v["rule"] for v in violations}, {"maxLength", "pattern", "decimals"})
 
     def test_103_published_profile_versions_do_not_collide(self):
         """Две редакции одного профиля обязаны различаться и не перекрывать друг друга."""

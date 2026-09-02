@@ -161,6 +161,46 @@ def inspect(raw, dictionary=None, scope=None):
                 else (True if spec.get("completeness") == "full" else None))
             facts[f"{name}FieldListCompleteness"] = spec.get("completeness")
 
-    # Поле Glasses по требованиям к рекламным конструкциям
-    facts["hasGlasses"] = any("Glasses" in p for p in props)
+    if dictionary and dictionary.get("fields"):
+        facts["fieldViolations"] = _check_constraints(text, props, dictionary["fields"])
+        facts["fieldViolationCount"] = len(facts["fieldViolations"])
+
+    facts["hasGlasses"] = any("Glasses" in p for p in props) or "Glasses" in (data or {})
     return facts
+
+
+NUM_RE_TMPL = r'"%s"\s*:\s*(-?[0-9]+(?:\.[0-9]+)?)'
+
+
+def _check_constraints(text, props, fields):
+    """Ограничения таблицы 1: длина, число знаков после точки, маски.
+
+    Число знаков считается по записи в тексте, а не по разобранному значению:
+    147.90 и 147.9 равны как числа, но требование предъявлено к записи —
+    «не более 2 знаков после точки» описывает именно её.
+    """
+    out = []
+    for name, spec in fields.items():
+        limit = spec.get("maxLength")
+        if limit:
+            for p in props:
+                v = p.get(name)
+                if isinstance(v, str) and len(v) > limit:
+                    out.append({"field": name, "rule": "maxLength",
+                                "limit": limit, "actual": len(v)})
+        decimals = spec.get("decimals")
+        if decimals is not None:
+            for m in re.finditer(NUM_RE_TMPL % re.escape(name), text):
+                got = _decimals(m.group(1))
+                if got > decimals:
+                    out.append({"field": name, "rule": "decimals",
+                                "limit": decimals, "actual": got, "value": m.group(1)})
+        pattern = spec.get("pattern")
+        if pattern:
+            rx = re.compile(pattern)
+            for p in props:
+                v = p.get(name)
+                if isinstance(v, str) and v and not rx.match(v):
+                    out.append({"field": name, "rule": "pattern",
+                                "pattern": pattern, "value": v})
+    return out
