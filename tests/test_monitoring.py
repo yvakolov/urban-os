@@ -1278,6 +1278,23 @@ class TestRegulationProvenance(unittest.TestCase):
         self.assertEqual(stale, set(),
                          f"пробел объявлен, но файл на месте и сверен: {sorted(stale)}")
 
+    def test_116a_registry_points_at_nothing_outside_the_repository(self):
+        """Реестр не ссылается на файлы вне репозитория.
+
+        Документ, лежащий рядом с проектом, источником права не является:
+        предъявить его нельзя, а ссылка на него создаёт видимость провенанса.
+        Хеш такого документа хранится отдельным полем, которое ничего не
+        подтверждает и прямо об этом говорит.
+        """
+        for sid, s in self.sources.items():
+            f = s.get("file")
+            if f:
+                self.assertFalse(f.startswith(("/", "..", "References/")),
+                                 f"{sid}: file указывает вне репозитория — {f}")
+            if s.get("transcribedFromHash"):
+                self.assertNotIn("file", s, f"{sid}: и путь, и неподтверждающий хеш")
+                self.assertIn("provenanceGap", s, f"{sid}: хеш без объяснения")
+
     def test_129_model_requirements_act_is_verifiable(self):
         """Действующие требования к НПМ и ВПМ подтверждаются файлом с хешем.
 
