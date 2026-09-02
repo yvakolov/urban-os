@@ -208,7 +208,7 @@
       "ruleId": "ad-separate-model",
       "profileId": "advertising-structures-2025-07",
       "category": "Состав",
-      "severity": "blocker",
+      "severity": "minor",
       "verification": "expert_evidence",
       "pending": false,
       "sourceRef": "стр.1"
@@ -220,7 +220,7 @@
       "ruleId": "ad-geojson",
       "profileId": "advertising-structures-2025-07",
       "category": "GeoJSON",
-      "severity": "blocker",
+      "severity": "minor",
       "verification": "automatic",
       "pending": false,
       "sourceRef": "стр.1"
@@ -232,7 +232,7 @@
       "ruleId": "ad-geojson-glasses",
       "profileId": "advertising-structures-2025-07",
       "category": "GeoJSON",
-      "severity": "blocker",
+      "severity": "minor",
       "verification": "automatic",
       "pending": false,
       "sourceRef": "стр.1"
@@ -244,7 +244,7 @@
       "ruleId": "ad-mount-depth",
       "profileId": "advertising-structures-2025-07",
       "category": "Геометрия",
-      "severity": "blocker",
+      "severity": "minor",
       "verification": "expert_evidence",
       "pending": false,
       "sourceRef": "п.1"
@@ -256,7 +256,7 @@
       "ruleId": "ad-triangles",
       "profileId": "advertising-structures-2025-07",
       "category": "Геометрия",
-      "severity": "blocker",
+      "severity": "minor",
       "verification": "automatic",
       "pending": false,
       "sourceRef": "п.1"
@@ -268,7 +268,7 @@
       "ruleId": "ad-screen-object",
       "profileId": "advertising-structures-2025-07",
       "category": "Геометрия",
-      "severity": "blocker",
+      "severity": "minor",
       "verification": "expert_evidence",
       "pending": false,
       "sourceRef": "п.1"
@@ -280,7 +280,7 @@
       "ruleId": "ad-screen-uv-1001",
       "profileId": "advertising-structures-2025-07",
       "category": "UV",
-      "severity": "blocker",
+      "severity": "minor",
       "verification": "expert_evidence",
       "pending": false,
       "sourceRef": "п.2"
@@ -292,7 +292,7 @@
       "ruleId": "ad-screen-uv-orientation",
       "profileId": "advertising-structures-2025-07",
       "category": "UV",
-      "severity": "blocker",
+      "severity": "minor",
       "verification": "expert_evidence",
       "pending": false,
       "sourceRef": "п.2"
@@ -304,7 +304,7 @@
       "ruleId": "ad-screen-uv-island",
       "profileId": "advertising-structures-2025-07",
       "category": "UV",
-      "severity": "blocker",
+      "severity": "minor",
       "verification": "expert_evidence",
       "pending": false,
       "sourceRef": "п.2"
@@ -316,7 +316,7 @@
       "ruleId": "ad-mount-material",
       "profileId": "advertising-structures-2025-07",
       "category": "Материалы",
-      "severity": "blocker",
+      "severity": "minor",
       "verification": "expert_evidence",
       "pending": false,
       "sourceRef": "п.3"
@@ -328,7 +328,7 @@
       "ruleId": "ad-screen-materials",
       "profileId": "advertising-structures-2025-07",
       "category": "Материалы",
-      "severity": "blocker",
+      "severity": "minor",
       "verification": "automatic",
       "pending": false,
       "sourceRef": "п.3"
@@ -340,7 +340,7 @@
       "ruleId": "ad-screen-no-maps",
       "profileId": "advertising-structures-2025-07",
       "category": "Материалы",
-      "severity": "blocker",
+      "severity": "minor",
       "verification": "expert_evidence",
       "pending": false,
       "sourceRef": "п.3"
@@ -352,7 +352,7 @@
       "ruleId": "ad-no-screen-material",
       "profileId": "advertising-structures-2025-07",
       "category": "Материалы",
-      "severity": "blocker",
+      "severity": "minor",
       "verification": "expert_evidence",
       "pending": false,
       "sourceRef": "п.3"
@@ -364,7 +364,7 @@
       "ruleId": "ad-pivot-wall",
       "profileId": "advertising-structures-2025-07",
       "category": "Координаты",
-      "severity": "blocker",
+      "severity": "minor",
       "verification": "expert_evidence",
       "pending": false,
       "sourceRef": "п.4"
@@ -376,7 +376,7 @@
       "ruleId": "ad-pivot-ground",
       "profileId": "advertising-structures-2025-07",
       "category": "Координаты",
-      "severity": "blocker",
+      "severity": "minor",
       "verification": "expert_evidence",
       "pending": false,
       "sourceRef": "п.4"
@@ -388,7 +388,7 @@
       "ruleId": "ad-emission",
       "profileId": "advertising-structures-2025-07",
       "category": "Текстуры",
-      "severity": "blocker",
+      "severity": "minor",
       "verification": "expert_evidence",
       "pending": false,
       "sourceRef": "п.5"
@@ -400,7 +400,7 @@
       "ruleId": "ad-screen-texture-format",
       "profileId": "advertising-structures-2025-07",
       "category": "Текстуры",
-      "severity": "blocker",
+      "severity": "minor",
       "verification": "expert_evidence",
       "pending": false,
       "sourceRef": "п.5.1"
@@ -412,7 +412,7 @@
       "ruleId": "ad-video-codec",
       "profileId": "advertising-structures-2025-07",
       "category": "Видео",
-      "severity": "blocker",
+      "severity": "minor",
       "verification": "expert_evidence",
       "pending": false,
       "sourceRef": "введение; п.6"
@@ -424,7 +424,7 @@
       "ruleId": "ad-video-resolution",
       "profileId": "advertising-structures-2025-07",
       "category": "Видео",
-      "severity": "blocker",
+      "severity": "minor",
       "verification": "expert_evidence",
       "pending": false,
       "sourceRef": "п.6.1"
@@ -436,7 +436,7 @@
       "ruleId": "ad-video-bitrate",
       "profileId": "advertising-structures-2025-07",
       "category": "Видео",
-      "severity": "blocker",
+      "severity": "minor",
       "verification": "expert_evidence",
       "pending": false,
       "sourceRef": "п.6.1"
@@ -448,7 +448,7 @@
       "ruleId": "ad-video-fps",
       "profileId": "advertising-structures-2025-07",
       "category": "Видео",
-      "severity": "blocker",
+      "severity": "minor",
       "verification": "expert_evidence",
       "pending": false,
       "sourceRef": "п.6.1"
@@ -460,7 +460,7 @@
       "ruleId": "ad-video-duration",
       "profileId": "advertising-structures-2025-07",
       "category": "Видео",
-      "severity": "blocker",
+      "severity": "minor",
       "verification": "expert_evidence",
       "pending": false,
       "sourceRef": "п.6.1"
@@ -472,7 +472,7 @@
       "ruleId": "ad-video-size",
       "profileId": "advertising-structures-2025-07",
       "category": "Видео",
-      "severity": "blocker",
+      "severity": "minor",
       "verification": "expert_evidence",
       "pending": false,
       "sourceRef": "п.6.1"
@@ -484,7 +484,7 @@
       "ruleId": "ad-naming",
       "profileId": "advertising-structures-2025-07",
       "category": "Именование",
-      "severity": "blocker",
+      "severity": "minor",
       "verification": "expert_evidence",
       "pending": false,
       "sourceRef": "п.7"

@@ -1,11 +1,12 @@
 {
   "schemaVersion": "1.1",
   "id": "advertising-structures-2025-07",
-  "version": "2025-07.1",
-  "status": "superseded",
+  "version": "2025-07.2",
+  "status": "active",
   "sourceId": "msk-advert-2025-07",
   "jurisdiction": "Москва",
   "modelClass": "AdvertisingStructure",
+  "contour": "operational",
   "effectiveFrom": "2025-07-15",
   "releasePolicy": "Все применимые правила должны иметь терминальное состояние; auto_fail и pending блокируют выпуск.",
   "rules": [
@@ -15,8 +16,9 @@
       "title": "Одна конструкция — одна модель",
       "requirement": "Каждый медиафасад, крышная или уникальная конструкция подготовлена отдельной моделью.",
       "verification": "expert_evidence",
-      "severity": "blocker",
-      "sourceRef": "стр.1"
+      "severity": "minor",
+      "sourceRef": "стр.1",
+      "note": "Эксплуатационный контур: на выдачу свидетельства об утверждении АГР не влияет."
     },
     {
       "id": "ad-geojson",
@@ -24,13 +26,14 @@
       "title": "Обязательные поля",
       "requirement": "Заполнены address, okrug, rajon, name, developer, designer, cadNum и coordinates.",
       "verification": "automatic",
-      "severity": "blocker",
+      "severity": "minor",
       "sourceRef": "стр.1",
       "evaluator": {
         "op": "equals",
         "path": "geojson.advertisingRequiredComplete",
         "value": true
-      }
+      },
+      "note": "Эксплуатационный контур: на выдачу свидетельства об утверждении АГР не влияет."
     },
     {
       "id": "ad-geojson-glasses",
@@ -38,7 +41,7 @@
       "title": "Glasses для экранной конструкции",
       "requirement": "Поле Glasses присутствует при наличии светопрозрачных или экранных материалов.",
       "verification": "automatic",
-      "severity": "blocker",
+      "severity": "minor",
       "sourceRef": "стр.1",
       "appliesWhen": {
         "path": "package.hasScreen",
@@ -48,7 +51,8 @@
         "op": "equals",
         "path": "geojson.hasGlasses",
         "value": true
-      }
+      },
+      "note": "Эксплуатационный контур: на выдачу свидетельства об утверждении АГР не влияет."
     },
     {
       "id": "ad-mount-depth",
@@ -56,8 +60,9 @@
       "title": "Крепление углублено на 0,5 м",
       "requirement": "Крепления углублены к точке крепления не менее чем на 50 см.",
       "verification": "expert_evidence",
-      "severity": "blocker",
-      "sourceRef": "п.1"
+      "severity": "minor",
+      "sourceRef": "п.1",
+      "note": "Эксплуатационный контур: на выдачу свидетельства об утверждении АГР не влияет."
     },
     {
       "id": "ad-triangles",
@@ -65,13 +70,14 @@
       "title": "До 200 000 треугольников",
       "requirement": "Геометрия без коллизии в одном FBX не превышает 200 000 треугольников.",
       "verification": "automatic",
-      "severity": "blocker",
+      "severity": "minor",
       "sourceRef": "п.1",
       "evaluator": {
         "op": "max",
         "path": "glb.triangles",
         "value": 200000
-      }
+      },
+      "note": "Эксплуатационный контур: на выдачу свидетельства об утверждении АГР не влияет."
     },
     {
       "id": "ad-screen-object",
@@ -79,8 +85,9 @@
       "title": "Экран отдельным объектом",
       "requirement": "Плоскость видео/изображения отделена в отдельный объект геометрии.",
       "verification": "expert_evidence",
-      "severity": "blocker",
-      "sourceRef": "п.1"
+      "severity": "minor",
+      "sourceRef": "п.1",
+      "note": "Эксплуатационный контур: на выдачу свидетельства об утверждении АГР не влияет."
     },
     {
       "id": "ad-screen-uv-1001",
@@ -88,8 +95,9 @@
       "title": "Экран в 1001 UDIM",
       "requirement": "Экран развернут в пределах 1001, с максимальным заполнением, отступом и центровкой.",
       "verification": "expert_evidence",
-      "severity": "blocker",
-      "sourceRef": "п.2"
+      "severity": "minor",
+      "sourceRef": "п.2",
+      "note": "Эксплуатационный контур: на выдачу свидетельства об утверждении АГР не влияет."
     },
     {
       "id": "ad-screen-uv-orientation",
@@ -97,8 +105,9 @@
       "title": "Ориентация экрана U0 V1",
       "requirement": "Верх экрана ориентирован к U:0 V:1.",
       "verification": "expert_evidence",
-      "severity": "blocker",
-      "sourceRef": "п.2"
+      "severity": "minor",
+      "sourceRef": "п.2",
+      "note": "Эксплуатационный контур: на выдачу свидетельства об утверждении АГР не влияет."
     },
     {
       "id": "ad-screen-uv-island",
@@ -106,8 +115,9 @@
       "title": "Одна область — один остров",
       "requirement": "Каждая уникальная экранная область использует один недеформированный UV-остров; дробление запрещено.",
       "verification": "expert_evidence",
-      "severity": "blocker",
-      "sourceRef": "п.2"
+      "severity": "minor",
+      "sourceRef": "п.2",
+      "note": "Эксплуатационный контур: на выдачу свидетельства об утверждении АГР не влияет."
     },
     {
       "id": "ad-mount-material",
@@ -115,8 +125,9 @@
       "title": "Один материал крепления",
       "requirement": "На объект крепления назначен один материал.",
       "verification": "expert_evidence",
-      "severity": "blocker",
-      "sourceRef": "п.3"
+      "severity": "minor",
+      "sourceRef": "п.3",
+      "note": "Эксплуатационный контур: на выдачу свидетельства об утверждении АГР не влияет."
     },
     {
       "id": "ad-screen-materials",
@@ -124,13 +135,14 @@
       "title": "До 4 экранных материалов",
       "requirement": "Число материалов экрана равно числу уникальных областей и не превышает 4; каждой области соответствует свое видео и текстура.",
       "verification": "automatic",
-      "severity": "blocker",
+      "severity": "minor",
       "sourceRef": "п.3",
       "evaluator": {
         "op": "max",
         "path": "package.screenMaterials",
         "value": 4
-      }
+      },
+      "note": "Эксплуатационный контур: на выдачу свидетельства об утверждении АГР не влияет."
     },
     {
       "id": "ad-screen-no-maps",
@@ -138,8 +150,9 @@
       "title": "Карты экрана вне архива",
       "requirement": "Материал экрана не содержит текстурных карт; видео и экранная текстура предоставлены отдельно от архива.",
       "verification": "expert_evidence",
-      "severity": "blocker",
-      "sourceRef": "п.3"
+      "severity": "minor",
+      "sourceRef": "п.3",
+      "note": "Эксплуатационный контур: на выдачу свидетельства об утверждении АГР не влияет."
     },
     {
       "id": "ad-no-screen-material",
@@ -147,8 +160,9 @@
       "title": "Один материал без экрана",
       "requirement": "Конструкция без экрана использует один материал на всю модель.",
       "verification": "expert_evidence",
-      "severity": "blocker",
-      "sourceRef": "п.3"
+      "severity": "minor",
+      "sourceRef": "п.3",
+      "note": "Эксплуатационный контур: на выдачу свидетельства об утверждении АГР не влияет."
     },
     {
       "id": "ad-pivot-wall",
@@ -156,8 +170,9 @@
       "title": "Pivot настенной конструкции",
       "requirement": "Pivot настенной конструкции — примерно центр XY и нижняя точка по Z.",
       "verification": "expert_evidence",
-      "severity": "blocker",
-      "sourceRef": "п.4"
+      "severity": "minor",
+      "sourceRef": "п.4",
+      "note": "Эксплуатационный контур: на выдачу свидетельства об утверждении АГР не влияет."
     },
     {
       "id": "ad-pivot-ground",
@@ -165,8 +180,9 @@
       "title": "Pivot наземной/крышной конструкции",
       "requirement": "Pivot наземной или крышной конструкции — примерно центр XY и уровень поверхности по Z.",
       "verification": "expert_evidence",
-      "severity": "blocker",
-      "sourceRef": "п.4"
+      "severity": "minor",
+      "sourceRef": "п.4",
+      "note": "Эксплуатационный контур: на выдачу свидетельства об утверждении АГР не влияет."
     },
     {
       "id": "ad-emission",
@@ -174,8 +190,9 @@
       "title": "Emission + R ERM",
       "requirement": "Светящиеся элементы используют карту Emission для цвета и красный канал ERM как маску; несветящиеся крепления имеют черный R ERM.",
       "verification": "expert_evidence",
-      "severity": "blocker",
-      "sourceRef": "п.5"
+      "severity": "minor",
+      "sourceRef": "п.5",
+      "note": "Эксплуатационный контур: на выдачу свидетельства об утверждении АГР не влияет."
     },
     {
       "id": "ad-screen-texture-format",
@@ -183,8 +200,9 @@
       "title": "Экран PNG до 2560",
       "requirement": "Экранная текстура рекомендуется PNG, не более 2560 px по длинной стороне, пропорции совпадают с UV-островом.",
       "verification": "expert_evidence",
-      "severity": "blocker",
-      "sourceRef": "п.5.1"
+      "severity": "minor",
+      "sourceRef": "п.5.1",
+      "note": "Эксплуатационный контур: на выдачу свидетельства об утверждении АГР не влияет."
     },
     {
       "id": "ad-video-codec",
@@ -192,8 +210,9 @@
       "title": "MP4 H.264",
       "requirement": "Видео — MP4 H.264, актуально по сезону/событию, с соответствующей статичной текстурой.",
       "verification": "expert_evidence",
-      "severity": "blocker",
-      "sourceRef": "введение; п.6"
+      "severity": "minor",
+      "sourceRef": "введение; п.6",
+      "note": "Эксплуатационный контур: на выдачу свидетельства об утверждении АГР не влияет."
     },
     {
       "id": "ad-video-resolution",
@@ -201,8 +220,9 @@
       "title": "Видео до 2560",
       "requirement": "Видео не превышает 2560 px по длинной стороне; пропорции совпадают с UV-островом.",
       "verification": "expert_evidence",
-      "severity": "blocker",
-      "sourceRef": "п.6.1"
+      "severity": "minor",
+      "sourceRef": "п.6.1",
+      "note": "Эксплуатационный контур: на выдачу свидетельства об утверждении АГР не влияет."
     },
     {
       "id": "ad-video-bitrate",
@@ -210,8 +230,9 @@
       "title": "Битрейт до 18 Мбит/с",
       "requirement": "Битрейт не выше 18 Мбит/с.",
       "verification": "expert_evidence",
-      "severity": "blocker",
-      "sourceRef": "п.6.1"
+      "severity": "minor",
+      "sourceRef": "п.6.1",
+      "note": "Эксплуатационный контур: на выдачу свидетельства об утверждении АГР не влияет."
     },
     {
       "id": "ad-video-fps",
@@ -219,8 +240,9 @@
       "title": "25 кадров/с",
       "requirement": "Частота кадров ровно 25 fps.",
       "verification": "expert_evidence",
-      "severity": "blocker",
-      "sourceRef": "п.6.1"
+      "severity": "minor",
+      "sourceRef": "п.6.1",
+      "note": "Эксплуатационный контур: на выдачу свидетельства об утверждении АГР не влияет."
     },
     {
       "id": "ad-video-duration",
@@ -228,8 +250,9 @@
       "title": "До 30 секунд",
       "requirement": "Длительность клипа не превышает 30 секунд.",
       "verification": "expert_evidence",
-      "severity": "blocker",
-      "sourceRef": "п.6.1"
+      "severity": "minor",
+      "sourceRef": "п.6.1",
+      "note": "Эксплуатационный контур: на выдачу свидетельства об утверждении АГР не влияет."
     },
     {
       "id": "ad-video-size",
@@ -237,8 +260,9 @@
       "title": "До 70 МБ",
       "requirement": "Видеофайл не превышает 70 МБ.",
       "verification": "expert_evidence",
-      "severity": "blocker",
-      "sourceRef": "п.6.1"
+      "severity": "minor",
+      "sourceRef": "п.6.1",
+      "note": "Эксплуатационный контур: на выдачу свидетельства об утверждении АГР не влияет."
     },
     {
       "id": "ad-naming",
@@ -246,9 +270,11 @@
       "title": "Маски имен",
       "requirement": "Экран, видео, текстура, материал и Emission именованы по маскам SM_/V_/T_/M_Address_MainBillboard_Slot и T_Address_Emission_Slot.UDIM.",
       "verification": "expert_evidence",
-      "severity": "blocker",
-      "sourceRef": "п.7"
+      "severity": "minor",
+      "sourceRef": "п.7",
+      "note": "Эксплуатационный контур: на выдачу свидетельства об утверждении АГР не влияет."
     }
   ],
-  "selfHash": "6ba266f1d4a70f34252e040c019b09be0200eee04e1c8f83e367f0a29e1061fd"
+  "revisionNote": "Корпус отнесён к эксплуатационному контуру, severity всех правил понижена с blocker до minor. Основание — три независимых признака. Первый: профиль не порождает ни одного артефакта комплекта, у него нет ни одного ребра produces. Второй: государственная услуга «Выдача разрешения на установку и эксплуатацию рекламной конструкции» трёхмерной модели не требует вовсе — в её 25 входящих документах и 6 нормативных актах нет ни одного упоминания моделей, FBX, полигонов или GeoJSON. Третий: содержание правил эксплуатационное — видео «актуально по сезону/событию», адресация через Slot и MainBillboard, — то есть речь о показе контента в работающей системе, а не об условии выдачи свидетельства. Источник документа при этом остался неустановленным; поиск публикации 2 сентября 2026 года результата не дал. Понижение severity этого не исправляет и не заменяет: оно лишь приводит вес правил в соответствие с тем, на что они влияют.",
+  "selfHash": "796f3d297272021b7b176b40827a78fb05f662eb9fb46878bd2904af26d73528"
 }

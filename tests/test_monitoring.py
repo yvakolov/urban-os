@@ -1569,9 +1569,39 @@ class TestReviewState(unittest.TestCase):
         delivs = json.loads(
             (ROOT / "deliverables" / "index.json").read_text(encoding="utf-8"))["deliverables"]
         orphans = {line.split(":")[0] for line in v.check_orphan_profiles(profiles, delivs)}
-        self.assertIn("advertising-structures-2025-07", orphans)
         self.assertIn("moscow-oblast-npm-2025-12", orphans)
+        # Эксплуатационный контур артефактов комплекта и не порождает: объявленное
+        # отсутствие связи предупреждением быть не должно, иначе оно приучает к шуму.
+        self.assertNotIn("advertising-structures-2025-07", orphans)
+        self.assertEqual(profiles["advertising-structures-2025-07"]["contour"], "operational")
         for wired in ("agr-request-package", "agr-materials-composition",
                       "moscow-ifc-agr-2026-01-16", "moscow-npm-2026-08-18",
                       "moscow-vpm-2026-08-18"):
             self.assertNotIn(wired, orphans, wired)
+
+    def test_133_operational_contour_cannot_block_the_certificate(self):
+        """Правило эксплуатационного контура не отвергает комплект.
+
+        Оно действует после выдачи свидетельства и на неё не влияет, поэтому
+        нести вес blocker не может. Severity здесь не косметика: она задаёт,
+        насколько срочно звать человека при изменении источника.
+        """
+        p = json.loads((ROOT / "requirements" / "advertising-structures-2025-07.v2.json")
+                       .read_text(encoding="utf-8"))
+        self.assertEqual(p["status"], "active")
+        self.assertEqual(p["contour"], "operational")
+        self.assertIn("revisionNote", p)
+        self.assertEqual({r["severity"] for r in p["rules"]}, {"minor"})
+
+        old = json.loads((ROOT / "requirements" / "advertising-structures-2025-07.v1.json")
+                         .read_text(encoding="utf-8"))
+        self.assertEqual(old["status"], "superseded")
+        self.assertEqual({r["severity"] for r in old["rules"]}, {"blocker"},
+                         "прежняя редакция сохраняется как история, а не переписывается")
+
+    def test_134_agr_package_contour_is_the_default(self):
+        """Отсутствие поля означает контур комплекта, а не отсутствие контура."""
+        for path in (ROOT / "requirements").glob("*.json"):
+            p = json.loads(path.read_text(encoding="utf-8"))
+            contour = p.get("contour", "agr_package")
+            self.assertIn(contour, ("agr_package", "operational"), path.name)

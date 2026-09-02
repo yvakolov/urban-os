@@ -402,6 +402,11 @@ def check_orphan_profiles(profiles, deliverables):
     for pid, p in sorted(profiles.items()):
         if p.get("status") != "active" or pid in linked:
             continue
+        # Эксплуатационный контур артефактов комплекта и не порождает: он
+        # действует после выдачи свидетельства. Объявленное отсутствие связи
+        # предупреждением быть не должно — иначе оно приучает к шуму.
+        if p.get("contour") == "operational":
+            continue
         out.append(f"{pid}: не порождает ни одного артефакта комплекта — "
                    f"проверьте, в своём ли он реестре")
     return out
