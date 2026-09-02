@@ -1,0 +1,34 @@
+<div class="flex h-full flex-col">
+  <header
+    class="flex shrink-0 items-center gap-4 border-b border-border bg-background px-5 py-2"
+  >
+    <a routerLink="/" class="flex items-baseline gap-2 no-underline">
+      <span class="text-base font-bold tracking-tight text-foreground">urban-os</span>
+      <span class="hidden text-xs text-muted-foreground sm:inline">требования как данные</span>
+    </a>
+
+    <hlm-separator orientation="vertical" class="h-5" />
+
+    <nav class="flex items-center gap-1" aria-label="Разделы">
+      <a
+        routerLink="/"
+        routerLinkActive="bg-accent text-accent-foreground"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground no-underline transition-colors hover:bg-accent hover:text-accent-foreground"
+      >
+        Обзор
+      </a>
+      <a
+        routerLink="/graph"
+        routerLinkActive="bg-accent text-accent-foreground"
+        class="rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground no-underline transition-colors hover:bg-accent hover:text-accent-foreground"
+      >
+        Граф требований
+      </a>
+    </nav>
+  </header>
+
+  <main class="flex min-h-0 flex-1">
+    <router-outlet />
+  </main>
+</div>
