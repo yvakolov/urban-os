@@ -1245,10 +1245,18 @@ class TestRegulationProvenance(unittest.TestCase):
             while cur:
                 chain.add(cur)
                 cur = self.sources.get(cur, {}).get("partOf")
-            pinned = any(
-                self.sources.get(c, {}).get("sha256")
-                and (ROOT / (self.sources[c].get("file") or "нет")).exists()
-                for c in chain)
+            def confirmed(c):
+                src = self.sources.get(c, {})
+                if not src.get("sha256"):
+                    return False
+                # файл в репозитории и сверяется на каждом прогоне
+                if (ROOT / (src.get("file") or "нет")).exists():
+                    return True
+                # либо файл опубликован по адресу, и хеш был сверен вручную:
+                # хост может быть закрыт защитой от автоматических запросов
+                return bool(src.get("url") and src.get("sha256VerifiedOn"))
+
+            pinned = any(confirmed(c) for c in chain)
             declared_gap = any(self.sources.get(c, {}).get("provenanceGap") for c in chain)
             self.assertTrue(pinned or (chain & monitored) or declared_gap,
                             f"{p['id']}: источник {sid} ничем не подтверждён и пробел не объявлен")
